@@ -22,6 +22,10 @@ set -x PATH $HOME/Library/Python/2.7/bin $PATH
 # For Python / OpenCV, as installed by HomeBrew
 set -x PYTHONPATH /usr/local/lib/python2.7/site-packages:$PYTHONPATH
 
+set -x GOPATH ~/golang/packages
+set -x GOROOT /usr/local/go
+set -x PATH $GOROOT/bin $PATH
+
 # Set FISH prompt to use Powerline, 'cause why not, right?
 set fish_function_path $fish_function_path "/Users/richardgoulter/github/powerline/powerline/bindings/fish"
 powerline-setup
