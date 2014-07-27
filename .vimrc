@@ -87,6 +87,12 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'phleet/vim-mercenary'
 Plugin 'vim-scripts/Lawrencium'
 
+" Distraction free writing
+" Use :Goyo or :Goyo 80,
+" As well as Limelight [0.0, 1.0], Limelight!!
+Plugin 'junegunn/goyo.vim'
+Plugin 'junegunn/limelight.vim'
+
 " Color Schemes
 " Solarized Color Scheme.
 Plugin 'altercation/vim-colors-solarized'
@@ -148,6 +154,9 @@ set expandtab
 set autoindent  " Enables Auto Indent on files without type
 filetype plugin on
 filetype indent on
+
+" Column count of 80
+set cc=80
 
 " Have backspace work properly.
 set backspace=eol,start,indent
@@ -316,3 +325,19 @@ map <Leader>s :SlimuxREPLSendLine<CR>
 vmap <Leader>s :SlimuxREPLSendSelection<CR>
 map <Leader>a :SlimuxShellLast<CR>
 map <Leader>k :SlimuxSendKeysLast<CR>
+
+" .md as Markdown
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+autocmd BufNewFile,BufReadPost *.markdown set filetype=markdown
+
+" Distraction free writing,
+" Integrate Goyo with Limelight
+function! GoyoBefore()
+  Limelight
+endfunction
+
+function! GoyoAfter()
+  Limelight!
+endfunction
+
+let g:goyo_callbacks = [function('GoyoBefore'), function('GoyoAfter')]
