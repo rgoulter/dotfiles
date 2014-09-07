@@ -5,7 +5,7 @@ filetype off                   " required!
 " see http://stackoverflow.com/questions/12230290/vim-errors-on-vim-startup-when-run-in-fish-shell
 set shell=/bin/sh
 
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#rc()
 
 " let Vundle manage Vundle
@@ -47,6 +47,12 @@ Plugin 'lukerandall/haskellmode-vim'
 Plugin 'eagletmt/neco-ghc'
 Plugin 'bitc/lushtags'
 Plugin 'travitch/hasksyn'
+
+" PHP, + HTML + JS
+" Updated PHP syntax
+Plugin 'StanAngeloff/php.vim'
+" Improved PHP indenting.
+Plugin '2072/PHP-Indenting-for-VIm'
 
 " tComment for comments.
 " (Alternative is NERDCommenter).
@@ -223,20 +229,20 @@ let g:airline_powerline_fonts=1
 "     endif
 "     return ""
 " endfunction
-
-func! g:jInYCM()
-    if pumvisible()
-        return "\<C-n>"
-    else
-        return "\<c-j>"
-endfunction
-
-func! g:kInYCM()
-    if pumvisible()
-        return "\<C-p>"
-    else
-        return "\<c-k>"
-endfunction
+"
+" func! g:jInYCM()
+"     if pumvisible()
+"         return "\<C-n>"
+"     else
+"         return "\<c-j>"
+" endfunction
+"
+" func! g:kInYCM()
+"     if pumvisible()
+"         return "\<C-p>"
+"     else
+"         return "\<c-k>"
+" endfunction
 inoremap <c-j> <c-r>=g:jInYCM()<cr>
 au BufEnter,BufRead * exec "inoremap <silent> " . g:UltiSnipsJumpBackwordTrigger . " <C-R>=g:kInYCM()<cr>"
 let g:UltiSnipsJumpBackwordTrigger = "<c-k>"
