@@ -42,9 +42,21 @@ Plugin 'bling/vim-airline'
 Plugin 'scrooloose/syntastic'
 
 " Haskell
-Plugin 'bitc/vim-hdevtools'
-Plugin 'lukerandall/haskellmode-vim'
+" Opting for ghcmod-vim over hdevtools, as this is what vim2hs supports.
+"  Plugin 'bitc/vim-hdevtools'
+" Opting for vim2hs, haskellmode-vim hasn't been updated in a long time.
+"  Plugin 'lukerandall/haskellmode-vim'
+" ghcmod-vim depends on vimproc.vim. n.b. vimproc needs to be built natively.
+Plugin 'Shougo/vimproc.vim'
+Plugin 'eagletmt/ghcmod-vim'
+Plugin 'dag/vim2hs'
+" nego-ghc for haskell autocompletion. Can work with YCM, see below.
+" But also requires
+"   setlocal omnifunc=necoghc#omnifunc 
+" e.g. in ~/.vim/ftplugin/haskell.vim
 Plugin 'eagletmt/neco-ghc'
+" Lushtags for Haskell+Ctags.
+" See https://github.com/zenzike/vim-haskell for discussion of alternatives.
 Plugin 'bitc/lushtags'
 Plugin 'travitch/hasksyn'
 
@@ -98,6 +110,9 @@ Plugin 'vim-scripts/Lawrencium'
 " As well as Limelight [0.0, 1.0], Limelight!!
 Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/limelight.vim'
+
+" For easy alignment
+Plugin 'junegunn/vim-easy-align'
 
 " Color Schemes
 " Solarized Color Scheme.
@@ -347,3 +362,14 @@ function! GoyoAfter()
 endfunction
 
 let g:goyo_callbacks = [function('GoyoBefore'), function('GoyoAfter')]
+
+
+
+" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+vmap <Enter> <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
+nmap <Leader>a <Plug>(EasyAlign)
+
+" To help CtrlP ignore files
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.hi,*.dyn_o
