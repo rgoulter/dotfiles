@@ -1,0 +1,3 @@
+# Vim Plugins are automatically added to ~/.vim/bundle by Vundle,
+# so we ignore them.
+vim/bundle/*

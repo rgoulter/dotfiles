@@ -1,0 +1,16 @@
+- clean: ['~']
+
+- link:
+    ~/.dotfiles: ''
+    ~/.tmux.conf: tmux.conf
+    ~/.vim: vim/
+    ~/.vimrc: vimrc
+    ~/.nvim: vim/
+    ~/.nvimrc: vimrc
+    ~/.config/fish/config.fish: config.fish
+    ~/.config/yi/yi.hs: yi.hs
+    ~/.sbt: sbt
+
+- shell:
+  - [git submodule update, Installing/updating submodules]
+  - [vim +PluginInstall +qall, Installing vim plugins]
