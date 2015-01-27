@@ -23,6 +23,7 @@ Plugin 'Valloric/YouCompleteMe'
 " Tern for Vim is for intelligent JavaScript code completion, etc.
 Plugin 'marijnh/tern_for_vim'
 " Ultisnips is a snippets plugin for Vim.
+Plugin 'ervandew/supertab'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 
@@ -122,6 +123,7 @@ Plugin 'chriskempson/vim-tomorrow-theme'
 Plugin 'tomasr/molokai'
 
 " Mac OSX only..
+" TODO: LOCAL/OSX
 if has("unix")
   let s:uname = system("uname -s")
   if s:uname == "Darwin"
@@ -203,6 +205,7 @@ nnoremap <C-J> a<CR><Esc>k$
 " setlocal omnifunc=necoghc#omnifunc
 
 " Haskell, load Haddock using Chrome
+" TODO: LOCAL/OSX
 let g:haddock_browser="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
 
 
@@ -228,48 +231,18 @@ let g:airline_powerline_fonts=1
 
 
 " YouCompleteMe and Ultisnips,
-" See: http://stackoverflow.com/questions/14896327/ultisnips-and-youcompleteme
-" Don't see; deprecated.
-" function! g:UltiSnips_Complete()
-"     call UltiSnips_ExpandSnippet()
-"     if g:ulti_expand_res == 0
-"         if pumvisible()
-"             return "\<C-n>"
-"         else
-"             call UltiSnips_JumpForwards()
-"             if g:ulti_jump_forwards_res == 0
-"                return "\<TAB>"
-"             endif
-"         endif
-"     endif
-"     return ""
-" endfunction
-"
-" func! g:jInYCM()
-"     if pumvisible()
-"         return "\<C-n>"
-"     else
-"         return "\<c-j>"
-" endfunction
-"
-" func! g:kInYCM()
-"     if pumvisible()
-"         return "\<C-p>"
-"     else
-"         return "\<c-k>"
-" endfunction
-inoremap <c-j> <c-r>=g:jInYCM()<cr>
-au BufEnter,BufRead * exec "inoremap <silent> " . g:UltiSnipsJumpBackwordTrigger . " <C-R>=g:kInYCM()<cr>"
-let g:UltiSnipsJumpBackwordTrigger = "<c-k>"
+" As per (last updated Jan 22 2014)
+" http://stackoverflow.com/questions/14896327/ultisnips-and-youcompleteme
 
-" au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
-"let g:UltiSnipsExpandTrigger="<tab>"
-"let g:UltiSnipsJumpForwardTrigger="<tab>"
-" let g:UltiSnipsExpandTrigger="<c-tab>"
-" let g:UltiSnipsListSnippets="<c-s-tab>"
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" better key bindings for UltiSnipsExpandTrigger
+" let g:UltiSnipsExpandTrigger = "<tab>"
+" let g:UltiSnipsJumpForwardTrigger = "<tab>"
+" let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 
 " Tips from http://blog.sanctum.geek.nz/vim-annoyances/
