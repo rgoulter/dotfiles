@@ -13,4 +13,4 @@
 
 - shell:
   - [git submodule update, Installing/updating submodules]
-  - [vim +PluginInstall +qall, Installing vim plugins]
+  - [vim -e +PluginInstall +visual +qall, Installing vim plugins (at least 15 mins first run).]
