@@ -9,7 +9,7 @@ alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %
 alias fucking=sudo
 
 # Fish, sudo last command
-alias please="sudo $history[1]"
+alias please="eval sudo $history[1]"
 
 
 # Convenience variables so SSH'ing isn't tedious to type out
