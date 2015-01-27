@@ -1,39 +1,47 @@
-# Set Application/MacVim's Vim as our EDITOR
-# set -x EDITOR /Applications/MacVim.app/Contents/MacOS/Vim
+# Use nvim as our editor
+set -x EDITOR nvim
 
-# set -x CLICOLOR 1
-# set -x LSCOLORS ExFxCxDxBxegedabagacad
-
-# set -x myfoo mybar123
 
 # From https://github.com/ndbroadbent/scm_breeze 
-alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit" 
+alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 
+# I've heard this is amusing
+alias fucking=sudo
+
+# Fish, sudo last command
+alias please="sudo $history[1]"
+
+
+# Convenience variables so SSH'ing isn't tedious to type out
 set -x SUNF rgoulter@sunfire.comp.nus.edu.sg
-set -x AWSASSG1 ec2-user@ec2-54-254-239-146.ap-southeast-1.compute.amazonaws.com
 set -x LORIS82 richardg@loris-82.ddns.comp.nus.edu.sg
 set -x LORIS88 richardg@loris-88.ddns.comp.nus.edu.sg
-# set -x PATH /usr/local/bin $PATH
 
-# OSX Bundles are messed up, so we need to alias like this.
-# alias vim='/Applications/MacVim.App/Contents/MacOS/Vim'
+set -x DIGOCEAN rgoulter@rgoulter.com
 
-# Haskell binaries
-# set -x PATH $HOME/Library/Haskell/bin $PATH
+
+# ANTLR 4.4, Arch Linux
+set ANTLR_PATH /usr/share/java/antlr-4.4-complete.jar
+if not contains $ANTLR_PATH $CLASSPATH
+    set -x CLASSPATH . $CLASSPATH
+    set -x CLASSPATH $ANTLR_PATH $CLASSPATH
+    alias grun='java org.antlr.v4.runtime.misc.TestRig'
+end
+
+# Haskell
 set -x PATH $HOME/.cabal/bin $PATH
-# set -x PATH $HOME/Library/Python/2.7/bin $PATH
-set -x PATH $HOME/.local/bin $PATH
 
-set -x JAVA_HOME /usr/lib/jvm/java-default-runtime
+# Ruby
+set -x PATH $HOME/.gem/ruby/2.1.0/bin $PATH
 
-# For Python / OpenCV, as installed by HomeBrew
-# set -x PYTHONPATH /usr/local/lib/python2.7/site-packages:$PYTHONPATH
+# OCaml
+# OPAM configuration
+if test -d $HOME/.opam
+    source $HOME/.opam/opam-init/init.fish > /dev/null 2> /dev/null or true
+end
 
-# set -x GOPATH ~/golang/packages
-# set -x GOROOT /usr/local/go
-# set -x PATH $GOROOT/bin $PATH
 
-# Set FISH prompt to use Powerline, 'cause why not, right?
-# /home/richard/.local/lib/python3.4/site-packages/powerline
-set fish_function_path $fish_function_path "/home/richard/.local/lib/python3.4/site-packages/powerline/bindings/fish"
-powerline-setup
+# Use local/user config.fish if it exists
+if test -f $HOME/.config/fish/config.user.fish
+    source $HOME/.config/fish/config.user.fish
+end
