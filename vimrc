@@ -60,9 +60,6 @@ Plugin 'eagletmt/neco-ghc'
 Plugin 'bitc/lushtags'
 Plugin 'travitch/hasksyn'
 
-" OCaml
-Plugin 'def-lkb/merlin'
-
 " PHP, + HTML + JS
 " Updated PHP syntax
 Plugin 'StanAngeloff/php.vim'
@@ -237,6 +234,13 @@ au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
 
 " OCaml
 
+" Add merlin to vim's runtime-path:
+let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+execute "set rtp+=" . g:opamshare . "/merlin/vim"
+
+" Also run the following line in vim to index the documentation:
+"   :execute "helptags " . g:opamshare . "/merlin/vim/doc"
+
 if filereadable("$HOME/.opam/4.02.1/share/vim/syntax/ocp-indent.vim")
     execute ":source " . "$HOME/.opam/4.02.1/share/vim/syntax/ocp-indent.vim"
 endif
@@ -284,7 +288,7 @@ let g:session_autosave = 'no'
 
 
 " For slimux
-map <Leader>s :SlimuxREPLSendLine<CR>
+map <CR> :SlimuxREPLSendLine<CR>
 vmap <Leader>s :SlimuxREPLSendSelection<CR>
 map <Leader>a :SlimuxShellLast<CR>
 map <Leader>k :SlimuxSendKeysLast<CR>
@@ -294,11 +298,11 @@ map <Leader>k :SlimuxSendKeysLast<CR>
 " Distraction free writing,
 " Integrate Goyo with Limelight
 function! GoyoBefore()
-  Limelight
+Limelight
 endfunction
 
 function! GoyoAfter()
-  Limelight!
+Limelight!
 endfunction
 
 let g:goyo_callbacks = [function('GoyoBefore'), function('GoyoAfter')]
