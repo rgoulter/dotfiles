@@ -1,12 +1,12 @@
 set nocompatible               " be iMproved
-filetype off                   " required!
+filetype off                   " required! by Vundle
 
 " Because we use Fish shell.
 " see http://stackoverflow.com/questions/12230290/vim-errors-on-vim-startup-when-run-in-fish-shell
 set shell=/bin/sh
 
 set rtp+=~/.vim/bundle/Vundle.vim/
-call vundle#rc()
+call vundle#begin()
 
 " let Vundle manage Vundle
 " Vundle is the way you want to handle Vim plugins.
@@ -19,23 +19,20 @@ Plugin 'gmarik/vundle'
 " Requires to be recompiled when it updates.
 " C-family code intelligence is a bit more complicated to install.
 Plugin 'Valloric/YouCompleteMe'
-"Plugin 'Shougo/neocomplete.vim'
+
 " Tern for Vim is for intelligent JavaScript code completion, etc.
 Plugin 'marijnh/tern_for_vim'
+
 " Ultisnips is a snippets plugin for Vim.
 Plugin 'ervandew/supertab'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 
 " TagBar provides nice code-browsing / structure overview.
-"  Needs exuberant tags.
+"  Needs exuberant ctags.
 Plugin 'majutsushi/tagbar'
 
 Plugin 'epeli/slimux'
-
-" Powerline is a pretty powerline to have.
-" Requires fancy fonts to look super-pretty.
-"Plugin 'Lokaltog/powerline'
 
 " vim-airline is a lightweight alternative to Powerline.
 Plugin 'bling/vim-airline'
@@ -51,19 +48,25 @@ Plugin 'scrooloose/syntastic'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'eagletmt/ghcmod-vim'
 Plugin 'dag/vim2hs'
+
 " nego-ghc for haskell autocompletion. Can work with YCM, see below.
 " But also requires
 "   setlocal omnifunc=necoghc#omnifunc 
 " e.g. in ~/.vim/ftplugin/haskell.vim
 Plugin 'eagletmt/neco-ghc'
+
 " Lushtags for Haskell+Ctags.
 " See https://github.com/zenzike/vim-haskell for discussion of alternatives.
 Plugin 'bitc/lushtags'
 Plugin 'travitch/hasksyn'
 
+" OCaml
+Plugin 'def-lkb/merlin'
+
 " PHP, + HTML + JS
 " Updated PHP syntax
 Plugin 'StanAngeloff/php.vim'
+
 " Improved PHP indenting.
 Plugin '2072/PHP-Indenting-for-VIm'
 
@@ -116,51 +119,25 @@ Plugin 'junegunn/limelight.vim'
 Plugin 'junegunn/vim-easy-align'
 
 " Color Schemes
-" Solarized Color Scheme.
 Plugin 'altercation/vim-colors-solarized'
-" Tomorrow Theme(s) for vim Color Schemes.
 Plugin 'chriskempson/vim-tomorrow-theme'
 Plugin 'tomasr/molokai'
 
-" Mac OSX only..
-" TODO: LOCAL/OSX
-if has("unix")
-  let s:uname = system("uname -s")
-  if s:uname == "Darwin"
-    " Do Mac stuff here
-    Plugin 'eraserhd/vim-ios'
-  endif
-endif
+" All of your Plugins must be added before the following line
+call vundle#end()            " required by Vundle
+filetype plugin indent on    " required by Vundle
 
-" vim-scripts repos
 
-" L9 is needed for some things, I think.
-Plugin 'L9'
-" FuzzyFinder is a really cool way to open files,
-"  so that you can open files with just a subsequence.
-"Plugin 'FuzzyFinder'
-
-" Required for Vundle, and many other things:
-filetype plugin indent on
 
 syntax enable
 set background=dark
 
-" Terminal
-"color Tomorrow-Night
-let g:solarized_termcolors=16
-let g:solarized_termtrans=0
-color solarized
-let g:solarized_termcolors=16
-let g:solarized_termtrans=0
-
 set hlsearch    " Enable Search Highlighting
 set incsearch   " Enable search while typing
-set showmatch   " Show mating brackets
-set ic          " Ignore Case
-set smartcase   " Be smart about cases.
+set showmatch   " Show matching brackets
+set ignorecase
+set smartcase   " Be smart about cases when searching
 
-"set cmdheight=2 " Height of Command bar.
 set cmdheight=2 " Height of Command bar.
 set showmode    " Shows mode
 set showcmd     " Shows cmd
@@ -173,16 +150,45 @@ set laststatus=2
 "" Indentation Settings
 set shiftwidth=4
 set softtabstop=4
+set tabstop=4
 set expandtab
 set autoindent  " Enables Auto Indent on files without type
-filetype plugin on
-filetype indent on
 
-" Column count of 80
-set cc=80
+set colorcolumn=80
 
 " Have backspace work properly.
 set backspace=eol,start,indent
+
+set encoding=utf-8
+set list listchars=tab:→\ ,trail:·
+
+" Disable swapfile, backup since we shouldn't need them.
+set noswapfile
+set nobackup
+
+set foldmethod=syntax
+set foldlevelstart=5
+
+" Tips from http://blog.sanctum.geek.nz/vim-annoyances/
+" Replace all occurrences during substititon (s/pat/repl/) by default; adding
+" g will keep it to the first occurrence
+set gdefault
+" Better defaults for new splits:
+"set splitbelow
+set splitright
+
+" To help CtrlP ignore files
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.hi,*.dyn_o
+
+
+
+" Tips from http://blog.sanctum.geek.nz/vim-annoyances/
+" Regardling j/k over wrapped lines
+nnoremap j gj
+nnoremap k gk
+nnoremap gj j
+nnoremap gk k
+
 
 " Some nice convenient keys.
 "nmap <F3> :FufCoverageFile<CR>
@@ -199,15 +205,25 @@ nmap <F9> :ProjectTreeToggle<CR>
 " from http://vim.wikia.com/wiki/Insert_newline_without_entering_insert_mode
 nnoremap <C-J> a<CR><Esc>k$
 
+
+
+" .md as Markdown
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+autocmd BufNewFile,BufReadPost *.markdown set filetype=markdown
+
+
+
+" Terminal Colours
+color solarized
+let g:solarized_termcolors=16
+let g:solarized_termtrans=0
+
+
+
 " Haskell
 
 " In ~/.vim/ftplugin/haskell.vim
 " setlocal omnifunc=necoghc#omnifunc
-
-" Haskell, load Haddock using Chrome
-" TODO: LOCAL/OSX
-let g:haddock_browser="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
-
 
 " For getting neco-ghc working with YouCompleteMe
 let g:ycm_semantic_triggers = {'haskell' : ['.']}
@@ -218,16 +234,23 @@ au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
 au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
 
 
+
+" OCaml
+
+if filereadable("$HOME/.opam/4.02.1/share/vim/syntax/ocp-indent.vim")
+    execute ":source " . "$HOME/.opam/4.02.1/share/vim/syntax/ocp-indent.vim"
+endif
+
+
+
 " Have YouCompleteMe and eclim
 "  play nicely with each other.
 let g:EclimCompletionMethod = 'omnifunc'
 
-" Powerline
-"set rtp+=~/github/powerline/powerline/bindings/vim
-"set laststatus=2 " Always display the statusline in all windows
-"set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
+
 
 let g:airline_powerline_fonts=1
+
 
 
 " YouCompleteMe and Ultisnips,
@@ -235,58 +258,17 @@ let g:airline_powerline_fonts=1
 " http://stackoverflow.com/questions/14896327/ultisnips-and-youcompleteme
 
 " make YCM compatible with UltiSnips (using supertab)
+" As per supertab, use c-n, c-p to cycle autocomplete; use tab for Ultisnips
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
 
 " better key bindings for UltiSnipsExpandTrigger
-" let g:UltiSnipsExpandTrigger = "<tab>"
-" let g:UltiSnipsJumpForwardTrigger = "<tab>"
-" let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 
-" Tips from http://blog.sanctum.geek.nz/vim-annoyances/
-" Regardling j/k over wrapped lines
-nnoremap j gj
-nnoremap k gk
-nnoremap gj j
-nnoremap gk k
-" Replace all occurrences during substititon (s/pat/repl/) by default; adding
-" g will keep it to the first occurrence
-set gdefault
-" Better defaults for new splits:
-"set splitbelow
-set splitright
-
-
-set encoding=utf-8
-set list listchars=tab:→\ ,trail:·
- 
-" This might be a bad idea, but..
-set tabstop=4
-
-" By default, hide menu + toolbar..
-set go-=m
-set go-=T
-
-" Disable swapfile, backup since we shouldn't need them.
-set noswapfile
-set nobackup
-
-" For the Sessions plugin
-let g:session_autosave = 'no'
-
-set foldmethod=syntax
-set foldlevelstart=5
-
-" For LaTeX Wordcount
-" acquired from http://tex.stackexchange.com/questions/534/is-there-any-way-to-do-a-correct-word-count-of-a-latex-document
-function! WC()
-    let filename = expand("%")
-    let cmd = "detex " . filename . " | wc -w | tr -d [:space:]"
-    let result = system(cmd)
-    echo result . " words"
-endfunction
 
 " Let's improve YCM
 let g:ycm_complete_in_comments = 1
@@ -294,25 +276,12 @@ let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_collect_identifiers_from_tags_files = 1
 
 
-"Plugin 'Rip-Rip/clang_complete'
 
-" Disable auto completion, always <c-x> <c-o> to complete
-let clang_complete_loaded = 1
-let g:clang_complete_auto = 1 
-let g:clang_use_library = 1
-let g:clang_periodic_quickfix = 0
-let g:clang_close_preview = 1
+" For the Sessions plugin
+" Session autosaving is tedious.
+let g:session_autosave = 'no'
 
-" For Objective-C, this needs to be active, otherwise multi-parameter methods won't be completed correctly
-let g:clang_snippets = 1
 
-" Snipmate does not work anymore, ultisnips is the recommended plugin
-let g:clang_snippets_engine = 'ultisnips'
-let g:clang_library_path = "/Library/Developer/CommandLineTools/usr/lib/"
-
-" for debugging YCM
-let g:ycm_server_use_vim_stdout = 1
-let g:ycm_server_log_level = 'debug'
 
 " For slimux
 map <Leader>s :SlimuxREPLSendLine<CR>
@@ -320,9 +289,7 @@ vmap <Leader>s :SlimuxREPLSendSelection<CR>
 map <Leader>a :SlimuxShellLast<CR>
 map <Leader>k :SlimuxSendKeysLast<CR>
 
-" .md as Markdown
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-autocmd BufNewFile,BufReadPost *.markdown set filetype=markdown
+
 
 " Distraction free writing,
 " Integrate Goyo with Limelight
@@ -343,6 +310,3 @@ vmap <Enter> <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
 nmap <Leader>a <Plug>(EasyAlign)
-
-" To help CtrlP ignore files
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.hi,*.dyn_o
