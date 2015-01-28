@@ -8,9 +8,18 @@
     ~/.gvimrc: gvimrc
     ~/.nvim: vim/
     ~/.nvimrc: vimrc
-    ~/.config/fish/config.fish: config.fish
-    ~/.config/yi/yi.hs: yi.hs
-    ~/.sbt: sbt
+    ~/.config/fish/config.fish:
+        create: true
+        path: config.fish
+    ~/.config/yi/yi.hs:
+        create: true
+        path: yi.hs
+    ~/.sbt/0.13/plugins/plugins.sbt:
+        create: true
+        path: sbt/0.13/plugins/plugins.sbt
+    ~/.gradle/init.gradle:
+        create: true
+        path:  gradle/init.gradle
     ~/.gradle/gradle.properties: gradle/gradle.properties
 
 - shell:
