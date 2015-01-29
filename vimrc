@@ -211,9 +211,9 @@ autocmd BufNewFile,BufReadPost *.markdown set filetype=markdown
 
 
 " Terminal Colours
+let g:solarized_termcolors=256
+let g:solarized_termtrans=1
 color solarized
-let g:solarized_termcolors=16
-let g:solarized_termtrans=0
 
 
 
