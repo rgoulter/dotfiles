@@ -11,6 +11,9 @@
     ~/.config/fish/config.fish:
         create: true
         path: config.fish
+    ~/.config/fish/functions:
+        create: true
+        path: fish/functions
     ~/.config/yi/yi.hs:
         create: true
         path: yi.hs
