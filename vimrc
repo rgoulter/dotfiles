@@ -88,6 +88,8 @@ Plugin 'mileszs/ack.vim'
 " quickfix and stuff
 Plugin 'tpope/vim-unimpaired'
 
+Plugin 'tpope/vim-surround'
+
 " Because why use vanilla sessions?
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-session'
@@ -100,6 +102,8 @@ Plugin 'vim-scripts/a.vim'
 " Plugins for improved language support
 Plugin 'sukima/xmledit'
 Plugin 'elzr/vim-json'
+Plugin 'jrozner/vim-antlr'
+Plugin 'derekwyatt/vim-scala'
 
 " VCS (HG, Git) Plugins for Vim
 Plugin 'tpope/vim-fugitive'
