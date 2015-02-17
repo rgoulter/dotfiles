@@ -83,6 +83,7 @@ Plugin 'mhinz/vim-signify'
 
 " Uses Ack as an improvement over grep searching.
 Plugin 'mileszs/ack.vim'
+Plugin 'rking/ag.vim'
 
 " Some good bindings by Tim Pope to help with
 " quickfix and stuff
