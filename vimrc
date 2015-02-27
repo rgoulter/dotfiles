@@ -105,6 +105,8 @@ Plugin 'sukima/xmledit'
 Plugin 'elzr/vim-json'
 Plugin 'jrozner/vim-antlr'
 Plugin 'derekwyatt/vim-scala'
+" Grade == Groovy
+Plugin 'tfnico/vim-gradle'
 
 " VCS (HG, Git) Plugins for Vim
 Plugin 'tpope/vim-fugitive'
