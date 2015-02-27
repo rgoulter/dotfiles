@@ -291,6 +291,7 @@ let g:ycm_collect_identifiers_from_tags_files = 1
 " For the Sessions plugin
 " Session autosaving is tedious.
 let g:session_autosave = 'no'
+let g:session_autoload = 'no'
 
 
 
