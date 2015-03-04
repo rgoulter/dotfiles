@@ -205,6 +205,12 @@ nmap <F8> :TagbarToggle<CR>
 
 nmap <F9> :ProjectTreeToggle<CR>
 
+" From http://vim.wikia.com/wiki/Remove_unwanted_spaces
+" The variable _s is used to save and restore the last search pattern
+" The e flag is used in the substitute command so no error is shown if
+"  trailing whitespace is not found
+nnoremap <silent> <F2> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
+
 " Opposite of Shift-J,
 " from http://vim.wikia.com/wiki/Insert_newline_without_entering_insert_mode
 nnoremap <C-J> a<CR><Esc>k$
