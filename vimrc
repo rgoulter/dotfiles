@@ -148,7 +148,9 @@ set showcmd     " Shows cmd
 set number      " Enable Line Number
 set ruler       " Enable Ruler
 
-" For vim airline
+set mouse=a     " use mouse
+
+" for vim airline
 set laststatus=2
 
 "" Indentation Settings
