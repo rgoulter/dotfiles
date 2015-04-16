@@ -278,21 +278,21 @@ let g:airline_powerline_fonts=1
 
 " make YCM compatible with UltiSnips (using supertab)
 " As per supertab, use c-n, c-p to cycle autocomplete; use tab for Ultisnips
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_select_completion   = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
+let g:SuperTabDefaultCompletionType    = '<C-n>'
 
 " better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsExpandTrigger       = "<tab>"
+let g:UltiSnipsJumpForwardTrigger  = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 
 
 " Let's improve YCM
-let g:ycm_complete_in_comments = 1
+let g:ycm_complete_in_comments                          = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
-let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_collect_identifiers_from_tags_files           = 1
 
 
 
@@ -304,10 +304,10 @@ let g:session_autoload = 'no'
 
 
 " For slimux
-map <Leader>s :SlimuxREPLSendLine<CR>
+map  <Leader>s :SlimuxREPLSendLine<CR>
 vmap <Leader>s :SlimuxREPLSendSelection<CR>
-map <Leader>a :SlimuxShellLast<CR>
-map <Leader>k :SlimuxSendKeysLast<CR>
+map  <Leader>a :SlimuxShellLast<CR>
+map  <Leader>k :SlimuxSendKeysLast<CR>
 
 
 
