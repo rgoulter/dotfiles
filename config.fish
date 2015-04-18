@@ -2,8 +2,12 @@
 set -x EDITOR nvim
 
 
-# From https://github.com/ndbroadbent/scm_breeze 
+# From https://github.com/ndbroadbent/scm_breeze
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+
+# In case memory is playing up?
+# From http://www.linuxquestions.org/questions/linux-general-1/how-to-show-the-memory-usage-per-process-160181/
+alias mem_usage_of_processes="ps -e -orss=,args= | sort -b -k1,1n | pr -TW$COLUMNS"
 
 # I've heard this is amusing
 alias fucking=sudo
