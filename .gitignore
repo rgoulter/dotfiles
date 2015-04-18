@@ -2,3 +2,4 @@
 # so we ignore them.
 vim/bundle/*
 vim/.netrwhist
+vim/sessions/*
