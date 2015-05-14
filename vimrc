@@ -184,7 +184,7 @@ set gdefault
 set splitright
 
 " To help CtrlP ignore files
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.hi,*.dyn_o
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.hi,*.dyn_o,*.class
 
 
 
