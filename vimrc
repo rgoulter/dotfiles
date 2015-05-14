@@ -330,3 +330,5 @@ vmap <Enter> <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
 nmap <Leader>a <Plug>(EasyAlign)
+
+let g:syntastic_python_python_exec = '/usr/bin/python2'
