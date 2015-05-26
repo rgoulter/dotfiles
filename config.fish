@@ -18,7 +18,15 @@ alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %
 # HG, one-liner logs.
 # from http://stackoverflow.com/questions/3575189/mercurial-log-with-one-liners
 # See also: hgbook.red-bean.com/read/customizing-the-output-of-mercurial.html
-alias hl="hg log --template '{node|short} | {date|isodatesec} | {author|user}: {desc|strip|firstline}\n'"
+#           https://www.selenic.com/hg/help/templates
+# node|short - commit hash
+# rev - int, revision number.
+# branches/branch - branchname.
+# desc|strip|firstline - 'subject'
+# date|age - human-readable difference in time.
+# author|person - Richard from Richard <richard.goulter@gmail.com>
+# alias hl="hg log --template '{node|short} | {date|isodatesec} | {author|user}: {desc|strip|firstline}\n'"
+alias hl="hg log --template '* {node|short} - ({branch}) {desc|strip|firstline} ({date|age}) <{author}>\n'"
 
 # In case memory is playing up?
 # From http://www.linuxquestions.org/questions/linux-general-1/how-to-show-the-memory-usage-per-process-160181/
