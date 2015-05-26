@@ -2,6 +2,9 @@
 # (Can set to nvim in config.user.fish)
 set -x EDITOR vim
 
+# HOST, for HG stuff.
+set -x HOST (hostname)
+
 
 # From https://github.com/ndbroadbent/scm_breeze
 # See also: http://git-scm.com/docs/pretty-formats
