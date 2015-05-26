@@ -253,8 +253,17 @@ au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 execute "set rtp+=" . g:opamshare . "/merlin/vim"
 
+let g:syntastic_ocaml_checkers = ['merlin']
+
+" Bindings:
+" <LocalLeader>t -> :MerlinTypeOf
+" gd -> :MerlinLocate ("Go to Declaration")
+
+map  <LocalLeader>o :MerlinOutline<CR>
+
+
 " Also run the following line in vim to index the documentation:
-"   :execute "helptags " . g:opamshare . "/merlin/vim/doc"
+execute "helptags " . g:opamshare . "/merlin/vim/doc"
 
 if filereadable("$HOME/.opam/4.02.1/share/vim/syntax/ocp-indent.vim")
     execute ":source " . "$HOME/.opam/4.02.1/share/vim/syntax/ocp-indent.vim"
