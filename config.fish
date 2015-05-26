@@ -19,6 +19,7 @@ alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %
 # from http://stackoverflow.com/questions/3575189/mercurial-log-with-one-liners
 # See also: hgbook.red-bean.com/read/customizing-the-output-of-mercurial.html
 #           https://www.selenic.com/hg/help/templates
+# and http://stackoverflow.com/questions/3625725/can-i-add-custom-colors-to-mercurial-command-templates
 # node|short - commit hash
 # rev - int, revision number.
 # branches/branch - branchname.
@@ -26,7 +27,13 @@ alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %
 # date|age - human-readable difference in time.
 # author|person - Richard from Richard <richard.goulter@gmail.com>
 # alias hl="hg log --template '{node|short} | {date|isodatesec} | {author|user}: {desc|strip|firstline}\n'"
-alias hl="hg log --template '* {node|short} - ({branch}) {desc|strip|firstline} ({date|age}) <{author}>\n'"
+# and hgrc like:
+# [color]
+# custom.rev = red
+# custom.decorate = yellow
+# custom.date = green
+# custom.author = blue bold
+alias hl="hg log --template \"* {label('custom.rev', node|short)} - ({label('custom.decorate', branch)}) {desc|strip|firstline} ({label('custom.date', date|age)}) <{label('custom.author', author)}>\n\""
 
 # In case memory is playing up?
 # From http://www.linuxquestions.org/questions/linux-general-1/how-to-show-the-memory-usage-per-process-160181/
