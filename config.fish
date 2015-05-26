@@ -7,7 +7,7 @@ alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %
 
 # In case memory is playing up?
 # From http://www.linuxquestions.org/questions/linux-general-1/how-to-show-the-memory-usage-per-process-160181/
-alias mem_usage_of_processes="ps -e -orss=,args= | sort -b -k1,1n | pr -TW$COLUMNS"
+alias mem_usage_of_processes="ps -e -orss=,args= | sort -b -k1,1n | pr -TW80"
 
 # I've heard this is amusing
 alias fucking=sudo
