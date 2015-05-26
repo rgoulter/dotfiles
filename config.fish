@@ -3,6 +3,12 @@ set -x EDITOR nvim
 
 
 # From https://github.com/ndbroadbent/scm_breeze
+# See also: http://git-scm.com/docs/pretty-formats
+# %h  - abbrev commit hash
+# %d  - ref names (like `(origin/master)`)
+# %s  - subject (first line of commit)
+# %cr - committer date, relative.
+# %an - author name.
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 
 # HG, one-liner logs.
