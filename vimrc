@@ -217,6 +217,9 @@ nnoremap <silent> <F2> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 " from http://vim.wikia.com/wiki/Insert_newline_without_entering_insert_mode
 nnoremap <C-J> a<CR><Esc>k$
 
+" Quickly disable highlighing.
+nnoremap <esc> :noh<return><esc>
+
 
 
 " .md as Markdown
