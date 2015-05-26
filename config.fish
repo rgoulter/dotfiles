@@ -5,6 +5,11 @@ set -x EDITOR nvim
 # From https://github.com/ndbroadbent/scm_breeze
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 
+# HG, one-liner logs.
+# from http://stackoverflow.com/questions/3575189/mercurial-log-with-one-liners
+# See also: hgbook.red-bean.com/read/customizing-the-output-of-mercurial.html
+alias hl="hg log --template '{node|short} | {date|isodatesec} | {author|user}: {desc|strip|firstline}\n'"
+
 # In case memory is playing up?
 # From http://www.linuxquestions.org/questions/linux-general-1/how-to-show-the-memory-usage-per-process-160181/
 alias mem_usage_of_processes="ps -e -orss=,args= | sort -b -k1,1n | pr -TW80"
