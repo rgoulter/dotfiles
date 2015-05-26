@@ -22,9 +22,16 @@ alias please="eval sudo $history[1]"
 
 
 # Convenience variables so SSH'ing isn't tedious to type out
+# (May make more sense to put this in .ssh/config?).
 set -x SUNF rgoulter@sunfire.comp.nus.edu.sg
+
+set -x LORIS5  richardg@loris-5.d2.comp.nus.edu.sg
 set -x LORIS82 richardg@loris-82.ddns.comp.nus.edu.sg
 set -x LORIS88 richardg@loris-88.ddns.comp.nus.edu.sg
+
+alias l5="ssh $LORIS5"
+alias l82="ssh $LORIS82"
+alias l88="ssh $LORIS88"
 
 set -x DIGOCEAN rgoulter@rgoulter.com
 
