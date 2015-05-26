@@ -1,5 +1,6 @@
-# Use nvim as our editor
-set -x EDITOR nvim
+# Use vim as our editor
+# (Can set to nvim in config.user.fish)
+set -x EDITOR vim
 
 
 # From https://github.com/ndbroadbent/scm_breeze
