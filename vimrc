@@ -108,6 +108,8 @@ Plugin 'derekwyatt/vim-scala'
 " Grade == Groovy
 Plugin 'tfnico/vim-gradle'
 
+Plugin 'dag/vim-fish'
+
 " VCS (HG, Git) Plugins for Vim
 Plugin 'tpope/vim-fugitive'
 Plugin 'phleet/vim-mercenary'
