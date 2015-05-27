@@ -12,10 +12,10 @@ function! Ntidyhipoutput()
 
     " Remove the control-path labels. (I don't find them useful?).
     " 'Redundant' if formatted..
-    execute "%s/(\\d*, )://"
+    silent! execute "%s/(\\d*, )://"
 
     " Tidy up the empty 'else' clauses
-    execute "%s/{\\s*\\n\\s*\\n\\s*/{/"
+    silent! execute "%s/{\\s*\\n\\s*\\n\\s*/{/"
 endfunction
 
 let g:hip_location = "~/hg/sleekex/hip"
@@ -28,7 +28,7 @@ function! Nrunont2input()
     let output = system(cmd)
 
     let fdir = expand("%:p:h")
-    let outfn  = fdir . "/" . expand("%") . "_out.txt"
+    let outfn  = fdir . "/" . expand("%:t") . "_out.txt"
 
     " 'Destructively' edit this file,
     execute ":edit " . outfn
