@@ -26,6 +26,10 @@ custom.decorate = yellow
 custom.date = green
 custom.author = blue bold
 
+[alias]
+# Unfortunately, this doesn't get limited by 'less'. Hrm.
+prettylog = log --style ~/.hgrc.d/fancy.style
+
 [extensions]
 purge =
 extdiff =

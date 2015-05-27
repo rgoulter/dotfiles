@@ -33,7 +33,7 @@ alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %
 # custom.decorate = yellow
 # custom.date = green
 # custom.author = blue bold
-alias hl="hg log --template \"* {label('custom.rev', node|short)} - ({label('custom.decorate', branch)}) {desc|strip|firstline} ({label('custom.date', date|age)}) <{label('custom.author', author)}>\n\""
+alias hl="hg log --style ~/.hgrc.d/fancy.style"
 
 # In case memory is playing up?
 # From http://www.linuxquestions.org/questions/linux-general-1/how-to-show-the-memory-usage-per-process-160181/

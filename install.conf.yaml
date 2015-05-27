@@ -4,6 +4,7 @@
     ~/.dotfiles: ''
     ~/.tmux.conf: tmux.conf
     ~/.hgrc: hgrc
+    ~/.hgrc.d: hgrc.d
     ~/.vim: vim/
     ~/.vimrc: vimrc
     ~/.gvimrc: gvimrc
