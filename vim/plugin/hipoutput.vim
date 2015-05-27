@@ -9,6 +9,13 @@ function! Ntidyhipoutput()
     normal }dG
     " Two {{ keeps the globals.. one { for just main.
     normal {{dgg
+
+    " Remove the control-path labels. (I don't find them useful?).
+    " 'Redundant' if formatted..
+    execute "%s/(\\d*, )://"
+
+    " Tidy up the empty 'else' clauses
+    execute "%s/{\\s*\\n\\s*\\n\\s*/{/"
 endfunction
 
 let g:hip_location = "~/hg/sleekex/hip"
