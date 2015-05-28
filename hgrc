@@ -30,6 +30,9 @@ custom.author = blue bold
 # Unfortunately, this doesn't get limited by 'less'. Hrm.
 prettylog = log --style ~/.hgrc.d/fancy.style
 
+[pager]
+attend = annotate, cat, diff, export, glog, log, qdiff, prettylog
+
 [extensions]
 purge =
 extdiff =
