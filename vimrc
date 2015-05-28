@@ -220,7 +220,8 @@ nnoremap <silent> <F2> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 nnoremap <C-J> a<CR><Esc>k$
 
 " Quickly disable highlighing.
-nnoremap <esc> :noh<return><esc>
+" Breaks <F3> -> :CtrlPMixed
+" nnoremap <esc> :silent! noh<return><esc>
 
 
 
