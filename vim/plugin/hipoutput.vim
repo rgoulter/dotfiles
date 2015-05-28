@@ -41,3 +41,6 @@ function! Nrunont2input()
 
     write
 endfunction
+
+" A keybinding for *.t2 files to call the above.
+autocmd BufNewFile,BufRead *.t2 nnoremap <buffer> <localleader>r :call Nrunont2input()<CR>
