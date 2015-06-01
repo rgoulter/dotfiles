@@ -81,7 +81,7 @@ if test -d $HOME/.opam
     source $HOME/.opam/opam-init/init.fish > /dev/null 2> /dev/null or true
 end
 
-source coloured-manpages.fish
+source $HOME/.config/fish/coloured-manpages.fish
 
 # Use local/user config.fish if it exists
 if test -f $HOME/.config/fish/config.user.fish
