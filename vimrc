@@ -184,7 +184,9 @@ set gdefault
 set splitright
 
 " To help CtrlP ignore files
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.hi,*.dyn_o,*.class
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.tar,*.o,*.hi,*.dyn_o
+set wildignore+=*.class,*.jar     " JVM class files.
+set wildignore+=*.pyc             " Python compiled *.pyc files.
 
 
 
