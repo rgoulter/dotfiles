@@ -3,3 +3,12 @@
 vim/bundle/*
 vim/.netrwhist
 vim/sessions/*
+
+# In general, may want to ignore 'user' files.
+config.user.fish
+
+# Decided to add .config/fish directly
+# (rather than install.conf.yaml every fish script).
+# So, need to ignore the following:
+fish_history
+fishd*

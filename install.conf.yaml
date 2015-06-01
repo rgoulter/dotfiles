@@ -3,17 +3,16 @@
 - link:
     ~/.dotfiles: ''
     ~/.tmux.conf: tmux.conf
+    ~/.hgrc: hgrc
+    ~/.hgrc.d: hgrc.d
     ~/.vim: vim/
     ~/.vimrc: vimrc
     ~/.gvimrc: gvimrc
     ~/.nvim: vim/
     ~/.nvimrc: vimrc
-    ~/.config/fish/config.fish:
+    ~/.config/fish:
         create: true
-        path: config.fish
-    ~/.config/fish/functions:
-        create: true
-        path: fish/functions
+        path: fish
     ~/.config/yi/yi.hs:
         create: true
         path: yi.hs

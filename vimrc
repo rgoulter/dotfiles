@@ -108,6 +108,8 @@ Plugin 'derekwyatt/vim-scala'
 " Grade == Groovy
 Plugin 'tfnico/vim-gradle'
 
+Plugin 'dag/vim-fish'
+
 " VCS (HG, Git) Plugins for Vim
 Plugin 'tpope/vim-fugitive'
 Plugin 'phleet/vim-mercenary'
@@ -219,6 +221,10 @@ nnoremap <silent> <F2> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 " from http://vim.wikia.com/wiki/Insert_newline_without_entering_insert_mode
 nnoremap <C-J> a<CR><Esc>k$
 
+" Quickly disable highlighing.
+" Breaks <F3> -> :CtrlPMixed
+" nnoremap <esc> :silent! noh<return><esc>
+
 
 
 " .md as Markdown
@@ -255,8 +261,17 @@ au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 execute "set rtp+=" . g:opamshare . "/merlin/vim"
 
+let g:syntastic_ocaml_checkers = ['merlin']
+
+" Bindings:
+" <LocalLeader>t -> :MerlinTypeOf
+" gd -> :MerlinLocate ("Go to Declaration")
+
+map  <LocalLeader>o :MerlinOutline<CR>
+
+
 " Also run the following line in vim to index the documentation:
-"   :execute "helptags " . g:opamshare . "/merlin/vim/doc"
+execute "helptags " . g:opamshare . "/merlin/vim/doc"
 
 if filereadable("$HOME/.opam/4.02.1/share/vim/syntax/ocp-indent.vim")
     execute ":source " . "$HOME/.opam/4.02.1/share/vim/syntax/ocp-indent.vim"

@@ -1,0 +1,95 @@
+%include .hgrc.local
+
+[ui]
+username = ${USER}@${HOST}
+#merge = kdiff3
+ignore = ~/.hgignore
+
+[hgview]
+maxfilesize=2000000
+
+[extensions]
+color =
+
+[color]
+status.modified = magenta bold
+status.added = green bold
+status.removed = red bold
+status.deleted = cyan bold
+status.unknown = blue bold
+status.ignored = black bold
+
+[color]
+# These colors to make a template for git log pretty
+custom.rev = red
+custom.decorate = yellow
+custom.date = green
+custom.author = blue bold
+
+[alias]
+# Unfortunately, this doesn't get limited by 'less'. Hrm.
+prettylog = log --style ~/.hgrc.d/fancy.style
+
+[pager]
+attend = annotate, cat, diff, export, glog, log, qdiff, prettylog
+
+[extensions]
+purge =
+extdiff =
+hgext.graphlog =
+
+[diff]
+git = True
+
+[extdiff]
+# add new command that runs GNU diff(1) in 'context diff' mode
+cmd.cdiff = gdiff
+opts.cdiff = -Nprc5
+
+# add new command called vdiff, runs kdiff3
+cmd.vdiff = kdiff3
+
+# add new command called meld, runs meld (no need to name twice)
+cmd.meld =
+cmd.kdiff3 =
+
+[merge-tools]
+kdiff3.args = $base $local $other -o $output
+kdiff3.priority = 7
+#kdiff3.premerge = True
+#kdiff3.executable = kdiff3
+kdiff3.gui = True
+#meld.args = $other $local
+#meld.priority = 1
+
+# add new command called vimdiff, runs gvimdiff with DirDiff plugin
+#(see http://www.vim.org/scripts/script.php?script_id=102)
+# Non english user, be sure to put "let g:DirDiffDynamicDiffText = 1" in
+# your .vimrc
+# cmd.vimdiff = gvim
+# opts.vimdiff = -f '+next' '+execute "DirDiff" argv(0) argv(1)'
+
+# add new command called ediff, runs emacs diff
+# cmd.ediff = sh
+# opts.ediff = -c 'if [ -d $0 ]; then emacs --eval "(ediff-directories \"$0\" \"$1\" \"\")"; else emacs --eval "(ediff-files \"$0\" \"$1\")"; fi'
+
+[extensions]
+hgk=
+
+[extensions]
+strip =
+
+[extensions]
+purge =
+
+[hooks]
+# Don't commit if text contains `# NOCOMMIT`
+pretxncommit.nocommit = hg export tip | (! egrep -q '^\+.*#[ \t]*NOCOMMIT.*$')
+
+# Run HG with pager, which is more convenient for
+# commands with large amounts of output.
+[pager]
+pager = LESS='FRX' less
+
+[extensions]
+pager =
