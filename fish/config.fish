@@ -35,6 +35,9 @@ alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %
 # custom.author = blue bold
 alias hl="hg log --style ~/.hgrc.d/fancy.style"
 
+# Git Clone from CliPboard.
+alias gccp="git clone (xclip -out)"
+
 # In case memory is playing up?
 # From http://www.linuxquestions.org/questions/linux-general-1/how-to-show-the-memory-usage-per-process-160181/
 alias mem_usage_of_processes="ps -e -orss=,args= | sort -b -k1,1n | pr -TW80"
