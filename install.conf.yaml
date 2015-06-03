@@ -10,6 +10,7 @@
     ~/.gvimrc: gvimrc
     ~/.nvim: vim/
     ~/.nvimrc: vimrc
+    ~/.emacs: emacs.el
     ~/.config/fish:
         create: true
         path: fish
