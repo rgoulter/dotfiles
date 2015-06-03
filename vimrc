@@ -273,9 +273,7 @@ map  <LocalLeader>o :MerlinOutline<CR>
 " Also run the following line in vim to index the documentation:
 execute "helptags " . g:opamshare . "/merlin/vim/doc"
 
-if filereadable("$HOME/.opam/4.02.1/share/vim/syntax/ocp-indent.vim")
-    execute ":source " . "$HOME/.opam/4.02.1/share/vim/syntax/ocp-indent.vim"
-endif
+autocmd FileType ocaml source ~/.opam/4.02.1/share/vim/syntax/ocp-indent.vim
 
 
 
