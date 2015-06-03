@@ -93,3 +93,7 @@ pager = LESS='FRX' less
 
 [extensions]
 pager =
+
+
+[phases]
+new-commit = secret
