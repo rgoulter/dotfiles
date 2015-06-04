@@ -32,4 +32,22 @@
   :config (progn
             (load-theme 'solarized-dark t)))
 
+;; 'Borrowed' by searching GitHub for "use-package tuareg"
+(req-package tuareg
+  :ensure t
+  ; :load-path ("~/.opam/system/share/emacs/site-lisp/")
+
+  :mode (("\\.ml[ily]?$" . tuareg-mode)
+         ("\\.topml$" . tuareg-mode)
+         ("\\.topscript$" . tuareg-mode))
+
+  :config (use-package merlin
+            :init (setq merlin-use-auto-complete-mode t
+                        merlin-error-after-save nil)
+
+            :config (add-hook 'tuareg-mode-hook 'merlin-mode)
+
+            :bind (("C-c <up>" . merlin-type-enclosing-go-up)
+                   ("C-c <down>" . merlin-type-enclosing-go-down))))
+
 (req-package-finish)
