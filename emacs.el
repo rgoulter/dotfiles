@@ -12,6 +12,11 @@
  ;; If there is more than one, they won't work right.
  )
 
+;; Use ibuffer mode, which manages buffers like Dired manages directories.
+;; From http://tuhdo.github.io/emacs-tutor.html
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+
+
 (require 'package)
   (push '("marmalade" . "http://marmalade-repo.org/packages/")
         package-archives )
