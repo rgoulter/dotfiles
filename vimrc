@@ -311,6 +311,31 @@ let g:ycm_collect_identifiers_from_tags_files           = 1
 
 
 
+" Improve airline
+
+" Shorter modeline map.
+let g:airline_mode_map = {
+    \ '__' : '-',
+    \ 'n'  : 'N',
+    \ 'i'  : 'I',
+    \ 'R'  : 'R',
+    \ 'c'  : 'C',
+    \ 'v'  : 'V',
+    \ 'V'  : 'V',
+    \ '' : 'V',
+    \ 's'  : 'S',
+    \ 'S'  : 'S',
+    \ '' : 'S',
+    \ }
+
+" Airline algo: tabs then spaces.
+let g:airline#extensions#whitespace#mixed_indent_algo = 2
+
+" Personally I love this idea,
+" but unsuitable for large codebase you didn't write yourself.
+let g:airline#extensions#whitespace#checks = []
+
+
 " For the Sessions plugin
 " Session autosaving is tedious.
 let g:session_autosave = 'no'
