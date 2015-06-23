@@ -51,7 +51,7 @@ Plugin 'dag/vim2hs'
 
 " nego-ghc for haskell autocompletion. Can work with YCM, see below.
 " But also requires
-"   setlocal omnifunc=necoghc#omnifunc 
+"   setlocal omnifunc=necoghc#omnifunc
 " e.g. in ~/.vim/ftplugin/haskell.vim
 Plugin 'eagletmt/neco-ghc'
 
