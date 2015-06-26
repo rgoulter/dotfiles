@@ -20,6 +20,7 @@ CompilerSet errorformat =
       \%AFile\ \"%f\"\\,\ line\ %l\\,\ character\ %c:%m,
       \%C%tarning\ %n:\ %m,
       \%C%trror\ %n:\ %m,
+      \%C%trror:\ %m,
       \%-G/usr%.%#,
       \%-G+\ /usr%.%#,
       \%-G#\ No\ parallelism\ done,
