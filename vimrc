@@ -189,6 +189,8 @@ set splitright
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.tar,*.o,*.hi,*.dyn_o
 set wildignore+=*.class,*.jar     " JVM class files.
 set wildignore+=*.pyc             " Python compiled *.pyc files.
+set wildignore+=_site
+set wildignore+=.git
 
 
 
