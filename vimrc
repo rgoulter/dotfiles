@@ -51,7 +51,7 @@ Plugin 'dag/vim2hs'
 
 " nego-ghc for haskell autocompletion. Can work with YCM, see below.
 " But also requires
-"   setlocal omnifunc=necoghc#omnifunc 
+"   setlocal omnifunc=necoghc#omnifunc
 " e.g. in ~/.vim/ftplugin/haskell.vim
 Plugin 'eagletmt/neco-ghc'
 
@@ -311,6 +311,31 @@ let g:ycm_complete_in_comments                          = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_collect_identifiers_from_tags_files           = 1
 
+
+
+" Improve airline
+
+" Shorter modeline map.
+let g:airline_mode_map = {
+    \ '__' : '-',
+    \ 'n'  : 'N',
+    \ 'i'  : 'I',
+    \ 'R'  : 'R',
+    \ 'c'  : 'C',
+    \ 'v'  : 'V',
+    \ 'V'  : 'V',
+    \ '' : 'V',
+    \ 's'  : 'S',
+    \ 'S'  : 'S',
+    \ '' : 'S',
+    \ }
+
+" Airline algo: tabs then spaces.
+let g:airline#extensions#whitespace#mixed_indent_algo = 2
+
+" Personally I love this idea,
+" but unsuitable for large codebase you didn't write yourself.
+let g:airline#extensions#whitespace#checks = []
 
 
 " For the Sessions plugin
