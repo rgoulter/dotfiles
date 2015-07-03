@@ -194,6 +194,11 @@ set wildignore+=*.class,*.jar     " JVM class files.
 set wildignore+=*.pyc             " Python compiled *.pyc files.
 
 
+" Custom Leader: <Space>
+let mapleader=" "
+let maplocalleader=" "
+nnoremap <Space> <Nop>
+
 
 " Tips from http://blog.sanctum.geek.nz/vim-annoyances/
 " Regardling j/k over wrapped lines
@@ -347,6 +352,8 @@ let g:session_autoload = 'no'
 
 
 " For slimux
+" NOTE: Unfortunately, some OCaml plugin has mapping for
+" something else (goto-interface).
 map  <Leader>s :SlimuxREPLSendLine<CR>
 vmap <Leader>s :SlimuxREPLSendSelection<CR>
 map  <Leader>a :SlimuxShellLast<CR>
