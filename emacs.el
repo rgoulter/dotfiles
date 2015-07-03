@@ -22,6 +22,8 @@
         package-archives )
   (push '("melpa" . "http://melpa.milkbox.net/packages/")
         package-archives)
+  (push '("melpa-stable" . "http://stable.melpa.org/packages/")
+        package-archives)
 
 ; Taken from http://juanjoalvarez.net/es/detail/2014/sep/19/vim-emacsevil-chaotic-migration-guide/
 ; See also: http://www.emacswiki.org/emacs/ELPA
@@ -54,5 +56,9 @@
 
             :bind (("C-c <up>" . merlin-type-enclosing-go-up)
                    ("C-c <down>" . merlin-type-enclosing-go-down))))
+
+(req-package haskell-mode
+  :init
+  (add-hook 'haskell-mode-hook 'turn-on-haskell-indent))
 
 (req-package-finish)
