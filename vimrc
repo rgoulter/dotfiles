@@ -138,6 +138,9 @@ filetype plugin indent on    " required by Vundle
 syntax enable
 set background=dark
 
+set hidden      " Lets Vim hide a buffer instead of closing.
+                " so doesn't throw error about unsaved changes.
+
 set hlsearch    " Enable Search Highlighting
 set incsearch   " Enable search while typing
 set showmatch   " Show matching brackets
