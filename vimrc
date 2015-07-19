@@ -138,6 +138,9 @@ filetype plugin indent on    " required by Vundle
 syntax enable
 set background=dark
 
+set hidden      " Lets Vim hide a buffer instead of closing.
+                " so doesn't throw error about unsaved changes.
+
 set hlsearch    " Enable Search Highlighting
 set incsearch   " Enable search while typing
 set showmatch   " Show matching brackets
@@ -192,6 +195,11 @@ set wildignore+=*.pyc             " Python compiled *.pyc files.
 set wildignore+=_site
 set wildignore+=.git
 
+
+" Custom Leader: <Space>
+let mapleader=" "
+let maplocalleader=" "
+nnoremap <Space> <Nop>
 
 
 " Tips from http://blog.sanctum.geek.nz/vim-annoyances/
@@ -346,6 +354,8 @@ let g:session_autoload = 'no'
 
 
 " For slimux
+" NOTE: Unfortunately, some OCaml plugin has mapping for
+" something else (goto-interface).
 map  <Leader>s :SlimuxREPLSendLine<CR>
 vmap <Leader>s :SlimuxREPLSendSelection<CR>
 map  <Leader>a :SlimuxShellLast<CR>
