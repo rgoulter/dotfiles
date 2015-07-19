@@ -39,6 +39,9 @@ Plugin 'bling/vim-airline'
 
 Plugin 'scrooloose/syntastic'
 
+" Make our parentheses, etc. pretty
+Plugin 'luochen1990/rainbow'
+
 " Haskell
 " Opting for ghcmod-vim over hdevtools, as this is what vim2hs supports.
 "  Plugin 'bitc/vim-hdevtools'
@@ -384,6 +387,9 @@ vmap <Enter> <Plug>(EasyAlign)
 nmap <Leader>a <Plug>(EasyAlign)
 
 let g:syntastic_python_python_exec = '/usr/bin/python2'
+
+" Enable rainbow parentheses
+let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 
 " For *locally* playing around wtih hipsleekutil,
 " we need to turn filetype off, then turn it on again.
