@@ -83,9 +83,6 @@ augroup hipsleekdev
     " A keybinding for *.t2 files to call the above.
     autocmd BufNewFile,BufRead *.t2 nnoremap <buffer> <localleader>r :call Nrunont2input()<CR>
 
-    " ss is our hip/slk, NOT scheme
-    au BufNewFile,BufRead *.ss set filetype= 
-
     " A keybinding for *.ss files to call the above.
     autocmd BufNewFile,BufRead *.ss nnoremap <buffer> <localleader>r :call HipRunSS()<CR>
 augroup END
