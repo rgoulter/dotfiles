@@ -374,3 +374,10 @@ vmap <Enter> <Plug>(EasyAlign)
 nmap <Leader>a <Plug>(EasyAlign)
 
 let g:syntastic_python_python_exec = '/usr/bin/python2'
+
+" For *locally* playing around wtih hipsleekutil,
+" we need to turn filetype off, then turn it on again.
+" Sigh.
+filetype off
+set rtp+=~/.vim/hipsleekutil/
+filetype plugin indent on
