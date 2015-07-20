@@ -395,7 +395,7 @@ nmap <Leader>a <Plug>(EasyAlign)
 let g:syntastic_python_python_exec = '/usr/bin/python2'
 
 " Enable rainbow parentheses
-let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
+let g:rainbow_active = 0 " if you want to enable it later via :RainbowToggle
 
 " For *locally* playing around wtih hipsleekutil,
 " we need to turn filetype off, then turn it on again.
