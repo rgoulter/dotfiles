@@ -49,7 +49,7 @@
          ("\\.topml$" . tuareg-mode)
          ("\\.topscript$" . tuareg-mode))
 
-  :config (use-package merlin
+  :config (req-package merlin
             :init (setq merlin-use-auto-complete-mode t
                         merlin-error-after-save nil)
 
