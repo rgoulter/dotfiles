@@ -42,6 +42,12 @@ Plugin 'scrooloose/syntastic'
 " Make our parentheses, etc. pretty
 Plugin 'luochen1990/rainbow'
 
+" More motions
+" Like f, but two letters
+Plugin 'goldfeld/vim-seek'
+" I don't use easy-motion, but nice to have in Vimrc?
+Plugin 'easymotion/vim-easymotion'
+
 " Haskell
 " Opting for ghcmod-vim over hdevtools, as this is what vim2hs supports.
 "  Plugin 'bitc/vim-hdevtools'
