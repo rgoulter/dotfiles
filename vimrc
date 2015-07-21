@@ -45,6 +45,8 @@ Plugin 'luochen1990/rainbow'
 " More motions
 " Like f, but two letters
 Plugin 'goldfeld/vim-seek'
+" seek works only on one line; sneak is more versatile.
+" Plugin 'justinmk/vim-sneak'
 " I don't use easy-motion, but nice to have in Vimrc?
 Plugin 'easymotion/vim-easymotion'
 
