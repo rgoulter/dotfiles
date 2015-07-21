@@ -42,9 +42,6 @@
 
 ;; 'Borrowed' by searching GitHub for "use-package tuareg"
 (req-package tuareg
-  :ensure t
-  ; :load-path ("~/.opam/system/share/emacs/site-lisp/")
-
   :mode (("\\.ml[ily]?$" . tuareg-mode)
          ("\\.topml$" . tuareg-mode)
          ("\\.topscript$" . tuareg-mode)))
@@ -54,10 +51,13 @@
               merlin-error-after-save nil)
 
   :config (add-hook 'tuareg-mode-hook 'merlin-mode)
-          (setq merlin-command 'opam)
+          ; See http://emacs.stackexchange.com/questions/12084/how-to-get-merlin-mode-to-work-in-emacs
+          ;(setq merlin-command 'opam)
 
-  :bind (("C-c <up>" . merlin-type-enclosing-go-up)
-         ("C-c <down>" . merlin-type-enclosing-go-down)))
+  ;; For some reason, having :bind here throws this out of whack. ???
+  ; :bind (("C-c <up>" . merlin-type-enclosing-go-up)
+  ;        ("C-c <down>" . merlin-type-enclosing-go-down))
+  )
 
 (req-package haskell-mode
   :init
@@ -66,9 +66,9 @@
 ; https://github.com/istib/rainbow-blocks looks maybe pretty, also?
 ; use M-x rainbow-delimiters-mode to toggle. (EVIL: Can use as Ex command).
 (req-package rainbow-delimiters
+  ; Enable for most programming languages:
   :config (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
-; Can enable it for most programming languages with:
-; (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
-; But how to idiomatically do this with use-package?
+
+; Qn: Why is it (add-hook ... #'whatever-mode) vs (add-hook ... 'whatever-mode) ???
 
 (req-package-finish)
