@@ -47,16 +47,17 @@
 
   :mode (("\\.ml[ily]?$" . tuareg-mode)
          ("\\.topml$" . tuareg-mode)
-         ("\\.topscript$" . tuareg-mode))
+         ("\\.topscript$" . tuareg-mode)))
 
-  :config (req-package merlin
-            :init (setq merlin-use-auto-complete-mode t
-                        merlin-error-after-save nil)
+(req-package merlin
+  :init (setq ; merlin-use-auto-complete-mode t
+              merlin-error-after-save nil)
 
-            :config (add-hook 'tuareg-mode-hook 'merlin-mode)
+  :config (add-hook 'tuareg-mode-hook 'merlin-mode)
+          (setq merlin-command 'opam)
 
-            :bind (("C-c <up>" . merlin-type-enclosing-go-up)
-                   ("C-c <down>" . merlin-type-enclosing-go-down))))
+  :bind (("C-c <up>" . merlin-type-enclosing-go-up)
+         ("C-c <down>" . merlin-type-enclosing-go-down)))
 
 (req-package haskell-mode
   :init
