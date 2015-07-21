@@ -65,7 +65,8 @@
 
 ; https://github.com/istib/rainbow-blocks looks maybe pretty, also?
 ; use M-x rainbow-delimiters-mode to toggle. (EVIL: Can use as Ex command).
-(req-package rainbow-delimiters)
+(req-package rainbow-delimiters
+  :config (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 ; Can enable it for most programming languages with:
 ; (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 ; But how to idiomatically do this with use-package?
