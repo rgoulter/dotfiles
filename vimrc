@@ -41,6 +41,9 @@ Plugin 'scrooloose/syntastic'
 
 " Make our parentheses, etc. pretty
 Plugin 'luochen1990/rainbow'
+" Alternatively, the somewhat cumbersome:
+"   kien/rainbow_parentheses.vim
+" which has many forks, each with a few commits.
 
 " More motions
 " Like f, but two letters
