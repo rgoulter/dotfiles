@@ -69,6 +69,10 @@
   ; Enable for most programming languages:
   :config (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
+(req-package org)
+(req-package evil-leader)
+(req-package evil-org)
+
 ; Qn: Why is it (add-hook ... #'whatever-mode) vs (add-hook ... 'whatever-mode) ???
 
 (req-package-finish)
