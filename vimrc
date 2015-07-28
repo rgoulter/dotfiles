@@ -109,7 +109,14 @@ Plugin 'tpope/vim-surround'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-session'
 Plugin 'xolox/vim-easytags'
+
+" Note taking stuff.
 Plugin 'xolox/vim-notes'
+" More note-taking, in the style of Emacs' org mode.
+" ~700 stars
+Plugin 'jceb/vim-orgmode'
+" ~400 stars
+" Plugin 'hsitz/VimOrganizer'
 
 " For matching files.
 Plugin 'vim-scripts/a.vim'
