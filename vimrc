@@ -119,7 +119,10 @@ Plugin 'jceb/vim-orgmode'
 " Plugin 'hsitz/VimOrganizer'
 
 " For matching files.
-Plugin 'vim-scripts/a.vim'
+" a.vim contains:
+"   imap <Leader>is ....
+" so, leader-as-space fucks things up.
+" Plugin 'vim-scripts/a.vim'
 
 " Plugins for improved language support
 Plugin 'sukima/xmledit'
