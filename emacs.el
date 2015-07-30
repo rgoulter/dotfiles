@@ -36,9 +36,9 @@
 (req-package evil
   :config (evil-mode 1))
 
-(req-package solarized-theme
-  :config (progn
-            (load-theme 'solarized-dark t)))
+; (req-package solarized-theme
+;   :config (progn
+;             (load-theme 'solarized-dark t)))
 
 ;; 'Borrowed' by searching GitHub for "use-package tuareg"
 (req-package tuareg
