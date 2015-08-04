@@ -40,13 +40,18 @@ alias gccp="git clone (xclip -out)"
 
 # In case memory is playing up?
 # From http://www.linuxquestions.org/questions/linux-general-1/how-to-show-the-memory-usage-per-process-160181/
-alias mem_usage_of_processes="ps -e -orss=,args= | sort -b -k1,1n | pr -TW80"
+function mem_usage_of_processes
+    ps -e -orss=,args= | sort -b -k1,1n | pr -TW$COLUMNS
+end
 
 # I've heard this is amusing
 alias fucking=sudo
 
 # Fish, sudo last command
-alias please="eval sudo $history[1]"
+# (Easier to write this way than using alias, where fish would eval var..).
+function please
+    eval sudo $history[1]
+end
 
 
 # Convenience variables so SSH'ing isn't tedious to type out
