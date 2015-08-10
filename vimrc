@@ -186,7 +186,8 @@ set laststatus=2
 set shiftwidth=4
 set softtabstop=4
 set tabstop=4
-set expandtab
+set noexpandtab
+set copyindent
 set autoindent  " Enables Auto Indent on files without type
 
 set colorcolumn=80
