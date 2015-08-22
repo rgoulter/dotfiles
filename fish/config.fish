@@ -38,6 +38,10 @@ alias hl="hg log --style ~/.hgrc.d/fancy.style"
 # Git Clone from CliPboard.
 alias gccp="git clone (xclip -out)"
 
+# Because I forget the actual commands for these
+alias pyjson="python -m json.tool"
+alias py3serve="python3 -m http.server"
+
 # In case memory is playing up?
 # From http://www.linuxquestions.org/questions/linux-general-1/how-to-show-the-memory-usage-per-process-160181/
 function mem_usage_of_processes
