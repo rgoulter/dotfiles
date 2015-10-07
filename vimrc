@@ -24,7 +24,7 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'marijnh/tern_for_vim'
 
 " Ultisnips is a snippets plugin for Vim.
-Plugin 'ervandew/supertab'
+" Plugin 'ervandew/supertab'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 
