@@ -186,7 +186,7 @@ set laststatus=2
 set shiftwidth=4
 set softtabstop=4
 set tabstop=4
-set noexpandtab
+set expandtab
 set copyindent
 set autoindent  " Enables Auto Indent on files without type
 
