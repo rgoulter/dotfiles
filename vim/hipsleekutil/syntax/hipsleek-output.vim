@@ -53,6 +53,9 @@ syntax match hsoutpHeapOp "\*[^)]\@=" contained
 syntax match hsoutpNumber "[0-9]\+" contained
 syntax match hsoutpIdent "[_a-zA-Z][_a-zA-Z0-9]*" contained
 
+syntax match hsoutpTrace "(==.*==)"
+syntax match hsoutpTrace "[a-zA-Z0-9_]\+ inp[0-9]\+ :"
+syntax match hsoutpTrace "[a-zA-Z0-9_]\+@[0-9]\+\( EXIT\)\?"
 
 
 " Again, not ideal, but since [] are used within, also.
@@ -71,5 +74,7 @@ highlight hsoutpParen4 ctermfg=Brown
 
 highlight hsoutpIdent ctermfg=Yellow
 highlight hsoutpNumber ctermfg=DarkGray
+
+highlight hsoutpTrace ctermfg=DarkGreen
 
 let b:current_syntax = "hipsleek-output.vim"
