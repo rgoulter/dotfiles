@@ -10,7 +10,7 @@ if exists("b:current_syntax")
   finish
 endif
 
-syntax region hsoutpLog start="!!!" end="$"
+syntax region hsoutpLog start="!!!" end="#[0-9]\+:"
 
 "" The Sleek syntax stuff should only apply within the Sleek region
 syntax region hsoutpExprReg start="\[" end="\]" contains=@SleekCluster

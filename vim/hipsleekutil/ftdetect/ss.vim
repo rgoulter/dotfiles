@@ -1,1 +1,1 @@
-au BufRead,BufNewFile *.ss		set filetype=sleek
+au BufRead,BufNewFile *.ss		set filetype=hip
