@@ -11,7 +11,11 @@ let s:buf_id = -1
 function! SleekRun()
     " Run the current file through Hip
     let fn = expand("%:p")
-    let cmd = g:sleek_location . ' ' . fn
+    if exists("b:extra_sleek_args")
+      let cmd = g:sleek_location . ' ' . fn . ' ' . b:extra_sleek_args
+    else
+      let cmd = g:sleek_location . ' ' . fn
+    end
     let output = system(cmd)
 
     " Try to reuse buffer / window, if they exist
@@ -53,5 +57,8 @@ function! SleekRun()
     normal gg
 endfunction
 
-" nnoremap <buffer> <localleader>r :call HipRunSS()<CR>
 nnoremap <buffer> <localleader>r :call SleekRun()<CR>
+
+"" Not sure the best way to do this.
+"" ?? Proj specific vimrc ?
+let b:extra_sleek_args="-dre complex_unfold"
