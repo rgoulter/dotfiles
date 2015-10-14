@@ -75,6 +75,6 @@ highlight hsoutpParen4 ctermfg=Brown
 highlight hsoutpIdent ctermfg=Yellow
 highlight hsoutpNumber ctermfg=DarkGray
 
-highlight hsoutpTrace ctermfg=DarkGreen
+highlight hsoutpTrace ctermfg=Brown
 
 let b:current_syntax = "hipsleek-output.vim"

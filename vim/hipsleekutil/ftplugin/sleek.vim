@@ -1,5 +1,24 @@
-" let g:hip_dir = "~/hg/sleekex"
-let g:hip_dir = "~/hg/fix-derive"
+" Try to find hip dir.
+function! FindHipSleekRepo()
+    let cwd = expand("%:p:h")
+
+    " use !empty(glob(V)) to check if V exists
+
+    " Look in parents, until find .hg repo.
+    " strlen > 1 is check against root..
+    while empty(glob(cwd . "/.hg")) && strlen(cwd) > 1
+        let cwd = cwd . "/.."
+    endwhile
+
+    let cwd = simplify(cwd)
+
+    " if cwd == /, then probably fail..
+    echom "Found repo dir: " . cwd
+
+    return cwd
+endfunction
+
+let g:hip_dir = FindHipSleekRepo()
 let g:sleek_location = g:hip_dir . "/sleek"
 let g:hip_location = g:hip_dir . "/hip"
 
@@ -61,4 +80,4 @@ nnoremap <buffer> <localleader>r :call SleekRun()<CR>
 
 "" Not sure the best way to do this.
 "" ?? Proj specific vimrc ?
-let b:extra_sleek_args="-dre complex_unfold"
+" let b:extra_sleek_args=""
