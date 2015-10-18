@@ -24,7 +24,7 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'marijnh/tern_for_vim'
 
 " Ultisnips is a snippets plugin for Vim.
-Plugin 'ervandew/supertab'
+" Plugin 'ervandew/supertab'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 
@@ -219,6 +219,7 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.tar,*.o,*.hi,*.dyn_o
 set wildignore+=*.class,*.jar     " JVM class files.
 set wildignore+=*.pyc             " Python compiled *.pyc files.
 set wildignore+=_site
+set wildignore+=target
 set wildignore+=.git
 
 
