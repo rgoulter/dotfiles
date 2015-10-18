@@ -60,7 +60,7 @@ Plugin 'easymotion/vim-easymotion'
 "  Plugin 'lukerandall/haskellmode-vim'
 " ghcmod-vim depends on vimproc.vim. n.b. vimproc needs to be built natively.
 Plugin 'Shougo/vimproc.vim'
-Plugin 'eagletmt/ghcmod-vim'
+" Plugin 'eagletmt/ghcmod-vim'
 Plugin 'dag/vim2hs'
 
 " nego-ghc for haskell autocompletion. Can work with YCM, see below.
@@ -287,7 +287,7 @@ let g:ycm_semantic_triggers = {'haskell' : ['.']}
 "g:necoghc_enable_detailed_browse = 1
 
 au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
-au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
+" au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
 
 
 
