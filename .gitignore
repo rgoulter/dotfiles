@@ -3,6 +3,9 @@
 vim/bundle/*
 vim/.netrwhist
 vim/sessions/*
+vim/eclim/*
+vim/spell/*
+vim/cworksheet/*
 
 # In general, may want to ignore 'user' files.
 config.user.fish
