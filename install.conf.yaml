@@ -17,6 +17,9 @@
     ~/.config/yi/yi.hs:
         create: true
         path: yi.hs
+    ~/.config/yi/lib:
+        create: true
+        path: lib-yi
     ~/.sbt/0.13/plugins/plugins.sbt:
         create: true
         path: sbt/0.13/plugins/plugins.sbt

@@ -1,24 +1,14 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 import Yi
-import Yi.Keymap.Vim (keymapSet)
+import Yi.Keymap.Vim (keymapSet, mkKeymapSet, defVimConfig, vimExCommandParsers)
 import qualified Yi.Mode.Haskell as Haskell
 import Yi.Style
 import Yi.Style.Library
 
--- import Yi.UI.Vty (start)
--- import Yi.UI.Pango (start)
+-- under lib/ folder
+import qualified HelloWorld as HelloWorld
 
--- Uncomment for Shim support
--- import qualified Yi.Mode.Shim as Shim
--- -- Shim.minorMode gives us emacs-like keybindings - what would be a good
--- -- set of keybindings for vim?
--- shimMode :: AnyMode
--- shimMode = AnyMode (Shim.minorMode Haskell.cleverMode)
-
-{-
-  For now we just make the selected style the same as the
-  modeline_focused style... Just because i'm not good with
-  styles yet - Jim
--}
 defaultVimUiTheme :: Theme
 defaultVimUiTheme = defaultTheme  `override` \super self -> super {
         selectedStyle = modelineFocusStyle self
@@ -33,8 +23,9 @@ myConfigUI = (configUI defaultVimConfig)  {
 
 main :: IO ()
 main = yi $ defaultVimConfig {
-    -- Uncomment for Shim support
-    -- modeTable = [shimMode] <|> modeTable defaultVimConfig,
     configUI = myConfigUI,
-    defaultKm = keymapSet
+    defaultKm = mkKeymapSet $ defVimConfig `override` \ super self -> super
+            { vimExCommandParsers = myExCmdParsers ++ vimExCommandParsers super }
  }
+
+myExCmdParsers = [HelloWorld.parse]
