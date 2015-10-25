@@ -1,0 +1,44 @@
+
+# Caches
+set header_cache=~/.mutt/cache/headers
+set message_cachedir=~/.mutt/cache/bodies
+set certificate_file=~/.mutt/certificates
+
+# Useful customizations
+set smart_wrap = yes
+set sort = 'threads'
+set sort_aux = 'last-date-received'
+set imap_check_subscribed
+#
+ignore "Authentication-Results:"
+ignore "DomainKey-Signature:"
+ignore "DKIM-Signature:"
+hdr_order Date From To Cc
+#
+
+set timeout=60  #Check for mail every minute
+set mail_check=5
+
+# Use poor man's password keeping, as per Arch Linux manual
+source "gpg2 -dq $HOME/.my-pwds.gpg |"
+
+
+## ACCOUNT1
+source "~/.mutt/nusstu"
+# Here we use the $folder variable that has just been set in the sourced file.
+# We must set it right now otherwise the 'folder' variable will change in the next sourced file.
+folder-hook $folder 'source ~/.mutt/nusstu'
+
+## ACCOUNT2
+source "~/.mutt/gmail"
+# folder-hook *richard.goulter@gmail.com/ 'source ~/.mutt/gmail'
+folder-hook $folder 'source ~/.mutt/gmail'
+
+## Shortcuts
+macro index,pager <f2> '<sync-mailbox><enter-command>source ~/.mutt/gmail<enter><change-folder>!<enter>'
+macro index,pager <f3> '<sync-mailbox><enter-command>source ~/.mutt/nusstu<enter><change-folder>!<enter>'
+
+mailboxes
+
+# Editor Information
+set editor=vim
