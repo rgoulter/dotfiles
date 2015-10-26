@@ -11,6 +11,7 @@
     ~/.nvim: vim/
     ~/.nvimrc: vimrc
     ~/.emacs: emacs.el
+    ~/.mutt: mutt/
     ~/.config/fish:
         create: true
         path: fish

@@ -42,3 +42,12 @@ mailboxes
 
 # Editor Information
 set editor=vim
+
+# Use a colour theme
+source ~/.mutt/mutt-colors-solarized-dark-256.muttrc
+
+# Try to view text/plain first
+alternative_order text/plain text/html
+
+# In case that files
+macro attach 'V' "<pipe-entry>cat >~/.cache/mutt/mail.html && $BROWSER ~/.cache/mutt/mail.html && rm ~/.cache/mutt/mail.html<enter>"
