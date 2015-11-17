@@ -263,6 +263,11 @@ nnoremap <C-J> a<CR><Esc>k$
 " nnoremap <esc> :silent! noh<return><esc>
 
 
+" Search for word under cursor
+" Adapted from https://robots.thoughtbot.com/faster-grepping-in-vim
+" bind K to grep word under cursor
+nnoremap K :Ag! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
 
 " .md as Markdown
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
