@@ -6,6 +6,7 @@ vim/sessions/*
 vim/eclim/*
 vim/spell/*
 vim/cworksheet/*
+vim/plugin/eclim.vim
 
 # In general, may want to ignore 'user' files.
 config.user.fish
@@ -15,3 +16,4 @@ config.user.fish
 # So, need to ignore the following:
 fish_history
 fishd*
+mutt/cache
