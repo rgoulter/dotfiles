@@ -125,7 +125,7 @@ Plugin 'jceb/vim-orgmode'
 " Plugin 'vim-scripts/a.vim'
 
 " Plugins for improved language support
-Plugin 'sukima/xmledit'
+" Plugin 'sukima/xmledit'
 Plugin 'elzr/vim-json'
 Plugin 'jrozner/vim-antlr'
 Plugin 'derekwyatt/vim-scala'
