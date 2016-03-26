@@ -16,6 +16,14 @@ set -x HOST (hostname)
 # %an - author name.
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 
+# Set a template for `git init` to use.
+# This is so I can have useful hooks in my projects.
+#
+# Can also be set in ~/.gitconfig like:
+#  [init]
+#    templatedir = ~/.git_template
+set -x GIT_TEMPLATE_DIR ~/.git_template/
+
 # HG, one-liner logs.
 # from http://stackoverflow.com/questions/3575189/mercurial-log-with-one-liners
 # See also: hgbook.red-bean.com/read/customizing-the-output-of-mercurial.html

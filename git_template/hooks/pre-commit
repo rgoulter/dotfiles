@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# It can be convenient to add a messages like "# NO COMMIT",
+# I want to disallow commits if such a word is in the repo.
+
+echo Running $BASH_SOURCE
+
+
+# Check to make sure no "NOCOMMIT" in the src.
+FORBIDDEN = "NOCOMMIT"
+git diff --cached -S "$FORBIDDEN" --exit-code && \
+    echo 'COMMIT REJECTED Found "$FORBIDDEN" references. Please remove them before commiting' && \
+    exit 1
