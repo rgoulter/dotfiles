@@ -125,7 +125,7 @@ Plugin 'jceb/vim-orgmode'
 " Plugin 'vim-scripts/a.vim'
 
 " Plugins for improved language support
-Plugin 'sukima/xmledit'
+" Plugin 'sukima/xmledit'
 Plugin 'elzr/vim-json'
 Plugin 'jrozner/vim-antlr'
 Plugin 'derekwyatt/vim-scala'
@@ -262,6 +262,11 @@ nnoremap <C-J> a<CR><Esc>k$
 " Breaks <F3> -> :CtrlPMixed
 " nnoremap <esc> :silent! noh<return><esc>
 
+
+" Search for word under cursor
+" Adapted from https://robots.thoughtbot.com/faster-grepping-in-vim
+" bind K to grep word under cursor
+nnoremap K :Ag! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 
 " .md as Markdown
