@@ -7,6 +7,13 @@ vim/eclim/*
 vim/spell/*
 vim/cworksheet/*
 
+# NeoVim's Shared Data?
+vim/shada/
+
+# Mutt stuff
+mutt/cache/
+mutt/mailcap
+
 # In general, may want to ignore 'user' files.
 config.user.fish
 
