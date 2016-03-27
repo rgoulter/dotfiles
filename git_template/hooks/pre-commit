@@ -7,7 +7,7 @@ echo Running $BASH_SOURCE
 
 
 # Check to make sure no "NOCOMMIT" in the src.
-FORBIDDEN = "NOCOMMIT"
-git diff --cached -S "$FORBIDDEN" --exit-code && \
-    echo 'COMMIT REJECTED Found "$FORBIDDEN" references. Please remove them before commiting' && \
-    exit 1
+FORBIDDEN="NOCOMMIT"
+git diff --cached -S "$FORBIDDEN" --exit-code || \
+    (echo "COMMIT REJECTED Found $FORBIDDEN references. Please remove them before commiting" && \
+     exit 1)
