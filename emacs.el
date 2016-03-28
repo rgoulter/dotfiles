@@ -37,9 +37,13 @@
 (req-package evil
   :config (evil-mode 1))
 
-; (req-package solarized-theme
-;   :config (progn
-;             (load-theme 'solarized-dark t)))
+;; https://github.com/sellout/emacs-color-theme-solarized
+; 930-stars on GitHub
+(req-package color-theme-solarized
+  :require color-theme
+  :config (progn
+            (set-frame-parameter nil 'background-mode 'dark) ; for GUI-only. I guess this breaks in term.
+            (load-theme 'solarized t)))
 
 ;; 'Borrowed' by searching GitHub for "use-package tuareg"
 (req-package tuareg
