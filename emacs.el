@@ -37,9 +37,13 @@
 (req-package evil
   :config (evil-mode 1))
 
-; (req-package solarized-theme
-;   :config (progn
-;             (load-theme 'solarized-dark t)))
+;; https://github.com/sellout/emacs-color-theme-solarized
+; 930-stars on GitHub
+(req-package color-theme-solarized
+  :require color-theme
+  :config (progn
+            ; (set-frame-parameter nil 'background-mode 'dark) ; for GUI-only. I guess this breaks in term.
+            (load-theme 'solarized t)))
 
 ;; 'Borrowed' by searching GitHub for "use-package tuareg"
 (req-package tuareg
@@ -68,7 +72,7 @@
 ; use M-x rainbow-delimiters-mode to toggle. (EVIL: Can use as Ex command).
 (req-package rainbow-delimiters
   ; Enable for most programming languages:
-  :config (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+  :config (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode))
 
 (req-package org)
 (req-package evil-leader)
@@ -77,3 +81,33 @@
 ; Qn: Why is it (add-hook ... #'whatever-mode) vs (add-hook ... 'whatever-mode) ???
 
 (req-package-finish)
+
+
+
+; Reload Emacs settings
+; taken from http://www.saltycrane.com/blog/2007/07/how-to-reload-your-emacs-file-while/
+(defun reload-dotemacs-file ()
+    "reload your .emacs file without restarting Emacs"
+    (interactive)
+    (load-file "~/.emacs"))
+
+
+
+; Set to dark or light
+;? These won't work if use `M-x customize-variable frame-background-mode`.
+;? What's an idiomatic way of enabling something like this?
+(defun solarized-light ()
+  (interactive)
+  (set-frame-parameter nil 'background-mode 'light)
+  (enable-theme 'solarized))
+(defun solarized-dark ()
+  (interactive)
+  (set-frame-parameter nil 'background-mode 'dark)
+  (enable-theme 'solarized))
+
+
+
+; Disable the toolbar;
+; can re-enable with `M-x tool-bar-mode`
+(tool-bar-mode -1)
+
