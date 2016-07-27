@@ -220,6 +220,11 @@ set gdefault
 "set splitbelow
 set splitright
 
+" Enable use of .exrc
+" as per http://www.ilker.de/specific-vim-settings-per-project.html
+set exrc
+set secure
+
 " To help CtrlP ignore files
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.tar,*.o,*.hi,*.dyn_o
 set wildignore+=*.class,*.jar     " JVM class files.
