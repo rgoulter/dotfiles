@@ -132,6 +132,12 @@ Plugin 'derekwyatt/vim-scala'
 " Grade == Groovy
 Plugin 'tfnico/vim-gradle'
 
+" Elm-Lang
+" ~122 stars
+Plugin 'ElmCast/elm-vim'
+" ~177 stars
+" Plugin 'lambdatoast/elm.vim'
+
 Plugin 'dag/vim-fish'
 
 " VCS (HG, Git) Plugins for Vim
