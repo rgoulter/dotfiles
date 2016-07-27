@@ -100,7 +100,7 @@ set -x PATH ~/node_modules/.bin/ $PATH
 
 # Elm-Env
 #$ git clone --recurse-submodules https://github.com/sonnym/elmenv.git ~/.elmenv
-set -x PATH ~/.elmenv/bin/ $PATH
+# set -x PATH ~/.elmenv/bin/ $PATH
 
 # Ruby
 set -x PATH $HOME/.gem/ruby/2.1.0/bin $PATH
