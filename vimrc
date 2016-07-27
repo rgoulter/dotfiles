@@ -364,6 +364,15 @@ let g:ycm_collect_identifiers_from_tags_files           = 1
 
 
 
+" Auto-hide the preview window from autocomplete.
+" See http://stackoverflow.com/questions/3105307/how-do-you-automatically-remove-the-preview-window-after-autocompletion-in-vim#3107159
+
+" autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+" autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+autocmd CompleteDone * pclose
+
+
+
 " Improve airline
 
 " Shorter modeline map.
