@@ -109,7 +109,7 @@ Plugin 'tpope/vim-surround'
 " Because why use vanilla sessions?
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-session'
-Plugin 'xolox/vim-easytags'
+" Plugin 'xolox/vim-easytags'
 
 " Note taking stuff.
 Plugin 'xolox/vim-notes'
