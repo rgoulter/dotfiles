@@ -35,7 +35,8 @@ Plugin 'majutsushi/tagbar'
 Plugin 'epeli/slimux'
 
 " vim-airline is a lightweight alternative to Powerline.
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 
 Plugin 'scrooloose/syntastic'
 
