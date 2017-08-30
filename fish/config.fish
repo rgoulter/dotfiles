@@ -93,17 +93,17 @@ if not contains $ANTLR_PATH $CLASSPATH
 end
 
 # Haskell
-set -x PATH $HOME/.cabal/bin $PATH
+# set -x PATH $HOME/.cabal/bin $PATH
 
 # NPM
-set -x PATH ~/node_modules/.bin/ $PATH
+# set -x PATH ~/node_modules/.bin/ $PATH
 
 # Elm-Env
 #$ git clone --recurse-submodules https://github.com/sonnym/elmenv.git ~/.elmenv
 # set -x PATH ~/.elmenv/bin/ $PATH
 
 # Ruby
-set -x PATH $HOME/.gem/ruby/2.1.0/bin $PATH
+# set -x PATH $HOME/.gem/ruby/2.1.0/bin $PATH
 
 # OCaml
 # OPAM configuration
