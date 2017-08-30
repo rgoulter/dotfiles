@@ -15,6 +15,9 @@
     ~/.config/fish:
         create: true
         path: fish
+    ~/.config/powerline:
+        create: true
+        path: powerline
     ~/.config/yi/yi.hs:
         create: true
         path: yi.hs

@@ -18,14 +18,16 @@ Plugin 'gmarik/vundle'
 "  to provide modern completion capabilities in Vim.
 " Requires to be recompiled when it updates.
 " C-family code intelligence is a bit more complicated to install.
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
+
+Plugin 'spwhitt/vim-nix'
 
 " Tern for Vim is for intelligent JavaScript code completion, etc.
 Plugin 'marijnh/tern_for_vim'
 
 " Ultisnips is a snippets plugin for Vim.
 " Plugin 'ervandew/supertab'
-Plugin 'SirVer/ultisnips'
+" Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 
 " TagBar provides nice code-browsing / structure overview.
@@ -167,7 +169,7 @@ filetype plugin indent on    " required by Vundle
 
 
 syntax enable
-set background=dark
+set background=light
 
 set hidden      " Lets Vim hide a buffer instead of closing.
                 " so doesn't throw error about unsaved changes.
@@ -232,6 +234,7 @@ set wildignore+=*.class,*.jar     " JVM class files.
 set wildignore+=*.pyc             " Python compiled *.pyc files.
 set wildignore+=_site
 set wildignore+=target
+set wildignore+=build
 set wildignore+=.git
 
 
@@ -331,6 +334,11 @@ au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
 
 
 
+" Jenkins/Jelly files are XML (in lieu of not having Jelly syntax)
+au BufRead,BufNewFile *.jelly setfiletype xml
+
+
+
 " Have YouCompleteMe and eclim
 "  play nicely with each other.
 let g:EclimCompletionMethod = 'omnifunc'
@@ -370,7 +378,7 @@ let g:ycm_collect_identifiers_from_tags_files           = 1
 
 " autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 " autocmd InsertLeave * if pumvisible() == 0|pclose|endif
-autocmd CompleteDone * pclose
+" autocmd CompleteDone * pclose
 
 
 
