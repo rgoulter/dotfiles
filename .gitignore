@@ -24,3 +24,6 @@ config.user.fish
 fish_history
 fishd*
 mutt/cache
+fish/functions/
+fish/conf.d/
+fish/completions/
