@@ -37,8 +37,8 @@ Plugin 'majutsushi/tagbar'
 Plugin 'epeli/slimux'
 
 " vim-airline is a lightweight alternative to Powerline.
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+" Plugin 'vim-airline/vim-airline'
+" Plugin 'vim-airline/vim-airline-themes'
 
 Plugin 'scrooloose/syntastic'
 
@@ -83,6 +83,8 @@ Plugin 'StanAngeloff/php.vim'
 
 " Improved PHP indenting.
 Plugin '2072/PHP-Indenting-for-VIm'
+
+Plugin 'vim-ruby/vim-ruby'
 
 " tComment for comments.
 " (Alternative is NERDCommenter).
@@ -342,6 +344,24 @@ au BufRead,BufNewFile *.jelly setfiletype xml
 " Have YouCompleteMe and eclim
 "  play nicely with each other.
 let g:EclimCompletionMethod = 'omnifunc'
+
+
+
+" https://vi.stackexchange.com/questions/9693/vim-omnicomplete-with-ruby-2-3-1
+autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
+autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+autocmd FileType ruby compiler ruby
+
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+    let g:neocomplete#sources#omni#input_patterns = {}
+endif
+if !exists('g:neocomplete#sources#omni#force_omni_input_patterns')
+    let g:neocomplete#sources#omni#force_omni_input_patterns = {}
+endif
+let g:neocomplete#sources#omni#input_patterns.ruby = '[^.[:digit:] *\t]\%(\.\|->\)'
 
 
 
