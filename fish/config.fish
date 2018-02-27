@@ -1,7 +1,9 @@
 # Use vim as our editor
 # (Can set to nvim in config.user.fish)
 set -x EDITOR vim
-set -x BROWSER /usr/bin/firefox
+
+# This breaks 'help'
+# set -x BROWSER /usr/bin/firefox
 
 # HOST, for HG stuff.
 set -x HOST (hostname)
