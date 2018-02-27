@@ -115,6 +115,9 @@ end
 
 source $HOME/.config/fish/coloured-manpages.fish
 
+# Legacy Keybindings for FZF conflict with new Fish keybindings in fish 2.4
+set -U FZF_LEGACY_KEYBINDINGS 0
+
 # Use local/user config.fish if it exists
 if test -f $HOME/.config/fish/config.user.fish
     source $HOME/.config/fish/config.user.fish
