@@ -75,9 +75,11 @@
 ;;             ; (set-frame-parameter nil 'background-mode 'dark) ; for GUI-only. I guess this breaks in term.
 ;;             (load-theme 'solarized t)))
 
-(req-package evil-leader)
+;; 2018-10-07: couldn't install on new Win10 Laptop
+; (req-package evil-leader)
 
-(req-package evil-org)
+;; 2018-10-07: couldn't install on new Win10 Laptop
+; (req-package evil-org)
 
 ;; Rainbow Delimiters
 ;; Colours are pretty. :-)
@@ -98,59 +100,62 @@
 ;; TODO: Look up (or try) Ivy vs Helm.
 (req-package ivy)
 
-(req-package counsel)
+;; 2018-10-07: couldn't install on new Win10 Laptop
+; (req-package counsel)
 
 (req-package swiper)
 
-(req-package avy)
+;; 2018-10-07: couldn't install on new Win10 Laptop
+; (req-package avy)
 
 (req-package which-key)
 
 ;; Taken from: https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/
 ;; GitHub: https://github.com/noctuid/general.el
-(req-package general
-  :require avy
-  :config
-  (general-define-key "C-'" 'avy-goto-word-1)
-  (general-define-key
-   ;; replace default keybindings
-   "C-s" 'swiper             ; search for string in current buffer
-   "M-x" 'counsel-M-x        ; replace default M-x with ivy backend
-   )
-  (general-define-key
-   :prefix "C-c"
-   ;; bind to simple key press
-    "b"	'ivy-switch-buffer  ; change buffer, chose using ivy
-    "/"   'counsel-git-grep   ; find string in git project
-    ;; bind to double key press
-    "f"   '(:ignore t :which-key "files")
-    "ff"  'counsel-find-file  ; find file using ivy
-    "fr"	'counsel-recentf    ; find recently edited files
-    "p"   '(:ignore t :which-key "project")
-    "pf"  '(counsel-git :which-key "find file in git dir")        ; find file in git project
-    )
+;(req-package general
+;  :require avy
+;  :config
+;  (general-define-key "C-'" 'avy-goto-word-1)
 ;  (general-define-key
-;   :states '(normal visual insert emacs)
-;   :prefix "SPC"
-;   :non-normal-prefix "C-SPC"
-;
-;    ;; simple command
-;    "'"   '(iterm-focus :which-key "iterm")
-;    "?"   '(iterm-goto-filedir-or-home :which-key "iterm - goto dir")
-;    "/"   'counsel-ag
-;    "TAB" '(switch-to-other-buffer :which-key "prev buffer")
-;    "SPC" '(avy-goto-word-or-subword-1  :which-key "go to char")
-;
-;    ;; Applications
-;    "a" '(:ignore t :which-key "Applications")
-;    "ar" 'ranger
-;    "ad" 'dired)
-  )
+;   ;; replace default keybindings
+;   "C-s" 'swiper             ; search for string in current buffer
+;   "M-x" 'counsel-M-x        ; replace default M-x with ivy backend
+;   )
+;  (general-define-key
+;   :prefix "C-c"
+;   ;; bind to simple key press
+;    "b"	'ivy-switch-buffer  ; change buffer, chose using ivy
+;    "/"   'counsel-git-grep   ; find string in git project
+;    ;; bind to double key press
+;    "f"   '(:ignore t :which-key "files")
+;    "ff"  'counsel-find-file  ; find file using ivy
+;    "fr"	'counsel-recentf    ; find recently edited files
+;    "p"   '(:ignore t :which-key "project")
+;    "pf"  '(counsel-git :which-key "find file in git dir")        ; find file in git project
+;    )
+;;  (general-define-key
+;;   :states '(normal visual insert emacs)
+;;   :prefix "SPC"
+;;   :non-normal-prefix "C-SPC"
+;;
+;;    ;; simple command
+;;    "'"   '(iterm-focus :which-key "iterm")
+;;    "?"   '(iterm-goto-filedir-or-home :which-key "iterm - goto dir")
+;;    "/"   'counsel-ag
+;;    "TAB" '(switch-to-other-buffer :which-key "prev buffer")
+;;    "SPC" '(avy-goto-word-or-subword-1  :which-key "go to char")
+;;
+;;    ;; Applications
+;;    "a" '(:ignore t :which-key "Applications")
+;;    "ar" 'ranger
+;;    "ad" 'dired)
+;  )
 
+;; 2018-10-07: couldn't install on new Win10 Laptop
 ;; For Editing Language: Haskell
-(req-package haskell-mode
-  :init
-  (add-hook 'haskell-mode-hook 'turn-on-haskell-indent))
+; (req-package haskell-mode
+;  :init
+;  (add-hook 'haskell-mode-hook 'turn-on-haskell-indent))
 
 ;; Tuarag Mode
 ;; For Editing Language: OCaml
@@ -162,18 +167,18 @@
 ;; Merlin
 ;; OCaml completion
 ;; For Editing Language: OCaml
-(req-package merlin
-  :init (setq ; merlin-use-auto-complete-mode t
-              merlin-error-after-save nil)
-
-  :config (add-hook 'tuareg-mode-hook 'merlin-mode)
-          ; See http://emacs.stackexchange.com/questions/12084/how-to-get-merlin-mode-to-work-in-emacs
-          ;(setq merlin-command 'opam)
-
-  ;; For some reason, having :bind here throws this out of whack. ???
-  ; :bind (("C-c <up>" . merlin-type-enclosing-go-up)
-  ;        ("C-c <down>" . merlin-type-enclosing-go-down))
-  )
+; (req-package merlin
+;   :init (setq ; merlin-use-auto-complete-mode t
+;               merlin-error-after-save nil)
+;
+;   :config (add-hook 'tuareg-mode-hook 'merlin-mode)
+;           ; See http://emacs.stackexchange.com/questions/12084/how-to-get-merlin-mode-to-work-in-emacs
+;           ;(setq merlin-command 'opam)
+;
+;   ;; For some reason, having :bind here throws this out of whack. ???
+;   ; :bind (("C-c <up>" . merlin-type-enclosing-go-up)
+;   ;        ("C-c <down>" . merlin-type-enclosing-go-down))
+;   )
 
 ; QUESTION: Why is it (add-hook ... #'whatever-mode) vs (add-hook ... 'whatever-mode) ???
 
