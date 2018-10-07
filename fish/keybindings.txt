@@ -1,0 +1,20 @@
+======================
+  Useful Keybindings:
+======================
+
+Fish:
+  Alt-left/right (empty shell) :: forward/back in dir history
+  Alt-left/right               :: move cursor a word left/right
+  Alt-f   :: accepts next suggested word
+  Alt-up/down :: searches history (for commands with the token the cursor is on)
+  Alt-l   :: list files in the directory
+  Alt-p   :: Adds "| less" to the command
+  Alt-h   :: Shows man-page for current command
+  Alt-e   :: Edit current command in external editor
+  Alt-v   :: Edit current command in external editor
+FZF Plugin:
+  Ctrl-f  :: Find a file
+  Ctrl-r  :: Search through command history
+  Ctrl-x  :: Does the reverse isearch, immediately executes command
+  Alt-o   :: cd into sub-directories (recursively searched)
+  Alt-Shift-o :: cd into sub-directories, including hidden ones.

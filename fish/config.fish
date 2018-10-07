@@ -1,7 +1,9 @@
 # Use vim as our editor
 # (Can set to nvim in config.user.fish)
 set -x EDITOR vim
-set -x BROWSER /usr/bin/firefox
+
+# This breaks 'help'
+# set -x BROWSER /usr/bin/firefox
 
 # HOST, for HG stuff.
 set -x HOST (hostname)
@@ -112,6 +114,9 @@ if test -d $HOME/.opam
 end
 
 source $HOME/.config/fish/coloured-manpages.fish
+
+# Legacy Keybindings for FZF conflict with new Fish keybindings in fish 2.4
+set -U FZF_LEGACY_KEYBINDINGS 0
 
 # Use local/user config.fish if it exists
 if test -f $HOME/.config/fish/config.user.fish
