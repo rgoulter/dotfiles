@@ -20,7 +20,7 @@
 
 
 (require 'package)
-  (push '("marmalade" . "http://marmalade-repo.org/packages/")
+  (push '("marmalade" . "https://marmalade-repo.org/packages/")
         package-archives )
   (push '("melpa" . "http://melpa.milkbox.net/packages/")
         package-archives)
@@ -39,11 +39,11 @@
 
 ;; https://github.com/sellout/emacs-color-theme-solarized
 ; 930-stars on GitHub
-(req-package color-theme-solarized
-  :require color-theme
-  :config (progn
-            ; (set-frame-parameter nil 'background-mode 'dark) ; for GUI-only. I guess this breaks in term.
-            (load-theme 'solarized t)))
+;; (req-package color-theme-solarized
+;;   :require color-theme
+;;   :config (progn
+;;             ; (set-frame-parameter nil 'background-mode 'dark) ; for GUI-only. I guess this breaks in term.
+;;             (load-theme 'solarized t)))
 
 ;; 'Borrowed' by searching GitHub for "use-package tuareg"
 (req-package tuareg
@@ -111,3 +111,29 @@
 ; can re-enable with `M-x tool-bar-mode`
 (tool-bar-mode -1)
 
+
+
+
+(setq org-agenda-files '("~/org-files/programming/tools.org"
+                         "~/org-files/personal/finance.org"
+                         "~/org-files/personal/vietnam.org"
+                         "~/org-files/books.org"
+                         "~/org-files/games.org"))
+
+; from: https://orgmode.org/manual/Activation.html#Activation
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cc" 'org-capture)
+(global-set-key "\C-cb" 'org-switchb)
+
+; from: http://sachachua.com/blog/2015/02/learn-take-notes-efficiently-org-mode/
+; use C-x r j (jump-to-register)
+(set-register ?o (cons 'file "~/org-files/capture.org"))
+
+(setq org-refile-targets '((org-agenda-files . (:maxlevel . 6))))
+
+(setq org-default-notes-file "~/org-files/capture.org")
+
+; ido, is easier to get started with than helm
+(ido-mode)
+(setq org-completion-use-ido t)
