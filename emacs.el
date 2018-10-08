@@ -98,17 +98,17 @@
 
 ;; Ivy is comparable to Helm.
 ;; TODO: Look up (or try) Ivy vs Helm.
-(req-package ivy)
+; (req-package ivy)
 
 ;; 2018-10-07: couldn't install on new Win10 Laptop
 ; (req-package counsel)
 
-(req-package swiper)
+; (req-package swiper)
 
 ;; 2018-10-07: couldn't install on new Win10 Laptop
 ; (req-package avy)
 
-(req-package which-key)
+; (req-package which-key)
 
 ;; Taken from: https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/
 ;; GitHub: https://github.com/noctuid/general.el
@@ -188,10 +188,10 @@
 
 ; Reload Emacs settings
 ; taken from http://www.saltycrane.com/blog/2007/07/how-to-reload-your-emacs-file-while/
-(defun reload-dotemacs-file ()
-    "reload your .emacs file without restarting Emacs"
-    (interactive)
-    (load-file "~/.emacs"))
+; (defun reload-dotemacs-file ()
+;     "reload your .emacs file without restarting Emacs"
+;     (interactive)
+;     (load-file "~/.emacs"))
 
 
 
