@@ -215,27 +215,7 @@
 
 
 
-(setq org-agenda-files '("~/org-files/programming/exercises.org"
-                         "~/org-files/programming/interview-brushup.org"
-                         "~/org-files/programming/parsers.org"
-                         "~/org-files/programming/projects.org"
-                         "~/org-files/programming/tools.org"
-                         "~/org-files/programming/projects.d/codebug.org"
-                         "~/org-files/programming/projects.d/cpp-qt5-opengl-cs5237-voronoi-art.org"
-                         "~/org-files/programming/projects.d/gamedev-platformer-phx.org"
-                         "~/org-files/programming/projects.d/haskell-megaparsec-expenses.org"
-                         "~/org-files/programming/projects.d/hellhound.org"
-                         "~/org-files/programming/projects.d/ios-cs3217-revision-racer.org"
-                         "~/org-files/programming/projects.d/python-email-receipt-scraper.org"
-                         "~/org-files/programming/projects.d/scala-frp-programming-typing-tutor.org"
-                         "~/org-files/programming/projects.d/scala-frp-c-worksheet.org"
-                         "~/org-files/personal/exercise.org"
-                         "~/org-files/personal/finance.org"
-                         "~/org-files/personal/general-curiosities.org"
-                         "~/org-files/personal/vietnam.org"
-                         "~/org-files/books.org"
-                         "~/org-files/games.org"
-                         "~/org-files/meta-audit.org"))
+(setq org-agenda-files "~/org/agenda")
 
 ; from: https://orgmode.org/manual/Activation.html#Activation
 (global-set-key "\C-cl" 'org-store-link)
@@ -245,7 +225,8 @@
 
 ; from: http://sachachua.com/blog/2015/02/learn-take-notes-efficiently-org-mode/
 ; use C-x r j (jump-to-register)
-(set-register ?o (cons 'file "~/org-files/capture.org"))
+(set-register ?e (cons 'file "~/.emacs.d/init.el"))
+(set-register ?o (cons 'file "~/org/capture.org"))
 
 (setq org-refile-targets '((org-agenda-files . (:tag . "refile"))))
 
@@ -289,3 +270,7 @@
 (helm-autoresize-mode 1)
 
 (helm-mode 1)
+
+; via https://www.reddit.com/r/emacs/comments/4366f9/how_do_orgrefiletargets_work/
+(setq org-outline-path-complete-in-steps nil)         ; Refile in a single go
+(setq org-refile-use-outline-path t)                  ; Show full paths for refiling
