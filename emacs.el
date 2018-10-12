@@ -39,33 +39,56 @@
 ;; Reference: https://stackoverflow.com/questions/14302171/ctrlu-in-emacs-when-using-evil-key-bindings
 (setq evil-want-C-u-scroll t)
 
-(require 'package)
-  (push '("marmalade" . "https://marmalade-repo.org/packages/")
-        package-archives )
-  (push '("melpa" . "http://melpa.milkbox.net/packages/")
-        package-archives)
-  (push '("melpa-stable" . "http://stable.melpa.org/packages/")
-        package-archives)
+; (require 'package)
+;   (push '("marmalade" . "https://marmalade-repo.org/packages/")
+;         package-archives )
+;   (push '("melpa" . "http://melpa.milkbox.net/packages/")
+;         package-archives)
+;   (push '("melpa-stable" . "http://stable.melpa.org/packages/")
+;         package-archives)
 
 ; Taken from http://juanjoalvarez.net/es/detail/2014/sep/19/vim-emacsevil-chaotic-migration-guide/
 ; See also: http://www.emacswiki.org/emacs/ELPA
-(setq package-enable-at-startup nil)
-(package-initialize)
+; (setq package-enable-at-startup nil)
+; (package-initialize)
 
 ;; Bootstrap `req-package'
-(unless (package-installed-p 'use-package) ; unless it is already installed
-  (package-refresh-contents) ; updage packages archive
-  (package-install 'req-package)) ; and install the most recent version of use-package
+; (unless (package-installed-p 'use-package) ; unless it is already installed
+;   (package-refresh-contents) ; updage packages archive
+;   (package-install 'req-package)) ; and install the most recent version of use-package
+
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
+; straight.el and use-package integration:
+(setq straight-use-package-by-default t)
+
+; install packages
+(straight-use-package 'use-package)
+; (straight-use-package 'org)
+(straight-use-package 'evil)
+(straight-use-package 'helm)
+; (straight-use-package 'helm-config)
 
 ;; `req-package` is different than `use-package`,
 ;; in that `req-package` also lets this emacs config declare which packages
 ;;  are dependencies of a required package.
-(require 'req-package)
+; (require 'req-package)
 
-(req-package org)
+; (req-package org)
 
-(req-package evil
-  :config (evil-mode 1))
+(use-package evil
+             :config (evil-mode 1))
 
 ;; https://github.com/sellout/emacs-color-theme-solarized
 ; 930-stars on GitHub
@@ -88,9 +111,9 @@
 ;; Usage-Notes:
 ;; - use M-x rainbow-delimiters-mode to toggle.
 ;; - EVIL: Can use as Ex command.
-(req-package rainbow-delimiters
-  ; Enable for most programming languages:
-  :config (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode))
+; (req-package rainbow-delimiters
+;   ; Enable for most programming languages:
+;   :config (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode))
 
 ;; Ivy/Counsel/Swiper work together.
 ;; Recommended by: https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/
@@ -159,10 +182,10 @@
 
 ;; Tuarag Mode
 ;; For Editing Language: OCaml
-(req-package tuareg
-  :mode (("\\.ml[ily]?$" . tuareg-mode)
-         ("\\.topml$" . tuareg-mode)
-         ("\\.topscript$" . tuareg-mode)))
+; (req-package tuareg
+;   :mode (("\\.ml[ily]?$" . tuareg-mode)
+;          ("\\.topml$" . tuareg-mode)
+;          ("\\.topscript$" . tuareg-mode)))
 
 ;; Merlin
 ;; OCaml completion
@@ -182,7 +205,7 @@
 
 ; QUESTION: Why is it (add-hook ... #'whatever-mode) vs (add-hook ... 'whatever-mode) ???
 
-(req-package-finish)
+; (req-package-finish)
 
 
 
@@ -267,7 +290,7 @@
 
 (setq helm-autoresize-max-height 0)
 (setq helm-autoresize-min-height 20)
-(helm-autoresize-mode 1)
+; (helm-autoresize-mode 1)
 
 (helm-mode 1)
 
