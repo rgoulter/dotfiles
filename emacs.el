@@ -253,7 +253,7 @@
 
 (setq org-refile-targets '((org-agenda-files . (:tag . "refile"))))
 
-(setq org-default-notes-file "~/org-files/capture.org")
+(setq org-default-notes-file "~/org/capture.org")
 
 ; ido, is easier to get started with than helm
 ; (ido-mode)
