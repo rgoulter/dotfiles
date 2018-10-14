@@ -79,6 +79,7 @@
 (straight-use-package 'evil)
 (straight-use-package 'helm)
 ; (straight-use-package 'helm-config)
+(straight-use-package 'magit)
 
 ;; `req-package` is different than `use-package`,
 ;; in that `req-package` also lets this emacs config declare which packages
@@ -297,3 +298,7 @@
 ; via https://www.reddit.com/r/emacs/comments/4366f9/how_do_orgrefiletargets_work/
 (setq org-outline-path-complete-in-steps nil)         ; Refile in a single go
 (setq org-refile-use-outline-path t)                  ; Show full paths for refiling
+
+
+; magit
+(global-set-key (kbd "C-x g") 'magit-status)
