@@ -80,6 +80,10 @@
 (straight-use-package 'helm)
 ; (straight-use-package 'helm-config)
 (straight-use-package 'magit)
+(straight-use-package 'smooth-scrolling)
+
+(require 'smooth-scrolling)
+(smooth-scrolling-mode 1)
 
 ;; `req-package` is different than `use-package`,
 ;; in that `req-package` also lets this emacs config declare which packages
