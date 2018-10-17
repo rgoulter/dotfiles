@@ -260,6 +260,10 @@
 
 (setq org-default-notes-file "~/org/capture.org")
 
+(setq org-todo-keywords
+      '((sequence "REFILE" "REFINE" "TODO" "|" "DONE")
+        (sequence "WTB" "TBR" "TOUCHED" "|" "READ")))
+
 ; ido, is easier to get started with than helm
 ; (ido-mode)
 ; (setq org-completion-use-ido t)
