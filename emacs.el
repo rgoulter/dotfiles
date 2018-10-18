@@ -264,6 +264,41 @@
       '((sequence "REFILE" "REFINE" "TODO" "|" "DONE")
         (sequence "WTB" "TBR" "TOUCHED" "|" "READ")))
 
+; https://orgmode.org/manual/Storing-searches.html#Storing-searches
+; (setq org-agenda-custom-commands
+;       '(("x" agenda)
+;         ("y" agenda*)
+;         ("w" todo "WAITING")
+;         ("W" todo-tree "WAITING")
+;         ("u" tags "+boss-urgent")
+;         ("v" tags-todo "+boss-urgent")
+;         ("U" tags-tree "+boss-urgent")
+;         ("f" occur-tree "\\<FIXME\\>")
+;         ("o" "Agenda and Office-related tasks"
+;          ((agenda "")
+;           (tags-todo "work")
+;           (tags "office")))
+;         ("h" . "HOME+Name tags searches") ; description for "h" prefix
+;         ("hl" tags "+home+Lisa")
+;         ("hp" tags "+home+Peter")
+;         ("hk" tags "+home+Kim")))
+(setq org-agenda-custom-commands
+      '(("r" . "Refile Tasks (excl. backlog)")
+        ("r" tags "TODO=\"REFILE\"-backlog")
+        ("R" tags-tree "TODO=\"REFILE\"-backlog")
+        ("i" . "Refine Tasks (excl. backlog)")
+        ("i" tags "TODO=\"REFINE\"-backlog")
+        ("I" tags-tree "TODO=\"REFINE\"-backlog")
+        ("i" . "Pick Up and Do")
+        ("p" tags "TODO=\"TODO\"+refile-backlog")
+        ("P" tags-tree "TODO=\"TODO\"+refile-backlog")
+        ("o" "Meta"
+         ((tags "TODO=\"REFILE\"-backlog")
+          (tags "TODO=\"REFINE\"-backlog")
+          (tags-todo "refile-backlog/TODO")
+          (tags-todo "backlog")))
+        ))
+
 ; ido, is easier to get started with than helm
 ; (ido-mode)
 ; (setq org-completion-use-ido t)
