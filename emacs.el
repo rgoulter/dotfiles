@@ -347,4 +347,5 @@
 (global-set-key (kbd "C-x g") 'magit-status)
 
 ; org-mode: I want RET to indent
-(org-defkey org-mode-map "\C-m"     'org-return-indent)
+(require 'org)
+(define-key org-mode-map (kbd "\C-m")     'org-return-indent)
