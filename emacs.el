@@ -261,8 +261,14 @@
 (setq org-default-notes-file "~/org/capture.org")
 
 (setq org-todo-keywords
-      '((sequence "REFILE" "REFINE" "TODO" "|" "DONE")
-        (sequence "WTB" "TBR" "TOUCHED" "|" "READ")))
+      '((sequence "REFILE(f)" "REFINE(r)" "TODO(d)" "|" "DONE(D)")
+        (sequence "WTB(w)" "TBR(b)" "TOUCHED(r)" "|" "READ(R)")))
+; Additionally, want:
+; - "journal/log": to-process | processed
+;   (b/c sometimes when logging I'll have thoughts,
+;    but I want it to be part of the log, not to capture it separately)
+; - issues: to-address | solution-listed fixed
+
 
 ; https://orgmode.org/manual/Storing-searches.html#Storing-searches
 ; (setq org-agenda-custom-commands
@@ -349,3 +355,7 @@
 ; org-mode: I want RET to indent
 (require 'org)
 (define-key org-mode-map (kbd "\C-m")     'org-return-indent)
+
+; This seems to speed-up Emacs when using "unicode characters"
+; h/t https://emacs.stackexchange.com/questions/33510/unicode-txt-slowness
+(setq inhibit-compacting-font-caches t)
