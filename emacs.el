@@ -122,10 +122,36 @@ Inserted by installing org-mode or when a release is made."
 
 (straight-use-package 'org)
 
+(straight-use-package 'ledger-mode)
+
+(straight-use-package 'evil-collection)
+(straight-use-package 'evil-magit)
+(straight-use-package 'evil-ledger)
+
+(straight-use-package 'hydra)
+
+(straight-use-package 'helm-swoop)
+
+(straight-use-package 'rainbow-delimiters)
+
+(straight-use-package 'projectile)
+
+(straight-use-package 'yasnippet)
+
+; evil-nerd-commenter
+
+(straight-use-package 'flycheck)
+
+(straight-use-package 'solarized-theme)
+
+(straight-use-package 'writeroom-mode)
 
 
 (require 'smooth-scrolling)
 (smooth-scrolling-mode 1)
+
+; evil-want-keybinding
+(setq evil-want-keybinding nil)
 
 ;; `req-package` is different than `use-package`,
 ;; in that `req-package` also lets this emacs config declare which packages
