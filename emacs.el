@@ -52,40 +52,41 @@
 ; straight.el and use-package integration:
 ; (setq straight-use-package-by-default t)
 
+; 2018-10-31: I ran into a problem when refiling, which I hadn't earlier.
 ; kludge from raxod502/straight.el readme for installing org
 ; h/t: https://github.com/raxod502/straight.el#installing-org-with-straightel
-(require 'subr-x)
-(straight-use-package 'git)
-
-; use straight.el to install a newer version of org-mode
-; h/t: https://github.com/raxod502/straight.el#installing-org-with-straightel
-(defun org-git-version ()
-  "The Git version of org-mode.
-Inserted by installing org-mode or when a release is made."
-  (require 'git)
-  (let ((git-repo (expand-file-name
-                   "straight/repos/org/" user-emacs-directory)))
-    (string-trim
-     (git-run "describe"
-              "--match=release\*"
-              "--abbrev=6"
-              "HEAD"))))
-
-(defun org-release ()
-  "The release version of org-mode.
-Inserted by installing org-mode or when a release is made."
-  (require 'git)
-  (let ((git-repo (expand-file-name
-                   "straight/repos/org/" user-emacs-directory)))
-    (string-trim
-     (string-remove-prefix
-      "release_"
-      (git-run "describe"
-               "--match=release\*"
-               "--abbrev=0"
-               "HEAD")))))
-
-(provide 'org-version)
+; (require 'subr-x)
+; (straight-use-package 'git)
+;
+; ; use straight.el to install a newer version of org-mode
+; ; h/t: https://github.com/raxod502/straight.el#installing-org-with-straightel
+; (defun org-git-version ()
+;   "The Git version of org-mode.
+; Inserted by installing org-mode or when a release is made."
+;   (require 'git)
+;   (let ((git-repo (expand-file-name
+;                    "straight/repos/org/" user-emacs-directory)))
+;     (string-trim
+;      (git-run "describe"
+;               "--match=release\*"
+;               "--abbrev=6"
+;               "HEAD"))))
+;
+; (defun org-release ()
+;   "The release version of org-mode.
+; Inserted by installing org-mode or when a release is made."
+;   (require 'git)
+;   (let ((git-repo (expand-file-name
+;                    "straight/repos/org/" user-emacs-directory)))
+;     (string-trim
+;      (string-remove-prefix
+;       "release_"
+;       (git-run "describe"
+;                "--match=release\*"
+;                "--abbrev=0"
+;                "HEAD")))))
+;
+; (provide 'org-version)
 
 (straight-use-package 'org)
 
