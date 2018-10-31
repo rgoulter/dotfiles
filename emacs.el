@@ -87,8 +87,8 @@
 ;                "HEAD")))))
 ;
 ; (provide 'org-version)
-
-(straight-use-package 'org)
+;
+; (straight-use-package 'org)
 
 
 
@@ -157,7 +157,7 @@
   :init
   ;; h/t: https://stackoverflow.com/questions/14302171/ctrlu-in-emacs-when-using-evil-key-bindings
   (setq evil-want-C-u-scroll t)
-             :config (evil-mode 1))
+  :config (evil-mode 1))
 
 ; (use-package evil-leader)
 
