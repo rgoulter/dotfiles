@@ -192,7 +192,9 @@
 ;; Alternative to helm: Ivy/Counsel/Swiper work together.
 ;; Recommended by: https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/
 
-;; (use-package which-key)
+(use-package which-key
+  :config
+  (which-key-mode))
 
 ;; Taken from: https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/
 ;; GitHub: https://github.com/noctuid/general.el
