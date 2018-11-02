@@ -1,3 +1,20 @@
+;; This is my emacs ~/.emacs.d/init.el file.
+;;
+;; My current main use-case for emacs is the excellent org-mode.
+;;
+;; I try to make a note of the sources of inspiration
+;; for various configuration improvements.
+;; Main sources have been (in no particular order):
+;;   - http://pages.sachachua.com/.emacs.d/Sacha.html
+;;   - https://github.com/emacs-tw/awesome-emacs
+;;   - http://tuhdo.github.io/index.html
+;;     - http://tuhdo.github.io/helm-intro.html
+;;   - https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/
+
+;; NOTE: Comments use `;;` since this is the ELisp convention.
+;; (And emacs will indent `;` to the right because of this!).
+;; https://www.gnu.org/software/emacs/manual/html_node/elisp/Comment-Tips.html#Comment-Tips
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -5,7 +22,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("bf3ec301ea82ab546efb39c2fdd4412d1188c7382ff3bbadd74a8ecae4121678" default)))
+    ("d737a2131d5ac01c0b2b944e0d2cb0be1c76496bb4ed61be51ff0e5457468974" "bf3ec301ea82ab546efb39c2fdd4412d1188c7382ff3bbadd74a8ecae4121678" default)))
  '(global-linum-mode t)
  '(indent-tabs-mode nil)
  '(show-trailing-whitespace t)
@@ -19,23 +36,23 @@
 
 ;; TODO: Consider the merits of each of these. (vs using Custom to do it).
 ;; from: https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/
-; (setq delete-old-versions -1 )		; delete excess backup versions silently
-; (setq version-control t )		; use version control
-; (setq vc-make-backup-files t )		; make backups file even when in version controlled dir
-; (setq backup-directory-alist `(("." . "~/.emacs.d/backups")) ) ; which directory to put backups file
-; (setq vc-follow-symlinks t )				       ; don't ask for confirmation when opening symlinked file
-; (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)) ) ;transform backups file name
-; (setq inhibit-startup-screen t )	; inhibit useless and old-school startup screen
-; (setq ring-bell-function 'ignore )	; silent bell when you make a mistake
-; (setq coding-system-for-read 'utf-8 )	; use utf-8 by default
-; (setq coding-system-for-write 'utf-8 )
-; (setq sentence-end-double-space nil)	; sentence SHOULD end with only a point.
-; (setq default-fill-column 80)		; toggle wrapping text at the 80th character
-; (setq initial-scratch-message "Welcome in Emacs") ; print a default message in the empty scratch buffer opened at startup
+;; (setq delete-old-versions -1 )		; delete excess backup versions silently
+;; (setq version-control t )		; use version control
+;; (setq vc-make-backup-files t )		; make backups file even when in version controlled dir
+;; (setq backup-directory-alist `(("." . "~/.emacs.d/backups")) ) ; which directory to put backups file
+;; (setq vc-follow-symlinks t )				       ; don't ask for confirmation when opening symlinked file
+;; (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)) ) ;transform backups file name
+;; (setq inhibit-startup-screen t )	; inhibit useless and old-school startup screen
+;; (setq ring-bell-function 'ignore )	; silent bell when you make a mistake
+;; (setq coding-system-for-read 'utf-8 )	; use utf-8 by default
+;; (setq coding-system-for-write 'utf-8 )
+;; (setq sentence-end-double-space nil)	; sentence SHOULD end with only a point.
+;; (setq default-fill-column 80)		; toggle wrapping text at the 80th character
+;; (setq initial-scratch-message "Welcome in Emacs") ; print a default message in the empty scratch buffer opened at startup
 
 
 
-; bootstrap straight.el
+;; bootstrap straight.el
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
@@ -49,46 +66,46 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
-; straight.el and use-package integration:
-; (setq straight-use-package-by-default t)
+;; straight.el and use-package integration:
+;; (setq straight-use-package-by-default t)
 
-; 2018-10-31: I ran into a problem when refiling, which I hadn't earlier.
-; kludge from raxod502/straight.el readme for installing org
-; h/t: https://github.com/raxod502/straight.el#installing-org-with-straightel
-; (require 'subr-x)
-; (straight-use-package 'git)
-;
-; ; use straight.el to install a newer version of org-mode
-; ; h/t: https://github.com/raxod502/straight.el#installing-org-with-straightel
-; (defun org-git-version ()
-;   "The Git version of org-mode.
-; Inserted by installing org-mode or when a release is made."
-;   (require 'git)
-;   (let ((git-repo (expand-file-name
-;                    "straight/repos/org/" user-emacs-directory)))
-;     (string-trim
-;      (git-run "describe"
-;               "--match=release\*"
-;               "--abbrev=6"
-;               "HEAD"))))
-;
-; (defun org-release ()
-;   "The release version of org-mode.
-; Inserted by installing org-mode or when a release is made."
-;   (require 'git)
-;   (let ((git-repo (expand-file-name
-;                    "straight/repos/org/" user-emacs-directory)))
-;     (string-trim
-;      (string-remove-prefix
-;       "release_"
-;       (git-run "describe"
-;                "--match=release\*"
-;                "--abbrev=0"
-;                "HEAD")))))
-;
-; (provide 'org-version)
-;
-; (straight-use-package 'org)
+;; 2018-10-31: I ran into a problem when refiling, which I hadn't earlier.
+;; kludge from raxod502/straight.el readme for installing org
+;; h/t: https://github.com/raxod502/straight.el#installing-org-with-straightel
+;; (require 'subr-x)
+;; (straight-use-package 'git)
+;;
+;; ; use straight.el to install a newer version of org-mode
+;; ; h/t: https://github.com/raxod502/straight.el#installing-org-with-straightel
+;; (defun org-git-version ()
+;;   "The Git version of org-mode.
+;; Inserted by installing org-mode or when a release is made."
+;;   (require 'git)
+;;   (let ((git-repo (expand-file-name
+;;                    "straight/repos/org/" user-emacs-directory)))
+;;     (string-trim
+;;      (git-run "describe"
+;;               "--match=release\*"
+;;               "--abbrev=6"
+;;               "HEAD"))))
+;;
+;; (defun org-release ()
+;;   "The release version of org-mode.
+;; Inserted by installing org-mode or when a release is made."
+;;   (require 'git)
+;;   (let ((git-repo (expand-file-name
+;;                    "straight/repos/org/" user-emacs-directory)))
+;;     (string-trim
+;;      (string-remove-prefix
+;;       "release_"
+;;       (git-run "describe"
+;;                "--match=release\*"
+;;                "--abbrev=0"
+;;                "HEAD")))))
+;;
+;; (provide 'org-version)
+;;
+;; (straight-use-package 'org)
 
 
 
@@ -127,7 +144,7 @@
 
 (straight-use-package 'yasnippet)
 
-; evil-nerd-commenter
+;; evil-nerd-commenter
 
 (straight-use-package 'flycheck)
 
@@ -135,8 +152,8 @@
 
 (straight-use-package 'writeroom-mode)
 
-; general is a more generalised package compared to evil-leader
-; h/t https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/
+;; general is a more generalised package compared to evil-leader
+;; h/t https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/
 (straight-use-package 'avy)
 (straight-use-package 'general)
 
@@ -147,9 +164,9 @@
 
 
 
-; note: the evil-collection warns that this should be set to nil
-;       before loading evil, evil-collection
-; h/t: https://github.com/emacs-evil/evil-collection/issues/60
+;; note: the evil-collection warns that this should be set to nil
+;;       before loading evil, evil-collection
+;; h/t: https://github.com/emacs-evil/evil-collection/issues/60
 (setq evil-want-keybinding nil)
 
 
@@ -159,7 +176,7 @@
   (setq evil-want-C-u-scroll t)
   :config (evil-mode 1))
 
-; (use-package evil-leader)
+;; (use-package evil-leader)
 
 ;; Rainbow Delimiters
 ;; Colours are pretty. :-)
@@ -175,91 +192,91 @@
 ;; Alternative to helm: Ivy/Counsel/Swiper work together.
 ;; Recommended by: https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/
 
-; (use-package which-key)
+;; (use-package which-key)
 
 ;; Taken from: https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/
 ;; GitHub: https://github.com/noctuid/general.el
-;(use-package general
-;  :config
-;  (general-define-key "C-'" 'avy-goto-word-1)
-;  (general-define-key
-;   ;; replace default keybindings
-;   "C-s" 'swiper             ; search for string in current buffer
-;   "M-x" 'counsel-M-x        ; replace default M-x with ivy backend
-;   )
-;  (general-define-key
-;   :prefix "C-c"
-;   ;; bind to simple key press
-;    "b"	'ivy-switch-buffer  ; change buffer, chose using ivy
-;    "/"   'counsel-git-grep   ; find string in git project
-;    ;; bind to double key press
-;    "f"   '(:ignore t :which-key "files")
-;    "ff"  'counsel-find-file  ; find file using ivy
-;    "fr"	'counsel-recentf    ; find recently edited files
-;    "p"   '(:ignore t :which-key "project")
-;    "pf"  '(counsel-git :which-key "find file in git dir")        ; find file in git project
-;    )
+;;(use-package general
+;;  :config
+;;  (general-define-key "C-'" 'avy-goto-word-1)
 ;;  (general-define-key
-;;   :states '(normal visual insert emacs)
-;;   :prefix "SPC"
-;;   :non-normal-prefix "C-SPC"
-;;
-;;    ;; simple command
-;;    "'"   '(iterm-focus :which-key "iterm")
-;;    "?"   '(iterm-goto-filedir-or-home :which-key "iterm - goto dir")
-;;    "/"   'counsel-ag
-;;    "TAB" '(switch-to-other-buffer :which-key "prev buffer")
-;;    "SPC" '(avy-goto-word-or-subword-1  :which-key "go to char")
-;;
-;;    ;; Applications
-;;    "a" '(:ignore t :which-key "Applications")
-;;    "ar" 'ranger
-;;    "ad" 'dired)
-;  )
+;;   ;; replace default keybindings
+;;   "C-s" 'swiper             ; search for string in current buffer
+;;   "M-x" 'counsel-M-x        ; replace default M-x with ivy backend
+;;   )
+;;  (general-define-key
+;;   :prefix "C-c"
+;;   ;; bind to simple key press
+;;    "b"	'ivy-switch-buffer  ; change buffer, chose using ivy
+;;    "/"   'counsel-git-grep   ; find string in git project
+;;    ;; bind to double key press
+;;    "f"   '(:ignore t :which-key "files")
+;;    "ff"  'counsel-find-file  ; find file using ivy
+;;    "fr"	'counsel-recentf    ; find recently edited files
+;;    "p"   '(:ignore t :which-key "project")
+;;    "pf"  '(counsel-git :which-key "find file in git dir")        ; find file in git project
+;;    )
+;;;  (general-define-key
+;;;   :states '(normal visual insert emacs)
+;;;   :prefix "SPC"
+;;;   :non-normal-prefix "C-SPC"
+;;;
+;;;    ;; simple command
+;;;    "'"   '(iterm-focus :which-key "iterm")
+;;;    "?"   '(iterm-goto-filedir-or-home :which-key "iterm - goto dir")
+;;;    "/"   'counsel-ag
+;;;    "TAB" '(switch-to-other-buffer :which-key "prev buffer")
+;;;    "SPC" '(avy-goto-word-or-subword-1  :which-key "go to char")
+;;;
+;;;    ;; Applications
+;;;    "a" '(:ignore t :which-key "Applications")
+;;;    "ar" 'ranger
+;;;    "ad" 'dired)
+;;  )
 
 ;; For Editing Language: Haskell
-; (use-package haskell-mode
-;  :init
-;  (add-hook 'haskell-mode-hook 'turn-on-haskell-indent))
+;; (use-package haskell-mode
+;;  :init
+;;  (add-hook 'haskell-mode-hook 'turn-on-haskell-indent))
 
 ;; Tuarag Mode
 ;; For Editing Language: OCaml
-; (use-package tuareg
-;   :mode (("\\.ml[ily]?$" . tuareg-mode)
-;          ("\\.topml$" . tuareg-mode)
-;          ("\\.topscript$" . tuareg-mode)))
+;; (use-package tuareg
+;;   :mode (("\\.ml[ily]?$" . tuareg-mode)
+;;          ("\\.topml$" . tuareg-mode)
+;;          ("\\.topscript$" . tuareg-mode)))
 
 ;; Merlin
 ;; OCaml completion
 ;; For Editing Language: OCaml
-; (use-package merlin
-;   :init (setq ; merlin-use-auto-complete-mode t
-;               merlin-error-after-save nil)
-;
-;   :config (add-hook 'tuareg-mode-hook 'merlin-mode)
-;           ; See http://emacs.stackexchange.com/questions/12084/how-to-get-merlin-mode-to-work-in-emacs
-;           ;(setq merlin-command 'opam)
-;
-;   ;; For some reason, having :bind here throws this out of whack. ???
-;   ; :bind (("C-c <up>" . merlin-type-enclosing-go-up)
-;   ;        ("C-c <down>" . merlin-type-enclosing-go-down))
-;   )
+;; (use-package merlin
+;;   :init (setq ; merlin-use-auto-complete-mode t
+;;               merlin-error-after-save nil)
+;;
+;;   :config (add-hook 'tuareg-mode-hook 'merlin-mode)
+;;           ; See http://emacs.stackexchange.com/questions/12084/how-to-get-merlin-mode-to-work-in-emacs
+;;           ;(setq merlin-command 'opam)
+;;
+;;   ;; For some reason, having :bind here throws this out of whack. ???
+;;   ; :bind (("C-c <up>" . merlin-type-enclosing-go-up)
+;;   ;        ("C-c <down>" . merlin-type-enclosing-go-down))
+;;   )
 
 
 
 ; Reload Emacs settings
 ; taken from http://www.saltycrane.com/blog/2007/07/how-to-reload-your-emacs-file-while/
-; (defun reload-dotemacs-file ()
-;     "reload your .emacs file without restarting Emacs"
-;     (interactive)
-;     (load-file "~/.emacs"))
+;; (defun reload-dotemacs-file ()
+;;     "reload your .emacs file without restarting Emacs"
+;;     (interactive)
+;;     (load-file "~/.emacs"))
 
 
 
 (setq org-agenda-files "~/org/agenda")
 
-; from: http://sachachua.com/blog/2015/02/learn-take-notes-efficiently-org-mode/
-; use C-x r j (jump-to-register)
+;; from: http://sachachua.com/blog/2015/02/learn-take-notes-efficiently-org-mode/
+;; use C-x r j (jump-to-register)
 (set-register ?e (cons 'file "~/.emacs.d/init.el"))
 (set-register ?o (cons 'file "~/org/capture.org"))
 
@@ -272,30 +289,30 @@
 (setq org-todo-keywords
       '((sequence "REFILE(f)" "REFINE(r)" "TODO(d)" "|" "DONE(D)")
         (sequence "WTB(w)" "TBR(b)" "TOUCHED(r)" "|" "READ(R)")))
-; Additionally, want:
-; - "journal/log": to-process | processed
-;   (b/c sometimes when logging I'll have thoughts,
-;    but I want it to be part of the log, not to capture it separately)
-; - issues: to-address | solution-listed fixed
+;; Additionally, want:
+;; - "journal/log": to-process | processed
+;;   (b/c sometimes when logging I'll have thoughts,
+;;    but I want it to be part of the log, not to capture it separately)
+;; - issues: to-address | solution-listed fixed
 
-; https://orgmode.org/manual/Storing-searches.html#Storing-searches
-; (setq org-agenda-custom-commands
-;       '(("x" agenda)
-;         ("y" agenda*)
-;         ("w" todo "WAITING")
-;         ("W" todo-tree "WAITING")
-;         ("u" tags "+boss-urgent")
-;         ("v" tags-todo "+boss-urgent")
-;         ("U" tags-tree "+boss-urgent")
-;         ("f" occur-tree "\\<FIXME\\>")
-;         ("o" "Agenda and Office-related tasks"
-;          ((agenda "")
-;           (tags-todo "work")
-;           (tags "office")))
-;         ("h" . "HOME+Name tags searches") ; description for "h" prefix
-;         ("hl" tags "+home+Lisa")
-;         ("hp" tags "+home+Peter")
-;         ("hk" tags "+home+Kim")))
+;; https://orgmode.org/manual/Storing-searches.html#Storing-searches
+;; (setq org-agenda-custom-commands
+;;       '(("x" agenda)
+;;         ("y" agenda*)
+;;         ("w" todo "WAITING")
+;;         ("W" todo-tree "WAITING")
+;;         ("u" tags "+boss-urgent")
+;;         ("v" tags-todo "+boss-urgent")
+;;         ("U" tags-tree "+boss-urgent")
+;;         ("f" occur-tree "\\<FIXME\\>")
+;;         ("o" "Agenda and Office-related tasks"
+;;          ((agenda "")
+;;           (tags-todo "work")
+;;           (tags "office")))
+;;         ("h" . "HOME+Name tags searches") ; description for "h" prefix
+;;         ("hl" tags "+home+Lisa")
+;;         ("hp" tags "+home+Peter")
+;;         ("hk" tags "+home+Kim")))
 (setq org-agenda-custom-commands
       '(("r" . "Refile Tasks (excl. backlog)")
         ("r" tags "TODO=\"REFILE\"-backlog")
@@ -315,27 +332,27 @@
 
 
 
-; from: https://orgmode.org/manual/Activation.html#Activation
+;; from: https://orgmode.org/manual/Activation.html#Activation
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cc" 'org-capture)
 (global-set-key "\C-cb" 'org-switchb)
 
-; Apparently needed for emacs-org-mode SRC code blocks to look pretty
-; https://orgmode.org/worg/org-contrib/babel/examples/fontify-src-code-blocks.html
+;; Apparently needed for emacs-org-mode SRC code blocks to look pretty
+;; https://orgmode.org/worg/org-contrib/babel/examples/fontify-src-code-blocks.html
 (setq org-src-fontify-natively t)
 
-; via https://www.reddit.com/r/emacs/comments/4366f9/how_do_orgrefiletargets_work/
+;; via https://www.reddit.com/r/emacs/comments/4366f9/how_do_orgrefiletargets_work/
 (setq org-outline-path-complete-in-steps nil)         ; Refile in a single go
 (setq org-refile-use-outline-path t)                  ; Show full paths for refiling
 
-; org-mode: I want RET to indent
+;; org-mode: I want RET to indent
 (require 'org)
 (define-key org-mode-map (kbd "\C-m")     'org-return-indent)
 
 
 
-; from http://tuhdo.github.io/helm-intro.html
+;; from http://tuhdo.github.io/helm-intro.html
 (require 'helm)
 (require 'helm-config)
 
@@ -367,15 +384,15 @@
 
 
 
-; magit
+;; magit
 (global-set-key (kbd "C-x g") 'magit-status)
 
-; This seems to speed-up Emacs when using "unicode characters"
-; h/t https://emacs.stackexchange.com/questions/33510/unicode-txt-slowness
+;; This seems to speed-up Emacs when using "unicode characters"
+;; h/t https://emacs.stackexchange.com/questions/33510/unicode-txt-slowness
 (setq inhibit-compacting-font-caches t)
 
 
-; https://emacs.stackexchange.com/questions/3322/python-auto-indent-problem/3338#3338
+;; h/t https://emacs.stackexchange.com/questions/3322/python-auto-indent-problem/3338#3338
 (setq electric-indent-mode -1)
 
 ;; ibuffer mode
@@ -401,6 +418,6 @@
 
 
 
-; Disable the toolbar.
-; NOTE: can re-enable with `M-x tool-bar-mode`
+;; Disable the toolbar.
+;; NOTE: can re-enable with `M-x tool-bar-mode`
 (tool-bar-mode -1)
