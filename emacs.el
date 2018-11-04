@@ -178,19 +178,20 @@
 
 ;; (use-package evil-leader)
 
-;; Rainbow Delimiters
+;;; Rainbow Delimiters
+;;
 ;; Colours are pretty. :-)
 ;; GitHub: https://github.com/istib/rainbow-blocks
 ;;
-;; Usage-Notes:
-;; - use M-x rainbow-delimiters-mode to toggle.
-;; - EVIL: Can use as Ex command.
-; (use-package rainbow-delimiters
-;   ; Enable for most programming languages:
-;   :config (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode))
+;; Usage:
+;; - command `rainbow-delimiters-mode` to toggle.
+(use-package rainbow-delimiters
+  ; Enable for most programming languages:
+  :config
+  (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode))
 
 ;; Alternative to helm: Ivy/Counsel/Swiper work together.
-;; Recommended by: https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/
+;; h/t: https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/
 
 (use-package which-key
   :config
