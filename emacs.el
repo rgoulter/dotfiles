@@ -424,3 +424,10 @@
 ;; Disable the toolbar.
 ;; NOTE: can re-enable with `M-x tool-bar-mode`
 (tool-bar-mode -1)
+
+;; 2018-11-08: TODO:
+;; Ohhh. e.g. a "Refiling Hydra" could be for the actions I do when refiling:
+;; - REFINE (+ next header)
+;; - REFILE ??
+;; - tag "backlog", or other popular tags
+;; - refile-to, and my popular places?
