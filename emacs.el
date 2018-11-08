@@ -292,12 +292,10 @@
 
 (setq org-todo-keywords
       '((sequence "REFILE(f)" "REFINE(r)" "TODO(d)" "|" "DONE(D)")
-        (sequence "WTB(w)" "TBR(b)" "TOUCHED(r)" "|" "READ(R)")))
-;; Additionally, want:
-;; - "journal/log": to-process | processed
-;;   (b/c sometimes when logging I'll have thoughts,
-;;    but I want it to be part of the log, not to capture it separately)
-;; - issues: to-address | solution-listed fixed
+        (sequence "WTB(w)" "TBR(b)" "TOUCHED(r)" "|" "READ(R)")
+        (sequence "|" "FAILED(F)")
+        (sequence "EXTRACT(x)" "|" "PROCESSED(P)")
+        (type "ISSUE(i)" "INVESTIGATE(q)" "|" "NOTED(N)")))
 
 ;; https://orgmode.org/manual/Storing-searches.html#Storing-searches
 ;; (setq org-agenda-custom-commands
@@ -349,6 +347,11 @@
 ;; via https://www.reddit.com/r/emacs/comments/4366f9/how_do_orgrefiletargets_work/
 (setq org-outline-path-complete-in-steps nil)         ; Refile in a single go
 (setq org-refile-use-outline-path t)                  ; Show full paths for refiling
+
+
+;; 2018-11-09: Will see if I prefer using org-mode with markup chars hidden.
+;; h/t https://stackoverflow.com/questions/10969617/hiding-markup-elements-in-org-mode
+(setq org-hide-emphasis-markers t)
 
 ;; org-mode: I want RET to indent
 (require 'org)
