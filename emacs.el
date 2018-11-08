@@ -358,6 +358,14 @@
 (define-key org-mode-map (kbd "\C-m")     'org-return-indent)
 
 
+;; Trade-off: this slows down the helm-org-rifle search,
+;; but this better suits how I'd like to use the rifle.
+;;
+;; (idea: if the rifle is too slow, can let/disable this
+;;  for a quick-rifle).
+(setq helm-org-rifle-test-against-path t)
+
+
 
 ;; from http://tuhdo.github.io/helm-intro.html
 (require 'helm)
