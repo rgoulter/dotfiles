@@ -283,7 +283,8 @@
 (set-register ?e (cons 'file "~/.emacs.d/init.el"))
 (set-register ?o (cons 'file "~/org/capture.org"))
 
-(setq org-refile-targets '((org-agenda-files . (:tag . "refile"))))
+(setq org-refile-targets '((org-agenda-files . (:tag . "refile"))
+                           (nil . (:tag . "refile"))))
 
 (setq org-default-notes-file "~/org/capture.org")
 
