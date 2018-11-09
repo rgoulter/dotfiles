@@ -349,13 +349,37 @@
 (setq org-refile-use-outline-path t)                  ; Show full paths for refiling
 
 
+;; One pain-point for me is that agenda view doesn't show the outline path
+;;  of the headings/entries.
+;; This means I can't use terse statements for headings
+;;  with my current org workflow.
+;; c.f. https://stackoverflow.com/questions/2807259/how-to-display-the-full-context-of-the-entries-in-org-mode-agenda-tree-view
+(setq org-agenda-show-outline-path t)
+
 ;; 2018-11-09: Will see if I prefer using org-mode with markup chars hidden.
 ;; h/t https://stackoverflow.com/questions/10969617/hiding-markup-elements-in-org-mode
 (setq org-hide-emphasis-markers t)
 
+;; c.f. parameters https://orgmode.org/manual/The-clock-table.html
+(setq org-agenda-clockreport-parameter-plist
+      '(:link      t
+        :maxlevel  2
+        ;; I like to use a large list of agenda files; showing 0:00 is noise.
+        :fileskip0 t))
+
+(setq org-capture-templates
+      ;; basic capture, tries to imitate the default capture template.
+      '(("c" "basic capture" entry (file "~/org/capture.org")
+         ;; %? :: puts the cursor there after capture
+         ;; %u :: inactive timestamp
+         ;; %a :: 'annotation'. links to context where the capture was made.
+         "* %?\n  %u\n  %a\n"
+         :clock-resume t)))             ;
+
 ;; org-mode: I want RET to indent
 (require 'org)
 (define-key org-mode-map (kbd "\C-m")     'org-return-indent)
+
 
 
 ;; Trade-off: this slows down the helm-org-rifle search,
