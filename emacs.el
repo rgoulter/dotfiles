@@ -379,9 +379,14 @@
       '(("c" "basic capture" entry (file "~/org/capture.org")
          ;; %? :: puts the cursor there after capture
          ;; %u :: inactive timestamp
+         "* %?\n  %u\n"
+         :clock-resume t)
+        ("C" "basic capture (with context)" entry (file "~/org/capture.org")
+         ;; %? :: puts the cursor there after capture
+         ;; %u :: inactive timestamp
          ;; %a :: 'annotation'. links to context where the capture was made.
          "* %?\n  %u\n  %a\n"
-         :clock-resume t)))             ;
+         :clock-resume t)))
 
 ;; org-mode: I want RET to indent
 (require 'org)
