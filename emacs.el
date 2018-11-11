@@ -349,12 +349,19 @@
 (setq org-refile-use-outline-path t)                  ; Show full paths for refiling
 
 
-;; One pain-point for me is that agenda view doesn't show the outline path
-;;  of the headings/entries.
-;; This means I can't use terse statements for headings
-;;  with my current org workflow.
-;; c.f. https://stackoverflow.com/questions/2807259/how-to-display-the-full-context-of-the-entries-in-org-mode-agenda-tree-view
 (setq org-agenda-show-outline-path t)
+
+;; 2018-11-09:
+;;   %b adds 'breadcrumbs' to the prefix
+;;    of each entry in the agenda view.
+;;    This may allow for using terse entry headings,
+;;    but I'd have to consider the structure of my
+;;    org agenda.
+;; (setq org-agenda-prefix-format
+;;       '((agenda . " %i %-12:c%?-12t% s%b")
+;;         (todo . " %i %-12:c%b")
+;;         (tags . " %i %-12:c%b")
+;;         (search . " %i %-12:c%b")))
 
 ;; 2018-11-09: Will see if I prefer using org-mode with markup chars hidden.
 ;; h/t https://stackoverflow.com/questions/10969617/hiding-markup-elements-in-org-mode
@@ -379,6 +386,24 @@
 ;; org-mode: I want RET to indent
 (require 'org)
 (define-key org-mode-map (kbd "\C-m")     'org-return-indent)
+
+
+;; enable org babel evaluation for more than just emacs lisp
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((C . t)                    ;; bonus: can run C, C++, D-lang
+   (R . t)
+   (awk . t)
+   (clojure . t)
+   (emacs-lisp . t)
+   (haskell . nil)
+   (js . t)
+   (ledger . t)
+   (python . t)
+   (ruby . t)
+   (sqlite . t)))
+
+(setq org-confirm-babel-evaluate nil)
 
 
 
