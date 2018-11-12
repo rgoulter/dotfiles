@@ -159,6 +159,11 @@
 
 (straight-use-package 'which-key)
 
+;; When running this, I encounter the error:
+;;> Building haskell-mode...
+;;> apply: haskell-font-lock.el:0:0: error: error: (Local variables entry is missing the suffix)
+;; (straight-use-package 'haskell-mode)
+
 
 
 
@@ -399,6 +404,7 @@
  '((C . t)                    ;; bonus: can run C, C++, D-lang
    (R . t)
    (awk . t)
+   (calc . t)
    (clojure . t)
    (emacs-lisp . t)
    (haskell . nil)
