@@ -136,6 +136,8 @@
 
 (straight-use-package 'hydra)
 
+(straight-use-package 'helm-ag)
+(straight-use-package 'helm-projectile)
 (straight-use-package 'helm-swoop)
 
 (straight-use-package 'rainbow-delimiters)
@@ -150,7 +152,11 @@
 
 (straight-use-package 'solarized-theme)
 
+(straight-use-package 'markdown-mode)
+
 (straight-use-package 'writeroom-mode)
+
+(straight-use-package 'neotree)
 
 ;; general is a more generalised package compared to evil-leader
 ;; h/t https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/
@@ -158,6 +164,8 @@
 (straight-use-package 'general)
 
 (straight-use-package 'which-key)
+
+(straight-use-package 'scala-mode)
 
 ;; When running this, I encounter the error:
 ;;> Building haskell-mode...
@@ -176,10 +184,13 @@
 
 
 (use-package evil
-  :init
-  ;; h/t: https://stackoverflow.com/questions/14302171/ctrlu-in-emacs-when-using-evil-key-bindings
-  (setq evil-want-C-u-scroll t)
-  :config (evil-mode 1))
+  :config
+  (evil-mode 1))
+
+(use-package evil-collection
+  :config
+  (evil-collection-init
+     'neotree))
 
 ;; (use-package evil-leader)
 
@@ -272,8 +283,8 @@
 
 
 
-; Reload Emacs settings
-; taken from http://www.saltycrane.com/blog/2007/07/how-to-reload-your-emacs-file-while/
+;; Reload Emacs settings
+;; taken from http://www.saltycrane.com/blog/2007/07/how-to-reload-your-emacs-file-while/
 ;; (defun reload-dotemacs-file ()
 ;;     "reload your .emacs file without restarting Emacs"
 ;;     (interactive)
@@ -496,6 +507,44 @@
 ;; Disable the toolbar.
 ;; NOTE: can re-enable with `M-x tool-bar-mode`
 (tool-bar-mode -1)
+
+
+
+(use-package markdown-mode
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "multimarkdown"))
+
+(use-package writeroom-mode)
+
+
+(use-package projectile
+;;  :bind
+;;  ("C-c p" . projectile-command-map)
+  :config
+  (projectile-mode 1)
+  (setq projectile-completion-system 'helm)
+  (setq projectile-switch-project-action 'helm-projectile-find-file)
+  (setq projectile-switch-project-action 'helm-projectile))
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+
+(projectile-global-mode)
+(setq projectile-completion-system 'helm)
+(helm-projectile-on)
+
+
+
+(use-package neotree)
+(global-set-key [f8] 'neotree-toggle)
+
+
+
+(use-package scala-mode)
 
 ;; 2018-11-08: TODO:
 ;; Ohhh. e.g. a "Refiling Hydra" could be for the actions I do when refiling:
