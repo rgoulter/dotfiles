@@ -115,6 +115,10 @@
 
 (straight-use-package 'helm)
 
+(straight-use-package 'ivy)
+(straight-use-package 'counsel)
+(straight-use-package 'swiper)
+
 (straight-use-package 'magit)
 
 (straight-use-package 'smooth-scrolling)
@@ -134,6 +138,9 @@
 
 (straight-use-package 'evil-ledger)
 
+(straight-use-package
+ '(evil-unimpaired :type git :host github :repo "zmaas/evil-unimpaired"))
+
 (straight-use-package 'hydra)
 
 (straight-use-package 'helm-ag)
@@ -143,6 +150,11 @@
 (straight-use-package 'rainbow-delimiters)
 
 (straight-use-package 'projectile)
+
+(straight-use-package 'ranger)
+(straight-use-package 'sunrise-commander)
+
+(straight-use-package 'hydra)
 
 (straight-use-package 'yasnippet)
 
@@ -166,6 +178,10 @@
 (straight-use-package 'which-key)
 
 (straight-use-package 'scala-mode)
+
+;; https://company-mode.github.io/
+;; https://github.com/company-mode/company-mode/wiki/Third-Party-Packages
+(straight-use-package 'company)
 
 ;; When running this, I encounter the error:
 ;;> Building haskell-mode...
