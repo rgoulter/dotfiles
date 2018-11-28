@@ -231,43 +231,41 @@
 
 ;; Taken from: https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/
 ;; GitHub: https://github.com/noctuid/general.el
-;;(use-package general
-;;  :config
-;;  (general-define-key "C-'" 'avy-goto-word-1)
-;;  (general-define-key
-;;   ;; replace default keybindings
-;;   "C-s" 'swiper             ; search for string in current buffer
-;;   "M-x" 'counsel-M-x        ; replace default M-x with ivy backend
-;;   )
-;;  (general-define-key
-;;   :prefix "C-c"
-;;   ;; bind to simple key press
-;;    "b"	'ivy-switch-buffer  ; change buffer, chose using ivy
-;;    "/"   'counsel-git-grep   ; find string in git project
-;;    ;; bind to double key press
-;;    "f"   '(:ignore t :which-key "files")
-;;    "ff"  'counsel-find-file  ; find file using ivy
-;;    "fr"	'counsel-recentf    ; find recently edited files
-;;    "p"   '(:ignore t :which-key "project")
-;;    "pf"  '(counsel-git :which-key "find file in git dir")        ; find file in git project
-;;    )
-;;;  (general-define-key
-;;;   :states '(normal visual insert emacs)
-;;;   :prefix "SPC"
-;;;   :non-normal-prefix "C-SPC"
-;;;
-;;;    ;; simple command
-;;;    "'"   '(iterm-focus :which-key "iterm")
-;;;    "?"   '(iterm-goto-filedir-or-home :which-key "iterm - goto dir")
-;;;    "/"   'counsel-ag
-;;;    "TAB" '(switch-to-other-buffer :which-key "prev buffer")
-;;;    "SPC" '(avy-goto-word-or-subword-1  :which-key "go to char")
-;;;
-;;;    ;; Applications
-;;;    "a" '(:ignore t :which-key "Applications")
-;;;    "ar" 'ranger
-;;;    "ad" 'dired)
-;;  )
+(use-package general
+  :config
+  (general-define-key "C-'" 'avy-goto-word-1)
+  (general-define-key
+   ;; replace default keybindings
+   "C-s" 'swiper             ; search for string in current buffer
+   ;; "M-x" 'counsel-M-x        ; replace default M-x with ivy backend
+   )
+  (general-define-key
+   :prefix "C-c"
+   ;; bind to simple key press
+    "b"	'ivy-switch-buffer  ; change buffer, chose using ivy
+    "/"   'counsel-git-grep   ; find string in git project
+    ;; bind to double key press
+    "f"   '(:ignore t :which-key "files")
+    "ff"  'counsel-find-file  ; find file using ivy
+    "fr"  'counsel-recentf    ; find recently edited files
+    ;; "p"   '(:ignore t :which-key "project")
+    "pf"  '(counsel-git :which-key "find file in git dir")        ; find file in git project
+    )
+  (general-define-key
+   :states '(normal visual insert emacs)
+   :prefix "SPC"
+   :non-normal-prefix "C-SPC"
+
+    ;; simple command
+    "/"   'counsel-ag
+    "TAB" '(switch-to-other-buffer :which-key "prev buffer")
+    "SPC" '(avy-goto-word-or-subword-1  :which-key "go to char")
+
+    ;; Applications
+    "a" '(:ignore t :which-key "Applications")
+    "ar" 'ranger
+    "ad" 'dired)
+  )
 
 ;; For Editing Language: Haskell
 ;; (use-package haskell-mode
@@ -367,10 +365,10 @@
 
 
 ;; from: https://orgmode.org/manual/Activation.html#Activation
-(global-set-key "\C-cl" 'org-store-link)
-(global-set-key "\C-ca" 'org-agenda)
-(global-set-key "\C-cc" 'org-capture)
-(global-set-key "\C-cb" 'org-switchb)
+(general-def "\C-cl" 'org-store-link)
+(general-def "\C-ca" 'org-agenda)
+(general-def "\C-cc" 'org-capture)
+(general-def "\C-cb" 'org-switchb)
 
 ;; Apparently needed for emacs-org-mode SRC code blocks to look pretty
 ;; https://orgmode.org/worg/org-contrib/babel/examples/fontify-src-code-blocks.html
@@ -422,7 +420,7 @@
 
 ;; org-mode: I want RET to indent
 (require 'org)
-(define-key org-mode-map (kbd "\C-m")     'org-return-indent)
+(general-def org-mode-map "\C-m" 'org-return-indent)
 
 
 ;; enable org babel evaluation for more than just emacs lisp
@@ -461,12 +459,12 @@
 ;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
 ;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
 ;; cannot change `helm-command-prefix-key' once `helm-config' is loaded.
-(global-set-key (kbd "C-c h") 'helm-command-prefix)
+(general-def "C-c h" 'helm-command-prefix)
 (global-unset-key (kbd "C-x c"))
 
-(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to run persistent action
-(define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB work in terminal
-(define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
+(general-def helm-map "<tab>" 'helm-execute-persistent-action) ; rebind tab to run persistent action
+(general-def helm-map "C-i"   'helm-execute-persistent-action) ; make TAB work in terminal
+(general-def helm-map "C-z"   'helm-select-action) ; list actions using C-z
 
 (when (executable-find "curl")
   (setq helm-google-suggest-use-curl-p t))
@@ -487,7 +485,7 @@
 
 
 ;; magit
-(global-set-key (kbd "C-x g") 'magit-status)
+(general-def "C-x g" 'magit-status)
 
 ;; This seems to speed-up Emacs when using "unicode characters"
 ;; h/t https://emacs.stackexchange.com/questions/33510/unicode-txt-slowness
@@ -501,7 +499,7 @@
 ;;  this manages buffers like Dired manages directories.
 ;;
 ;; from: http://tuhdo.github.io/emacs-tutor.html
-(global-set-key (kbd "C-x C-b") 'ibuffer)
+(general-def "C-x C-b" 'ibuffer)
 
 (use-package solarized-theme
   :init
@@ -544,10 +542,10 @@
   (setq projectile-completion-system 'helm)
   (setq projectile-switch-project-action 'helm-projectile-find-file)
   (setq projectile-switch-project-action 'helm-projectile))
-(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+(general-def projectile-mode-map "C-c p" 'projectile-command-map)
 
-(global-set-key (kbd "M-x") 'helm-M-x)
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(general-def "M-x" 'helm-M-x)
+(general-def "C-x C-f" 'helm-find-files)
 
 (projectile-global-mode)
 (setq projectile-completion-system 'helm)
@@ -556,7 +554,7 @@
 
 
 (use-package neotree)
-(global-set-key [f8] 'neotree-toggle)
+(general-def [f8] 'neotree-toggle)
 
 
 
