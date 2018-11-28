@@ -23,7 +23,7 @@
  '(custom-safe-themes
    (quote
     ("d737a2131d5ac01c0b2b944e0d2cb0be1c76496bb4ed61be51ff0e5457468974" "bf3ec301ea82ab546efb39c2fdd4412d1188c7382ff3bbadd74a8ecae4121678" default)))
- '(global-linum-mode t)
+ '(global-linum-mode nil)
  '(indent-tabs-mode nil)
  '(show-trailing-whitespace t)
  '(vc-follow-symlinks t))
@@ -235,13 +235,33 @@ Inserted by installing org-mode or when a release is made."
 
 (use-package which-key
   :config
+  (which-key-add-key-based-replacements
+    "C-x 4" "other window prefix")
+  (which-key-add-key-based-replacements
+    "C-x 5" "frame prefix")
+  (which-key-add-key-based-replacements
+    "C-x 6" "two column prefix")
+  (which-key-add-key-based-replacements
+    "C-x 8" "symbols prefix")
+  (which-key-add-key-based-replacements
+    "C-x @" "event apply prefix")
+  (which-key-add-key-based-replacements
+    "C-x X" "edebug prefix")
+  (which-key-add-key-based-replacements
+    "C-x a" "abbrev prefix")
+  (which-key-add-key-based-replacements
+    "C-x a i" "inverse prefix")
+  (which-key-add-key-based-replacements
+    "C-x n" "narrow prefix")
+  (which-key-add-key-based-replacements
+    "C-x r" "register prefix")
   (which-key-mode))
 
 
 
 ;; add some commands to switch to particular themes
 ;; see also: https://www.brautaset.org/articles/2017/hydra-theme-switcher.html
-;; ^^ this adds a hydra for selecting the theme.
+;; ^^ this seems to be a much cleve
 (defun my-load-theme-dark ()
   (interactive)
   (load-theme 'solarized-dark))
@@ -269,6 +289,7 @@ Inserted by installing org-mode or when a release is made."
     "fr"  'counsel-recentf    ; find recently edited files
     ;; "p"   '(:ignore t :which-key "project")
     "pf"  '(counsel-git :which-key "find file in git dir")        ; find file in git project
+    "t"   '(:ignore t :which-key "load theme")
     "td" '(my-load-theme-dark :which-key "solarized dark")
     "tl" '(my-load-theme-light :which-key "solarized light"))
   (general-define-key
