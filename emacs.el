@@ -36,18 +36,18 @@
 
 ;; TODO: Consider the merits of each of these. (vs using Custom to do it).
 ;; from: https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/
-;; (setq delete-old-versions -1 )		; delete excess backup versions silently
-;; (setq version-control t )		; use version control
-;; (setq vc-make-backup-files t )		; make backups file even when in version controlled dir
-;; (setq backup-directory-alist `(("." . "~/.emacs.d/backups")) ) ; which directory to put backups file
-;; (setq vc-follow-symlinks t )				       ; don't ask for confirmation when opening symlinked file
-;; (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)) ) ;transform backups file name
-;; (setq inhibit-startup-screen t )	; inhibit useless and old-school startup screen
-;; (setq ring-bell-function 'ignore )	; silent bell when you make a mistake
-;; (setq coding-system-for-read 'utf-8 )	; use utf-8 by default
-;; (setq coding-system-for-write 'utf-8 )
-;; (setq sentence-end-double-space nil)	; sentence SHOULD end with only a point.
-;; (setq default-fill-column 80)		; toggle wrapping text at the 80th character
+(setq delete-old-versions -1)		; delete excess backup versions silently
+(setq version-control t)		; use version control
+(setq vc-make-backup-files t)		; make backups file even when in version controlled dir
+(setq backup-directory-alist `(("." . "~/.emacs.d/backups"))) ; which directory to put backups file
+(setq vc-follow-symlinks t )				       ; don't ask for confirmation when opening symlinked file
+(setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)) ) ;transform backups file name
+(setq inhibit-startup-screen t)	; inhibit useless and old-school startup screen
+(setq ring-bell-function 'ignore)	; silent bell when you make a mistake
+;; (setq coding-system-for-read 'utf-8)	; use utf-8 by default
+;; (setq coding-system-for-write 'utf-8)
+(setq sentence-end-double-space nil)	; sentence SHOULD end with only a point.
+(setq default-fill-column 80)		; toggle wrapping text at the 80th character
 ;; (setq initial-scratch-message "Welcome in Emacs") ; print a default message in the empty scratch buffer opened at startup
 
 
@@ -146,6 +146,7 @@ Inserted by installing org-mode or when a release is made."
 (straight-use-package 'helm-ag)
 (straight-use-package 'helm-projectile)
 (straight-use-package 'helm-swoop)
+(straight-use-package 'helm-themes)
 
 (straight-use-package 'rainbow-delimiters)
 
@@ -209,6 +210,9 @@ Inserted by installing org-mode or when a release is made."
      'neotree))
 
 ;; (use-package evil-leader)
+(use-package evil-unimpaired
+  :config
+  (evil-unimpaired-mode 1))
 
 
 
@@ -235,6 +239,16 @@ Inserted by installing org-mode or when a release is made."
 
 
 
+;; add some commands to switch to particular themes
+;; see also: https://www.brautaset.org/articles/2017/hydra-theme-switcher.html
+;; ^^ this adds a hydra for selecting the theme.
+(defun my-load-theme-dark ()
+  (interactive)
+  (load-theme 'solarized-dark))
+(defun my-load-theme-light ()
+  (interactive)
+  (load-theme 'solarized-light))
+
 ;; Taken from: https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/
 ;; GitHub: https://github.com/noctuid/general.el
 (use-package general
@@ -254,7 +268,9 @@ Inserted by installing org-mode or when a release is made."
     "ff"  'counsel-find-file  ; find file using ivy
     "fr"  'counsel-recentf    ; find recently edited files
     ;; "p"   '(:ignore t :which-key "project")
-    "pf"  '(counsel-git :which-key "find file in git dir"))        ; find file in git project
+    "pf"  '(counsel-git :which-key "find file in git dir")        ; find file in git project
+    "td" '(my-load-theme-dark :which-key "solarized dark")
+    "tl" '(my-load-theme-light :which-key "solarized light"))
   (general-define-key
    :states '(normal visual insert emacs)
    :prefix "SPC"
@@ -533,6 +549,12 @@ Inserted by installing org-mode or when a release is made."
 
 
 (use-package scala-mode)
+
+
+
+(use-package ivy)
+(use-package counsel)
+(use-package swiper)
 
 ;; 2018-11-08: TODO:
 ;; Ohhh. e.g. a "Refiling Hydra" could be for the actions I do when refiling:
