@@ -72,40 +72,40 @@
 ;; 2018-10-31: I ran into a problem when refiling, which I hadn't earlier.
 ;; kludge from raxod502/straight.el readme for installing org
 ;; h/t: https://github.com/raxod502/straight.el#installing-org-with-straightel
-;; (require 'subr-x)
-;; (straight-use-package 'git)
-;;
-;; ; use straight.el to install a newer version of org-mode
-;; ; h/t: https://github.com/raxod502/straight.el#installing-org-with-straightel
-;; (defun org-git-version ()
-;;   "The Git version of org-mode.
-;; Inserted by installing org-mode or when a release is made."
-;;   (require 'git)
-;;   (let ((git-repo (expand-file-name
-;;                    "straight/repos/org/" user-emacs-directory)))
-;;     (string-trim
-;;      (git-run "describe"
-;;               "--match=release\*"
-;;               "--abbrev=6"
-;;               "HEAD"))))
-;;
-;; (defun org-release ()
-;;   "The release version of org-mode.
-;; Inserted by installing org-mode or when a release is made."
-;;   (require 'git)
-;;   (let ((git-repo (expand-file-name
-;;                    "straight/repos/org/" user-emacs-directory)))
-;;     (string-trim
-;;      (string-remove-prefix
-;;       "release_"
-;;       (git-run "describe"
-;;                "--match=release\*"
-;;                "--abbrev=0"
-;;                "HEAD")))))
-;;
-;; (provide 'org-version)
-;;
-;; (straight-use-package 'org)
+(require 'subr-x)
+(straight-use-package 'git)
+
+; use straight.el to install a newer version of org-mode
+; h/t: https://github.com/raxod502/straight.el#installing-org-with-straightel
+(defun org-git-version ()
+  "The Git version of org-mode.
+Inserted by installing org-mode or when a release is made."
+  (require 'git)
+  (let ((git-repo (expand-file-name
+                   "straight/repos/org/" user-emacs-directory)))
+    (string-trim
+     (git-run "describe"
+              "--match=release\*"
+              "--abbrev=6"
+              "HEAD"))))
+
+(defun org-release ()
+  "The release version of org-mode.
+Inserted by installing org-mode or when a release is made."
+  (require 'git)
+  (let ((git-repo (expand-file-name
+                   "straight/repos/org/" user-emacs-directory)))
+    (string-trim
+     (string-remove-prefix
+      "release_"
+      (git-run "describe"
+               "--match=release\*"
+               "--abbrev=0"
+               "HEAD")))))
+
+(provide 'org-version)
+
+(straight-use-package 'org)
 
 
 
@@ -210,6 +210,8 @@
 
 ;; (use-package evil-leader)
 
+
+
 ;;; Rainbow Delimiters
 ;;
 ;; Colours are pretty. :-)
@@ -225,9 +227,13 @@
 ;; Alternative to helm: Ivy/Counsel/Swiper work together.
 ;; h/t: https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/
 
+
+
 (use-package which-key
   :config
   (which-key-mode))
+
+
 
 ;; Taken from: https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/
 ;; GitHub: https://github.com/noctuid/general.el
@@ -236,9 +242,8 @@
   (general-define-key "C-'" 'avy-goto-word-1)
   (general-define-key
    ;; replace default keybindings
-   "C-s" 'swiper             ; search for string in current buffer
+   "C-s" 'swiper)             ; search for string in current buffer
    ;; "M-x" 'counsel-M-x        ; replace default M-x with ivy backend
-   )
   (general-define-key
    :prefix "C-c"
    ;; bind to simple key press
@@ -249,8 +254,7 @@
     "ff"  'counsel-find-file  ; find file using ivy
     "fr"  'counsel-recentf    ; find recently edited files
     ;; "p"   '(:ignore t :which-key "project")
-    "pf"  '(counsel-git :which-key "find file in git dir")        ; find file in git project
-    )
+    "pf"  '(counsel-git :which-key "find file in git dir"))        ; find file in git project
   (general-define-key
    :states '(normal visual insert emacs)
    :prefix "SPC"
@@ -264,13 +268,16 @@
     ;; Applications
     "a" '(:ignore t :which-key "Applications")
     "ar" 'ranger
-    "ad" 'dired)
-  )
+    "ad" 'dired))
+
+
 
 ;; For Editing Language: Haskell
 ;; (use-package haskell-mode
 ;;  :init
 ;;  (add-hook 'haskell-mode-hook 'turn-on-haskell-indent))
+
+
 
 ;; Tuarag Mode
 ;; For Editing Language: OCaml
@@ -306,80 +313,11 @@
 
 
 
-(setq org-agenda-files "~/org/agenda")
 
 ;; from: http://sachachua.com/blog/2015/02/learn-take-notes-efficiently-org-mode/
 ;; use C-x r j (jump-to-register)
 (set-register ?e (cons 'file "~/.emacs.d/init.el"))
 (set-register ?o (cons 'file "~/org/capture.org"))
-
-(setq org-refile-targets '((org-agenda-files . (:tag . "refile"))
-                           (nil . (:tag . "refile"))))
-
-(setq org-default-notes-file "~/org/capture.org")
-
-
-
-(setq org-todo-keywords
-      '((sequence "REFILE(f)" "REFINE(r)" "TODO(d)" "|" "DONE(D)")
-        (sequence "WTB(w)" "TBR(b)" "TOUCHED(r)" "|" "READ(R)")
-        (sequence "|" "FAILED(F)")
-        (sequence "EXTRACT(x)" "|" "PROCESSED(P)")
-        (type "ISSUE(i)" "INVESTIGATE(q)" "|" "NOTED(N)")))
-
-;; https://orgmode.org/manual/Storing-searches.html#Storing-searches
-;; (setq org-agenda-custom-commands
-;;       '(("x" agenda)
-;;         ("y" agenda*)
-;;         ("w" todo "WAITING")
-;;         ("W" todo-tree "WAITING")
-;;         ("u" tags "+boss-urgent")
-;;         ("v" tags-todo "+boss-urgent")
-;;         ("U" tags-tree "+boss-urgent")
-;;         ("f" occur-tree "\\<FIXME\\>")
-;;         ("o" "Agenda and Office-related tasks"
-;;          ((agenda "")
-;;           (tags-todo "work")
-;;           (tags "office")))
-;;         ("h" . "HOME+Name tags searches") ; description for "h" prefix
-;;         ("hl" tags "+home+Lisa")
-;;         ("hp" tags "+home+Peter")
-;;         ("hk" tags "+home+Kim")))
-(setq org-agenda-custom-commands
-      '(("r" . "Refile Tasks (excl. backlog)")
-        ("r" tags "TODO=\"REFILE\"-backlog")
-        ("R" tags-tree "TODO=\"REFILE\"-backlog")
-        ("i" . "Refine Tasks (excl. backlog)")
-        ("i" tags "TODO=\"REFINE\"-backlog")
-        ("I" tags-tree "TODO=\"REFINE\"-backlog")
-        ("i" . "Pick Up and Do")
-        ("p" tags "TODO=\"TODO\"+refile-backlog")
-        ("P" tags-tree "TODO=\"TODO\"+refile-backlog")
-        ("o" "Meta"
-         ((tags "TODO=\"REFILE\"-backlog")
-          (tags "TODO=\"REFINE\"-backlog")
-          (tags-todo "refile-backlog/TODO")
-          (tags-todo "backlog")))
-        ))
-
-
-
-;; from: https://orgmode.org/manual/Activation.html#Activation
-(general-def "\C-cl" 'org-store-link)
-(general-def "\C-ca" 'org-agenda)
-(general-def "\C-cc" 'org-capture)
-(general-def "\C-cb" 'org-switchb)
-
-;; Apparently needed for emacs-org-mode SRC code blocks to look pretty
-;; https://orgmode.org/worg/org-contrib/babel/examples/fontify-src-code-blocks.html
-(setq org-src-fontify-natively t)
-
-;; via https://www.reddit.com/r/emacs/comments/4366f9/how_do_orgrefiletargets_work/
-(setq org-outline-path-complete-in-steps nil)         ; Refile in a single go
-(setq org-refile-use-outline-path t)                  ; Show full paths for refiling
-
-
-(setq org-agenda-show-outline-path t)
 
 ;; 2018-11-09:
 ;;   %b adds 'breadcrumbs' to the prefix
@@ -393,53 +331,88 @@
 ;;         (tags . " %i %-12:c%b")
 ;;         (search . " %i %-12:c%b")))
 
-;; 2018-11-09: Will see if I prefer using org-mode with markup chars hidden.
-;; h/t https://stackoverflow.com/questions/10969617/hiding-markup-elements-in-org-mode
-(setq org-hide-emphasis-markers t)
-
-;; c.f. parameters https://orgmode.org/manual/The-clock-table.html
-(setq org-agenda-clockreport-parameter-plist
-      '(:link      t
-        :maxlevel  2
-        ;; I like to use a large list of agenda files; showing 0:00 is noise.
-        :fileskip0 t))
-
-(setq org-capture-templates
-      ;; basic capture, tries to imitate the default capture template.
-      '(("c" "basic capture" entry (file "~/org/capture.org")
-         ;; %? :: puts the cursor there after capture
-         ;; %u :: inactive timestamp
-         "* %?\n  %u\n"
-         :clock-resume t)
-        ("C" "basic capture (with context)" entry (file "~/org/capture.org")
-         ;; %? :: puts the cursor there after capture
-         ;; %u :: inactive timestamp
-         ;; %a :: 'annotation'. links to context where the capture was made.
-         "* %?\n  %u\n  %a\n"
-         :clock-resume t)))
-
 ;; org-mode: I want RET to indent
-(require 'org)
-(general-def org-mode-map "\C-m" 'org-return-indent)
-
-
-;; enable org babel evaluation for more than just emacs lisp
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((C . t)                    ;; bonus: can run C, C++, D-lang
-   (R . t)
-   (awk . t)
-   (calc . t)
-   (clojure . t)
-   (emacs-lisp . t)
-   (haskell . nil)
-   (js . t)
-   (ledger . t)
-   (python . t)
-   (ruby . t)
-   (sqlite . t)))
-
-(setq org-confirm-babel-evaluate nil)
+(use-package org
+  :init
+  (setq org-agenda-files "~/org/agenda")
+  (setq org-refile-targets '((org-agenda-files . (:tag . "refile"))
+                             (nil . (:tag . "refile"))))
+  (setq org-default-notes-file "~/org/capture.org")
+  (setq org-todo-keywords
+        '((sequence "REFILE(f)" "REFINE(r)" "TODO(d)" "|" "DONE(D)")
+          (sequence "WTB(w)" "TBR(b)" "TOUCHED(r)" "|" "READ(R)")
+          (sequence "|" "FAILED(F)")
+          (sequence "EXTRACT(x)" "|" "PROCESSED(P)")
+          (type "ISSUE(i)" "INVESTIGATE(q)" "|" "NOTED(N)")))
+  ;; https://orgmode.org/manual/Storing-searches.html#Storing-searches
+  (setq org-agenda-custom-commands
+        '(("r" . "Refile Tasks (excl. backlog)")
+          ("r" tags "TODO=\"REFILE\"-backlog")
+          ("R" tags-tree "TODO=\"REFILE\"-backlog")
+          ("i" . "Refine Tasks (excl. backlog)")
+          ("i" tags "TODO=\"REFINE\"-backlog")
+          ("I" tags-tree "TODO=\"REFINE\"-backlog")
+          ("i" . "Pick Up and Do")
+          ("p" tags "TODO=\"TODO\"+refile-backlog")
+          ("P" tags-tree "TODO=\"TODO\"+refile-backlog")
+          ("o" "Meta"
+           ((tags "TODO=\"REFILE\"-backlog")
+            (tags "TODO=\"REFINE\"-backlog")
+            (tags-todo "refile-backlog/TODO")
+            (tags-todo "backlog")))))
+  ;; Apparently needed for emacs-org-mode SRC code blocks to look pretty
+  ;; https://orgmode.org/worg/org-contrib/babel/examples/fontify-src-code-blocks.html
+  (setq org-src-fontify-natively t)
+  ;; via https://www.reddit.com/r/emacs/comments/4366f9/how_do_orgrefiletargets_work/
+  (setq org-outline-path-complete-in-steps nil)         ; Refile in a single go
+  (setq org-refile-use-outline-path t)                  ; Show full paths for refiling
+  (setq org-agenda-show-outline-path t)
+  ;; 2018-11-09: Will see if I prefer using org-mode with markup chars hidden.
+  ;; h/t https://stackoverflow.com/questions/10969617/hiding-markup-elements-in-org-mode
+  (setq org-hide-emphasis-markers t)
+  ;; c.f. parameters https://orgmode.org/manual/The-clock-table.html
+  (setq org-agenda-clockreport-parameter-plist
+        '(:link      t
+          :maxlevel  2
+          ;; I like to use a large list of agenda files; showing 0:00 is noise.
+          :fileskip0 t))
+  (setq org-capture-templates
+        ;; basic capture, tries to imitate the default capture template.
+        '(("c" "basic capture" entry (file "~/org/capture.org")
+           ;; %? :: puts the cursor there after capture
+           ;; %u :: inactive timestamp
+           "* %?\n  %u\n"
+           :clock-resume t)
+          ("C" "basic capture (with context)" entry (file "~/org/capture.org")
+           ;; %? :: puts the cursor there after capture
+           ;; %u :: inactive timestamp
+           ;; %a :: 'annotation'. links to context where the capture was made.
+           "* %?\n  %u\n  %a\n"
+           :clock-resume t)))
+  :config
+  ;; enable org babel evaluation for more than just emacs lisp
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((C . t)                    ;; bonus: can run C, C++, D-lang
+     (R . t)
+     (awk . t)
+     (calc . t)
+     (clojure . t)
+     (emacs-lisp . t)
+     (haskell . nil)
+     (js . t)
+     (ledger . t)
+     (python . t)
+     (ruby . t)
+     (sqlite . t)))
+  (setq org-confirm-babel-evaluate nil)
+  :general
+  ;; from: https://orgmode.org/manual/Activation.html#Activation
+  ("\C-cl" 'org-store-link)
+  ("\C-ca" 'org-agenda)
+  ("\C-cc" 'org-capture)
+  ("\C-cb" 'org-switchb)
+  (org-mode-map "\C-m" 'org-return-indent))
 
 
 
@@ -453,39 +426,36 @@
 
 
 ;; from http://tuhdo.github.io/helm-intro.html
-(require 'helm)
-(require 'helm-config)
-
-;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
-;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
-;; cannot change `helm-command-prefix-key' once `helm-config' is loaded.
-(general-def "C-c h" 'helm-command-prefix)
-(global-unset-key (kbd "C-x c"))
-
-(general-def helm-map "<tab>" 'helm-execute-persistent-action) ; rebind tab to run persistent action
-(general-def helm-map "C-i"   'helm-execute-persistent-action) ; make TAB work in terminal
-(general-def helm-map "C-z"   'helm-select-action) ; list actions using C-z
-
-(when (executable-find "curl")
-  (setq helm-google-suggest-use-curl-p t))
-
-(setq helm-split-window-in-side-p           t ; open helm buffer inside current window, not occupy whole other window
-      helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.
-      helm-ff-search-library-in-sexp        t ; search for library in `require' and `declare-function' sexp.
-      helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
-      helm-ff-file-name-history-use-recentf t
-      helm-echo-input-in-header-line t)
-
-(setq helm-autoresize-max-height 0)
-(setq helm-autoresize-min-height 20)
-(helm-autoresize-mode 1)
-
-(helm-mode 1)
+(use-package helm
+  :init
+  (setq helm-command-prefix-key "C-c h")
+  (require 'helm-config)
+  :general
+  ("M-x" 'helm-M-x)
+  ("C-x C-f" 'helm-find-files)
+  (helm-map "<tab>" 'helm-execute-persistent-action) ; rebind tab to run persistent action
+  (helm-map "C-i"   'helm-execute-persistent-action) ; make TAB work in terminal
+  (helm-map "C-z"   'helm-select-action) ; list actions using C-z
+  :config
+  (when (executable-find "curl")
+    (setq helm-google-suggest-use-curl-p t))
+  (setq helm-split-window-in-side-p           t ; open helm buffer inside current window, not occupy whole other window
+        helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.
+        helm-ff-search-library-in-sexp        t ; search for library in `require' and `declare-function' sexp.
+        helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
+        helm-ff-file-name-history-use-recentf t
+        helm-echo-input-in-header-line t)
+  (setq helm-autoresize-max-height 0)
+  (setq helm-autoresize-min-height 20)
+  (helm-autoresize-mode 1)
+  (helm-mode 1))
 
 
 
 ;; magit
 (general-def "C-x g" 'magit-status)
+
+
 
 ;; This seems to speed-up Emacs when using "unicode characters"
 ;; h/t https://emacs.stackexchange.com/questions/33510/unicode-txt-slowness
@@ -495,11 +465,15 @@
 ;; h/t https://emacs.stackexchange.com/questions/3322/python-auto-indent-problem/3338#3338
 (setq electric-indent-mode -1)
 
+
+
 ;; ibuffer mode
 ;;  this manages buffers like Dired manages directories.
 ;;
 ;; from: http://tuhdo.github.io/emacs-tutor.html
 (general-def "C-x C-b" 'ibuffer)
+
+
 
 (use-package solarized-theme
   :init
@@ -512,6 +486,8 @@
   (setq solarized-height-plus-4 1.0)
   :config
   (load-theme 'solarized-dark))
+
+
 
 (require 'smooth-scrolling)
 (smooth-scrolling-mode 1)
@@ -534,27 +510,25 @@
 (use-package writeroom-mode)
 
 
+
 (use-package projectile
-;;  :bind
-;;  ("C-c p" . projectile-command-map)
+  :defer nil  ;; I tried `:commands` but this still didn't help. :/
   :config
   (projectile-mode 1)
   (setq projectile-completion-system 'helm)
   (setq projectile-switch-project-action 'helm-projectile-find-file)
-  (setq projectile-switch-project-action 'helm-projectile))
-(general-def projectile-mode-map "C-c p" 'projectile-command-map)
-
-(general-def "M-x" 'helm-M-x)
-(general-def "C-x C-f" 'helm-find-files)
-
-(projectile-global-mode)
-(setq projectile-completion-system 'helm)
-(helm-projectile-on)
+  (setq projectile-switch-project-action 'helm-projectile)
+  (projectile-global-mode)
+  (setq projectile-completion-system 'helm)
+  (helm-projectile-on)
+  :general
+  (projectile-mode-map "C-c p" 'projectile-command-map))
 
 
 
-(use-package neotree)
-(general-def [f8] 'neotree-toggle)
+(use-package neotree
+  :general
+  ([f8] 'neotree-toggle))
 
 
 
