@@ -143,6 +143,7 @@ Inserted by installing org-mode or when a release is made."
 
 (straight-use-package 'hydra)
 
+(straight-use-package 'ag)
 (straight-use-package 'helm-ag)
 (straight-use-package 'helm-projectile)
 (straight-use-package 'helm-swoop)
@@ -312,6 +313,8 @@ Inserted by installing org-mode or when a release is made."
     "TAB" '(switch-to-other-buffer :which-key "prev buffer")
     "SPC" '(avy-goto-word-or-subword-1  :which-key "go to char")
 
+    ";"   'helm-M-x
+
     ;; Applications
     "a" '(:ignore t :which-key "Applications")
     "ar" 'ranger
@@ -393,20 +396,22 @@ Inserted by installing org-mode or when a release is made."
           (type "ISSUE(i)" "INVESTIGATE(q)" "|" "NOTED(N)")))
   ;; https://orgmode.org/manual/Storing-searches.html#Storing-searches
   (setq org-agenda-custom-commands
-        '(("r" . "Refile Tasks (excl. backlog)")
-          ("r" tags "TODO=\"REFILE\"-backlog")
-          ("R" tags-tree "TODO=\"REFILE\"-backlog")
-          ("i" . "Refine Tasks (excl. backlog)")
-          ("i" tags "TODO=\"REFINE\"-backlog")
-          ("I" tags-tree "TODO=\"REFINE\"-backlog")
-          ("i" . "Pick Up and Do")
-          ("p" tags "TODO=\"TODO\"+refile-backlog")
-          ("P" tags-tree "TODO=\"TODO\"+refile-backlog")
-          ("o" "Meta"
+        '(("r" . "Refile/Refine Tasks (excl. backlog)")
+          ("rr" "To Refile" tags "TODO=\"REFILE\"-backlog")
+          ("rR" "To Refile (tree)" tags-tree "TODO=\"REFILE\"-backlog")
+          ("ri" "To Refine" tags "TODO=\"REFINE\"-backlog")
+          ("rI" "To Refine (tree)" tags-tree "TODO=\"REFINE\"-backlog")
+          ("d" . "Pick Up and Do")
+          ("dp" "TODO" tags "TODO=\"TODO\"+refile-backlog")
+          ("dP" "TODO (tree)" tags-tree "TODO=\"TODO\"+refile-backlog")
+          ("do" "Refile, Refine, TODO, backlog"
            ((tags "TODO=\"REFILE\"-backlog")
             (tags "TODO=\"REFINE\"-backlog")
             (tags-todo "refile-backlog/TODO")
-            (tags-todo "backlog")))))
+            (tags-todo "backlog")))
+          ("o" . "My Org Mode Stuff")
+          ("oa" tags "ITEM=\"ASPIRATIONS\"")
+          ("or" tags "ITEM=\"RITUALS\"")))
   ;; Apparently needed for emacs-org-mode SRC code blocks to look pretty
   ;; https://orgmode.org/worg/org-contrib/babel/examples/fontify-src-code-blocks.html
   (setq org-src-fontify-natively t)
