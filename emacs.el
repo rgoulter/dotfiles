@@ -161,6 +161,16 @@ Inserted by installing org-mode or when a release is made."
 
 ;; evil-nerd-commenter
 
+;; must run all-the-icons-install-fonts command
+;; and (on windows) install manually
+;; h/t: https://github.com/domtronn/all-the-icons.el
+;; powershell: h/t: https://superuser.com/questions/201896/how-do-i-install-a-font-from-the-windows-command-prompt
+;;  $fonts = (New-Object -ComObject Shell.Application).Namespace(0x14)
+;;  Get-ChildItem -Recurse -include *.ttf | % { $fonts.CopyHere($_.fullname) }
+(straight-use-package 'all-the-icons)
+(straight-use-package 'doom-themes)
+(straight-use-package 'doom-modeline)
+
 (straight-use-package 'flycheck)
 
 (straight-use-package 'solarized-theme)
@@ -576,6 +586,10 @@ Inserted by installing org-mode or when a release is made."
 (use-package ivy)
 (use-package counsel)
 (use-package swiper)
+
+(use-package doom-modeline
+  :defer t
+  :hook (after-init . doom-modeline-init))
 
 ;; 2018-11-08: TODO:
 ;; Ohhh. e.g. a "Refiling Hydra" could be for the actions I do when refiling:
