@@ -15,27 +15,9 @@
 ;; (And emacs will indent `;` to the right because of this!).
 ;; https://www.gnu.org/software/emacs/manual/html_node/elisp/Comment-Tips.html#Comment-Tips
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   (quote
-    ("d737a2131d5ac01c0b2b944e0d2cb0be1c76496bb4ed61be51ff0e5457468974" "bf3ec301ea82ab546efb39c2fdd4412d1188c7382ff3bbadd74a8ecae4121678" default)))
- '(global-linum-mode nil)
- '(indent-tabs-mode nil)
- '(org-modules
-   (quote
-    (org-bbdb org-bibtex org-docview org-eww org-gnus org-habit org-info org-irc org-mhe org-rmail org-tempo org-w3m)))
- '(show-trailing-whitespace t)
- '(vc-follow-symlinks t))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+(setq custom-file "~/.emacs.d/custom.el")
+(when (file-exists-p custom-file)
+  (load custom-file))
 
 ;; TODO: Consider the merits of each of these. (vs using Custom to do it).
 ;; from: https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/
