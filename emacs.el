@@ -25,6 +25,9 @@
     ("d737a2131d5ac01c0b2b944e0d2cb0be1c76496bb4ed61be51ff0e5457468974" "bf3ec301ea82ab546efb39c2fdd4412d1188c7382ff3bbadd74a8ecae4121678" default)))
  '(global-linum-mode nil)
  '(indent-tabs-mode nil)
+ '(org-modules
+   (quote
+    (org-bbdb org-bibtex org-docview org-eww org-gnus org-habit org-info org-irc org-mhe org-rmail org-tempo org-w3m)))
  '(show-trailing-whitespace t)
  '(vc-follow-symlinks t))
 (custom-set-faces
@@ -148,6 +151,7 @@ Inserted by installing org-mode or when a release is made."
 (straight-use-package 'helm-projectile)
 (straight-use-package 'helm-swoop)
 (straight-use-package 'helm-themes)
+(straight-use-package 'helm-descbinds)
 
 (straight-use-package 'rainbow-delimiters)
 
@@ -194,6 +198,7 @@ Inserted by installing org-mode or when a release is made."
 ;; https://company-mode.github.io/
 ;; https://github.com/company-mode/company-mode/wiki/Third-Party-Packages
 (straight-use-package 'company)
+(straight-use-package 'company-lsp)
 
 ;; When running this, I encounter the error:
 ;;> Building haskell-mode...
@@ -217,8 +222,7 @@ Inserted by installing org-mode or when a release is made."
 
 (use-package evil-collection
   :config
-  (evil-collection-init
-     'neotree))
+  (evil-collection-init))
 
 ;; (use-package evil-leader)
 (use-package evil-unimpaired
@@ -435,11 +439,11 @@ Inserted by installing org-mode or when a release is made."
            ;; %u :: inactive timestamp
            "* %?\n  %u\n"
            :clock-resume t)
-          ("C" "basic capture (with context)" entry (file "~/org/capture.org")
+          ("C" "basic capture (with content, context)" entry (file "~/org/capture.org")
            ;; %? :: puts the cursor there after capture
            ;; %u :: inactive timestamp
            ;; %a :: 'annotation'. links to context where the capture was made.
-           "* %?\n  %u\n  %a\n"
+           "* %?\n  %u\n  %a\n  %i\n"
            :clock-resume t)))
   :config
   ;; enable org babel evaluation for more than just emacs lisp
@@ -595,6 +599,10 @@ Inserted by installing org-mode or when a release is made."
 (use-package doom-modeline
   :defer t
   :hook (after-init . doom-modeline-init))
+
+(use-package company
+  :init
+  (add-hook 'after-init-hook 'global-company-mode))
 
 ;; 2018-11-08: TODO:
 ;; Ohhh. e.g. a "Refiling Hydra" could be for the actions I do when refiling:
