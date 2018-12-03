@@ -226,7 +226,8 @@ Inserted by installing org-mode or when a release is made."
 
 (use-package evil-collection
   :config
-  (evil-collection-init))
+  (evil-collection-init
+     'ibuffer))
 
 ;; (use-package evil-leader)
 (use-package evil-unimpaired
