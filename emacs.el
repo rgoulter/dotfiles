@@ -52,6 +52,7 @@
 (setq sentence-end-double-space nil)	; sentence SHOULD end with only a point.
 (setq default-fill-column 80)		; toggle wrapping text at the 80th character
 ;; (setq initial-scratch-message "Welcome in Emacs") ; print a default message in the empty scratch buffer opened at startup
+(setq select-enable-clipboard nil)      ; use of killring / clipboard annoys me
 
 
 
