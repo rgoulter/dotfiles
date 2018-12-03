@@ -468,6 +468,7 @@ Inserted by installing org-mode or when a release is made."
   ("\C-cb" 'org-switchb)
   (org-mode-map "\C-m" 'org-return-indent))
 
+(setq org-habit-show-all-today t)
 
 
 ;; Trade-off: this slows down the helm-org-rifle search,
