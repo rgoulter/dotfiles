@@ -145,6 +145,9 @@ Inserted by installing org-mode or when a release is made."
 (straight-use-package
  '(evil-unimpaired :type git :host github :repo "zmaas/evil-unimpaired"))
 
+(straight-use-package
+ '(evil-org-mode :type git :host github :repo "Somelauw/evil-org-mode"))
+
 (straight-use-package 'hydra)
 
 (straight-use-package 'ag)
@@ -230,6 +233,15 @@ Inserted by installing org-mode or when a release is made."
   :config
   (evil-unimpaired-mode 1))
 
+(use-package evil-org
+  :after org
+  :config
+  (add-hook 'org-mode-hook 'evil-org-mode)
+  (add-hook 'evil-org-mode-hook
+            (lambda ()
+              (evil-org-set-key-theme)))
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
 
 
 ;;; Rainbow Delimiters
