@@ -189,7 +189,8 @@ Inserted by installing org-mode or when a release is made."
 ;; When running this, I encounter the error:
 ;;> Building haskell-mode...
 ;;> apply: haskell-font-lock.el:0:0: error: error: (Local variables entry is missing the suffix)
-;; (straight-use-package 'haskell-mode)
+;; ^ The solution to this is to config git to use autoclrf is input
+(straight-use-package 'haskell-mode)
 
 
 
@@ -325,9 +326,9 @@ Inserted by installing org-mode or when a release is made."
 
 
 ;; For Editing Language: Haskell
-;; (use-package haskell-mode
-;;  :init
-;;  (add-hook 'haskell-mode-hook 'turn-on-haskell-indent))
+(use-package haskell-mode
+ :init
+ (add-hook 'haskell-mode-hook 'turn-on-haskell-indent))
 
 
 
