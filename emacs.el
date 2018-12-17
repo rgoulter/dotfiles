@@ -35,6 +35,28 @@
 (setq default-fill-column 80)		; toggle wrapping text at the 80th character
 ;; (setq initial-scratch-message "Welcome in Emacs") ; print a default message in the empty scratch buffer opened at startup
 (setq select-enable-clipboard nil)      ; use of killring / clipboard annoys me
+(setq global-linum-mode nil)            ; don't enable line numbers. (IMO, too slow on large files with hidden areas)
+(setq indent-tabs-mode nil)
+(setq
+ org-modules
+ '(org-bbdb
+   org-bibtex
+   org-docview
+   org-gnus
+   org-habit
+   org-info
+   org-irc
+   org-mhe
+   org-rmail
+   org-tempo
+   org-w3m))
+(setq show-trailing-whitespace t)
+(setq vc-follow-symlinks t)
+;; copied from my custom.el
+(setq
+ custom-safe-themes
+ '("d737a2131d5ac01c0b2b944e0d2cb0be1c76496bb4ed61be51ff0e5457468974"
+   "bf3ec301ea82ab546efb39c2fdd4412d1188c7382ff3bbadd74a8ecae4121678" default))
 
 
 
@@ -192,6 +214,13 @@ Inserted by installing org-mode or when a release is made."
 ;; ^ The solution to this is to config git to use autoclrf is input
 (straight-use-package 'haskell-mode)
 
+(straight-use-package 'ht)
+(straight-use-package '(lsp-mode
+                      :type git :host github :repo "emacs-lsp/lsp-mode"))
+(straight-use-package 'lsp-ui)
+(straight-use-package 'lsp-haskell)
+
+(straight-use-package 'json-reformat)
 
 
 
@@ -283,6 +312,9 @@ Inserted by installing org-mode or when a release is made."
   (interactive)
   (load-theme 'solarized-light))
 
+(setq w32-pass-lwindow-to-system nil)
+(setq w32-lwindow-modifier 'super)
+
 ;; Taken from: https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/
 ;; GitHub: https://github.com/noctuid/general.el
 (use-package general
@@ -317,6 +349,10 @@ Inserted by installing org-mode or when a release is made."
     "SPC" '(avy-goto-word-or-subword-1  :which-key "go to char")
 
     ";"   'helm-M-x
+
+    "cx" 'clipboard-kill-region
+    "cc" 'clipboard-kill-ring-save
+    "cv" 'clipboard-yank
 
     ;; Applications
     "a" '(:ignore t :which-key "Applications")
@@ -371,6 +407,7 @@ Inserted by installing org-mode or when a release is made."
 ;; use C-x r j (jump-to-register)
 (set-register ?e (cons 'file "~/.emacs.d/init.el"))
 (set-register ?o (cons 'file "~/org/capture.org"))
+(set-register ?j (cons 'file "~/org/journal/journal.org"))
 
 ;; 2018-11-09:
 ;;   %b adds 'breadcrumbs' to the prefix
@@ -444,6 +481,8 @@ Inserted by installing org-mode or when a release is made."
            ;; %a :: 'annotation'. links to context where the capture was made.
            "* %?\n  %u\n  %a\n  %i\n"
            :clock-resume t)))
+  (setq org-agenda-sticky t)
+  (setq org-agenda-window-setup 'current-window)
   :config
   ;; enable org babel evaluation for more than just emacs lisp
   (org-babel-do-load-languages
@@ -544,7 +583,6 @@ Inserted by installing org-mode or when a release is made."
   (load-theme 'solarized-dark))
 
 
-
 (require 'smooth-scrolling)
 (smooth-scrolling-mode 1)
 
@@ -610,3 +648,93 @@ Inserted by installing org-mode or when a release is made."
 ;; - REFILE ??
 ;; - tag "backlog", or other popular tags
 ;; - refile-to, and my popular places?
+
+(require 'lsp)
+;; in case you are using client which is available as part of lsp refer to the
+;; table bellow for the clients that are distributed as part of lsp-mode.el
+;; (require 'lsp-clients)
+;; (add-hook 'programming-mode-hook 'lsp)
+(require 'lsp-ui)
+;; (add-hook 'lsp-mode-hook 'lsp-ui-mode)
+;; (add-hook 'haskell-mode-hook 'flycheck-mode)
+(require 'lsp-haskell)
+;; (add-hook 'haskell-mode-hook 'lsp)
+
+(straight-use-package 'intero)
+;; (add-hook 'haskell-mode-hook 'intero-mode)
+
+
+;; h/t https://github.com/emacs-lsp/lsp-haskell/issues/31
+;; (lsp-define-stdio-client lsp-haskell "haskell" #'lsp-haskell--get-root
+;; 			 ;; '("hie" "--lsp" "-d" "-l" "/tmp/hie.log"))
+;;        ;; '("hie" "--lsp" "-d" "-l" "/tmp/hie.log" "--vomit"))
+;;        (funcall lsp-haskell-process-wrapper-function (lsp--haskell-hie-command)))
+;; (setq lsp-haskell-process-args-hie '("-d" "-l" "c:/Users/MX15PRO-Richard/AppData/Local/Temp/hie.log"))
+;; lsp-haskell-process-args-hie is a variable defined in ‘emacs.el’.
+;; Its value is ("-d" "-l" "/tmp/hie.log")
+;; (setq debug-on-error t)
+(require 'tree-widget)
+
+
+
+;; narrow to region is a useful command,
+;; (unless you accidentally invoke it).
+(put 'narrow-to-region 'disabled nil)
+
+
+
+
+;; (straight-use-package
+;;  '(ribbon-dummy-demo :local-repo "d:/github/buffer-ribbon.el"))
+;; (add-to-list 'load-path "D:/github/buffer-ribbon.el")
+;; (load-library "buffer-ribbon")
+;; (require 'buffer-ribbon)
+;; (load-file "d:/github/buffer-ribbon.el/buffer-ribbon.el")
+;; (load-file "d:/github/buffer-ribbon.el/buffer-ribbon-tests.el")
+
+;; shift left, right; zoom, unzoom
+;; TODO: hydra-head to select the buffer!
+(defhydra hydra-patch-grid nil
+  "patch-grid"
+  ("h" buffer-ribbon/scroll-patch-grid-left "shift left")
+  ("l" buffer-ribbon/scroll-patch-grid-right "shift right")
+  ("j" buffer-ribbon/zoom-selected-window "zoom in" :exit t)
+  ("k" buffer-ribbon/unzoom "zoom out")
+
+  ("b" switch-to-buffer "switch buffer")
+
+  ("w"
+   (lambda ()
+     (interactive)
+     (buffer-ribbon/select-patch-grid-window 0 0))
+   "jump to grid tile 0, 0")
+  ("e"
+   (lambda ()
+     (interactive)
+     (buffer-ribbon/select-patch-grid-window 1 0))
+   "jump to grid tile 1, 0")
+  ("r"
+   (lambda ()
+     (interactive)
+     (buffer-ribbon/select-patch-grid-window 2 0))
+   "jump to grid tile 1, 0")
+  ("s"
+   (lambda ()
+     (interactive)
+     (buffer-ribbon/select-patch-grid-window 0 1))
+   "jump to grid tile 0, 1")
+  ("d"
+   (lambda ()
+     (interactive)
+     (buffer-ribbon/select-patch-grid-window 1 1))
+   "jump to grid tile 1, 1")
+  ("f"
+   (lambda ()
+     (interactive)
+     (buffer-ribbon/select-patch-grid-window 2 1))
+   "jump to grid tile 2, 1"))
+
+(general-define-key
+ :states '(normal visual)
+ :prefix "SPC"
+ "r" 'hydra-patch-grid/body)
