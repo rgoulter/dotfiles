@@ -50,13 +50,15 @@
    org-rmail
    org-tempo
    org-w3m))
-(setq show-trailing-whitespace t)
 (setq vc-follow-symlinks t)
 ;; copied from my custom.el
 (setq
  custom-safe-themes
  '("d737a2131d5ac01c0b2b944e0d2cb0be1c76496bb4ed61be51ff0e5457468974"
    "bf3ec301ea82ab546efb39c2fdd4412d1188c7382ff3bbadd74a8ecae4121678" default))
+
+
+(add-hook 'text-mode-hook 'whitespace-mode)
 
 
 
@@ -641,6 +643,9 @@ Inserted by installing org-mode or when a release is made."
 (use-package company
   :init
   (add-hook 'after-init-hook 'global-company-mode))
+
+(use-package flycheck
+  :init (global-flycheck-mode t))
 
 ;; 2018-11-08: TODO:
 ;; Ohhh. e.g. a "Refiling Hydra" could be for the actions I do when refiling:
