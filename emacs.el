@@ -15,24 +15,25 @@
 ;; (And emacs will indent `;` to the right because of this!).
 ;; https://www.gnu.org/software/emacs/manual/html_node/elisp/Comment-Tips.html#Comment-Tips
 
+;;; CODE:
 (setq custom-file "~/.emacs.d/custom.el")
 (when (file-exists-p custom-file)
   (load custom-file))
 
 ;; TODO: Consider the merits of each of these. (vs using Custom to do it).
 ;; from: https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/
-(setq delete-old-versions -1)		; delete excess backup versions silently
-(setq version-control t)		; use version control
-(setq vc-make-backup-files t)		; make backups file even when in version controlled dir
+(setq delete-old-versions -1)           ; delete excess backup versions silently
+(setq version-control t)                ; use version control
+(setq vc-make-backup-files t)           ; make backups file even when in version controlled dir
 (setq backup-directory-alist `(("." . "~/.emacs.d/backups"))) ; which directory to put backups file
-(setq vc-follow-symlinks t )				       ; don't ask for confirmation when opening symlinked file
+(setq vc-follow-symlinks t )            ; don't ask for confirmation when opening symlinked file
 (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)) ) ;transform backups file name
-(setq inhibit-startup-screen t)	; inhibit useless and old-school startup screen
-(setq ring-bell-function 'ignore)	; silent bell when you make a mistake
-;; (setq coding-system-for-read 'utf-8)	; use utf-8 by default
+(setq inhibit-startup-screen t)         ; inhibit useless and old-school startup screen
+(setq ring-bell-function 'ignore)       ; silent bell when you make a mistake
+;; (setq coding-system-for-read 'utf-8) ; use utf-8 by default
 ;; (setq coding-system-for-write 'utf-8)
-(setq sentence-end-double-space nil)	; sentence SHOULD end with only a point.
-(setq default-fill-column 80)		; toggle wrapping text at the 80th character
+(setq sentence-end-double-space nil)    ; sentence SHOULD end with only a point.
+(setq fill-column 80)           ; toggle wrapping text at the 80th character
 ;; (setq initial-scratch-message "Welcome in Emacs") ; print a default message in the empty scratch buffer opened at startup
 (setq select-enable-clipboard nil)      ; use of killring / clipboard annoys me
 (setq global-linum-mode nil)            ; don't enable line numbers. (IMO, too slow on large files with hidden areas)
@@ -122,8 +123,35 @@ Inserted by installing org-mode or when a release is made."
 (straight-use-package 'use-package)
 
 (straight-use-package 'evil)
+(straight-use-package 'evil-collection)
+(straight-use-package 'evil-leader)
+(straight-use-package 'evil-ledger)
+(straight-use-package 'evil-magit)
+(straight-use-package 'evil-nerd-commenter)
+(straight-use-package
+ '(evil-unimpaired :type git :host github :repo "zmaas/evil-unimpaired"))
+(straight-use-package
+ '(evil-org-mode :type git :host github :repo "Somelauw/evil-org-mode"))
+
+(straight-use-package 'flycheck)
+
+;; general is a more generalised package compared to evil-leader
+;; h/t https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/
+(straight-use-package 'general)
 
 (straight-use-package 'helm)
+(straight-use-package 'ag)
+(straight-use-package 'helm-ag)
+(straight-use-package 'helm-projectile)
+(straight-use-package 'helm-swoop)
+(straight-use-package 'helm-themes)
+(straight-use-package 'helm-descbinds)
+(straight-use-package 'dash)
+(straight-use-package 'f)
+(straight-use-package 's)
+(straight-use-package 'helm-org-rifle)
+
+(straight-use-package 'hydra)
 
 (straight-use-package 'ivy)
 (straight-use-package 'counsel)
@@ -131,98 +159,67 @@ Inserted by installing org-mode or when a release is made."
 
 (straight-use-package 'magit)
 
-(straight-use-package 'smooth-scrolling)
-
-(straight-use-package 'dash)
-(straight-use-package 'f)
-(straight-use-package 's)
-(straight-use-package 'helm-org-rifle)
-
-(straight-use-package 'ledger-mode)
-
-(straight-use-package 'evil-leader)
-
-(straight-use-package 'evil-collection)
-
-(straight-use-package 'evil-magit)
-
-(straight-use-package 'evil-ledger)
-
-(straight-use-package
- '(evil-unimpaired :type git :host github :repo "zmaas/evil-unimpaired"))
-
-(straight-use-package
- '(evil-org-mode :type git :host github :repo "Somelauw/evil-org-mode"))
-
-(straight-use-package 'hydra)
-
-(straight-use-package 'ag)
-(straight-use-package 'helm-ag)
-(straight-use-package 'helm-projectile)
-(straight-use-package 'helm-swoop)
-(straight-use-package 'helm-themes)
-(straight-use-package 'helm-descbinds)
-
-(straight-use-package 'rainbow-delimiters)
-
 (straight-use-package 'projectile)
 
-(straight-use-package 'ranger)
-(straight-use-package 'sunrise-commander)
-
-(straight-use-package 'hydra)
-
-(straight-use-package 'yasnippet)
-
-;; evil-nerd-commenter
+(straight-use-package 'which-key)
 
 ;; must run all-the-icons-install-fonts command
 ;; and (on windows) install manually
 ;; h/t: https://github.com/domtronn/all-the-icons.el
-;; powershell: h/t: https://superuser.com/questions/201896/how-do-i-install-a-font-from-the-windows-command-prompt
+;; powershell: h/t:
+;;   https://superuser.com/questions/201896/how-do-i-install-a-font-from-the-windows-command-prompt
 ;;  $fonts = (New-Object -ComObject Shell.Application).Namespace(0x14)
 ;;  Get-ChildItem -Recurse -include *.ttf | % { $fonts.CopyHere($_.fullname) }
 (straight-use-package 'all-the-icons)
 (straight-use-package 'doom-themes)
 (straight-use-package 'doom-modeline)
 
-(straight-use-package 'flycheck)
-
-(straight-use-package 'solarized-theme)
-
-(straight-use-package 'markdown-mode)
-
-(straight-use-package 'writeroom-mode)
+(straight-use-package 'avy)
 
 (straight-use-package 'neotree)
 
-;; general is a more generalised package compared to evil-leader
-;; h/t https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/
-(straight-use-package 'avy)
-(straight-use-package 'general)
+(straight-use-package 'rainbow-delimiters)
 
-(straight-use-package 'which-key)
+(straight-use-package 'ranger)
+(straight-use-package 'sunrise-commander)
 
-(straight-use-package 'scala-mode)
+(straight-use-package 'smooth-scrolling)
+
+(straight-use-package 'solarized-theme)
 
 ;; https://company-mode.github.io/
 ;; https://github.com/company-mode/company-mode/wiki/Third-Party-Packages
 (straight-use-package 'company)
 (straight-use-package 'company-lsp)
-
-;; When running this, I encounter the error:
-;;> Building haskell-mode...
-;;> apply: haskell-font-lock.el:0:0: error: error: (Local variables entry is missing the suffix)
-;; ^ The solution to this is to config git to use autoclrf is input
-(straight-use-package 'haskell-mode)
+(straight-use-package 'company-quickhelp)
 
 (straight-use-package 'ht)
 (straight-use-package '(lsp-mode
-                      :type git :host github :repo "emacs-lsp/lsp-mode"))
+                        :type git
+                        :host github
+                        :repo "emacs-lsp/lsp-mode"))
 (straight-use-package 'lsp-ui)
 (straight-use-package 'lsp-haskell)
 
+(straight-use-package 'writeroom-mode)
+
+(straight-use-package 'yasnippet)
+
+;; When running this, I encounter the error:
+;;> Building haskell-mode...
+;;> apply: haskell-font-lock.el:0:0: error: error:
+;;  (Local variables entry is missing the suffix)
+;; ^ The solution to this is to config git to use autoclrf is input
+;;   (IIRC)
+(straight-use-package 'haskell-mode)
+
 (straight-use-package 'json-reformat)
+
+(straight-use-package 'ledger-mode)
+
+(straight-use-package 'markdown-mode)
+
+(straight-use-package 'scala-mode)
 
 
 
@@ -329,7 +326,7 @@ Inserted by installing org-mode or when a release is made."
   (general-define-key
    :prefix "C-c"
    ;; bind to simple key press
-    "b"	'ivy-switch-buffer  ; change buffer, chose using ivy
+    "b"   'ivy-switch-buffer  ; change buffer, chose using ivy
     "/"   'counsel-git-grep   ; find string in git project
     ;; bind to double key press
     "f"   '(:ignore t :which-key "files")
@@ -642,7 +639,8 @@ Inserted by installing org-mode or when a release is made."
 
 (use-package company
   :init
-  (add-hook 'after-init-hook 'global-company-mode))
+  (add-hook 'after-init-hook 'global-company-mode)
+  (add-hook 'after-init-hook 'company-quickhelp-mode))
 
 (use-package flycheck
   :init (global-flycheck-mode t))
@@ -671,7 +669,7 @@ Inserted by installing org-mode or when a release is made."
 
 ;; h/t https://github.com/emacs-lsp/lsp-haskell/issues/31
 ;; (lsp-define-stdio-client lsp-haskell "haskell" #'lsp-haskell--get-root
-;; 			 ;; '("hie" "--lsp" "-d" "-l" "/tmp/hie.log"))
+;;        ;; '("hie" "--lsp" "-d" "-l" "/tmp/hie.log"))
 ;;        ;; '("hie" "--lsp" "-d" "-l" "/tmp/hie.log" "--vomit"))
 ;;        (funcall lsp-haskell-process-wrapper-function (lsp--haskell-hie-command)))
 ;; (setq lsp-haskell-process-args-hie '("-d" "-l" "c:/Users/MX15PRO-Richard/AppData/Local/Temp/hie.log"))
