@@ -134,6 +134,7 @@ Inserted by installing org-mode or when a release is made."
  '(evil-org-mode :type git :host github :repo "Somelauw/evil-org-mode"))
 
 (straight-use-package 'flycheck)
+(straight-use-package 'flycheck-package)
 
 ;; general is a more generalised package compared to evil-leader
 ;; h/t https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/
@@ -643,7 +644,9 @@ Inserted by installing org-mode or when a release is made."
   (add-hook 'after-init-hook 'company-quickhelp-mode))
 
 (use-package flycheck
-  :init (global-flycheck-mode t))
+  :init (global-flycheck-mode t)
+  :config
+  (flycheck-package-setup))
 
 ;; 2018-11-08: TODO:
 ;; Ohhh. e.g. a "Refiling Hydra" could be for the actions I do when refiling:
