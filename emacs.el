@@ -37,7 +37,7 @@
 ;; (setq initial-scratch-message "Welcome in Emacs") ; print a default message in the empty scratch buffer opened at startup
 (setq select-enable-clipboard nil)      ; use of killring / clipboard annoys me
 (setq global-linum-mode nil)            ; don't enable line numbers. (IMO, too slow on large files with hidden areas)
-(setq indent-tabs-mode nil)
+(setq-default indent-tabs-mode nil)
 (setq
  org-modules
  '(org-bbdb
@@ -718,52 +718,48 @@ Inserted by installing org-mode or when a release is made."
 
 ;; (straight-use-package
 ;;  '(ribbon-dummy-demo :local-repo "d:/github/buffer-ribbon.el"))
-;; (add-to-list 'load-path "D:/github/buffer-ribbon.el")
-;; (load-library "buffer-ribbon")
+(add-to-list 'load-path "D:/github/buffer-ribbon.el")
+(load-library "buffer-ribbon")
 ;; (require 'buffer-ribbon)
 ;; (load-file "d:/github/buffer-ribbon.el/buffer-ribbon.el")
 ;; (load-file "d:/github/buffer-ribbon.el/buffer-ribbon-tests.el")
 
 ;; shift left, right; zoom, unzoom
 ;; TODO: hydra-head to select the buffer!
-(defhydra hydra-patch-grid nil
+(defhydra hydra-patch-grid (global-map "C-c r")
   "patch-grid"
-  ("h" buffer-ribbon/scroll-patch-grid-left "shift left")
-  ("l" buffer-ribbon/scroll-patch-grid-right "shift right")
-  ("j" buffer-ribbon/zoom-selected-window "zoom in" :exit t)
-  ("k" buffer-ribbon/unzoom "zoom out")
+  ("h" evil-window-left  "select left")
+  ("j" evil-window-down  "select down")
+  ("k" evil-window-up    "select up")
+  ("l" evil-window-right "select right")
+  
+  ("H" buffer-ribbon/scroll-patch-grid-left "shift left")
+  ("L" buffer-ribbon/scroll-patch-grid-right "shift right")
+
+  ("J" buffer-ribbon/zoom-selected-window "zoom in" :exit t)
+  ("K" buffer-ribbon/unzoom "zoom out")
 
   ("b" switch-to-buffer "switch buffer")
 
-  ("w"
-   (lambda ()
-     (interactive)
-     (buffer-ribbon/select-patch-grid-window 0 0))
+  ("o" other-window "cycle to other-window")
+
+  ("gw"
+   (buffer-ribbon/select-patch-grid-window 0 0)
    "jump to grid tile 0, 0")
-  ("e"
-   (lambda ()
-     (interactive)
-     (buffer-ribbon/select-patch-grid-window 1 0))
+  ("ge"
+   (buffer-ribbon/select-patch-grid-window 1 0)
    "jump to grid tile 1, 0")
-  ("r"
-   (lambda ()
-     (interactive)
-     (buffer-ribbon/select-patch-grid-window 2 0))
-   "jump to grid tile 1, 0")
-  ("s"
-   (lambda ()
-     (interactive)
-     (buffer-ribbon/select-patch-grid-window 0 1))
+  ("gr"
+   (buffer-ribbon/select-patch-grid-window 2 0)
+   "jump to grid tile 2, 0")
+  ("gs"
+   (buffer-ribbon/select-patch-grid-window 0 1)
    "jump to grid tile 0, 1")
-  ("d"
-   (lambda ()
-     (interactive)
-     (buffer-ribbon/select-patch-grid-window 1 1))
+  ("gd"
+   (buffer-ribbon/select-patch-grid-window 1 1)
    "jump to grid tile 1, 1")
-  ("f"
-   (lambda ()
-     (interactive)
-     (buffer-ribbon/select-patch-grid-window 2 1))
+  ("gf"
+   (buffer-ribbon/select-patch-grid-window 2 1)
    "jump to grid tile 2, 1"))
 
 (general-define-key
