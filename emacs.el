@@ -506,7 +506,12 @@ Inserted by installing org-mode or when a release is made."
            ;; %u :: inactive timestamp
            ;; %a :: 'annotation'. links to context where the capture was made.
            "* %?\n  %u\n  %a\n  %i\n"
-           :clock-resume t)))
+           :clock-resume t)
+          ("d"
+           "review, daily cleanup"
+           checkitem
+           (file+olp+datetree "~/org/daily.org" "Cleanup")
+           (file "~/org/templates/daily-cleanup.org"))))
   (setq org-agenda-sticky t)
   (setq org-agenda-window-setup 'current-window)
   :config
