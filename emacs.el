@@ -194,6 +194,7 @@ Inserted by installing org-mode or when a release is made."
 ;; https://company-mode.github.io/
 ;; https://github.com/company-mode/company-mode/wiki/Third-Party-Packages
 (straight-use-package 'company)
+(straight-use-package 'company-jedi)
 (straight-use-package 'company-lsp)
 (straight-use-package 'company-quickhelp)
 
@@ -694,7 +695,7 @@ Inserted by installing org-mode or when a release is made."
 (require 'lsp-ui)
 ;; (add-hook 'lsp-mode-hook 'lsp-ui-mode)
 ;; (add-hook 'haskell-mode-hook 'flycheck-mode)
-(require 'lsp-haskell)
+;; (require 'lsp-haskell)
 ;; (add-hook 'haskell-mode-hook 'lsp)
 
 (straight-use-package 'intero)
