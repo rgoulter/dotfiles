@@ -143,6 +143,7 @@ Inserted by installing org-mode or when a release is made."
 (straight-use-package 'helm)
 (straight-use-package 'ag)
 (straight-use-package 'helm-ag)
+(straight-use-package 'helm-rg)
 (straight-use-package 'helm-projectile)
 (straight-use-package 'helm-swoop)
 (straight-use-package 'helm-themes)
@@ -205,6 +206,8 @@ Inserted by installing org-mode or when a release is made."
                         :repo "emacs-lsp/lsp-mode"))
 (straight-use-package 'lsp-ui)
 (straight-use-package 'lsp-haskell)
+
+(straight-use-package 'robe)
 
 (straight-use-package 'writeroom-mode)
 
