@@ -512,7 +512,12 @@ Inserted by installing org-mode or when a release is made."
            "review, daily cleanup"
            checkitem
            (file+olp+datetree "~/org/daily.org" "Cleanup")
-           (file "~/org/templates/daily-cleanup.org"))))
+           (file "~/org/templates/daily-cleanup.org"))
+          ("w"
+           "review, weekly"
+           checkitem
+           (file+olp+datetree "~/org/reviews.org" "Weekly Review")
+           (file "~/org/templates/weekly-template.org"))))
   (setq org-agenda-sticky t)
   (setq org-agenda-window-setup 'current-window)
   :config
