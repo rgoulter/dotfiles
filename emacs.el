@@ -58,6 +58,7 @@
  '("d737a2131d5ac01c0b2b944e0d2cb0be1c76496bb4ed61be51ff0e5457468974"
    "bf3ec301ea82ab546efb39c2fdd4412d1188c7382ff3bbadd74a8ecae4121678" default))
 
+(setq ediff-split-window-function #'split-window-horizontally)
 
 (add-hook 'text-mode-hook 'whitespace-mode)
 
