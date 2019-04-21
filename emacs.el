@@ -61,6 +61,7 @@
 (setq ediff-split-window-function #'split-window-horizontally)
 
 (add-hook 'text-mode-hook 'whitespace-mode)
+(add-hook 'haskell-mode-hook 'whitespace-mode)
 
 
 
@@ -232,6 +233,8 @@ Inserted by installing org-mode or when a release is made."
 
 (straight-use-package 'scala-mode)
 
+(straight-use-package 'feature-mode)
+
 
 
 
@@ -251,7 +254,8 @@ Inserted by installing org-mode or when a release is made."
   ;; h/t https://github.com/emacs-evil/evil-collection/issues/53
   (setq evil-collection-outline-bind-tab-p nil)
   (evil-collection-init
-     'ibuffer))
+   '(dired
+     ibuffer)))
 
 ;; (use-package evil-leader)
 (use-package evil-unimpaired
@@ -435,131 +439,12 @@ Inserted by installing org-mode or when a release is made."
 
 
 
+;; moving my org-mode code to a separate Emacs Lisp file.
+;; This contains (use-package org ...) and other settings.
+(let ((personal-settings "~/org/settings.el"))
+ (when (file-exists-p personal-settings)
+   (load-file personal-settings)))
 
-;; from: http://sachachua.com/blog/2015/02/learn-take-notes-efficiently-org-mode/
-;; use C-x r j (jump-to-register)
-(set-register ?e (cons 'file "~/.emacs.d/init.el"))
-(set-register ?o (cons 'file "~/org/capture.org"))
-(set-register ?j (cons 'file "~/org/journal/journal.org"))
-
-;; 2018-11-09:
-;;   %b adds 'breadcrumbs' to the prefix
-;;    of each entry in the agenda view.
-;;    This may allow for using terse entry headings,
-;;    but I'd have to consider the structure of my
-;;    org agenda.
-;; (setq org-agenda-prefix-format
-;;       '((agenda . " %i %-12:c%?-12t% s%b")
-;;         (todo . " %i %-12:c%b")
-;;         (tags . " %i %-12:c%b")
-;;         (search . " %i %-12:c%b")))
-
-;; org-mode: I want RET to indent
-(use-package org
-  :init
-  (setq org-agenda-files "~/org/agenda")
-  (setq org-refile-targets '((org-agenda-files . (:tag . "refile"))
-                             (nil . (:tag . "refile"))))
-  (setq org-default-notes-file "~/org/capture.org")
-  (setq org-todo-keywords
-        '((sequence "REFILE(f)" "REFINE(r)" "TODO(d)" "|" "DONE(D)")
-          (sequence "WTB(w)" "TBR(b)" "TOUCHED(r)" "|" "READ(R)")
-          (sequence "|" "FAILED(F)")
-          (sequence "EXTRACT(x)" "|" "PROCESSED(P)")
-          (type "ISSUE(i)" "INVESTIGATE(q)" "|" "NOTED(N)")))
-  ;; https://orgmode.org/manual/Storing-searches.html#Storing-searches
-  (setq org-agenda-custom-commands
-        '(("r" . "Refile/Refine Tasks (excl. backlog)")
-          ("rr" "To Refile" tags "TODO=\"REFILE\"-backlog")
-          ("rR" "To Refile (tree)" tags-tree "TODO=\"REFILE\"-backlog")
-          ("ri" "To Refine" tags "TODO=\"REFINE\"-backlog")
-          ("rI" "To Refine (tree)" tags-tree "TODO=\"REFINE\"-backlog")
-          ("d" . "Pick Up and Do")
-          ("dp" "TODO" tags "TODO=\"TODO\"+refile-backlog")
-          ("dP" "TODO (tree)" tags-tree "TODO=\"TODO\"+refile-backlog")
-          ("do" "Refile, Refine, TODO, backlog"
-           ((tags "TODO=\"REFILE\"-backlog")
-            (tags "TODO=\"REFINE\"-backlog")
-            (tags-todo "refile-backlog/TODO")
-            (tags-todo "backlog")))
-          ("o" . "My Org Mode Stuff")
-          ("oa" tags "ITEM=\"ASPIRATIONS\"")
-          ("or" tags "ITEM=\"RITUALS\"")))
-  ;; Apparently needed for emacs-org-mode SRC code blocks to look pretty
-  ;; https://orgmode.org/worg/org-contrib/babel/examples/fontify-src-code-blocks.html
-  (setq org-src-fontify-natively t)
-  ;; via https://www.reddit.com/r/emacs/comments/4366f9/how_do_orgrefiletargets_work/
-  (setq org-outline-path-complete-in-steps nil)         ; Refile in a single go
-  (setq org-refile-use-outline-path t)                  ; Show full paths for refiling
-  (setq org-agenda-show-outline-path t)
-  ;; 2018-11-09: Will see if I prefer using org-mode with markup chars hidden.
-  ;; h/t https://stackoverflow.com/questions/10969617/hiding-markup-elements-in-org-mode
-  (setq org-hide-emphasis-markers t)
-  ;; c.f. parameters https://orgmode.org/manual/The-clock-table.html
-  (setq org-agenda-clockreport-parameter-plist
-        '(:link      t
-          :maxlevel  2
-          ;; I like to use a large list of agenda files; showing 0:00 is noise.
-          :fileskip0 t))
-  (setq org-capture-templates
-        ;; basic capture, tries to imitate the default capture template.
-        '(("c" "basic capture" entry (file "~/org/capture.org")
-           ;; %? :: puts the cursor there after capture
-           ;; %u :: inactive timestamp
-           "* %?\n  %u\n"
-           :clock-resume t)
-          ("C" "basic capture (with content, context)" entry (file "~/org/capture.org")
-           ;; %? :: puts the cursor there after capture
-           ;; %u :: inactive timestamp
-           ;; %a :: 'annotation'. links to context where the capture was made.
-           "* %?\n  %u\n  %a\n  %i\n"
-           :clock-resume t)
-          ("d"
-           "review, daily cleanup"
-           checkitem
-           (file+olp+datetree "~/org/daily.org" "Cleanup")
-           (file "~/org/templates/daily-cleanup.org"))
-          ("w"
-           "review, weekly"
-           checkitem
-           (file+olp+datetree "~/org/reviews.org" "Weekly Review")
-           (file "~/org/templates/weekly-template.org"))))
-  (setq org-agenda-sticky t)
-  (setq org-agenda-window-setup 'current-window)
-  :config
-  ;; enable org babel evaluation for more than just emacs lisp
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((C . t)                    ;; bonus: can run C, C++, D-lang
-     (R . t)
-     (awk . t)
-     (calc . t)
-     (clojure . t)
-     (emacs-lisp . t)
-     (haskell . nil)
-     (js . t)
-     (ledger . t)
-     (python . t)
-     (ruby . t)
-     (sqlite . t)))
-  (setq org-confirm-babel-evaluate nil)
-  :general
-  ;; from: https://orgmode.org/manual/Activation.html#Activation
-  ("\C-cl" 'org-store-link)
-  ("\C-ca" 'org-agenda)
-  ("\C-cc" 'org-capture)
-  ("\C-cb" 'org-switchb)
-  (org-mode-map "\C-m" 'org-return-indent))
-
-(setq org-habit-show-all-today t)
-
-
-;; Trade-off: this slows down the helm-org-rifle search,
-;; but this better suits how I'd like to use the rifle.
-;;
-;; (idea: if the rifle is too slow, can let/disable this
-;;  for a quick-rifle).
-(setq helm-org-rifle-test-against-path t)
 
 
 
