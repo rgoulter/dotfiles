@@ -235,6 +235,8 @@ Inserted by installing org-mode or when a release is made."
 
 (straight-use-package 'feature-mode)
 
+(straight-use-package 'rainbow-mode)
+
 
 
 
