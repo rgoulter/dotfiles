@@ -20,6 +20,11 @@
 (when (file-exists-p custom-file)
   (load custom-file))
 
+(defvar workstation-file "File location for a local Emacs Lisp configuration file")
+(setq workstation-file "~/.emacs.d/local.el")
+(when (file-exists-p workstation-file)
+  (load workstation-file))
+
 ;; TODO: Consider the merits of each of these. (vs using Custom to do it).
 ;; from: https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/
 (setq delete-old-versions -1)           ; delete excess backup versions silently
@@ -237,7 +242,6 @@ Inserted by installing org-mode or when a release is made."
 (straight-use-package 'feature-mode)
 
 (straight-use-package 'rainbow-mode)
-
 
 
 
@@ -497,7 +501,7 @@ Inserted by installing org-mode or when a release is made."
 ;;  this manages buffers like Dired manages directories.
 ;;
 ;; from: http://tuhdo.github.io/emacs-tutor.html
-(general-def "C-x C-b" 'ibuffer)
+(general-def "C-x C-b" 'ibuffer)
 
 
 
