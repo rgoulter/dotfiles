@@ -336,6 +336,15 @@ Inserted by installing org-mode or when a release is made."
 (setq w32-pass-lwindow-to-system nil)
 (setq w32-lwindow-modifier 'super)
 
+(defun rgoulter/cheatsheet-rifle ()
+  "A convenience command for running helm-org-rifle against
+a cheatsheet file"
+  (interactive)
+  (when (file-exists-p cheatsheet-org-file)
+    (let ((helm-autoresize-min-height 50)
+          (helm-autoresize-max-height 50))
+      (helm-org-rifle-files (list cheatsheet-org-file)))))
+
 ;; Taken from: https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/
 ;; GitHub: https://github.com/noctuid/general.el
 (use-package general
@@ -378,7 +387,9 @@ Inserted by installing org-mode or when a release is made."
     ;; Applications
     "a" '(:ignore t :which-key "Applications")
     "ar" 'ranger
-    "ad" 'dired))
+    "ad" 'dired
+
+    "oc" 'rgoulter/cheatsheet-rifle))
 
 
 
@@ -448,6 +459,7 @@ Inserted by installing org-mode or when a release is made."
 
 ;; moving my org-mode code to a separate Emacs Lisp file.
 ;; This contains (use-package org ...) and other settings.
+(defvar cheatsheet-org-file nil "path to a cheatsheet org file")
 (let ((personal-settings "~/org/settings.el"))
  (when (file-exists-p personal-settings)
    (load-file personal-settings)))
