@@ -562,6 +562,7 @@ a cheatsheet file"
   (projectile-global-mode)
   (setq projectile-completion-system 'helm)
   (helm-projectile-on)
+  (setq projectile-globally-ignored-directories (cons "node_modules" projectile-globally-ignored-directories))
   :general
   (projectile-mode-map "C-c p" 'projectile-command-map))
 
