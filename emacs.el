@@ -219,6 +219,8 @@ Inserted by installing org-mode or when a release is made."
 
 (straight-use-package 'writeroom-mode)
 
+(straight-use-package 'restclient)
+
 (straight-use-package 'yasnippet)
 
 ;; When running this, I encounter the error:
