@@ -173,6 +173,9 @@ Inserted by installing org-mode or when a release is made."
 
 (straight-use-package 'which-key)
 
+(straight-use-package
+ '(discover-my-major :type git :host github :repo "jguenther/discover-my-major"))
+
 ;; must run all-the-icons-install-fonts command
 ;; and (on windows) install manually
 ;; h/t: https://github.com/domtronn/all-the-icons.el
@@ -392,6 +395,10 @@ a cheatsheet file"
     "ad" 'dired
 
     "oc" 'rgoulter/cheatsheet-rifle))
+
+(use-package discover-my-major
+ :general
+ ("C-h C-m" 'discover-my-major))
 
 
 
