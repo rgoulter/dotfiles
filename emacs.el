@@ -226,6 +226,7 @@ Inserted by installing org-mode or when a release is made."
 (straight-use-package 'restclient)
 
 (straight-use-package 'yasnippet)
+(straight-use-package 'yasnippet-snippets)
 
 (straight-use-package 'realgud)
 (straight-use-package '(realgud-node-inspect :type git :host github :repo "realgud/realgud-node-inspect"))
