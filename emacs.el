@@ -226,6 +226,12 @@ Inserted by installing org-mode or when a release is made."
 
 (straight-use-package 'yasnippet)
 
+(straight-use-package 'realgud)
+(straight-use-package '(realgud-node-inspect :type git :host github :repo "realgud/realgud-node-inspect"))
+(straight-use-package '(realgud-trepan-ni :type git :host github :repo "realgud/realgud-trepan-ni"))
+
+(straight-use-package 'indium)
+
 ;; When running this, I encounter the error:
 ;;> Building haskell-mode...
 ;;> apply: haskell-font-lock.el:0:0: error: error:
