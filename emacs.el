@@ -557,9 +557,10 @@ a cheatsheet file"
 
 
 
-;; Disable the toolbar.
-;; NOTE: can re-enable with `M-x tool-bar-mode`
+;; Disable GUI elements for a cleaner UI
 (tool-bar-mode -1)
+(menu-bar-mode -1)
+(scroll-bar-mode -1)
 
 
 
