@@ -18,21 +18,6 @@
     ~/.config/powerline:
         create: true
         path: powerline
-    ~/.config/yi/yi.hs:
-        create: true
-        path: yi.hs
-    ~/.config/yi/lib:
-        create: true
-        path: lib-yi
-    ~/.sbt/0.13/plugins/plugins.sbt:
-        create: true
-        path: sbt/0.13/plugins/plugins.sbt
-    ~/.gradle/init.gradle:
-        create: true
-        path:  gradle/init.gradle
-    ~/.gradle/gradle.properties:
-        create: true
-        path: gradle/gradle.properties
 
 - shell:
   - [git submodule init, Installing/updating submodules]

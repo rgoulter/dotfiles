@@ -1,7 +1,0 @@
-// Originally had:
-// rootProject.allprojects {
-//
-// but currently prefer:
-allprojects {
-    apply plugin: "eclipse"
-}
