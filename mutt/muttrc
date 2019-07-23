@@ -24,18 +24,10 @@ source "gpg2 -dq $HOME/.my-pwds.gpg |"
 
 
 ## ACCOUNT1
-source "~/.mutt/nusstu"
-folder-hook $folder 'source ~/.mutt/nusstu'
-
-## ACCOUNT2
 source "~/.mutt/gmail"
 folder-hook $folder 'source ~/.mutt/gmail'
 
-## ACCOUNT3
-source "~/.mutt/nusstf"
-folder-hook $folder 'source ~/.mutt/nusstf'
-
-## ACCOUNT4
+## ACCOUNT2
 source "~/.mutt/outlook"
 folder-hook $folder 'source ~/.mutt/outlook'
 
