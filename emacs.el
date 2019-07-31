@@ -144,6 +144,8 @@ Inserted by installing org-mode or when a release is made."
  '(evil-unimpaired :type git :host github :repo "zmaas/evil-unimpaired"))
 (straight-use-package
  '(evil-org-mode :type git :host github :repo "Somelauw/evil-org-mode"))
+(straight-use-package 'evil-snipe)
+(straight-use-package 'evil-surround)
 
 (straight-use-package 'flycheck)
 (straight-use-package 'flycheck-package)
@@ -286,6 +288,14 @@ Inserted by installing org-mode or when a release is made."
 (use-package evil-unimpaired
   :config
   (evil-unimpaired-mode 1))
+
+(use-package evil-snipe
+  :config
+  (evil-snipe-mode 1))
+
+(use-package evil-surround
+  :config
+  (global-evil-surround-mode 1))
 
 (use-package evil-org
   :after org
