@@ -209,14 +209,14 @@ Inserted by installing org-mode or when a release is made."
 ;; https://github.com/company-mode/company-mode/wiki/Third-Party-Packages
 (straight-use-package 'company)
 (straight-use-package 'company-jedi)
-(straight-use-package 'company-lsp)
-(straight-use-package 'company-quickhelp)
-
-(straight-use-package 'ht)
 (straight-use-package '(lsp-mode
                         :type git
                         :host github
                         :repo "emacs-lsp/lsp-mode"))
+(straight-use-package 'company-lsp)
+(straight-use-package 'company-quickhelp)
+
+(straight-use-package 'ht)
 (straight-use-package 'lsp-ui)
 (straight-use-package 'lsp-haskell)
 
