@@ -72,6 +72,7 @@
 
 (add-hook 'text-mode-hook 'whitespace-mode)
 (add-hook 'haskell-mode-hook 'whitespace-mode)
+(add-hook 'js-mode-hook 'whitespace-mode)
 
 
 
