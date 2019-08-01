@@ -412,6 +412,8 @@ a cheatsheet file"
     "a" '(:ignore t :which-key "Applications")
     "ar" 'ranger
     "ad" 'dired
+    "at" 'tldr
+    "am" 'woman
 
     "oc" 'rgoulter/cheatsheet-rifle))
 
