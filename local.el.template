@@ -1,0 +1,44 @@
+;;
+;; Template for the kinds of functions and settings which go in local.el
+;; (things which are host-specific)
+;;
+
+;; Woman-Path:
+;; Use Msys2's man-pages on Windows.
+;; (setq woman-path "C:/tools/msys64/usr/share/man")
+
+;; SQL-Mode,
+;; A connection alist
+;; (setq sql-connection-alist
+;;   '(
+;;     ("postgres.local"
+;;         (sql-product 'postgres)
+;;         (sql-user "postgres")
+;;         (sql-database "postgres")
+;;         (sql-server "localhost"))
+;;     ))
+
+;; (defun rgoulter/sql-connect.postgres.local ()
+;;   "Convenience command which sets ENV vars
+;; and connects sql-mode postgres to localhost postgres."
+;;   (interactive)
+;;   (setenv "PGDATABASE" "postgres")
+;;   (setenv "PGHOST" "localhost")
+;;   (setenv "PGPORT" "5432")
+;;   (setenv "PGUSER" "postgres")
+;;   (setenv "PGPASSWORD" "postgres")
+;;   (sql-connect "postgres.local"))  ; <-- should agree with the key in sql-connection-alist
+
+;; (defun rgoulter/magit.repoX ()
+;;   "Convenience command which opens magit
+;; in repoX dir."
+;;   (interactive)
+;;   (magit-status "d:/git/repoX"))
+
+;; (defun rgoulter/diff-from-develop-except-lock ()
+;;   "Convenience command for calling diff against develop..."
+;;   (interactive)
+;;   (magit-diff-range "develop..." '("--stat") '(":(exclude)package-lock.json")))
+
+;; NOTE: 2019-08-01: This should probably be in project-specific config
+;; (setq js-indent-level 2)
