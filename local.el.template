@@ -42,3 +42,6 @@
 
 ;; NOTE: 2019-08-01: This should probably be in project-specific config
 ;; (setq js-indent-level 2)
+
+;; Use system's TLDR cache
+;; (setq tldr-directory-path "~/.tldr/cache")
