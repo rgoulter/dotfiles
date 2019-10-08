@@ -194,6 +194,8 @@ Inserted by installing org-mode or when a release is made."
 (straight-use-package 'ace-link)
 (straight-use-package 'avy)
 
+(straight-use-package 'diff-hl)
+
 (straight-use-package 'helpful)
 
 (straight-use-package 'neotree)
@@ -223,6 +225,10 @@ Inserted by installing org-mode or when a release is made."
 (straight-use-package 'lsp-haskell)
 
 (straight-use-package 'robe)
+
+(straight-use-package 'elixir-mode)
+
+(straight-use-package 'tide)
 
 (straight-use-package 'writeroom-mode)
 
@@ -631,7 +637,11 @@ a cheatsheet file"
 (use-package company
   :init
   (add-hook 'after-init-hook 'global-company-mode)
-  (add-hook 'after-init-hook 'company-quickhelp-mode))
+  (add-hook 'after-init-hook 'company-quickhelp-mode)
+  :config
+  (setq company-idle-delay 0.1)
+  (setq company-minimum-prefix-length 3)
+  (setq company-quickhelp-delay 0.1))
 
 (use-package flycheck
   :init (global-flycheck-mode t)
@@ -730,3 +740,5 @@ a cheatsheet file"
  :states '(normal visual)
  :prefix "SPC"
  "r" 'hydra-patch-grid/body)
+
+(add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
