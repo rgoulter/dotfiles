@@ -245,12 +245,6 @@ Inserted by installing org-mode or when a release is made."
 
 (straight-use-package 'indium)
 
-;; When running this, I encounter the error:
-;;> Building haskell-mode...
-;;> apply: haskell-font-lock.el:0:0: error: error:
-;;  (Local variables entry is missing the suffix)
-;; ^ The solution to this is to config git to use autoclrf is input
-;;   (IIRC)
 (straight-use-package 'haskell-mode)
 
 (straight-use-package 'json-reformat)
