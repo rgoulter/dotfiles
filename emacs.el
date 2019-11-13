@@ -658,6 +658,11 @@ a cheatsheet file"
 (use-package zetteldeft
   :after deft)
 
+;; If creating more than one note in a minute
+;; using zetteldeft, the default id generation
+;; gives them the same ID.
+(setq zetteldeft-id-format "%Y-%m-%d-%H%M%S")
+
 (general-define-key
   :prefix "SPC"
   :non-normal-prefix "C-SPC"
