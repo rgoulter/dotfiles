@@ -15,17 +15,13 @@
 ;; (And emacs will indent `;` to the right because of this!).
 ;; https://www.gnu.org/software/emacs/manual/html_node/elisp/Comment-Tips.html#Comment-Tips
 
+
+;; ("~/.emacs.d/straight/repos/use-package/README.md")
+;; ("~/.emacs.d/straight/repos/general.el/README.org")
+
 ;;; CODE:
-(setq custom-file "~/.emacs.d/custom.el")
-(when (file-exists-p custom-file)
-  (load custom-file))
 
-(defvar workstation-file "File location for a local Emacs Lisp configuration file")
-(setq workstation-file "~/.emacs.d/local.el")
-(when (file-exists-p workstation-file)
-  (load workstation-file))
-
-;; TODO: Consider the merits of each of these. (vs using Custom to do it).
+;; TODO: Consider the merits of each of these
 ;; from: https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/
 (setq delete-old-versions -1)           ; delete excess backup versions silently
 (setq version-control t)                ; use version control
@@ -65,9 +61,57 @@
 
 (setq ediff-split-window-function #'split-window-horizontally)
 
+(setq w32-pass-lwindow-to-system nil)
+(setq w32-lwindow-modifier 'super)
+
+;; This seems to speed-up Emacs when using "unicode characters"
+;; h/t https://emacs.stackexchange.com/questions/33510/unicode-txt-slowness
+(setq inhibit-compacting-font-caches t)
+
+
+;; h/t https://emacs.stackexchange.com/questions/3322/python-auto-indent-problem/3338#3338
+(setq electric-indent-mode -1)
+
+;; Disable GUI elements for a cleaner UI
+(tool-bar-mode -1)
+(menu-bar-mode -1)
+(scroll-bar-mode -1)
+
 (add-hook 'text-mode-hook 'whitespace-mode)
 (add-hook 'haskell-mode-hook 'whitespace-mode)
 (add-hook 'js-mode-hook 'whitespace-mode)
+
+;; add some commands to switch to particular themes
+;; see also: https://www.brautaset.org/articles/2017/hydra-theme-switcher.html
+;; ^^ this seems to be a much cleve
+(defun my-load-theme-dark ()
+  (interactive)
+  (load-theme 'solarized-dark))
+(defun my-load-theme-light ()
+  (interactive)
+  (load-theme 'solarized-light))
+
+(defun rgoulter/cheatsheet-rifle ()
+  "A convenience command for running helm-org-rifle against
+a cheatsheet file"
+  (interactive)
+  (when (file-exists-p cheatsheet-org-file)
+    (let ((helm-autoresize-min-height 50)
+          (helm-autoresize-max-height 50))
+      (helm-org-rifle-files (list cheatsheet-org-file)))))
+
+
+;; Reload Emacs settings
+;; taken from http://www.saltycrane.com/blog/2007/07/how-to-reload-your-emacs-file-while/
+;; (defun reload-dotemacs-file ()
+;;     "reload your .emacs file without restarting Emacs"
+;;     (interactive)
+;;     (load-file "~/.emacs"))
+
+
+
+
+
 
 
 
@@ -252,6 +296,7 @@ Inserted by installing org-mode or when a release is made."
 
 (straight-use-package 'indium)
 
+(straight-use-package 'intero)
 (straight-use-package 'haskell-mode)
 
 (straight-use-package 'json-reformat)
@@ -306,19 +351,22 @@ Inserted by installing org-mode or when a release is made."
 
 (use-package evil-org
   :after org
+  :hook
+  ((org-mode-hook . evil-org-mode)
+   (evil-org-mode-hook .
+    (lambda ()
+      (evil-org-set-key-theme))))
   :config
-  (add-hook 'org-mode-hook 'evil-org-mode)
-  (add-hook 'evil-org-mode-hook
-            (lambda ()
-              (evil-org-set-key-theme)))
-  (require 'evil-org-agenda)
   (evil-org-agenda-set-keys))
+
+(use-package evil-org-agenda
+  :after (org evil-org))
 
 (use-package evil-snipe
   :init
   (setq evil-snipe-spillover-scope 'buffer)
   :config
-  (evil-snipe-mode +1))
+  (evil-snipe-mode 1))
 
 (use-package evil-surround
   :config
@@ -332,9 +380,9 @@ Inserted by installing org-mode or when a release is made."
 ;; Usage:
 ;; - command `rainbow-delimiters-mode` to toggle.
 (use-package rainbow-delimiters
-  ; Enable for most programming languages:
-  :config
-  (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode))
+  ;; Enable for most programming languages:
+  :hook
+  (emacs-lisp-mode-hook . rainbow-delimiters-mode))
 
 ;; Alternative to helm: Ivy/Counsel/Swiper work together.
 ;; h/t: https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/
@@ -363,35 +411,14 @@ Inserted by installing org-mode or when a release is made."
     "C-x n" "narrow prefix")
   (which-key-add-key-based-replacements
     "C-x r" "register prefix")
-  (which-key-mode))
+  (which-key-mode 1))
 
 
-
-;; add some commands to switch to particular themes
-;; see also: https://www.brautaset.org/articles/2017/hydra-theme-switcher.html
-;; ^^ this seems to be a much cleve
-(defun my-load-theme-dark ()
-  (interactive)
-  (load-theme 'solarized-dark))
-(defun my-load-theme-light ()
-  (interactive)
-  (load-theme 'solarized-light))
-
-(setq w32-pass-lwindow-to-system nil)
-(setq w32-lwindow-modifier 'super)
-
-(defun rgoulter/cheatsheet-rifle ()
-  "A convenience command for running helm-org-rifle against
-a cheatsheet file"
-  (interactive)
-  (when (file-exists-p cheatsheet-org-file)
-    (let ((helm-autoresize-min-height 50)
-          (helm-autoresize-max-height 50))
-      (helm-org-rifle-files (list cheatsheet-org-file)))))
 
 ;; Taken from: https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/
 ;; GitHub: https://github.com/noctuid/general.el
 (use-package general
+  ;; TODO: use :general (general-def) rather than general-define-key
   :config
   (general-define-key "C-'" 'avy-goto-word-1)
   (general-define-key
@@ -468,8 +495,8 @@ a cheatsheet file"
 
 ;; For Editing Language: Haskell
 (use-package haskell-mode
- :init
- (add-hook 'haskell-mode-hook 'turn-on-haskell-indent))
+ :hook
+ (haskell-mode-hook . turn-on-haskell-indent))
 
 
 
@@ -495,24 +522,6 @@ a cheatsheet file"
 ;;   ; :bind (("C-c <up>" . merlin-type-enclosing-go-up)
 ;;   ;        ("C-c <down>" . merlin-type-enclosing-go-down))
 ;;   )
-
-
-
-;; Reload Emacs settings
-;; taken from http://www.saltycrane.com/blog/2007/07/how-to-reload-your-emacs-file-while/
-;; (defun reload-dotemacs-file ()
-;;     "reload your .emacs file without restarting Emacs"
-;;     (interactive)
-;;     (load-file "~/.emacs"))
-
-
-
-;; moving my org-mode code to a separate Emacs Lisp file.
-;; This contains (use-package org ...) and other settings.
-(defvar cheatsheet-org-file nil "path to a cheatsheet org file")
-(let ((personal-settings "~/org/settings.el"))
- (when (file-exists-p personal-settings)
-   (load-file personal-settings)))
 
 
 
@@ -543,27 +552,17 @@ a cheatsheet file"
   (helm-mode 1))
 
 
+;; TODO: 2019-11-13: these genera-defs out of place compared to use-packages below.
 
 ;; magit
 (general-def "C-x g" 'magit-status)
-
-
-
-;; This seems to speed-up Emacs when using "unicode characters"
-;; h/t https://emacs.stackexchange.com/questions/33510/unicode-txt-slowness
-(setq inhibit-compacting-font-caches t)
-
-
-;; h/t https://emacs.stackexchange.com/questions/3322/python-auto-indent-problem/3338#3338
-(setq electric-indent-mode -1)
-
 
 
 ;; ibuffer mode
 ;;  this manages buffers like Dired manages directories.
 ;;
 ;; from: http://tuhdo.github.io/emacs-tutor.html
-(general-def "C-x C-b" 'ibuffer)
+(general-def "C-x C-b" 'ibuffer)
 
 
 
@@ -580,15 +579,9 @@ a cheatsheet file"
   (load-theme 'solarized-dark))
 
 
-(require 'smooth-scrolling)
-(smooth-scrolling-mode 1)
-
-
-
-;; Disable GUI elements for a cleaner UI
-(tool-bar-mode -1)
-(menu-bar-mode -1)
-(scroll-bar-mode -1)
+(use-package smooth-scrolling
+ :config
+ (smooth-scrolling-mode 1))
 
 
 
@@ -619,12 +612,6 @@ a cheatsheet file"
 
 
 
-(use-package neotree
-  :general
-  ([f8] 'neotree-toggle))
-
-
-
 (use-package scala-mode)
 
 
@@ -638,9 +625,9 @@ a cheatsheet file"
   :hook (after-init . doom-modeline-init))
 
 (use-package company
-  :init
-  (add-hook 'after-init-hook 'global-company-mode)
-  (add-hook 'after-init-hook 'company-quickhelp-mode)
+  :hook
+  (after-init-hook . global-company-mode)
+  (after-init-hook . company-quickhelp-mode)
   :config
   (setq company-idle-delay 0.1)
   (setq company-minimum-prefix-length 3)
@@ -656,35 +643,34 @@ a cheatsheet file"
   (setq deft-extensions '("org" "md" "txt")))
 
 (use-package zetteldeft
-  :after deft)
-
-;; If creating more than one note in a minute
-;; using zetteldeft, the default id generation
-;; gives them the same ID.
-(setq zetteldeft-id-format "%Y-%m-%d-%H%M%S")
-
-(general-define-key
-  :prefix "SPC"
-  :non-normal-prefix "C-SPC"
-  :states '(normal visual motion emacs)
-  :keymaps 'override
-  "d"  '(nil :wk "deft")
-  "dd" '(deft :wk "deft")
-  "dD" '(zetteldeft-deft-new-search :wk "new search")
-  "dR" '(deft-refresh :wk "refresh")
-  "ds" '(zetteldeft-search-at-point :wk "search at point")
-  "dc" '(zetteldeft-search-current-id :wk "search current id")
-  "df" '(zetteldeft-follow-link :wk "follow link")
-  "dF" '(zetteldeft-avy-file-search-ace-window :wk "avy file other window")
-  "dl" '(zetteldeft-avy-link-search :wk "avy link search")
-  "dt" '(zetteldeft-avy-tag-search :wk "avy tag search")
-  "dT" '(zetteldeft-tag-buffer :wk "tag list")
-  "di" '(zetteldeft-find-file-id-insert :wk "insert id")
-  "dI" '(zetteldeft-find-file-full-title-insert :wk "insert full title")
-  "do" '(zetteldeft-find-file :wk "find file")
-  "dn" '(zetteldeft-new-file :wk "new file")
-  "dN" '(zetteldeft-new-file-and-link :wk "new file & link")
-  "dr" '(zetteldeft-file-rename :wk "rename"))
+  :after deft
+  :config
+  ;; If creating more than one note in a minute
+  ;; using zetteldeft, the default id generation
+  ;; gives them the same ID.
+  (setq zetteldeft-id-format "%Y-%m-%d-%H%M%S")
+  :general
+  (:prefix "SPC"
+   :non-normal-prefix "C-SPC"
+   :states '(normal visual motion emacs)
+   :keymaps 'override
+   "d"  '(nil :wk "deft")
+   "dd" '(deft :wk "deft")
+   "dD" '(zetteldeft-deft-new-search :wk "new search")
+   "dR" '(deft-refresh :wk "refresh")
+   "ds" '(zetteldeft-search-at-point :wk "search at point")
+   "dc" '(zetteldeft-search-current-id :wk "search current id")
+   "df" '(zetteldeft-follow-link :wk "follow link")
+   "dF" '(zetteldeft-avy-file-search-ace-window :wk "avy file other window")
+   "dl" '(zetteldeft-avy-link-search :wk "avy link search")
+   "dt" '(zetteldeft-avy-tag-search :wk "avy tag search")
+   "dT" '(zetteldeft-tag-buffer :wk "tag list")
+   "di" '(zetteldeft-find-file-id-insert :wk "insert id")
+   "dI" '(zetteldeft-find-file-full-title-insert :wk "insert full title")
+   "do" '(zetteldeft-find-file :wk "find file")
+   "dn" '(zetteldeft-new-file :wk "new file")
+   "dN" '(zetteldeft-new-file-and-link :wk "new file & link")
+   "dr" '(zetteldeft-file-rename :wk "rename")))
 
 ;; 2018-11-08: TODO:
 ;; Ohhh. e.g. a "Refiling Hydra" could be for the actions I do when refiling:
@@ -693,39 +679,18 @@ a cheatsheet file"
 ;; - tag "backlog", or other popular tags
 ;; - refile-to, and my popular places?
 
-(require 'lsp)
+(use-package lsp)
 ;; in case you are using client which is available as part of lsp refer to the
 ;; table bellow for the clients that are distributed as part of lsp-mode.el
 ;; (require 'lsp-clients)
 ;; (add-hook 'programming-mode-hook 'lsp)
-(require 'lsp-ui)
+(use-package lsp-ui)
 ;; (add-hook 'lsp-mode-hook 'lsp-ui-mode)
 ;; (add-hook 'haskell-mode-hook 'flycheck-mode)
 ;; (require 'lsp-haskell)
 ;; (add-hook 'haskell-mode-hook 'lsp)
 
-(straight-use-package 'intero)
 ;; (add-hook 'haskell-mode-hook 'intero-mode)
-
-
-;; h/t https://github.com/emacs-lsp/lsp-haskell/issues/31
-;; (lsp-define-stdio-client lsp-haskell "haskell" #'lsp-haskell--get-root
-;;        ;; '("hie" "--lsp" "-d" "-l" "/tmp/hie.log"))
-;;        ;; '("hie" "--lsp" "-d" "-l" "/tmp/hie.log" "--vomit"))
-;;        (funcall lsp-haskell-process-wrapper-function (lsp--haskell-hie-command)))
-;; (setq lsp-haskell-process-args-hie '("-d" "-l" "c:/Users/MX15PRO-Richard/AppData/Local/Temp/hie.log"))
-;; lsp-haskell-process-args-hie is a variable defined in ‘emacs.el’.
-;; Its value is ("-d" "-l" "/tmp/hie.log")
-;; (setq debug-on-error t)
-(require 'tree-widget)
-
-
-
-;; narrow to region is a useful command,
-;; (unless you accidentally invoke it).
-(put 'narrow-to-region 'disabled nil)
-
-
 
 
 ;; (straight-use-package
@@ -779,5 +744,23 @@ a cheatsheet file"
 ;;  :prefix "SPC"
 ;;  "r" 'hydra-patch-grid/body)
 
-(use-package diff-hl)
-(add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
+(use-package diff-hl
+  :hook (magit-post-refresh-hook . diff-hl-magit-post-refresh))
+
+
+
+
+(setq custom-file "~/.emacs.d/custom.el")
+(when (file-exists-p custom-file)
+  (load custom-file))
+
+(defvar workstation-file "File location for a local Emacs Lisp configuration file")
+(setq workstation-file "~/.emacs.d/local.el")
+(when (file-exists-p workstation-file)
+  (load workstation-file))
+;; moving my org-mode code to a separate Emacs Lisp file.
+;; This contains (use-package org ...) and other settings.
+(defvar cheatsheet-org-file nil "path to a cheatsheet org file")
+(let ((personal-settings "~/org/settings.el"))
+ (when (file-exists-p personal-settings)
+   (load-file personal-settings)))
