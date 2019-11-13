@@ -419,7 +419,7 @@ a cheatsheet file"
 
     ;; simple command
     "/"   'counsel-ag
-    "TAB" '(switch-to-other-buffer :which-key "prev buffer")
+    "TAB" '(evil-switch-to-windows-last-buffer :which-key "prev buffer")
     "SPC" '(avy-goto-word-or-subword-1  :which-key "go to char")
 
     ";"   'helm-M-x
