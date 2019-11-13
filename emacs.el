@@ -194,6 +194,13 @@ Inserted by installing org-mode or when a release is made."
 (straight-use-package 'ace-link)
 (straight-use-package 'avy)
 
+(straight-use-package 'deft)
+
+(straight-use-package '(zetteldeft
+                        :type git
+                        :host github
+                        :repo "EFLS/zetteldeft"))
+
 (straight-use-package 'diff-hl)
 
 (straight-use-package 'helpful)
@@ -643,6 +650,36 @@ a cheatsheet file"
   :init (global-flycheck-mode t)
   :config
   (flycheck-package-setup))
+
+(use-package deft
+  :init
+  (setq deft-extensions '("org" "md" "txt")))
+
+(use-package zetteldeft
+  :after deft)
+
+(general-define-key
+  :prefix "SPC"
+  :non-normal-prefix "C-SPC"
+  :states '(normal visual motion emacs)
+  :keymaps 'override
+  "d"  '(nil :wk "deft")
+  "dd" '(deft :wk "deft")
+  "dD" '(zetteldeft-deft-new-search :wk "new search")
+  "dR" '(deft-refresh :wk "refresh")
+  "ds" '(zetteldeft-search-at-point :wk "search at point")
+  "dc" '(zetteldeft-search-current-id :wk "search current id")
+  "df" '(zetteldeft-follow-link :wk "follow link")
+  "dF" '(zetteldeft-avy-file-search-ace-window :wk "avy file other window")
+  "dl" '(zetteldeft-avy-link-search :wk "avy link search")
+  "dt" '(zetteldeft-avy-tag-search :wk "avy tag search")
+  "dT" '(zetteldeft-tag-buffer :wk "tag list")
+  "di" '(zetteldeft-find-file-id-insert :wk "insert id")
+  "dI" '(zetteldeft-find-file-full-title-insert :wk "insert full title")
+  "do" '(zetteldeft-find-file :wk "find file")
+  "dn" '(zetteldeft-new-file :wk "new file")
+  "dN" '(zetteldeft-new-file-and-link :wk "new file & link")
+  "dr" '(zetteldeft-file-rename :wk "rename"))
 
 ;; 2018-11-08: TODO:
 ;; Ohhh. e.g. a "Refiling Hydra" could be for the actions I do when refiling:
