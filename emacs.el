@@ -779,4 +779,5 @@ a cheatsheet file"
 ;;  :prefix "SPC"
 ;;  "r" 'hydra-patch-grid/body)
 
+(use-package diff-hl)
 (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
