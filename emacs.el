@@ -220,6 +220,8 @@ Inserted by installing org-mode or when a release is made."
 (straight-use-package 'company-lsp)
 (straight-use-package 'company-quickhelp)
 
+(straight-use-package 'docker)
+
 (straight-use-package 'ht)
 (straight-use-package 'lsp-ui)
 (straight-use-package 'lsp-haskell)
