@@ -1,6 +1,10 @@
-;; This is my emacs ~/.emacs.d/init.el file.
+;;; init.el --- my emacs initialization file
+
+;;; Commentary:
 ;;
-;; My current main use-case for emacs is the excellent org-mode.
+;; This is my Emacs ~/.emacs.d/init.el file.
+;;
+;; My current main use-case for Emacs is the excellent org-mode.
 ;;
 ;; I try to make a note of the sources of inspiration
 ;; for various configuration improvements.
@@ -12,7 +16,7 @@
 ;;   - https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/
 
 ;; NOTE: Comments use `;;` since this is the ELisp convention.
-;; (And emacs will indent `;` to the right because of this!).
+;; (And Emacs will indent `;` to the right because of this!).
 ;; https://www.gnu.org/software/emacs/manual/html_node/elisp/Comment-Tips.html#Comment-Tips
 
 
@@ -85,15 +89,16 @@
 ;; see also: https://www.brautaset.org/articles/2017/hydra-theme-switcher.html
 ;; ^^ this seems to be a much cleve
 (defun my-load-theme-dark ()
+  "A convenience command to load the solarized-dark theme."
   (interactive)
   (load-theme 'solarized-dark))
 (defun my-load-theme-light ()
+  "A convenience command to load the solarized-light theme."
   (interactive)
   (load-theme 'solarized-light))
 
 (defun rgoulter/cheatsheet-rifle ()
-  "A convenience command for running helm-org-rifle against
-a cheatsheet file"
+  "A convenience command for running helm-org-rifle against a cheatsheet file."
   (interactive)
   (when (file-exists-p cheatsheet-org-file)
     (let ((helm-autoresize-min-height 50)
@@ -141,8 +146,9 @@ a cheatsheet file"
 ; use straight.el to install a newer version of org-mode
 ; h/t: https://github.com/raxod502/straight.el#installing-org-with-straightel
 (defun org-git-version ()
-  "The Git version of org-mode.
-Inserted by installing org-mode or when a release is made."
+  "The Git version of 'org-mode'.
+
+Inserted by installing 'org-mode' or when a release is made."
   (require 'git)
   (let ((git-repo (expand-file-name
                    "straight/repos/org/" user-emacs-directory)))
@@ -153,8 +159,9 @@ Inserted by installing org-mode or when a release is made."
               "HEAD"))))
 
 (defun org-release ()
-  "The release version of org-mode.
-Inserted by installing org-mode or when a release is made."
+  "The release version of 'org-mode'.
+
+Inserted by installing 'org-mode' or when a release is made."
   (require 'git)
   (let ((git-repo (expand-file-name
                    "straight/repos/org/" user-emacs-directory)))
@@ -386,7 +393,7 @@ Inserted by installing org-mode or when a release is made."
 (use-package rainbow-delimiters
   ;; Enable for most programming languages:
   :hook
-  (emacs-lisp-mode-hook . rainbow-delimiters-mode))
+  (emacs-lisp-mode . rainbow-delimiters-mode))
 
 ;; Alternative to helm: Ivy/Counsel/Swiper work together.
 ;; h/t: https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/
@@ -500,7 +507,7 @@ Inserted by installing org-mode or when a release is made."
 ;; For Editing Language: Haskell
 (use-package haskell-mode
  :hook
- (haskell-mode-hook . turn-on-haskell-indent))
+ (haskell-mode . turn-on-haskell-indent))
 
 
 
@@ -591,9 +598,9 @@ Inserted by installing org-mode or when a release is made."
 
 (use-package markdown-mode
   :commands (markdown-mode gfm-mode)
-  :mode (("README\\.md\\'" . gfm-mode)
-         ("\\.md\\'" . markdown-mode)
-         ("\\.markdown\\'" . markdown-mode))
+  :mode (("README\\.md\\'" . 'gfm-mode)
+         ("\\.md\\'" . 'markdown-mode)
+         ("\\.markdown\\'" . 'markdown-mode))
   :init (setq markdown-command "multimarkdown"))
 
 (use-package writeroom-mode)
@@ -630,8 +637,8 @@ Inserted by installing org-mode or when a release is made."
 
 (use-package company
   :hook
-  (after-init-hook . global-company-mode)
-  (after-init-hook . company-quickhelp-mode)
+  (after-init . global-company-mode)
+  (after-init . company-quickhelp-mode)
   :config
   (setq company-idle-delay 0.1)
   (setq company-minimum-prefix-length 3)
@@ -749,7 +756,7 @@ Inserted by installing org-mode or when a release is made."
 ;;  "r" 'hydra-patch-grid/body)
 
 (use-package diff-hl
-  :hook (magit-post-refresh-hook . diff-hl-magit-post-refresh))
+  :hook (magit-post-refresh . diff-hl-magit-post-refresh))
 
 
 
@@ -764,7 +771,9 @@ Inserted by installing org-mode or when a release is made."
   (load workstation-file))
 ;; moving my org-mode code to a separate Emacs Lisp file.
 ;; This contains (use-package org ...) and other settings.
-(defvar cheatsheet-org-file nil "path to a cheatsheet org file")
+(defvar cheatsheet-org-file nil "Path to a cheatsheet org file.")
 (let ((personal-settings "~/org/settings.el"))
  (when (file-exists-p personal-settings)
    (load-file personal-settings)))
+
+;;; init.el ends here
