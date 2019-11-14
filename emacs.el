@@ -351,16 +351,20 @@ Inserted by installing org-mode or when a release is made."
 
 (use-package evil-org
   :after org
-  :hook
-  ((org-mode-hook . evil-org-mode)
-   (evil-org-mode-hook .
-    (lambda ()
-      (evil-org-set-key-theme))))
   :config
+  (add-hook 'org-mode-hook 'evil-org-mode)
+  (add-hook
+   'evil-org-mode-hook
+   (lambda ()
+     (evil-org-set-key-theme)))
+  (require 'evil-org-agenda)
   (evil-org-agenda-set-keys))
 
-(use-package evil-org-agenda
-  :after (org evil-org))
+;; (use-package evil-org-agenda
+;;   :after (org evil-org)
+;;   :defer nil
+;;   :config
+;;   (evil-org-agenda-set-keys))
 
 (use-package evil-snipe
   :init
