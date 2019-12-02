@@ -33,15 +33,15 @@
 (setq backup-directory-alist `(("." . "~/.emacs.d/backups"))) ; which directory to put backups file
 (setq vc-follow-symlinks t )            ; don't ask for confirmation when opening symlinked file
 (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)) ) ;transform backups file name
-(setq inhibit-startup-screen t)         ; inhibit useless and old-school startup screen
+(setq create-lockfiles nil)             ; For me, lockfiles can cause more problems than it solves
+(setq inhibit-startup-screen t)
 (setq ring-bell-function 'ignore)       ; silent bell when you make a mistake
-(setq coding-system-for-read 'utf-8) ; use utf-8 by default
+(setq coding-system-for-read 'utf-8)    ; use utf-8 by default
 (setq coding-system-for-write 'utf-8)
 (setq sentence-end-double-space nil)    ; sentence SHOULD end with only a point.
 (setq fill-column 80)           ; toggle wrapping text at the 80th character
-;; (setq initial-scratch-message "Welcome in Emacs") ; print a default message in the empty scratch buffer opened at startup
 (setq select-enable-clipboard nil)      ; use of killring / clipboard annoys me
-(setq global-linum-mode nil)            ; don't enable line numbers. (IMO, too slow on large files with hidden areas)
+(setq global-linum-mode nil)            ; disable line numbers. (IME, too slow on large files for me)
 (setq-default indent-tabs-mode nil)
 (setq
  org-modules
@@ -758,6 +758,9 @@ Inserted by installing 'org-mode' or when a release is made."
 (use-package diff-hl
   :hook (magit-post-refresh . diff-hl-magit-post-refresh))
 
+
+(use-package restclient
+  :mode ("\\.rest\\'" . restclient-mode))
 
 
 
