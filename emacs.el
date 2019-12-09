@@ -59,8 +59,8 @@
 (setq vc-follow-symlinks t)
 (setq
  custom-safe-themes
- '("d91ef4e714f05fff2070da7ca452980999f5361209e679ee988e3c432df24347"
-   "0598c6a29e13e7112cfbc2f523e31927ab7dce56ebb2016b567e1eff6dc1fd4f"))
+ '("c433c87bd4b64b8ba9890e8ed64597ea0f8eb0396f4c9a9e01bd20a04d15d358"
+   "2809bcb77ad21312897b541134981282dc455ccd7c14d74cc333b6e549b824f3"))
 (setq compilation-scroll-output 'first-error)
 
 (setq ediff-split-window-function #'split-window-horizontally)
@@ -261,7 +261,7 @@ Inserted by installing 'org-mode' or when a release is made."
 (straight-use-package 'rainbow-delimiters)
 
 (straight-use-package 'ranger)
-(straight-use-package 'sunrise-commander)
+;; (straight-use-package 'sunrise-commander)
 
 (straight-use-package 'smooth-scrolling)
 
