@@ -306,6 +306,8 @@ Inserted by installing 'org-mode' or when a release is made."
 (straight-use-package 'intero)
 (straight-use-package 'haskell-mode)
 
+(straight-use-package 'elm-mode)
+
 (straight-use-package 'json-reformat)
 
 (straight-use-package 'ledger-mode)
