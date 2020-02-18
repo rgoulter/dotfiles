@@ -692,12 +692,21 @@ Inserted by installing 'org-mode' or when a release is made."
 ;; - tag "backlog", or other popular tags
 ;; - refile-to, and my popular places?
 
-(use-package lsp)
+;; (use-package lsp)
 ;; in case you are using client which is available as part of lsp refer to the
 ;; table bellow for the clients that are distributed as part of lsp-mode.el
 ;; (require 'lsp-clients)
 ;; (add-hook 'programming-mode-hook 'lsp)
-(use-package lsp-ui)
+(use-package lsp-mode
+  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+  :init (setq lsp-keymap-prefix "C-c l")
+  :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
+         ;; (elm-mode . lsp)
+         ;; if you want which-key integration
+         (lsp-mode . lsp-enable-which-key-integration))
+  :commands lsp)
+(use-package lsp-ui :commands lsp-ui-mode)
+(use-package company-lsp :commands company-lsp)
 ;; (add-hook 'lsp-mode-hook 'lsp-ui-mode)
 ;; (add-hook 'haskell-mode-hook 'flycheck-mode)
 ;; (require 'lsp-haskell)
