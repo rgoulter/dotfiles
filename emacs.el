@@ -25,6 +25,21 @@
 
 ;;; CODE:
 
+;; h/t https://emacs.stackexchange.com/questions/34342/is-there-any-downside-to-setting-gc-cons-threshold-very-high-and-collecting-ga
+;;;;;; Set garbage collection threshold
+
+;; From https://www.reddit.com/r/emacs/comments/3kqt6e/2_easy_little_known_steps_to_speed_up_emacs_start/
+
+(setq gc-cons-threshold-original gc-cons-threshold)
+(setq gc-cons-threshold (* 1024 1024 100))
+
+;;;;;; Set file-name-handler-alist
+
+;; Also from https://www.reddit.com/r/emacs/comments/3kqt6e/2_easy_little_known_steps_to_speed_up_emacs_start/
+
+(setq file-name-handler-alist-original file-name-handler-alist)
+(setq file-name-handler-alist nil)
+
 ;; TODO: Consider the merits of each of these
 ;; from: https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/
 (setq delete-old-versions -1)           ; delete excess backup versions silently
@@ -77,9 +92,10 @@
 (setq electric-indent-mode -1)
 
 ;; Disable GUI elements for a cleaner UI
-(tool-bar-mode -1)
-(menu-bar-mode -1)
-(scroll-bar-mode -1)
+(progn
+  (tool-bar-mode -1)
+  (menu-bar-mode -1)
+  (scroll-bar-mode -1))
 
 (add-hook 'text-mode-hook 'whitespace-mode)
 (add-hook 'haskell-mode-hook 'whitespace-mode)
@@ -203,18 +219,20 @@ Inserted by installing 'org-mode' or when a release is made."
 ;; h/t https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/
 (straight-use-package 'general)
 
-(straight-use-package 'helm)
 (straight-use-package 'ag)
+
+(straight-use-package 'helm)
 (straight-use-package 'helm-ag)
 (straight-use-package 'helm-rg)
 (straight-use-package 'helm-projectile)
 (straight-use-package 'helm-swoop)
 (straight-use-package 'helm-themes)
 (straight-use-package 'helm-descbinds)
+(straight-use-package 'helm-org-rifle)
+
 (straight-use-package 'dash)
 (straight-use-package 'f)
 (straight-use-package 's)
-(straight-use-package 'helm-org-rifle)
 
 (straight-use-package 'hydra)
 
@@ -329,25 +347,22 @@ Inserted by installing 'org-mode' or when a release is made."
 
 
 
-;; note: the evil-collection warns that this should be set to nil
-;;       before loading evil, evil-collection
-;; h/t: https://github.com/emacs-evil/evil-collection/issues/60
-(setq evil-want-keybinding nil)
-
-
-(use-package evil
-  :config
-  (evil-mode 1))
-
 (use-package evil-collection
+  :init
+  (setq evil-want-keybinding nil)
   :config
+   ;; note: the evil-collection warns that this should be set to nil
+   ;;       before loading evil, evil-collection
+   ;; h/t: https://github.com/emacs-evil/evil-collection/issues/60
   ;; h/t https://github.com/emacs-evil/evil-collection/issues/53
   (setq evil-collection-outline-bind-tab-p nil)
   (evil-collection-init
    '(dired
-     ibuffer)))
+     ibuffer))
+  (evil-mode 1))
 
 ;; (use-package evil-leader)
+
 (use-package evil-unimpaired
   :config
   (evil-unimpaired-mode 1))
@@ -791,5 +806,29 @@ Inserted by installing 'org-mode' or when a release is made."
 (let ((personal-settings "~/org/settings.el"))
  (when (file-exists-p personal-settings)
    (load-file personal-settings)))
+
+;; https://www.emacswiki.org/emacs/Calc#toc14
+(defun calc-eval-region (arg beg end)
+  "Calculate the region and display the result in the echo area.
+With prefix ARG non-nil, insert the result at the end of region."
+  (interactive "P\nr")
+  (let* ((expr (buffer-substring-no-properties beg end))
+         (result (calc-eval expr)))
+    (if (null arg)
+        (message "%s = %s" expr result)
+      (goto-char end)
+      (save-excursion
+        (insert result)))))
+
+
+;; h/t https://emacs.stackexchange.com/questions/34342/is-there-any-downside-to-setting-gc-cons-threshold-very-high-and-collecting-ga
+(run-with-idle-timer
+ 5 nil
+ (lambda ()
+   (setq gc-cons-threshold gc-cons-threshold-original)
+   (setq file-name-handler-alist file-name-handler-alist-original)
+   (makunbound 'gc-cons-threshold-original)
+   (makunbound 'file-name-handler-alist-original)
+   (message "gc-cons-threshold and file-name-handler-alist restored")))
 
 ;;; init.el ends here
