@@ -324,6 +324,8 @@ Inserted by installing 'org-mode' or when a release is made."
 
 (straight-use-package 'tldr)
 
+(straight-use-package 'esup)
+
 
 
 
