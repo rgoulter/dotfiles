@@ -9,7 +9,7 @@
     ~/.vimrc: vimrc
     ~/.gvimrc: gvimrc
     ~/.nvim: vim/
-    ~/.nvimrc: vimrc
+    ~/.config/nvim/init.vim: vimrc
     ~/.emacs.d/init.el: emacs.el
     ~/.config/fish:
         create: true
