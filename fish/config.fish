@@ -69,14 +69,6 @@ function please
 end
 
 
-# ANTLR 4.4, Arch Linux
-set ANTLR_PATH /usr/share/java/antlr-4.4-complete.jar
-if not contains $ANTLR_PATH $CLASSPATH
-    set -x CLASSPATH . $CLASSPATH
-    set -x CLASSPATH $ANTLR_PATH $CLASSPATH
-    alias grun='java org.antlr.v4.runtime.misc.TestRig'
-end
-
 source $HOME/.config/fish/coloured-manpages.fish
 
 # Legacy Keybindings for FZF conflict with new Fish keybindings in fish 2.4
