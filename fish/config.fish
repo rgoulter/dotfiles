@@ -80,9 +80,6 @@ end
 # Haskell
 # set -x PATH $HOME/.cabal/bin $PATH
 
-# NPM
-# set -x PATH ~/node_modules/.bin/ $PATH
-
 source $HOME/.config/fish/coloured-manpages.fish
 
 # Legacy Keybindings for FZF conflict with new Fish keybindings in fish 2.4
