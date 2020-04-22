@@ -83,10 +83,6 @@ end
 # NPM
 # set -x PATH ~/node_modules/.bin/ $PATH
 
-# Elm-Env
-#$ git clone --recurse-submodules https://github.com/sonnym/elmenv.git ~/.elmenv
-# set -x PATH ~/.elmenv/bin/ $PATH
-
 source $HOME/.config/fish/coloured-manpages.fish
 
 # Legacy Keybindings for FZF conflict with new Fish keybindings in fish 2.4
