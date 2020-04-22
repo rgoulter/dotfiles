@@ -49,8 +49,10 @@ alias hl="hg log --style ~/.hgrc.d/fancy.style"
 # Git Clone from CliPboard.
 alias gccp="git clone (xclip -out)"
 
-# Because I forget the actual commands for these
+# json.tool validates and pretty-prints JSON
+# https://unix.stackexchange.com/questions/283025/cant-find-documentation-on-json-tool
 alias pyjson="python -m json.tool"
+# simple http static server with Python
 alias py3serve="python3 -m http.server"
 
 # In case memory is playing up?
