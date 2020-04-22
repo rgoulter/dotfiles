@@ -90,12 +90,6 @@ end
 # Ruby
 # set -x PATH $HOME/.gem/ruby/2.1.0/bin $PATH
 
-# OCaml
-# OPAM configuration
-if test -d $HOME/.opam
-    # source $HOME/.opam/opam-init/init.fish > /dev/null 2> /dev/null or true
-end
-
 source $HOME/.config/fish/coloured-manpages.fish
 
 # Legacy Keybindings for FZF conflict with new Fish keybindings in fish 2.4
