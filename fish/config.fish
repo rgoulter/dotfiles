@@ -87,9 +87,6 @@ end
 #$ git clone --recurse-submodules https://github.com/sonnym/elmenv.git ~/.elmenv
 # set -x PATH ~/.elmenv/bin/ $PATH
 
-# Ruby
-# set -x PATH $HOME/.gem/ruby/2.1.0/bin $PATH
-
 source $HOME/.config/fish/coloured-manpages.fish
 
 # Legacy Keybindings for FZF conflict with new Fish keybindings in fish 2.4
