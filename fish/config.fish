@@ -69,23 +69,6 @@ function please
 end
 
 
-# Convenience variables so SSH'ing isn't tedious to type out
-# (May make more sense to put this in .ssh/config?).
-set -x SUNF rgoulter@sunfire.comp.nus.edu.sg
-
-set -x LORIS5  richardg@loris-5.d2.comp.nus.edu.sg
-set -x LORIS7 richardg@loris-7.ddns.comp.nus.edu.sg
-set -x LORIS82 richardg@loris-82.ddns.comp.nus.edu.sg
-set -x LORIS88 richardg@loris-88.ddns.comp.nus.edu.sg
-
-alias l5="ssh $LORIS5"
-alias l7="ssh $LORIS7"
-alias l82="ssh $LORIS82"
-alias l88="ssh $LORIS88"
-
-set -x DIGOCEAN rgoulter@rgoulter.com
-
-
 # ANTLR 4.4, Arch Linux
 set ANTLR_PATH /usr/share/java/antlr-4.4-complete.jar
 if not contains $ANTLR_PATH $CLASSPATH
