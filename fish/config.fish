@@ -61,9 +61,6 @@ function mem_usage_of_processes
     ps -e -orss=,args= | sort -b -k1,1n | pr -TW$COLUMNS
 end
 
-# I've heard this is amusing
-alias fucking=sudo
-
 # Fish, sudo last command
 # (Easier to write this way than using alias, where fish would eval var..).
 function please
