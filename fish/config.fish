@@ -77,9 +77,6 @@ if not contains $ANTLR_PATH $CLASSPATH
     alias grun='java org.antlr.v4.runtime.misc.TestRig'
 end
 
-# Haskell
-# set -x PATH $HOME/.cabal/bin $PATH
-
 source $HOME/.config/fish/coloured-manpages.fish
 
 # Legacy Keybindings for FZF conflict with new Fish keybindings in fish 2.4
