@@ -2,6 +2,7 @@
 # (Can set to nvim in config.user.fish)
 set -x EDITOR vim
 
+
 # HOST, for HG stuff.
 set -x HOST (hostname)
 
@@ -15,6 +16,7 @@ set -x HOST (hostname)
 # %an - author name.
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 
+
 # Set a template for `git init` to use.
 # This is so I can have useful hooks in my projects.
 #
@@ -25,6 +27,7 @@ alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %
 # This is used by git-init
 # https://git-scm.com/docs/git-init#_template_directory
 set -x GIT_TEMPLATE_DIR ~/.git_template/
+
 
 # HG, one-liner logs.
 # from http://stackoverflow.com/questions/3575189/mercurial-log-with-one-liners
@@ -46,12 +49,16 @@ set -x GIT_TEMPLATE_DIR ~/.git_template/
 # custom.author = blue bold
 alias hl="hg log --style ~/.hgrc.d/fancy.style"
 
+
 # Git Clone from CliPboard.
 alias gccp="git clone (xclip -out)"
+
 
 # json.tool validates and pretty-prints JSON
 # https://unix.stackexchange.com/questions/283025/cant-find-documentation-on-json-tool
 alias pyjson="python -m json.tool"
+
+
 # simple http static server with Python
 alias py3serve="python3 -m http.server"
 
@@ -60,6 +67,7 @@ alias py3serve="python3 -m http.server"
 function mem_usage_of_processes
     ps -e -orss=,args= | sort -b -k1,1n | pr -TW$COLUMNS
 end
+
 
 # Fish, sudo last command
 # (Easier to write this way than using alias, where fish would eval var..).
@@ -70,10 +78,13 @@ end
 
 source $HOME/.config/fish/coloured-manpages.fish
 
+
 # Legacy Keybindings for FZF conflict with new Fish keybindings in fish 2.4
 set -U FZF_LEGACY_KEYBINDINGS 0
 
+
 # Use local/user config.fish if it exists
+# (Source this at the end as an easy way of overriding variables set above).
 if test -f $HOME/.config/fish/config.user.fish
     source $HOME/.config/fish/config.user.fish
 end
