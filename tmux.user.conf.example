@@ -1,4 +1,11 @@
-set -g default-shell "/usr/bin/fish"
+# on linux:
+# set -g default-shell "/usr/bin/fish"
+
+# on MacOS:
+# set -g default-shell "/usr/local/bin/fish"
 
 # Load Powerline bindings for TMux
-source '/usr/lib/python3.4/site-packages/powerline/bindings/tmux/powerline.conf'
+# source '/usr/lib/python3.4/site-packages/powerline/bindings/tmux/powerline.conf'
+#
+# e.g. MacOS with Python3.7 installed by homebrew:
+# source '/usr/local/lib/python3.7/site-packages/powerline/bindings/tmux/powerline.conf'
