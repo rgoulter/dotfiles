@@ -22,6 +22,7 @@ config.user.fish
 # (rather than install.conf.yaml every fish script).
 # So, need to ignore the following:
 fish_history
+fish_variables
 fishd*
 mutt/cache
 fish/functions/
