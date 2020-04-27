@@ -358,6 +358,7 @@ Inserted by installing 'org-mode' or when a release is made."
   (setq evil-collection-outline-bind-tab-p nil)
   (evil-collection-init
    '(dired
+     docker
      ibuffer))
   (evil-mode 1))
 
