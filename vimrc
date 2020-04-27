@@ -171,7 +171,7 @@ filetype plugin indent on    " required by Vundle
 
 
 syntax enable
-set background=light
+set background=dark
 
 set hidden      " Lets Vim hide a buffer instead of closing.
                 " so doesn't throw error about unsaved changes.
@@ -294,7 +294,7 @@ autocmd BufNewFile,BufReadPost *.markdown set filetype=markdown
 
 " Terminal Colours
 let g:solarized_termcolors=256
-let g:solarized_termtrans=1
+let g:solarized_termtrans=0
 color solarized
 
 
