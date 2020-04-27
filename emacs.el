@@ -363,6 +363,10 @@ Inserted by installing 'org-mode' or when a release is made."
 
 ;; (use-package evil-leader)
 
+(use-package evil-magit
+  :hook
+  (with-editor-mode . evil-insert-state))
+
 (use-package evil-unimpaired
   :config
   (evil-unimpaired-mode 1))
