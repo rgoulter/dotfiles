@@ -592,7 +592,11 @@ Inserted by installing 'org-mode' or when a release is made."
 ;; TODO: 2019-11-13: these genera-defs out of place compared to use-packages below.
 
 ;; magit
-(general-def "C-x g" 'magit-status)
+(use-package magit
+  :config
+  (evil-magit-init)
+  :general
+  ("C-x g" 'magit-status))
 
 
 ;; ibuffer mode
