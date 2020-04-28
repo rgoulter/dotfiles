@@ -332,6 +332,8 @@ Inserted by installing 'org-mode' or when a release is made."
 
 (straight-use-package 'markdown-mode)
 
+(straight-use-package 'go-mode)
+
 (straight-use-package 'rust-mode)
 
 (straight-use-package 'scala-mode)
