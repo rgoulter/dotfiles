@@ -334,9 +334,13 @@ Inserted by installing 'org-mode' or when a release is made."
 
 (straight-use-package 'go-mode)
 
+(straight-use-package 'plantuml-mode)
+
 (straight-use-package 'rust-mode)
 
 (straight-use-package 'scala-mode)
+
+(straight-use-package 'terraform-mode)
 
 (straight-use-package 'feature-mode)
 
