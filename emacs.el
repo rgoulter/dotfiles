@@ -278,6 +278,8 @@ Inserted by installing 'org-mode' or when a release is made."
 
 (straight-use-package 'diff-hl)
 
+(straight-use-package 'dired+)
+
 (straight-use-package 'helpful)
 
 (straight-use-package 'neotree)
@@ -853,5 +855,7 @@ With prefix ARG non-nil, insert the result at the end of region."
    (makunbound 'gc-cons-threshold-original)
    (makunbound 'file-name-handler-alist-original)
    (message "gc-cons-threshold and file-name-handler-alist restored")))
+
+(require 'dired+)
 
 ;;; init.el ends here
