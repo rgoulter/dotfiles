@@ -252,6 +252,8 @@ Inserted by installing 'org-mode' or when a release is made."
 
 (straight-use-package 'which-key)
 
+(straight-use-package 'org-jira)
+
 (straight-use-package
  '(discover-my-major :type git :host github :repo "jguenther/discover-my-major"))
 
