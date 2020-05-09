@@ -195,6 +195,12 @@ Inserted by installing 'org-mode' or when a release is made."
 
 
 
+;; Workaround macOS.
+;; The /usr/local/bin (used by Homebrew, etc.) isn't on Emacs'
+;; exec-path, etc., even though it's on the PATH
+;; in the shell.
+(straight-use-package 'exec-path-from-shell)
+
 (straight-use-package 'use-package)
 
 (straight-use-package 'evil)
@@ -351,6 +357,8 @@ Inserted by installing 'org-mode' or when a release is made."
 (straight-use-package 'esup)
 
 
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
 
 
 (use-package evil-collection
