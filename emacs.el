@@ -373,7 +373,8 @@ Inserted by installing 'org-mode' or when a release is made."
   ;; h/t https://github.com/emacs-evil/evil-collection/issues/53
   (setq evil-collection-outline-bind-tab-p nil)
   (evil-collection-init
-   '(dired
+   '(ag
+     dired
      docker
      ibuffer))
   (evil-mode 1))
