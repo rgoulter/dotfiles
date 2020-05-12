@@ -201,6 +201,8 @@ Inserted by installing 'org-mode' or when a release is made."
 ;; in the shell.
 (straight-use-package 'exec-path-from-shell)
 
+(straight-use-package 'pinentry)
+
 (straight-use-package 'use-package)
 
 (straight-use-package 'evil)
