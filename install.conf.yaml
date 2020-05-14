@@ -17,6 +17,9 @@
     ~/.config/powerline:
         create: true
         path: powerline
+    ~/.config/nixpkgs/overlays/myPackages.nix:
+        create: true
+        path: myPackages.nix
 
 - shell:
   - [git submodule init, Installing/updating submodules]
