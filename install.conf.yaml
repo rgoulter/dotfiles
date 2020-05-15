@@ -20,6 +20,7 @@
     ~/.config/nixpkgs/overlays/myPackages.nix:
         create: true
         path: myPackages.nix
+    ~/.emacs-profiles.el: emacs-profiles.el
 
 - shell:
   - [git submodule init, Installing/updating submodules]
