@@ -299,21 +299,6 @@ color solarized
 
 
 
-" Haskell
-
-" In ~/.vim/ftplugin/haskell.vim
-" setlocal omnifunc=necoghc#omnifunc
-
-" For getting neco-ghc working with YouCompleteMe
-let g:ycm_semantic_triggers = {'haskell' : ['.']}
-
-"g:necoghc_enable_detailed_browse = 1
-
-au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
-" au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
-
-
-
 " Jenkins/Jelly files are XML (in lieu of not having Jelly syntax)
 au BufRead,BufNewFile *.jelly setfiletype xml
 
