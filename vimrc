@@ -126,11 +126,6 @@ Plugin 'elzr/vim-json'
 " nixpkgs nix syntax
 Plugin 'spwhitt/vim-nix'
 
-" Scala
-Plugin 'derekwyatt/vim-scala'
-" Scala -> Grade == Groovy
-Plugin 'tfnico/vim-gradle'
-
 " PHP, + HTML + JS
 " Updated PHP syntax
 Plugin 'StanAngeloff/php.vim'
