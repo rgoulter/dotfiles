@@ -20,11 +20,6 @@ Plugin 'gmarik/vundle'
 " C-family code intelligence is a bit more complicated to install.
 " Plugin 'Valloric/YouCompleteMe'
 
-Plugin 'spwhitt/vim-nix'
-
-" Tern for Vim is for intelligent JavaScript code completion, etc.
-Plugin 'marijnh/tern_for_vim'
-
 " Ultisnips is a snippets plugin for Vim.
 " Plugin 'ervandew/supertab'
 " Plugin 'SirVer/ultisnips'
@@ -55,36 +50,6 @@ Plugin 'goldfeld/vim-seek'
 " Plugin 'justinmk/vim-sneak'
 " I don't use easy-motion, but nice to have in Vimrc?
 Plugin 'easymotion/vim-easymotion'
-
-" Haskell
-" Opting for ghcmod-vim over hdevtools, as this is what vim2hs supports.
-"  Plugin 'bitc/vim-hdevtools'
-" Opting for vim2hs, haskellmode-vim hasn't been updated in a long time.
-"  Plugin 'lukerandall/haskellmode-vim'
-" ghcmod-vim depends on vimproc.vim. n.b. vimproc needs to be built natively.
-Plugin 'Shougo/vimproc.vim'
-" Plugin 'eagletmt/ghcmod-vim'
-Plugin 'dag/vim2hs'
-
-" nego-ghc for haskell autocompletion. Can work with YCM, see below.
-" But also requires
-"   setlocal omnifunc=necoghc#omnifunc
-" e.g. in ~/.vim/ftplugin/haskell.vim
-Plugin 'eagletmt/neco-ghc'
-
-" Lushtags for Haskell+Ctags.
-" See https://github.com/zenzike/vim-haskell for discussion of alternatives.
-Plugin 'bitc/lushtags'
-Plugin 'travitch/hasksyn'
-
-" PHP, + HTML + JS
-" Updated PHP syntax
-Plugin 'StanAngeloff/php.vim'
-
-" Improved PHP indenting.
-Plugin '2072/PHP-Indenting-for-VIm'
-
-Plugin 'vim-ruby/vim-ruby'
 
 " tComment for comments.
 " (Alternative is NERDCommenter).
@@ -117,33 +82,12 @@ Plugin 'xolox/vim-session'
 
 " Note taking stuff.
 Plugin 'xolox/vim-notes'
-" More note-taking, in the style of Emacs' org mode.
-" ~700 stars
-Plugin 'jceb/vim-orgmode'
-" ~400 stars
-" Plugin 'hsitz/VimOrganizer'
 
 " For matching files.
 " a.vim contains:
 "   imap <Leader>is ....
 " so, leader-as-space fucks things up.
 " Plugin 'vim-scripts/a.vim'
-
-" Plugins for improved language support
-" Plugin 'sukima/xmledit'
-Plugin 'elzr/vim-json'
-Plugin 'jrozner/vim-antlr'
-Plugin 'derekwyatt/vim-scala'
-" Grade == Groovy
-Plugin 'tfnico/vim-gradle'
-
-" Elm-Lang
-" ~122 stars
-Plugin 'ElmCast/elm-vim'
-" ~177 stars
-" Plugin 'lambdatoast/elm.vim'
-
-Plugin 'dag/vim-fish'
 
 " VCS (HG, Git) Plugins for Vim
 Plugin 'tpope/vim-fugitive'
@@ -164,11 +108,75 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'chriskempson/vim-tomorrow-theme'
 Plugin 'tomasr/molokai'
 
+""""""""""""""""""""
+" Language Plugins "
+""""""""""""""""""""
+
+" ANTLR
+Plugin 'jrozner/vim-antlr'
+
+" Elm-Lang
+" ~122 stars
+Plugin 'ElmCast/elm-vim'
+" ~177 stars
+" Plugin 'lambdatoast/elm.vim'
+
+" Fish
+Plugin 'dag/vim-fish'
+
+" Plugins for improved language support
+" Plugin 'sukima/xmledit'
+" JSON
+Plugin 'elzr/vim-json'
+
+" Haskell
+" Opting for ghcmod-vim over hdevtools, as this is what vim2hs supports.
+"  Plugin 'bitc/vim-hdevtools'
+" Opting for vim2hs, haskellmode-vim hasn't been updated in a long time.
+"  Plugin 'lukerandall/haskellmode-vim'
+" ghcmod-vim depends on vimproc.vim. n.b. vimproc needs to be built natively.
+Plugin 'Shougo/vimproc.vim'
+" Plugin 'eagletmt/ghcmod-vim'
+Plugin 'dag/vim2hs'
+
+" Lushtags for Haskell+Ctags.
+" See https://github.com/zenzike/vim-haskell for discussion of alternatives.
+Plugin 'bitc/lushtags'
+Plugin 'travitch/hasksyn'
+
+" nego-ghc for haskell autocompletion. Can work with YCM, see below.
+" But also requires
+"   setlocal omnifunc=necoghc#omnifunc
+" e.g. in ~/.vim/ftplugin/haskell.vim
+Plugin 'eagletmt/neco-ghc'
+
+" nixpkgs nix syntax
+Plugin 'spwhitt/vim-nix'
+
+" More note-taking, in the style of Emacs' org mode.
+" ~700 stars
+Plugin 'jceb/vim-orgmode'
+" ~400 stars
+" Plugin 'hsitz/VimOrganizer'
+
+" Scala
+Plugin 'derekwyatt/vim-scala'
+" Scala -> Grade == Groovy
+Plugin 'tfnico/vim-gradle'
+
+" PHP, + HTML + JS
+" Updated PHP syntax
+Plugin 'StanAngeloff/php.vim'
+
+" Improved PHP indenting.
+Plugin '2072/PHP-Indenting-for-VIm'
+
+" Ruby
+Plugin 'vim-ruby/vim-ruby'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required by Vundle
 filetype plugin indent on    " required by Vundle
-
-
 
 syntax enable
 set background=dark
