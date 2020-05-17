@@ -314,28 +314,6 @@ au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
 
 
 
-" OCaml
-
-" Add merlin to vim's runtime-path:
-" let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
-" execute "set rtp+=" . g:opamshare . "/merlin/vim"
-
-" let g:syntastic_ocaml_checkers = ['merlin']
-
-" Bindings:
-" <LocalLeader>t -> :MerlinTypeOf
-" gd -> :MerlinLocate ("Go to Declaration")
-
-" map  <LocalLeader>o :MerlinOutline<CR>
-
-
-" Also run the following line in vim to index the documentation:
-" execute "helptags " . g:opamshare . "/merlin/vim/doc"
-
-" autocmd FileType ocaml source ~/.opam/4.02.1/share/vim/syntax/ocp-indent.vim
-
-
-
 " Jenkins/Jelly files are XML (in lieu of not having Jelly syntax)
 au BufRead,BufNewFile *.jelly setfiletype xml
 
