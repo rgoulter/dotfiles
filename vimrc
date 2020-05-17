@@ -126,12 +126,6 @@ Plugin 'elzr/vim-json'
 " nixpkgs nix syntax
 Plugin 'spwhitt/vim-nix'
 
-" More note-taking, in the style of Emacs' org mode.
-" ~700 stars
-Plugin 'jceb/vim-orgmode'
-" ~400 stars
-" Plugin 'hsitz/VimOrganizer'
-
 " Scala
 Plugin 'derekwyatt/vim-scala'
 " Scala -> Grade == Groovy
