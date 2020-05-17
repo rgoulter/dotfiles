@@ -82,16 +82,6 @@ Plugin 'tpope/vim-surround'
 " Because why use vanilla sessions?
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-session'
-" Plugin 'xolox/vim-easytags'
-
-" Note taking stuff.
-Plugin 'xolox/vim-notes'
-
-" For matching files.
-" a.vim contains:
-"   imap <Leader>is ....
-" so, leader-as-space fucks things up.
-" Plugin 'vim-scripts/a.vim'
 
 " VCS (HG, Git) Plugins for Vim
 Plugin 'tpope/vim-fugitive'
