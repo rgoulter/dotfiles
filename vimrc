@@ -339,14 +339,14 @@ let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 
 
-" Prefer over YCM defaults
+" Customize YCM
 let g:ycm_complete_in_comments                          = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_collect_identifiers_from_tags_files           = 1
 
 
 
-" Improve airline
+" Customize airline
 
 let g:airline_powerline_fonts=1
 
