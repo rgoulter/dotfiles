@@ -275,11 +275,6 @@ nnoremap <silent> <F2> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 " from http://vim.wikia.com/wiki/Insert_newline_without_entering_insert_mode
 nnoremap <C-J> a<CR><Esc>k$
 
-" Quickly disable highlighing.
-" Breaks <F3> -> :CtrlPMixed
-" nnoremap <esc> :silent! noh<return><esc>
-
-
 " Search for word under cursor
 " Adapted from https://robots.thoughtbot.com/faster-grepping-in-vim
 " bind K to grep word under cursor
