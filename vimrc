@@ -113,10 +113,7 @@ Plugin 'tomasr/molokai'
 """"""""""""""""""""
 
 " Elm-Lang
-" ~122 stars
 Plugin 'ElmCast/elm-vim'
-" ~177 stars
-" Plugin 'lambdatoast/elm.vim'
 
 " Fish
 Plugin 'dag/vim-fish'
