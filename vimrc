@@ -5,7 +5,9 @@ filetype off                   " required! by Vundle
 " see http://stackoverflow.com/questions/12230290/vim-errors-on-vim-startup-when-run-in-fish-shell
 set shell=/bin/sh
 
-if (has("termguicolors"))
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
   set termguicolors
 endif
 
