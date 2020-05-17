@@ -20,34 +20,31 @@ Plugin 'gmarik/vundle'
 
 " My Bundles here:
 
-" YouCompleteMe replaces AutoComplPop, and other things,
-"  to provide modern completion capabilities in Vim.
-" Requires to be recompiled when it updates.
-" C-family code intelligence is a bit more complicated to install.
-" Plugin 'Valloric/YouCompleteMe'
-
-" Ultisnips is a snippets plugin for Vim.
-" Plugin 'ervandew/supertab'
-" Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-
-" TagBar provides nice code-browsing / structure overview.
-"  Needs exuberant ctags.
-Plugin 'majutsushi/tagbar'
-
-Plugin 'epeli/slimux'
+""""""""""""""""""""""""""""""""""""""""""
+" Plugins which change the way vim looks "
+""""""""""""""""""""""""""""""""""""""""""
 
 " vim-airline is a lightweight alternative to Powerline.
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 
-Plugin 'scrooloose/syntastic'
-
 " Make our parentheses, etc. pretty
 Plugin 'luochen1990/rainbow'
-" Alternatively, the somewhat cumbersome:
-"   kien/rainbow_parentheses.vim
-" which has many forks, each with a few commits.
+
+" For +/- for diff from VCS.
+Plugin 'mhinz/vim-signify'
+
+Plugin 'scrooloose/syntastic'
+
+" Color Schemes
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'chriskempson/vim-tomorrow-theme'
+Plugin 'tomasr/molokai'
+Plugin 'romainl/flattened'
+
+"""""""""""""""""""""""""""""""""""""""""""""
+" Plugins which add normal-mode keybindings "
+"""""""""""""""""""""""""""""""""""""""""""""
 
 " More motions
 " Like f, but two letters
@@ -57,6 +54,18 @@ Plugin 'goldfeld/vim-seek'
 " I don't use easy-motion, but nice to have in Vimrc?
 Plugin 'easymotion/vim-easymotion'
 
+" a la ST, mulitcursor support. Looks cool.
+Plugin 'terryma/vim-multiple-cursors'
+
+" Some good bindings by Tim Pope to help with
+" quickfix and stuff
+Plugin 'tpope/vim-unimpaired'
+
+Plugin 'tpope/vim-surround'
+
+" For easy alignment
+Plugin 'junegunn/vim-easy-align'
+
 " tComment for comments.
 " (Alternative is NERDCommenter).
 Plugin 'tomtom/tcomment_vim'
@@ -65,30 +74,37 @@ Plugin 'tomtom/tcomment_vim'
 " (Replacing FuzzyFinder).
 Plugin 'kien/ctrlp.vim'
 
-" a la ST, mulitcursor support. Looks cool.
-Plugin 'terryma/vim-multiple-cursors'
 
-" For +/- for diff from VCS.
-Plugin 'mhinz/vim-signify'
+
+""""""""""""""""""""""""""""""""""""""""""""""
+" Plugins which interact with external tools "
+""""""""""""""""""""""""""""""""""""""""""""""
+
+" YouCompleteMe replaces AutoComplPop, and other things,
+"  to provide modern completion capabilities in Vim.
+" Requires to be recompiled when it updates.
+" C-family code intelligence is a bit more complicated to install.
+" Plugin 'Valloric/YouCompleteMe'
+
+Plugin 'epeli/slimux'
 
 " Uses Ack as an improvement over grep searching.
 Plugin 'mileszs/ack.vim'
 Plugin 'rking/ag.vim'
 
-" Some good bindings by Tim Pope to help with
-" quickfix and stuff
-Plugin 'tpope/vim-unimpaired'
-
-Plugin 'tpope/vim-surround'
-
-" Because why use vanilla sessions?
-Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-session'
-
 " VCS (HG, Git) Plugins for Vim
 Plugin 'tpope/vim-fugitive'
 Plugin 'phleet/vim-mercenary'
 Plugin 'vim-scripts/Lawrencium'
+
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""
+" Other plugins which add useful functionality "
+""""""""""""""""""""""""""""""""""""""""""""""""
+
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-session'
 
 " Distraction free writing
 " Use :Goyo or :Goyo 80,
@@ -96,14 +112,14 @@ Plugin 'vim-scripts/Lawrencium'
 Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/limelight.vim'
 
-" For easy alignment
-Plugin 'junegunn/vim-easy-align'
+" Ultisnips is a snippets plugin for Vim.
+" Plugin 'ervandew/supertab'
+" Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 
-" Color Schemes
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'chriskempson/vim-tomorrow-theme'
-Plugin 'tomasr/molokai'
-Plugin 'romainl/flattened'
+" TagBar provides nice code-browsing / structure overview.
+"  Needs exuberant ctags.
+Plugin 'majutsushi/tagbar'
 
 """"""""""""""""""""
 " Language Plugins "
