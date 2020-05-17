@@ -147,73 +147,54 @@ call vundle#end()            " required by Vundle
 filetype plugin indent on    " required by Vundle
 
 syntax enable
+
+set autoindent                     " Enables Auto Indent on files without type
 set background=dark
-
-set hidden      " Lets Vim hide a buffer instead of closing.
-                " so doesn't throw error about unsaved changes.
-
-set hlsearch    " Enable Search Highlighting
-set incsearch   " Enable search while typing
-set showmatch   " Show matching brackets
-set ignorecase
-set smartcase   " Be smart about cases when searching
-
-set cmdheight=2 " Height of Command bar.
-set showmode    " Shows mode
-set showcmd     " Shows cmd
-set number      " Enable Line Number
-set ruler       " Enable Ruler
-
-set mouse=a     " use mouse
-
-" for vim airline
-set laststatus=2
-
-"" Indentation Settings
-set shiftwidth=4
-set softtabstop=4
-set tabstop=4
-" Better to expandtab, and put exceptions to this specific
-set expandtab
+set backspace=eol,start,indent     " Have backspace work properly.
+set cmdheight=2                    " Height of Command bar.
+set colorcolumn=80                 " highlight column to encourage short lines.
 set copyindent
-set autoindent  " Enables Auto Indent on files without type
-
-set colorcolumn=80
-
-" Have backspace work properly.
-set backspace=eol,start,indent
-
 set encoding=utf-8
-set list listchars=tab:→\ ,trail:·
-
-" Disable swapfile, backup since we shouldn't need them.
-set noswapfile
-set nobackup
-
-set foldmethod=syntax
+set expandtab
+" Enable use of .exrc
+" as per http://www.ilker.de/specific-vim-settings-per-project.html
+set exrc
 set foldlevelstart=5
-
+set foldmethod=syntax
 " Tips from http://blog.sanctum.geek.nz/vim-annoyances/
 " Replace all occurrences during substititon (s/pat/repl/) by default; adding
 " g will keep it to the first occurrence
 set gdefault
+set hidden                         " Lets Vim hide a buffer instead of closing.
+                                   " so doesn't throw error about unsaved changes.
+set hlsearch                       " Enable Search Highlighting
+set incsearch                      " Enable search while typing
+set ignorecase
+set laststatus=2                   " for vim airline
+set list listchars=tab:→\ ,trail:· " for highlighting whitespace
+set mouse=a                        " use mouse
+set nobackup                       " Rely on VCS instead
+set noswapfile                     " Rely on VCS instead
+set number                         " Enable Line Number
+set ruler                          " Enable Ruler
+set secure                         " for exrc
+set shiftwidth=4                   " indentation
+set showcmd                        " Shows cmd
+set showmode                       " Shows mode
+set showmatch                      " Show matching brackets
+set smartcase                      " Be smart about cases when searching
+set softtabstop=4                  " indentation
 " Better defaults for new splits:
-"set splitbelow
+" set splitbelow
 set splitright
-
-" Enable use of .exrc
-" as per http://www.ilker.de/specific-vim-settings-per-project.html
-set exrc
-set secure
-
 " To help CtrlP ignore files
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.tar,*.o,*.hi,*.dyn_o
-set wildignore+=*.class,*.jar     " JVM class files.
-set wildignore+=*.pyc             " Python compiled *.pyc files.
-set wildignore+=_site
-set wildignore+=target
-set wildignore+=build
+set wildignore+=*.class,*.jar      " JVM class files.
+set wildignore+=*.pyc              " Python compiled *.pyc files.
 set wildignore+=.git
+set wildignore+=_site
+set wildignore+=build
+set wildignore+=target
 
 
 " Custom Leader: <Space>
