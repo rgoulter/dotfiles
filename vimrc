@@ -126,13 +126,6 @@ Plugin 'elzr/vim-json'
 " nixpkgs nix syntax
 Plugin 'spwhitt/vim-nix'
 
-" PHP, + HTML + JS
-" Updated PHP syntax
-Plugin 'StanAngeloff/php.vim'
-
-" Improved PHP indenting.
-Plugin '2072/PHP-Indenting-for-VIm'
-
 " Ruby
 Plugin 'vim-ruby/vim-ruby'
 
