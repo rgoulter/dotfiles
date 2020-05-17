@@ -112,9 +112,6 @@ Plugin 'tomasr/molokai'
 " Language Plugins "
 """"""""""""""""""""
 
-" ANTLR
-Plugin 'jrozner/vim-antlr'
-
 " Elm-Lang
 " ~122 stars
 Plugin 'ElmCast/elm-vim'
