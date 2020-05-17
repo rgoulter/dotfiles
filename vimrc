@@ -37,8 +37,8 @@ Plugin 'majutsushi/tagbar'
 Plugin 'epeli/slimux'
 
 " vim-airline is a lightweight alternative to Powerline.
-" Plugin 'vim-airline/vim-airline'
-" Plugin 'vim-airline/vim-airline-themes'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 
 Plugin 'scrooloose/syntastic'
 
@@ -314,10 +314,6 @@ autocmd FileType ruby compiler ruby
 
 
 
-let g:airline_powerline_fonts=1
-
-
-
 " YouCompleteMe and Ultisnips,
 " As per (last updated Jan 22 2014)
 " http://stackoverflow.com/questions/14896327/ultisnips-and-youcompleteme
@@ -343,6 +339,8 @@ let g:ycm_collect_identifiers_from_tags_files           = 1
 
 
 " Improve airline
+
+let g:airline_powerline_fonts=1
 
 " Shorter modeline map.
 let g:airline_mode_map = {
