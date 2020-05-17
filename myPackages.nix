@@ -7,7 +7,6 @@ self: super:
       awscli
       bat
       chromedriver
-      coreutils
       ctags
       curlie
       docker
@@ -19,6 +18,7 @@ self: super:
       gcc
       geckodriver
       git
+      gitAndTools.tig
       gnupg
       go
       jq
