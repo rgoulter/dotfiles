@@ -312,15 +312,6 @@ autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 autocmd FileType ruby compiler ruby
 
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-    let g:neocomplete#sources#omni#input_patterns = {}
-endif
-if !exists('g:neocomplete#sources#omni#force_omni_input_patterns')
-    let g:neocomplete#sources#omni#force_omni_input_patterns = {}
-endif
-let g:neocomplete#sources#omni#input_patterns.ruby = '[^.[:digit:] *\t]\%(\.\|->\)'
-
 
 
 let g:airline_powerline_fonts=1
