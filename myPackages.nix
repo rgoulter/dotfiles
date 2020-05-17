@@ -7,6 +7,8 @@ self: super:
       awscli
       bat
       chromedriver
+      coreutils
+      ctags
       curlie
       docker
       emacs
@@ -15,6 +17,7 @@ self: super:
       fish
       fzf
       gcc
+      geckodriver
       git
       gnupg
       go
@@ -36,6 +39,7 @@ self: super:
       terraform
       tldr
       tmux
+      vim
       vscode
       websocat
       yarn
