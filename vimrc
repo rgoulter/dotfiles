@@ -123,27 +123,6 @@ Plugin 'dag/vim-fish'
 " JSON
 Plugin 'elzr/vim-json'
 
-" Haskell
-" Opting for ghcmod-vim over hdevtools, as this is what vim2hs supports.
-"  Plugin 'bitc/vim-hdevtools'
-" Opting for vim2hs, haskellmode-vim hasn't been updated in a long time.
-"  Plugin 'lukerandall/haskellmode-vim'
-" ghcmod-vim depends on vimproc.vim. n.b. vimproc needs to be built natively.
-Plugin 'Shougo/vimproc.vim'
-" Plugin 'eagletmt/ghcmod-vim'
-Plugin 'dag/vim2hs'
-
-" Lushtags for Haskell+Ctags.
-" See https://github.com/zenzike/vim-haskell for discussion of alternatives.
-Plugin 'bitc/lushtags'
-Plugin 'travitch/hasksyn'
-
-" nego-ghc for haskell autocompletion. Can work with YCM, see below.
-" But also requires
-"   setlocal omnifunc=necoghc#omnifunc
-" e.g. in ~/.vim/ftplugin/haskell.vim
-Plugin 'eagletmt/neco-ghc'
-
 " nixpkgs nix syntax
 Plugin 'spwhitt/vim-nix'
 
