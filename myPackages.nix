@@ -4,6 +4,7 @@ self: super:
   myPackages = super.buildEnv {
     name = "my-packages";
     paths = with self; [
+      alacritty
       awscli
       bat
       chromedriver

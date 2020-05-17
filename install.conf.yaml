@@ -21,6 +21,10 @@
         create: true
         path: myPackages.nix
     ~/.emacs-profiles.el: emacs-profiles.el
+    ~/.config/alacritty/alacritty.yml:
+        create: true
+        path: alacritty.yml
+
 
 - shell:
   - [git submodule init, Installing/updating submodules]
