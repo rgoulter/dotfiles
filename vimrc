@@ -5,6 +5,10 @@ filetype off                   " required! by Vundle
 " see http://stackoverflow.com/questions/12230290/vim-errors-on-vim-startup-when-run-in-fish-shell
 set shell=/bin/sh
 
+if (has("termguicolors"))
+  set termguicolors
+endif
+
 set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#begin()
 
@@ -107,6 +111,7 @@ Plugin 'junegunn/vim-easy-align'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'chriskempson/vim-tomorrow-theme'
 Plugin 'tomasr/molokai'
+Plugin 'romainl/flattened'
 
 """"""""""""""""""""
 " Language Plugins "
@@ -250,10 +255,9 @@ autocmd BufNewFile,BufReadPost *.markdown set filetype=markdown
 
 
 
-" Terminal Colours
-let g:solarized_termcolors=256
-let g:solarized_termtrans=0
-color solarized
+" Truecolor color scheme
+colorscheme flattened_dark
+" colorscheme flattened_light
 
 
 
