@@ -386,19 +386,10 @@ let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 
 
-" Let's improve YCM
+" Prefer over YCM defaults
 let g:ycm_complete_in_comments                          = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_collect_identifiers_from_tags_files           = 1
-
-
-
-" Auto-hide the preview window from autocomplete.
-" See http://stackoverflow.com/questions/3105307/how-do-you-automatically-remove-the-preview-window-after-autocompletion-in-vim#3107159
-
-" autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
-" autocmd InsertLeave * if pumvisible() == 0|pclose|endif
-" autocmd CompleteDone * pclose
 
 
 
@@ -464,14 +455,5 @@ vmap <Enter> <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
 nmap <Leader>a <Plug>(EasyAlign)
 
-let g:syntastic_python_python_exec = '/usr/bin/python2'
-
 " Enable rainbow parentheses
 let g:rainbow_active = 0 " if you want to enable it later via :RainbowToggle
-
-" For *locally* playing around wtih hipsleekutil,
-" we need to turn filetype off, then turn it on again.
-" Sigh.
-filetype off
-set rtp+=~/.vim/hipsleekutil/
-filetype plugin indent on
