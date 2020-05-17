@@ -409,6 +409,3 @@ vmap <Enter> <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
 nmap <Leader>a <Plug>(EasyAlign)
-
-" Enable rainbow parentheses
-let g:rainbow_active = 0 " if you want to enable it later via :RainbowToggle
