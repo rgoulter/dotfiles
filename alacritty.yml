@@ -1,4 +1,5 @@
 font:
+  size: 15.0
   # The normal (roman) font face to use.
   normal:
     family: Inconsolata for Powerline
