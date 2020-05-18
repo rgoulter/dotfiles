@@ -20,8 +20,10 @@ self: super:
       geckodriver
       git
       gitAndTools.tig
+      glances
       gnupg
       go
+      htop
       jq
       keepassxc
       lazydocker
