@@ -25,6 +25,7 @@ self: super:
       gnupg
       go
       gron
+      groovy
       htop
       jl
       jq
