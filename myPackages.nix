@@ -27,6 +27,7 @@ self: super:
       gron
       groovy
       htop
+      jid
       jl
       jq
       jsawk
