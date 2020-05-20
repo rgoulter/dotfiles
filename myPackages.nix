@@ -16,6 +16,7 @@ self: super:
       fd
       fish
       fzf
+      fzy
       gcc
       geckodriver
       git
@@ -23,10 +24,14 @@ self: super:
       glances
       gnupg
       go
+      gron
       htop
+      jl
       jq
+      jsawk
       keepassxc
       lazydocker
+      lnav
       neovim
       nodejs
       nox
@@ -37,9 +42,11 @@ self: super:
       ruby
       rustup
       silver-searcher
+      skim
       stack
       starship
       terraform
+      tree
       tldr
       tmux
       vim
