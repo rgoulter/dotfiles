@@ -50,6 +50,7 @@ self: super:
       tree
       tldr
       tmux
+      up
       vim
       vscode
       websocat
