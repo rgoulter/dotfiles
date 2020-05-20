@@ -43,6 +43,7 @@ self: super:
       ripgrep
       ruby
       rustup
+      scc
       silver-searcher
       skim
       stack
@@ -51,6 +52,7 @@ self: super:
       tree
       tldr
       tmux
+      tokei
       up
       vim
       vscode
