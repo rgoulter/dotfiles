@@ -1,3 +1,14 @@
+# An overlay which adds myPackages for declarative package management.
+#
+# Put this file in ~/.config/nixpkgs/overlays/
+# and run `nix-env --install --attr nixpkgs.myPackages
+#
+# Some of the packages in myPackages are unfree.
+# ~/.config/nix/config.nix should have allowUnfree = true.
+#
+# See:
+# - https://nixos.org/nixpkgs/manual/#sec-declarative-package-management
+# - https://nixos.org/nixpkgs/manual/#chap-overlays
 self: super:
 
 {
