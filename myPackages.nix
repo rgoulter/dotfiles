@@ -24,6 +24,7 @@ self: super:
       glances
       gnupg
       go
+      gopls
       gron
       groovy
       htop

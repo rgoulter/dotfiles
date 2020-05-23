@@ -749,6 +749,7 @@ Inserted by installing 'org-mode' or when a release is made."
   :init (setq lsp-keymap-prefix "C-c l")
   :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
          ;; (elm-mode . lsp)
+         (go-mode . lsp-deferred)
          ;; if you want which-key integration
          (lsp-mode . lsp-enable-which-key-integration))
   :commands lsp)
