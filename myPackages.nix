@@ -5,6 +5,10 @@ self: super:
     name = "my-packages";
     paths = with self; [
       alacritty
+      aspell
+      aspellDicts.en
+      aspellDicts.en-computers
+      aspellDicts.vi
       awscli
       bat
       chromedriver
