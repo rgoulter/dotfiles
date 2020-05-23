@@ -50,10 +50,10 @@ self: super:
       stack
       starship
       terraform
-      tree
       tldr
       tmux
       tokei
+      tree
       up
       vim
       vscode
