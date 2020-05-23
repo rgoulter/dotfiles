@@ -75,6 +75,6 @@ self: super:
       websocat
       yarn
     ];
-    pathsToLink = [ "/share" "/bin" ];
+    pathsToLink = [ "/share" "/bin" "/lib" ];
   };
 }
