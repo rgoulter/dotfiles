@@ -60,6 +60,7 @@ self: super:
       ruby
       rustup
       scc
+      shellcheck
       silver-searcher
       skim
       stack
