@@ -316,6 +316,8 @@ Inserted by installing 'org-mode' or when a release is made."
 
 (straight-use-package 'robe)
 
+(straight-use-package 'groovy-mode)
+
 (straight-use-package 'elixir-mode)
 
 (straight-use-package 'tide)
