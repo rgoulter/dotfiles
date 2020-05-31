@@ -347,6 +347,7 @@ Inserted by installing 'org-mode' or when a release is made."
 (straight-use-package 'markdown-mode)
 
 (straight-use-package 'go-mode)
+(straight-use-package 'ob-go)
 
 (straight-use-package 'plantuml-mode)
 
