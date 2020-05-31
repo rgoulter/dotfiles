@@ -11,6 +11,33 @@
 # - https://nixos.org/nixpkgs/manual/#chap-overlays
 self: super:
 
+let
+  ginkgo =
+    with super;
+    buildGoModule rec {
+      pname = "ginkgo";
+      version = "1.12.2";
+
+      src = fetchFromGitHub {
+        owner = "onsi";
+        repo = "ginkgo";
+        rev = "v${version}";
+        sha256 = "1c2g63yblzdz5b27403vvj6n3f6sl9zdwq7r6k0zwqhbc4afb9fi";
+      };
+
+      vendorSha256 = "072amyw1ir18v9vk268j2y7dhw3lfwvxzvzsdqhnp50rxsa911bx";
+
+      subPackages = [ "ginkgo" ];
+
+      meta = with stdenv.lib; {
+        description = "Simple command-line snippet manager, written in Go";
+        homepage = "http://onsi.github.io/ginkgo/";
+        license = licenses.mit;
+        maintainers = [ "onsi" ];
+        platforms = platforms.linux ++ platforms.darwin;
+      };
+    };
+in
 {
   myPackages = super.buildEnv {
     name = "my-packages";
@@ -36,6 +63,7 @@ self: super:
       geckodriver
       git
       gitAndTools.tig
+      ginkgo
       glances
       gnupg
       go
