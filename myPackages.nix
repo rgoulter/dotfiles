@@ -50,6 +50,7 @@ self: super:
       keepassxc
       lazydocker
       lnav
+      mc
       neovim
       nodejs
       nox
