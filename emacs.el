@@ -76,6 +76,14 @@
  custom-safe-themes
  '("c433c87bd4b64b8ba9890e8ed64597ea0f8eb0396f4c9a9e01bd20a04d15d358"
    "2809bcb77ad21312897b541134981282dc455ccd7c14d74cc333b6e549b824f3"))
+
+;;; (custom-set-faces
+;;;  ;; custom-set-faces was added by Custom.
+;;;  ;; If you edit it by hand, you could mess it up, so be careful.
+;;;  ;; Your init file should contain only one such instance.
+;;;  ;; If there is more than one, they won't work right.
+;;;  '(whitespace-tab ((((class color) (min-colors 89)) (:background unspecified :foreground "#586e75" :inverse-video unspecified)))))
+
 (setq compilation-scroll-output 'first-error)
 
 (setq ediff-split-window-function #'split-window-horizontally)
