@@ -10,6 +10,9 @@
     ~/.gvimrc: gvimrc
     ~/.nvim: vim/
     ~/.config/nvim/init.vim: vimrc
+    ~/.emacs.d/straight/versions/default.el:
+        create: true
+        path: emacs.d/straight/versions/default.el
     ~/.emacs.d/init.el: emacs.el
     ~/.config/fish:
         create: true
