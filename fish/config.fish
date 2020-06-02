@@ -62,6 +62,9 @@ alias pyjson="python -m json.tool"
 # simple http static server with Python
 alias py3serve="python3 -m http.server"
 
+set -x GOPATH "$HOME/go"
+set -x PATH $GOPATH/bin/ $PATH
+
 # In case memory is playing up?
 # From http://www.linuxquestions.org/questions/linux-general-1/how-to-show-the-memory-usage-per-process-160181/
 function mem_usage_of_processes
