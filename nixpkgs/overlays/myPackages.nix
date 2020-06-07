@@ -37,6 +37,35 @@ let
         platforms = platforms.linux ++ platforms.darwin;
       };
     };
+  mockgen =
+    with super;
+    buildGoModule rec {
+      pname = "go-mock";
+      version = "1.4.3";
+
+      src = pkgs.fetchFromGitHub {
+        owner = "golang";
+        repo = "mock";
+        rev = "v${version}";
+        sha256 = "1p37xnja1dgq5ykx24n7wincwz2gahjh71b95p8vpw7ss2g8j8wx";
+      };
+
+      vendorSha256 = "1kpiij3pimwv3gn28rbrdvlw9q5c76lzw6zpa12q6pgck76acdw4";
+
+      subPackages = [ "mockgen" ];
+
+      preBuild = ''
+        export buildFlagsArray+=("--ldflags" "-X main.version=1.4.3")
+      '';
+
+      meta = with pkgs.stdenv.lib; {
+        description = "MockGen generates mock implementations of Go interfaces.";
+        homepage = "https://github.com/golang/mock/";
+        license = licenses.asl20;
+        maintainers = [];
+        platforms = platforms.linux ++ platforms.darwin;
+      };
+    };
 in
 {
   myPackages = super.buildEnv {
@@ -80,6 +109,7 @@ in
       lazydocker
       lnav
       mc
+      mockgen
       neovim
       nodejs
       nox
