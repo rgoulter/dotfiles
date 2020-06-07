@@ -100,6 +100,7 @@ in
       tokei
       tree
       up
+      vagrant
       vim
       vscode
       websocat
