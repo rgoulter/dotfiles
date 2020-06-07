@@ -20,9 +20,9 @@
     ~/.config/powerline:
         create: true
         path: powerline
-    ~/.config/nixpkgs/overlays/myPackages.nix:
+    ~/.config/nixpkgs/overlays:
         create: true
-        path: myPackages.nix
+        path: nixpkgs/overlays
     ~/.emacs-profiles.el: emacs-profiles.el
     ~/.config/alacritty/alacritty.yml:
         create: true
