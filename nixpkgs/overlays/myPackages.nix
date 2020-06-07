@@ -48,6 +48,7 @@ in
       aspellDicts.en-computers
       aspellDicts.vi
       awscli
+      aws_mfa
       bat
       chromedriver
       ctags
