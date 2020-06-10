@@ -119,6 +119,7 @@ in
       ripgrep
       ruby
       rustup
+      safe
       scc
       shellcheck
       silver-searcher
@@ -126,12 +127,16 @@ in
       stack
       starship
       terraform
+      tflint
+      tfsec
       tldr
       tmux
       tokei
       tree
       up
       vagrant
+      vault
+      vaultenv
       vim
       vscode
       websocat
