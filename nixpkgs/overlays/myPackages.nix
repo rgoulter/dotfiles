@@ -85,6 +85,7 @@ in
       docker
       emacs
       emacs-all-the-icons-fonts
+      exa
       fd
       fish
       fzf
@@ -127,6 +128,7 @@ in
       stack
       starship
       terraform
+      terragrunt
       tflint
       tfsec
       tldr
@@ -141,6 +143,7 @@ in
       vscode
       websocat
       yarn
+      ytop
     ];
     pathsToLink = [ "/share" "/bin" "/lib" ];
   };
