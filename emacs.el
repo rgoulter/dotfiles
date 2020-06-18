@@ -257,6 +257,9 @@ Inserted by installing 'org-mode' or when a release is made."
 (straight-use-package 'swiper)
 
 (straight-use-package 'magit)
+(straight-use-package 'forge)
+
+(straight-use-package 'github-review)
 
 (straight-use-package 'projectile)
 
@@ -627,6 +630,11 @@ Inserted by installing 'org-mode' or when a release is made."
   (evil-magit-init)
   :general
   ("C-x g" 'magit-status))
+
+
+
+(use-package forge
+  :after magit)
 
 
 ;; ibuffer mode
