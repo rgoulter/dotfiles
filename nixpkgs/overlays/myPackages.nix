@@ -145,6 +145,6 @@ in
       yarn
       ytop
     ];
-    pathsToLink = [ "/share" "/bin" "/lib" ];
+    pathsToLink = [ "/share" "/bin" "/lib" ] ++ (if self.stdenv.isDarwin then [ "/Applications" ] else []);
   };
 }
