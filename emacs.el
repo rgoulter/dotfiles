@@ -239,7 +239,15 @@ Inserted by installing 'org-mode' or when a release is made."
 
 (straight-use-package 'helm)
 (straight-use-package 'helm-ag)
-(straight-use-package 'helm-rg)
+;; Use this fork until it's up to date with helm
+;; https://github.com/cosmicexplorer/helm-rg/issues/26
+(straight-use-package
+ '(helm-rg :type git
+           :host github
+           :repo "cosmicexplorer/helm-rg"
+           :fork (:host github
+                  :repo "braineo/helm-rg"
+                  :branch "fix-helm-source")))
 (straight-use-package 'helm-projectile)
 (straight-use-package 'helm-swoop)
 (straight-use-package 'helm-themes)
