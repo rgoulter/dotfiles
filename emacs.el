@@ -512,6 +512,7 @@ Inserted by installing 'org-mode' or when a release is made."
   (general-define-key
    :states '(normal visual insert emacs)
    :prefix "SPC"
+   :keymaps 'override
    :non-normal-prefix "C-SPC"
 
     ;; simple command
