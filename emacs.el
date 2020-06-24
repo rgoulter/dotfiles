@@ -534,6 +534,12 @@ Inserted by installing 'org-mode' or when a release is made."
     "cc" 'clipboard-kill-ring-save
     "cv" 'clipboard-yank
 
+    "g" 'magit-status
+
+    "p" 'projectile-command-map
+
+    "A" '(lambda () (interactive) (org-agenda nil "a"))
+
     ;; Applications
     "a" '(:ignore t :which-key "Applications")
     "ar" 'ranger
