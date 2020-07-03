@@ -108,6 +108,7 @@ in
       jsawk
       keepassxc
       lazydocker
+      less
       lnav
       mc
       mockgen
@@ -115,7 +116,9 @@ in
       nodejs
       nox
       openssh
+      perl
       plantuml
+      procps
       python3
       ripgrep
       ruby
@@ -142,6 +145,7 @@ in
       vim
       vscode
       websocat
+      which
       yarn
       ytop
     ];
