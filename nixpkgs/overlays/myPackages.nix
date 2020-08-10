@@ -76,7 +76,7 @@ in
       aspellDicts.en
       aspellDicts.en-computers
       aspellDicts.vi
-      awscli
+      awscli2
       aws_mfa
       bat
       chromedriver
