@@ -111,11 +111,11 @@ let
     "recurseForDerivations"
   ];
 in rec {
-  terraform_0_12_8 = pluggable (generic {
-    version = "0.12.8";
-    sha256 = "1qlhbn6xj2nd8gwr6aiyjsb62qmj4j9jnxab006xgdr1avvl2p67";
+  terraform_0_12 = pluggable (generic {
+    version = "0.12.29";
+    sha256 = "18i7vkvnvfybwzhww8d84cyh93xfbwswcnwfrgvcny1qwm8rsaj8";
     patches = [
-        # ./provider-path.patch
+        ./provider-path.patch
         (fetchpatch {
             name = "fix-mac-mojave-crashes.patch";
             url = "https://github.com/hashicorp/terraform/commit/cd65b28da051174a13ac76e54b7bb95d3051255c.patch";
@@ -124,5 +124,5 @@ in rec {
     passthru = { inherit plugins; };
   });
 
-  terraform_0_12_8-full = terraform_0_12_8.full;
+  terraform_0_12-full = terraform_0_12.full;
 }
