@@ -83,6 +83,7 @@ in
       ctags
       curlie
       docker
+      eksctl
       emacs
       emacs-all-the-icons-fonts
       exa
@@ -107,6 +108,7 @@ in
       jq
       jsawk
       keepassxc
+      kubectl
       lazydocker
       less
       lnav
