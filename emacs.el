@@ -384,6 +384,9 @@ Inserted by installing 'org-mode' or when a release is made."
 
 (straight-use-package 'esup)
 
+(straight-use-package 'kubernetes)
+(straight-use-package 'kubernetes-evil)
+
 
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
