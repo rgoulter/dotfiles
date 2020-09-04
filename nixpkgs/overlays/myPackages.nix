@@ -37,35 +37,35 @@ let
         platforms = platforms.linux ++ platforms.darwin;
       };
     };
-  mockgen =
-    with super;
-    buildGoModule rec {
-      pname = "go-mock";
-      version = "1.4.4";
+  ## mockgen =
+  ##   with super;
+  ##   buildGoModule rec {
+  ##     pname = "go-mock";
+  ##     version = "1.4.4";
 
-      src = pkgs.fetchFromGitHub {
-        owner = "golang";
-        repo = "mock";
-        rev = "v${version}";
-        sha256 = "1lj0dvd6div4jaq1s0afpwqaq9ah8cxhkq93wii2ably1xmp2l0a";
-      };
+  ##     src = pkgs.fetchFromGitHub {
+  ##       owner = "golang";
+  ##       repo = "mock";
+  ##       rev = "v${version}";
+  ##       sha256 = "1lj0dvd6div4jaq1s0afpwqaq9ah8cxhkq93wii2ably1xmp2l0a";
+  ##     };
 
-      vendorSha256 = "1md4cg1zzhc276sc7i2v0xvg5pf6gzy0n9ga2g1lx3d572igq1wy";
+  ##     vendorSha256 = "1md4cg1zzhc276sc7i2v0xvg5pf6gzy0n9ga2g1lx3d572igq1wy";
 
-      subPackages = [ "mockgen" ];
+  ##     subPackages = [ "mockgen" ];
 
-      preBuild = ''
-        export buildFlagsArray+=("--ldflags" "-X main.version=1.4.3")
-      '';
+  ##     preBuild = ''
+  ##       export buildFlagsArray+=("--ldflags" "-X main.version=1.4.3")
+  ##     '';
 
-      meta = with pkgs.stdenv.lib; {
-        description = "MockGen generates mock implementations of Go interfaces.";
-        homepage = "https://github.com/golang/mock/";
-        license = licenses.asl20;
-        maintainers = [];
-        platforms = platforms.linux ++ platforms.darwin;
-      };
-    };
+  ##     meta = with pkgs.stdenv.lib; {
+  ##       description = "MockGen generates mock implementations of Go interfaces.";
+  ##       homepage = "https://github.com/golang/mock/";
+  ##       license = licenses.asl20;
+  ##       maintainers = [];
+  ##       platforms = platforms.linux ++ platforms.darwin;
+  ##     };
+  ##   };
 in
 {
   myPackages = super.buildEnv {
