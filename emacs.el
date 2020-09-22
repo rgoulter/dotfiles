@@ -121,6 +121,17 @@
   (interactive)
   (load-theme 'solarized-light))
 
+
+(defun rgoulter/set-font-dyslexic-big ()
+    (interactive)
+    (set-face-attribute 'default nil :font "OpenDyslexic 24" )
+    (set-frame-font "OpenDyslexic 24" nil t))
+
+(defun rgoulter/set-font-dyslexic-mono-big ()
+    (interactive)
+    (set-face-attribute 'default nil :font "OpenDyslexicMono 20" )
+    (set-frame-font "OpenDyslexicMono 20" nil t))
+
 (defun rgoulter/cheatsheet-rifle ()
   "A convenience command for running helm-org-rifle against a cheatsheet file."
   (interactive)
