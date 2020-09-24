@@ -132,6 +132,11 @@
     (set-face-attribute 'default nil :font "OpenDyslexicMono 20" )
     (set-frame-font "OpenDyslexicMono 20" nil t))
 
+(defun rgoulter/set-font-programming ()
+    (interactive)
+    (set-face-attribute 'default nil :font "Inconsolata for Powerline 20" )
+    (set-frame-font "Inconsolata for Powerline 20" nil t))
+
 (defun rgoulter/cheatsheet-rifle ()
   "A convenience command for running helm-org-rifle against a cheatsheet file."
   (interactive)
