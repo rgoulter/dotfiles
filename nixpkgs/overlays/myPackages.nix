@@ -37,6 +37,31 @@ let
         platforms = platforms.linux ++ platforms.darwin;
       };
     };
+  kind =
+    with super;
+    buildGoModule rec {
+      pname = "kind";
+      version = "0.9.0";
+
+      src = fetchFromGitHub {
+        owner = "kubernetes-sigs";
+        repo = "kind";
+        rev = "v${version}";
+        sha256 = "1kyjmlp1kmr3lwylnya6w392j1qpqgbvcacwpnz3ifyh3pbv32qr";
+      };
+
+      vendorSha256 = "04fmqh6lhvvzpvf1l2xk1r8687k5jx2lb5199rgmjbfnjgsa0q2d";
+
+      subPackages = [ "cmd/kind" ];
+
+      meta = with stdenv.lib; {
+        description = "Kubernetes IN Docker - local clusters for testing Kubernetes ";
+        homepage = "https://kind.sigs.k8s.io/";
+        license = licenses.asl20;
+        maintainers = [ "kubernetes-sigs" ];
+        platforms = platforms.linux ++ platforms.darwin;
+      };
+    };
   ## mockgen =
   ##   with super;
   ##   buildGoModule rec {
@@ -109,6 +134,7 @@ in
       jq
       jsawk
       keepassxc
+      kind
       kubectl
       lazydocker
       less
