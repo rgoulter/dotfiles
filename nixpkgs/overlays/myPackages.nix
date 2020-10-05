@@ -135,6 +135,7 @@ in
       jsawk
       keepassxc
       kind
+      kitty
       kubectl
       lazydocker
       less
