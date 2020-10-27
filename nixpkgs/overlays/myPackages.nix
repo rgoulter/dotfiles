@@ -132,7 +132,8 @@ in
       jid
       jl
       jq
-      jsawk
+#      jsawk # the given spidermonkey version is insecure
+      kakoune
       keepassxc
       kind
       kitty
