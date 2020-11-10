@@ -62,6 +62,31 @@ let
         platforms = platforms.linux ++ platforms.darwin;
       };
     };
+  swag =
+    with super;
+    buildGoModule rec {
+      pname = "swaggo-swag";
+      version = "1.6.9";
+
+      src = pkgs.fetchFromGitHub {
+        owner = "swaggo";
+        repo = "swag";
+        rev = "v${version}";
+        sha256 = "07wx9sbca4vamy8ywhj1lr9bj6j7rscfw8v0dsyvzysibsp7abjk";
+      };
+
+      vendorSha256 = "0xi0hyifqg7d5f1dzqhaf1p6yylywh7rxd0vsx5y0a8x7bib4hgi";
+
+      subPackages = [ "cmd/swag" ];
+
+      meta = with pkgs.stdenv.lib; {
+        description = "Automatically generate RESTful API documentation with Swagger 2.0 for Go.";
+        homepage = "https://github.com/swaggo/swag/";
+        license = "licenses.mit";
+        maintainers = with maintainers; [ "rgoulter" ];
+        platforms = platforms.linux ++ platforms.darwin;
+      };
+    };
   ## mockgen =
   ##   with super;
   ##   buildGoModule rec {
