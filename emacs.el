@@ -355,6 +355,8 @@ Inserted by installing 'org-mode' or when a release is made."
 
 (straight-use-package 'elixir-mode)
 
+(straight-use-package 'nix-mode)
+
 (straight-use-package 'tide)
 
 (straight-use-package 'writeroom-mode)
@@ -916,5 +918,8 @@ With prefix ARG non-nil, insert the result at the end of region."
    (message "gc-cons-threshold and file-name-handler-alist restored")))
 
 (require 'dired+)
+
+(use-package nix-mode
+  :mode "\\.nix\\'")
 
 ;;; init.el ends here
