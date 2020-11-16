@@ -8,8 +8,10 @@ let
 in
 {
   boot = hostSpecific.boot;
+  networking = hostSpecific.networking;
 
   environment.systemPackages = with pkgs; [
+    ksshaskpass
   ];
 
   hardware.bluetooth.enable = true;
@@ -19,8 +21,6 @@ in
       ./hardware-configuration.nix
     ];
 
-  networking = hostSpecific.networking;
-
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.gnupg.agent = {
@@ -28,6 +28,12 @@ in
   #   enableSSHSupport = true;
   #   pinentryFlavor = "gnome3";
   # };
+  programs.ssh.startAgent = true;
+
+  security.pam.services.kwallet = {
+    name = "kwallet";
+    enableKwallet = true;
+  };
 
   services = {
     # Enable the OpenSSH daemon.
