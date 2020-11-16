@@ -129,6 +129,7 @@ in
       awscli2
       aws_mfa
       bat
+      bottom
       chromedriver
       coreutils
       ctags
@@ -157,7 +158,7 @@ in
       jid
       jl
       jq
-#      jsawk # the given spidermonkey version is insecure
+      # jsawk # the given spidermonkey version is insecure
       kakoune
       keepassxc
       kind
@@ -204,7 +205,6 @@ in
       websocat
       which
       yarn
-      ytop
     ];
     pathsToLink = [ "/share" "/bin" "/lib" ] ++ (if self.stdenv.isDarwin then [ "/Applications" "/Library" ] else []);
   };
