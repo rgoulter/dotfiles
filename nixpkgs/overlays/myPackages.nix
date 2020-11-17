@@ -187,7 +187,7 @@ in
       skim
       stack
       starship
-      terraform
+      terraform_0_13
       terragrunt
       tflint
       tfsec
