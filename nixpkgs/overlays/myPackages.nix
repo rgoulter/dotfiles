@@ -118,6 +118,11 @@ let
   ##   };
 in
 {
+  python3 = super.python3.override {
+     packageOverrides = self: super: {
+       crate = super.crate.overrideAttrs (oldAttrs: { doInstallCheck = false; doCheck = false; });
+     };
+    };
   myPackages = super.buildEnv {
     name = "my-packages";
     paths = with self; [
@@ -132,6 +137,7 @@ in
       bottom
       chromedriver
       coreutils
+      csvkit
       ctags
       curlie
       docker
