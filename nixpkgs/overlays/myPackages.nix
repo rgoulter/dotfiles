@@ -12,6 +12,7 @@
 self: super:
 
 let
+  anki = super.anki.overrideAttrs (oldAttrs: { doInstallCheck = false; doCheck = false; });
   ginkgo =
     with super;
     buildGoModule rec {
@@ -127,6 +128,7 @@ in
     name = "my-packages";
     paths = with self; [
       alacritty
+      anki
       aspell
       aspellDicts.en
       aspellDicts.en-computers
