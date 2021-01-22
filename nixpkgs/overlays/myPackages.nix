@@ -135,6 +135,7 @@ in
       aspellDicts.vi
       awscli2
       aws_mfa
+      bash
       bat
       bottom
       chromedriver
@@ -151,6 +152,7 @@ in
       fish
       fzf
       fzy
+      gawk
       gcc
       geckodriver
       git
@@ -163,6 +165,7 @@ in
       gron
       groovy
       htop
+      imagemagick
       jid
       jl
       jq
@@ -173,9 +176,11 @@ in
       kitty
       kubectl
       lazydocker
+      lazygit
       less
       lnav
       mc
+      minikube
       mockgen
       neovim
       nodejs
@@ -195,6 +200,7 @@ in
       skim
       stack
       starship
+      stlink
       terraform_0_13
       terragrunt
       tflint
