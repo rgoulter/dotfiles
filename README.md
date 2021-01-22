@@ -1,6 +1,6 @@
 # Dotfiles
 
-My dotfiles repo.  
+My dotfiles repo.
 
 Makes use of [anishathalye/dotbot](https://github.com/anishathalye/dotbot)
 for managing symlinks.
