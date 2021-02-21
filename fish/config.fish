@@ -91,3 +91,5 @@ set -U FZF_LEGACY_KEYBINDINGS 0
 if test -f $HOME/.config/fish/config.user.fish
     source $HOME/.config/fish/config.user.fish
 end
+
+direnv hook fish | source
