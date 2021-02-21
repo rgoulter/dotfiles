@@ -143,6 +143,7 @@ in
       csvkit
       ctags
       curlie
+      direnv
       docker
       eksctl
       emacs
