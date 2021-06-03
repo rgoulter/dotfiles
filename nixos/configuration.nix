@@ -15,6 +15,7 @@ in
   ];
 
   hardware.bluetooth.enable = true;
+  hardware.pulseaudio.enable = true;
 
   imports =
     [
@@ -75,6 +76,7 @@ SUBSYSTEMS=="usb", ATTRS{idVendor}=="03EB", ATTRS{idProduct}=="2FF4", TAG+="uacc
   users.users.rgoulter = {
     isNormalUser = true;
     extraGroups = [
+      "audio"
       "docker"
       "networkmanager"
       "wheel"           # Enable ‘sudo’ for the user.
