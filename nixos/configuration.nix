@@ -82,6 +82,8 @@ SUBSYSTEMS=="usb", ATTRS{idVendor}=="03EB", ATTRS{idProduct}=="2FF4", TAG+="uacc
       "wheel"           # Enable ‘sudo’ for the user.
     ];
   };
+  users.extraGroups.vboxusers.members = ["rgoulter"];
 
   virtualisation.docker.enable = true;
+  virtualisation.virtualbox.host.enable = true;
 }
