@@ -39,13 +39,19 @@ in
     # Enable the OpenSSH daemon.
     openssh.enable = true;
 
-    udev.packages = [ pkgs.yubikey-personalization ];
+    udev = {
+      # https://docs.qmk.fm/#/faq_build?id=linux-udev-rules
+      extraRules = ''
+# Atmel DFU
+SUBSYSTEMS=="usb", ATTRS{idVendor}=="03EB", ATTRS{idProduct}=="2FF4", TAG+="uaccess", RUN{builtin}+="uaccess", MODE:="0666" # ATmega32U4
+      '';
+      packages = [ pkgs.yubikey-personalization ];
+    };
 
     # Enable the X11 windowing system.
     xserver = {
       # Enable the KDE Desktop Environment.
       desktopManager.plasma5.enable = true;
-
       # Enable the KDE's Display Manager
       displayManager.sddm.enable = true;
 
