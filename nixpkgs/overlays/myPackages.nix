@@ -191,6 +191,7 @@ in
       plantuml
       procps
       python3
+      python38Packages.powerline
       ripgrep
       ruby
       rustup
