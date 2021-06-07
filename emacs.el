@@ -132,10 +132,20 @@
     (set-face-attribute 'default nil :font "OpenDyslexicMono 20" )
     (set-frame-font "OpenDyslexicMono 20" nil t))
 
+;; h/t https://www.reddit.com/r/emacs/comments/1xe7vr/check_if_font_is_available_before_setting/
+;; Test char and monospace:
+;; 0123456789abcdefghijklmnopqrstuvwxyz [] () :;,. !@#$^&*
+;; 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ {} <> "'`  ~-_/|\?
+;;
+;; Probably not the best way of doing this.
 (defun rgoulter/set-font-programming ()
     (interactive)
-    (set-face-attribute 'default nil :font "Inconsolata for Powerline 20" )
-    (set-frame-font "Inconsolata for Powerline 20" nil t))
+    (dolist (font-name '("Inconsolata for Powerline" "Inconsolata Nerd Font"))
+      (when (find-font (font-spec :name font-name))
+        ;; e.g. "Inconsolata for Powerline 20"
+        (let ((font-name-with-size (concat font-name " 18")))
+          (set-face-attribute 'default nil :font font-name-with-size)
+          (set-frame-font font-name-with-size nil t)))))
 
 (defun rgoulter/cheatsheet-rifle ()
   "A convenience command for running helm-org-rifle against a cheatsheet file."
