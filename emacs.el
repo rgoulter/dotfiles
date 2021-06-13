@@ -243,7 +243,6 @@ Inserted by installing 'org-mode' or when a release is made."
 (straight-use-package 'evil-collection)
 (straight-use-package 'evil-leader)
 (straight-use-package 'evil-ledger)
-(straight-use-package 'evil-magit)
 (straight-use-package 'evil-nerd-commenter)
 (straight-use-package 'evil-snipe)
 (straight-use-package 'evil-surround)
