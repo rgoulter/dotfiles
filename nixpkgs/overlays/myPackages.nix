@@ -217,11 +217,13 @@ in
       vault
       vaultenv
       vim
-      vscode
       websocat
       which
       yarn
-    ] ++ (lib.optionals stdenv.isDarwin [
+    ] ++ (lib.optionals true [
+      # Unfree software; requires config.allowUnfree = true
+      vscode
+    ]) ++(lib.optionals stdenv.isDarwin [
       pinentry_mac
     ]) ++ (lib.optionals stdenv.isLinux [
       pinentry_gtk2
