@@ -221,7 +221,11 @@ in
       websocat
       which
       yarn
-    ];
+    ] ++ (lib.optionals stdenv.isDarwin [
+      pinentry_mac
+    ]) ++ (lib.optionals stdenv.isLinux [
+      pinentry_gtk2
+    ]);
     pathsToLink = ["/bin" "/lib" "/share" ] ++ (with self; lib.optionals stdenv.isDarwin [ "/Applications" "/Library" ]);
   };
 }
