@@ -30,7 +30,7 @@ let
 
       subPackages = [ "ginkgo" ];
 
-      meta = with stdenv.lib; {
+      meta = with lib; {
         description = "Simple command-line snippet manager, written in Go";
         homepage = "http://onsi.github.io/ginkgo/";
         license = licenses.mit;
@@ -55,7 +55,7 @@ let
 
       subPackages = [ "cmd/kind" ];
 
-      meta = with stdenv.lib; {
+      meta = with lib; {
         description = "Kubernetes IN Docker - local clusters for testing Kubernetes ";
         homepage = "https://kind.sigs.k8s.io/";
         license = licenses.asl20;
@@ -80,7 +80,7 @@ let
 
       subPackages = [ "cmd/swag" ];
 
-      meta = with pkgs.stdenv.lib; {
+      meta = with pkgs.lib; {
         description = "Automatically generate RESTful API documentation with Swagger 2.0 for Go.";
         homepage = "https://github.com/swaggo/swag/";
         license = "licenses.mit";
@@ -109,7 +109,7 @@ let
   ##       export buildFlagsArray+=("--ldflags" "-X main.version=1.4.3")
   ##     '';
 
-  ##     meta = with pkgs.stdenv.lib; {
+  ##     meta = with pkgs.lib; {
   ##       description = "MockGen generates mock implementations of Go interfaces.";
   ##       homepage = "https://github.com/golang/mock/";
   ##       license = licenses.asl20;

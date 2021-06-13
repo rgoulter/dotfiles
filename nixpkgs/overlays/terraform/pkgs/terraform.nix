@@ -40,7 +40,7 @@ let
         export HOME=$TMP
       '';
 
-      meta = with stdenv.lib; {
+      meta = with lib; {
         description =
           "Tool for building, changing, and versioning infrastructure";
         homepage = "https://www.terraform.io/";

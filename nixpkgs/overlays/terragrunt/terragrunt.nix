@@ -1,4 +1,4 @@
-{ stdenv, buildGoModule, fetchFromGitHub, fetchhg, fetchbzr, fetchsvn, makeWrapper, terraform }:
+{ stdenv, lib, buildGoModule, fetchFromGitHub, fetchhg, fetchbzr, fetchsvn, makeWrapper, terraform }:
 
 buildGoModule rec {
   pname = "terragrunt";
@@ -23,10 +23,10 @@ buildGoModule rec {
 
   postInstall = ''
     wrapProgram $out/bin/terragrunt \
-      --set TERRAGRUNT_TFPATH ${stdenv.lib.getBin terraform}/bin/terraform
+      --set TERRAGRUNT_TFPATH ${lib.getBin terraform}/bin/terraform
   '';
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "A thin wrapper for Terraform that supports locking for Terraform state and enforces best practices.";
     homepage = "https://github.com/gruntwork-io/terragrunt/";
     license = licenses.mit;
