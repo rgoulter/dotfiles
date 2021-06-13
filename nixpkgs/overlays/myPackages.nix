@@ -120,9 +120,9 @@ let
 in
 {
   python3 = super.python3.override {
-     packageOverrides = self: super: {
-       crate = super.crate.overrideAttrs (oldAttrs: { doInstallCheck = false; doCheck = false; });
-     };
+      packageOverrides = self: super: {
+        crate = super.crate.overrideAttrs (oldAttrs: { doInstallCheck = false; doCheck = false; });
+      };
     };
   myPackages = super.buildEnv {
     name = "my-packages";
