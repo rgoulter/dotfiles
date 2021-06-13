@@ -256,6 +256,7 @@ Inserted by installing 'org-mode' or when a release is made."
 
 (straight-use-package 'flycheck)
 (straight-use-package 'flycheck-package)
+(straight-use-package 'flycheck-projectile)
 
 ;; general is a more generalised package compared to evil-leader
 ;; h/t https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/
