@@ -926,4 +926,11 @@ With prefix ARG non-nil, insert the result at the end of region."
 (use-package nix-mode
   :mode "\\.nix\\'")
 
+(require 'ansi-color)
+(defun colorize-compilation-buffer ()
+  (toggle-read-only)
+  (ansi-color-apply-on-region compilation-filter-start (point))
+  (toggle-read-only))
+(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
+
 ;;; init.el ends here
