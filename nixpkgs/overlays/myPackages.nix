@@ -222,6 +222,6 @@ in
       which
       yarn
     ];
-    pathsToLink = [ "/share" "/bin" "/lib" ] ++ (if self.stdenv.isDarwin then [ "/Applications" "/Library" ] else []);
+    pathsToLink = ["/bin" "/lib" "/share" ] ++ (with self; lib.optionals stdenv.isDarwin [ "/Applications" "/Library" ]);
   };
 }
