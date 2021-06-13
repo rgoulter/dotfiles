@@ -1,19 +1,9 @@
 - clean: ['~']
 
 - link:
-    ~/.dotfiles: ''
-    ~/.tmux.conf: tmux.conf
-    ~/.hgrc: hgrc
-    ~/.hgrc.d: hgrc.d
-    ~/.vim: vim/
-    ~/.vimrc: vimrc
-    ~/.gvimrc: gvimrc
-    ~/.nvim: vim/
-    ~/.config/nvim/init.vim: vimrc
-    ~/.emacs.d/straight/versions/default.el:
+    ~/.config/alacritty/alacritty.yml:
         create: true
-        path: emacs.d/straight/versions/default.el
-    ~/.emacs.d/init.el: emacs.el
+        path: alacritty.yml
     ~/.config/fish:
         create: true
         path: fish
@@ -26,10 +16,19 @@
     ~/.config/nixpkgs/overlays:
         create: true
         path: nixpkgs/overlays
+    ~/.config/nvim/init.vim: vimrc
     ~/.emacs-profiles.el: emacs-profiles.el
-    ~/.config/alacritty/alacritty.yml:
+    ~/.emacs.d/init.el: emacs.el
+    ~/.emacs.d/straight/versions/default.el:
         create: true
-        path: alacritty.yml
+        path: emacs.d/straight/versions/default.el
+    ~/.gvimrc: gvimrc
+    ~/.hgrc.d: hgrc.d
+    ~/.hgrc: hgrc
+    ~/.nvim: vim/
+    ~/.tmux.conf: tmux.conf
+    ~/.vim: vim/
+    ~/.vimrc: vimrc
 
 
 - shell:
