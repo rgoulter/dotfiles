@@ -17,6 +17,9 @@
     ~/.config/fish:
         create: true
         path: fish
+    ~/.config/kitty:
+        create: true
+        path: kitty
     ~/.config/powerline:
         create: true
         path: powerline
