@@ -22,13 +22,6 @@ in
       ./hardware-configuration.nix
     ];
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  #   pinentryFlavor = "gnome3";
-  # };
   programs.ssh.startAgent = true;
 
   security.pam.services.kwallet = {
@@ -72,9 +65,8 @@ SUBSYSTEMS=="usb", ATTRS{idVendor}=="03EB", ATTRS{idProduct}=="2FF4", TAG+="uacc
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "21.05"; # Did you read the comment?
+  system.stateVersion = "21.05";
 
-  # Set your time zone.
   time.timeZone = "Asia/Jakarta";
 
   users.users.rgoulter = {
@@ -83,7 +75,7 @@ SUBSYSTEMS=="usb", ATTRS{idVendor}=="03EB", ATTRS{idProduct}=="2FF4", TAG+="uacc
       "audio"
       "docker"
       "networkmanager"
-      "wheel"           # Enable ‘sudo’ for the user.
+      "wheel"
     ];
   };
   users.extraGroups.vboxusers.members = ["rgoulter"];
