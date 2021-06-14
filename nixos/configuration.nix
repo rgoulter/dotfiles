@@ -10,10 +10,6 @@ in
   boot = hostSpecific.boot;
   networking = hostSpecific.networking;
 
-  environment.systemPackages = with pkgs; [
-    ksshaskpass
-  ];
-
   hardware.bluetooth.enable = true;
   hardware.pulseaudio.enable = true;
 
@@ -23,11 +19,6 @@ in
     ];
 
   programs.ssh.startAgent = true;
-
-  security.pam.services.kwallet = {
-    name = "kwallet";
-    enableKwallet = true;
-  };
 
   services = {
     # Enable the OpenSSH daemon.
@@ -44,11 +35,6 @@ SUBSYSTEMS=="usb", ATTRS{idVendor}=="03EB", ATTRS{idProduct}=="2FF4", TAG+="uacc
 
     # Enable the X11 windowing system.
     xserver = {
-      # Enable the KDE Desktop Environment.
-      # desktopManager.plasma5.enable = true;
-      # Enable the KDE's Display Manager
-      # displayManager.sddm.enable = true;
-
       # Enable the GNOME 3 Desktop Environment.
       desktopManager.gnome.enable = true;
       displayManager.gdm.enable = true;
