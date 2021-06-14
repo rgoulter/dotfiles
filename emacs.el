@@ -427,7 +427,8 @@ Inserted by installing 'org-mode' or when a release is made."
    '(ag
      dired
      docker
-     ibuffer))
+     ibuffer
+     magit))
   (evil-mode 1))
 
 ;; (use-package evil-leader)
