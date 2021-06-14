@@ -52,9 +52,13 @@ SUBSYSTEMS=="usb", ATTRS{idVendor}=="03EB", ATTRS{idProduct}=="2FF4", TAG+="uacc
     # Enable the X11 windowing system.
     xserver = {
       # Enable the KDE Desktop Environment.
-      desktopManager.plasma5.enable = true;
+      # desktopManager.plasma5.enable = true;
       # Enable the KDE's Display Manager
-      displayManager.sddm.enable = true;
+      # displayManager.sddm.enable = true;
+
+      # Enable the GNOME 3 Desktop Environment.
+      desktopManager.gnome.enable = true;
+      displayManager.gdm.enable = true;
 
       enable = true;
 
@@ -68,7 +72,7 @@ SUBSYSTEMS=="usb", ATTRS{idVendor}=="03EB", ATTRS{idProduct}=="2FF4", TAG+="uacc
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "20.03"; # Did you read the comment?
+  system.stateVersion = "21.05"; # Did you read the comment?
 
   # Set your time zone.
   time.timeZone = "Asia/Jakarta";
