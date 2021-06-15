@@ -943,6 +943,6 @@ With prefix ARG non-nil, insert the result at the end of region."
     (append (if (consp backend) backend (list backend))
             '(:with company-yasnippet))))
 
-(setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
+;; (setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
 
 ;;; init.el ends here
