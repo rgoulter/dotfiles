@@ -667,8 +667,6 @@ Inserted by installing 'org-mode' or when a release is made."
 
 ;; magit
 (use-package magit
-  :config
-  (evil-magit-init)
   :general
   ("C-x g" 'magit-status))
 
