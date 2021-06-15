@@ -45,9 +45,9 @@
 (setq delete-old-versions -1)           ; delete excess backup versions silently
 (setq version-control t)                ; use version control
 (setq vc-make-backup-files t)           ; make backups file even when in version controlled dir
-(setq backup-directory-alist `(("." . "~/.emacs.d/backups"))) ; which directory to put backups file
+(setq backup-directory-alist `(("." . (concat user-emacs-directory "backups")))) ; which directory to put backups file
 (setq vc-follow-symlinks t )            ; don't ask for confirmation when opening symlinked file
-(setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)) ) ;transform backups file name
+(setq auto-save-file-name-transforms '((".*" (concat user-emacs-directory "auto-save-list") t)) ) ;transform backups file name
 (setq create-lockfiles nil)             ; For me, lockfiles can cause more problems than it solves
 (setq inhibit-startup-screen t)
 (setq ring-bell-function 'ignore)       ; silent bell when you make a mistake
@@ -881,12 +881,12 @@ Inserted by installing 'org-mode' or when a release is made."
 
 
 
-(setq custom-file "~/.emacs.d/custom.el")
+(setq custom-file (concat user-emacs-directory "custom.el"))
 (when (file-exists-p custom-file)
   (load custom-file))
 
 (defvar workstation-file "File location for a local Emacs Lisp configuration file")
-(setq workstation-file "~/.emacs.d/local.el")
+(setq workstation-file (concat user-emacs-directory "local.el"))
 (when (file-exists-p workstation-file)
   (load workstation-file))
 ;; moving my org-mode code to a separate Emacs Lisp file.
