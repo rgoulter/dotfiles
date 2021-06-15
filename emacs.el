@@ -45,9 +45,11 @@
 (setq delete-old-versions -1)           ; delete excess backup versions silently
 (setq version-control t)                ; use version control
 (setq vc-make-backup-files t)           ; make backups file even when in version controlled dir
-(setq backup-directory-alist `(("." . (concat user-emacs-directory "backups")))) ; which directory to put backups file
+;; (setq backup-directory-alist `(("." . (concat user-emacs-directory "backups")))) ; which directory to put backups file
+(setq backup-directory-alist `(("." . "~/.config/emacs-rgoulter/backups"))) ; which directory to put backups file
 (setq vc-follow-symlinks t )            ; don't ask for confirmation when opening symlinked file
-(setq auto-save-file-name-transforms '((".*" (concat user-emacs-directory "auto-save-list") t)) ) ;transform backups file name
+;; (setq auto-save-file-name-transforms '((".*" (concat user-emacs-directory "auto-save-list") t)) ) ;transform backups file name
+(setq auto-save-file-name-transforms '((".*" "~/.config/emacs-rgoulter/auto-save-list" t)) ) ;transform backups file name
 (setq create-lockfiles nil)             ; For me, lockfiles can cause more problems than it solves
 (setq inhibit-startup-screen t)
 (setq ring-bell-function 'ignore)       ; silent bell when you make a mistake
