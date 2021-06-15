@@ -88,6 +88,44 @@ let
         platforms = platforms.linux ++ platforms.darwin;
       };
     };
+  emacsWithProfileDoomApplication =
+    super.writeTextFile {
+      name = "chemacs-doom";
+      destination = "/share/applications/emacs-doom.desktop";
+      text = ''
+[Desktop Entry]
+Name=Emacs (Doom)
+GenericName=Text Editor
+Comment=Edit text
+MimeType=text/english;text/plain;text/x-makefile;text/x-c++hdr;text/x-c++src;text/x-chdr;text/x-csrc;text/x-java;text/x-moc;text/x-pascal;text/x-tcl;text/x-tex;application/x-shellscript;text/x-c;text/x-c++;
+Exec=emacs --with-profile doom %F
+Icon=emacs
+Type=Application
+Terminal=false
+Categories=Development;TextEditor;
+StartupWMClass=Emacs
+Keywords=Text;Editor;
+      '';
+        };
+  emacsWithProfileSpacemacsApplication =
+    super.writeTextFile {
+      name = "chemacs-spacemacs";
+      destination = "/share/applications/emacs-spacemacs.desktop";
+      text = ''
+[Desktop Entry]
+Name=Emacs (Spacemacs)
+GenericName=Text Editor
+Comment=Edit text
+MimeType=text/english;text/plain;text/x-makefile;text/x-c++hdr;text/x-c++src;text/x-chdr;text/x-csrc;text/x-java;text/x-moc;text/x-pascal;text/x-tcl;text/x-tex;application/x-shellscript;text/x-c;text/x-c++;
+Exec=emacs --with-profile spacemacs %F
+Icon=emacs
+Type=Application
+Terminal=false
+Categories=Development;TextEditor;
+StartupWMClass=Emacs
+Keywords=Text;Editor;
+      '';
+        };
   ## mockgen =
   ##   with super;
   ##   buildGoModule rec {
@@ -226,6 +264,10 @@ in
     ]) ++(lib.optionals stdenv.isDarwin [
       pinentry_mac
     ]) ++ (lib.optionals stdenv.isLinux [
+      emacsWithProfileDoomApplication
+      emacsWithProfileSpacemacsApplication
+      firefox
+      google-chrome
       pinentry_gtk2
     ]);
     pathsToLink = ["/bin" "/lib" "/share" ] ++ (with self; lib.optionals stdenv.isDarwin [ "/Applications" "/Library" ]);
