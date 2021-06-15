@@ -4,6 +4,12 @@
     ~/.config/alacritty/alacritty.yml:
         create: true
         path: alacritty.yml
+    ~/.config/emacs-rgoulter/init.el:
+        create: true
+        path: emacs.el
+    ~/.config/emacs-rgoulter/straight/versions/default.el:
+        create: true
+        path: emacs.d/straight/versions/default.el
     ~/.config/fish:
         create: true
         path: fish
@@ -18,10 +24,6 @@
         path: nixpkgs/overlays
     ~/.config/nvim/init.vim: vimrc
     ~/.emacs-profiles.el: emacs-profiles.el
-    ~/.emacs.d/init.el: emacs.el
-    ~/.emacs.d/straight/versions/default.el:
-        create: true
-        path: emacs.d/straight/versions/default.el
     ~/.gvimrc: gvimrc
     ~/.hgrc.d: hgrc.d
     ~/.hgrc: hgrc

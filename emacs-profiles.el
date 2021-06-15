@@ -1,4 +1,4 @@
-(("default" . ((user-emacs-directory . "~/.emacs.d")))
+(("default" . ((user-emacs-directory . "~/.config/emacs-rgoulter")))
  ("spacemacs" . ((user-emacs-directory . "~/spacemacs")))
  ("prelude" . ((user-emacs-directory . "~/prelude")))
  ("doom" . ((user-emacs-directory . "~/doom-emacs")
