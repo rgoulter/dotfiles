@@ -18,6 +18,8 @@ in
       ./hardware-configuration.nix
     ];
 
+  nixpkgs.config.allowUnfree = true;
+
   programs.ssh.startAgent = true;
 
   services = {
@@ -39,7 +41,10 @@ SUBSYSTEMS=="usb", ATTRS{idVendor}=="03EB", ATTRS{idProduct}=="2FF4", TAG+="uacc
       desktopManager.gnome.enable = true;
       displayManager.gdm.enable = true;
 
+
       enable = true;
+
+      videoDrivers = [ "nvidia" ];
 
       layout = "us";
     };
