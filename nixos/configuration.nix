@@ -9,6 +9,7 @@ in
 {
   boot = hostSpecific.boot;
   networking = hostSpecific.networking;
+  location = hostSpecific.location;
 
   hardware.bluetooth.enable = true;
   hardware.pulseaudio.enable = true;
@@ -23,6 +24,10 @@ in
   services = {
     # Enable the OpenSSH daemon.
     openssh.enable = true;
+
+    redshift = {
+      enable = true;
+    };
 
     udev = {
       # https://docs.qmk.fm/#/faq_build?id=linux-udev-rules
