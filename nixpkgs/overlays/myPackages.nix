@@ -200,6 +200,7 @@ in
       glances
       gnupg
       go
+      google-cloud-sdk
       gopls
       gron
       groovy
@@ -269,6 +270,7 @@ in
       emacsWithProfileSpacemacsApplication
       firefox
       google-chrome
+      onedrive
       lens
       pinentry_gtk2
     ]);
