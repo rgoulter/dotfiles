@@ -209,6 +209,7 @@ in
       jl
       jq
       # jsawk # the given spidermonkey version is insecure
+      k9s
       kakoune
       keepassxc
       kind
@@ -268,6 +269,7 @@ in
       emacsWithProfileSpacemacsApplication
       firefox
       google-chrome
+      lens
       pinentry_gtk2
     ]);
     pathsToLink = ["/bin" "/lib" "/share" ] ++ (with self; lib.optionals stdenv.isDarwin [ "/Applications" "/Library" ]);
