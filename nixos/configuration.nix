@@ -65,12 +65,16 @@ SUBSYSTEMS=="usb", ATTRS{idVendor}=="03EB", ATTRS{idProduct}=="2FF4", TAG+="uacc
     extraGroups = [
       "audio"
       "docker"
+      "libvirtd"
       "networkmanager"
       "wheel"
     ];
   };
   users.extraGroups.vboxusers.members = ["rgoulter"];
 
-  virtualisation.docker.enable = true;
-  virtualisation.virtualbox.host.enable = true;
+  virtualisation = {
+    docker.enable = true;
+    libvirtd.enable = true;
+    virtualbox.host.enable = true;
+  };
 }
