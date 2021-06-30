@@ -30,7 +30,7 @@ in
       # https://docs.qmk.fm/#/faq_build?id=linux-udev-rules
       extraRules = ''
 # Atmel DFU
-SUBSYSTEMS=="usb", ATTRS{idVendor}=="03EB", ATTRS{idProduct}=="2FF4", TAG+="uaccess", RUN{builtin}+="uaccess", MODE:="0666" # ATmega32U4
+SUBSYSTEMS=="usb", ATTRS{idVendor}=="03eb", ATTRS{idProduct}=="2ff4", TAG+="uaccess"
       '';
       packages = [ pkgs.yubikey-personalization ];
     };
