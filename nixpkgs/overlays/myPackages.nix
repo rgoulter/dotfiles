@@ -270,6 +270,7 @@ in
       emacsWithProfileSpacemacsApplication
       firefox
       google-chrome
+      obs-studio
       onedrive
       lens
       pinentry_gtk2
