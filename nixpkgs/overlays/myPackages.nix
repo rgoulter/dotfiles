@@ -198,6 +198,7 @@ in
       gitAndTools.tig
       ginkgo
       glances
+      gnumake
       gnupg
       go
       google-cloud-sdk
@@ -227,6 +228,7 @@ in
       nodejs
       nox
       openssh
+      pandoc
       perl
       plantuml
       procps
@@ -258,6 +260,7 @@ in
       vaultenv
       vim
       websocat
+      wget
       which
       yarn
     ] ++ (lib.optionals true [
@@ -274,6 +277,9 @@ in
       onedrive
       lens
       pinentry_gtk2
+      spice-gtk
+      tdesktop
+      vlc
     ]);
     pathsToLink = ["/bin" "/lib" "/share" ] ++ (with self; lib.optionals stdenv.isDarwin [ "/Applications" "/Library" ]);
   };
