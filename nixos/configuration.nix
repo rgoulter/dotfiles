@@ -10,7 +10,16 @@ in
   boot = hostSpecific.boot;
   networking = hostSpecific.networking;
 
-  hardware.bluetooth.enable = true;
+  # https://nixos.wiki/wiki/Bluetooth#Using_Bluetooth_headsets_with_PulseAudio
+  # https://nixos.wiki/wiki/Bluetooth#Enabling_A2DP_Sink
+  hardware.bluetooth = {
+    enable = true;
+    settings = {
+      General = {
+        Enable = "Source,Sink,Media,Socket";
+      };
+    };
+  };
   hardware.pulseaudio.enable = true;
 
   imports =
