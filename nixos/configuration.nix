@@ -3,12 +3,12 @@
 
 { config, pkgs, ... }:
 
-let
-  hostSpecific = import ./host-specific.nix;
-in
 {
-  boot = hostSpecific.boot;
-  networking = hostSpecific.networking;
+  imports =
+    [
+      ./hardware-configuration.nix
+      ./host-specific.nix
+    ];
 
   # https://nixos.wiki/wiki/Bluetooth#Using_Bluetooth_headsets_with_PulseAudio
   # https://nixos.wiki/wiki/Bluetooth#Enabling_A2DP_Sink
@@ -21,11 +21,6 @@ in
     };
   };
   hardware.pulseaudio.enable = true;
-
-  imports =
-    [
-      ./hardware-configuration.nix
-    ];
 
   # https://github.com/NixOS/nix/issues/2208
   nix.extraOptions = "keep-outputs = true";
