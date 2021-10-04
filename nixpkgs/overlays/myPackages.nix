@@ -52,11 +52,6 @@ Keywords=Text;Editor;
         };
 in
 {
-  python3 = super.python3.override {
-      packageOverrides = self: super: {
-        crate = super.crate.overrideAttrs (oldAttrs: { doInstallCheck = false; doCheck = false; });
-      };
-    };
   myPackages = super.buildEnv {
     name = "my-packages";
     paths = with self; [
@@ -66,7 +61,7 @@ in
       aspellDicts.en-computers
       aspellDicts.vi
       awscli2
-      aws_mfa
+      aws-mfa
       bash
       bat
       bottom
@@ -133,3 +128,4 @@ in
     pathsToLink = ["/bin" "/lib" "/share" ] ++ (with self; lib.optionals stdenv.isDarwin [ "/Applications" "/Library" ]);
   };
 }
+
