@@ -18,6 +18,9 @@ in
       ./hardware-configuration.nix
     ];
 
+  # https://github.com/NixOS/nix/issues/2208
+  nix.extraOptions = "keep-outputs = true";
+
   nixpkgs.config.allowUnfree = true;
 
   programs.ssh.startAgent = true;
