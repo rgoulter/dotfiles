@@ -3,11 +3,11 @@ format = """
 ($gcloud\n)\
 ($openstack\n)\
 ($terraform\n)\
+($kubernetes\n)\
 $username\
 $hostname\
 $shlvl\
 $singularity\
-$kubernetes\
 $directory\
 $vcsh\
 $git_branch\
@@ -68,6 +68,10 @@ format = '${symbol}AWS: [($profile )(\($region\) )(\[$duration\])]($style)'
 
 [gcloud]
 format = '${symbol}GCP: [$active $account(@$domain)]($style)( in [$project (\($region\))]($style))'
+
+[kubernetes]
+disabled = false
+format = 'Kubernetes: [$symbol$context( \(using namespace $namespace\))]($style)'
 
 [openstack]
 format = "${symbol}OpenStack: [$cloud(\\($project\\))]($style)"
