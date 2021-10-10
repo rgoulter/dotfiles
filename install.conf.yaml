@@ -23,6 +23,7 @@
         create: true
         path: nixpkgs/overlays
     ~/.config/nvim/init.vim: vimrc
+    ~/.config/starship.toml: starship.toml
     ~/.emacs-profiles.el: emacs-profiles.el
     ~/.gvimrc: gvimrc
     ~/.hgrc.d: hgrc.d
