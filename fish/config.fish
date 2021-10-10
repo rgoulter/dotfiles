@@ -1,7 +1,4 @@
-# Use vim as our editor
-# (Can set to nvim in config.user.fish)
-set -x EDITOR vim
-
+set -x EDITOR nvim
 
 # HOST, for HG stuff.
 set -x HOST (hostname)
@@ -50,33 +47,8 @@ set -x GIT_TEMPLATE_DIR ~/.git_template/
 alias hl="hg log --style ~/.hgrc.d/fancy.style"
 
 
-# Git Clone from CliPboard.
-alias gccp="git clone (xclip -out)"
-
-
-# json.tool validates and pretty-prints JSON
-# https://unix.stackexchange.com/questions/283025/cant-find-documentation-on-json-tool
-alias pyjson="python -m json.tool"
-
-
-# simple http static server with Python
-alias py3serve="python3 -m http.server"
-
 set -x GOPATH "$HOME/go"
 set -x PATH $GOPATH/bin/ $PATH
-
-# In case memory is playing up?
-# From http://www.linuxquestions.org/questions/linux-general-1/how-to-show-the-memory-usage-per-process-160181/
-function mem_usage_of_processes
-    ps -e -orss=,args= | sort -b -k1,1n | pr -TW$COLUMNS
-end
-
-
-# Fish, sudo last command
-# (Easier to write this way than using alias, where fish would eval var..).
-function please
-    eval sudo $history[1]
-end
 
 
 source $HOME/.config/fish/coloured-manpages.fish
@@ -92,4 +64,7 @@ if test -f $HOME/.config/fish/config.user.fish
     source $HOME/.config/fish/config.user.fish
 end
 
+
 direnv hook fish | source
+
+starship init fish | source
