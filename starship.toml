@@ -76,5 +76,8 @@ format = 'Kubernetes: [$symbol$context( \(using namespace $namespace\))]($style)
 [openstack]
 format = "${symbol}OpenStack: [$cloud(\\($project\\))]($style)"
 
+[status]
+disabled = false
+
 [terraform]
 format = "${symbol}Terraform: ([$version]($style) )in [$workspace]($style) workspace"
