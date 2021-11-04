@@ -62,6 +62,7 @@ in
       aspellDicts.vi
       awscli2
       aws-mfa
+      babelfish
       bash
       bat
       bottom
@@ -97,6 +98,8 @@ in
       procps
       python38Packages.powerline
       ripgrep
+      # ruby needed for tmux-jump
+      ruby
       safe
       silver-searcher
       skim
@@ -114,14 +117,21 @@ in
     ]) ++(lib.optionals stdenv.isDarwin [
       pinentry_mac
     ]) ++ (lib.optionals stdenv.isLinux [
+      desktop-file-utils
       emacsWithProfileDoomApplication
       emacsWithProfileSpacemacsApplication
-      firefox
+      (firefox.override {
+        cfg = {
+          enableTridactylNative = true;
+        };
+      })
       google-chrome
+      lens
       obs-studio
       onedrive
-      lens
       pinentry_gtk2
+      slack
+      spotify
       tdesktop
       vlc
     ]);
