@@ -68,3 +68,6 @@ end
 direnv hook fish | source
 
 starship init fish | source
+
+abbr -a nscf nix-shell --command "fish"
+abbr -a nb nix-build
