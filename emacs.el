@@ -4,43 +4,30 @@
 ;;
 ;; This is my Emacs ~/.emacs.d/init.el file.
 ;;
-;; My current main use-case for Emacs is the excellent org-mode.
-;;
-;; I try to make a note of the sources of inspiration
-;; for various configuration improvements.
-;; Main sources have been (in no particular order):
+;; Many parts of this configuration have been
+;; inspired by (in no particular order):
 ;;   - http://pages.sachachua.com/.emacs.d/Sacha.html
 ;;   - https://github.com/emacs-tw/awesome-emacs
 ;;   - http://tuhdo.github.io/index.html
 ;;     - http://tuhdo.github.io/helm-intro.html
 ;;   - https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/
 
-;; NOTE: Comments use `;;` since this is the ELisp convention.
-;; (And Emacs will indent `;` to the right because of this!).
-;; https://www.gnu.org/software/emacs/manual/html_node/elisp/Comment-Tips.html#Comment-Tips
-
-
-;; ("~/.emacs.d/straight/repos/use-package/README.md")
-;; ("~/.emacs.d/straight/repos/general.el/README.org")
+;; "~/.emacs.d/straight/repos/use-package/README.md"
+;; "~/.emacs.d/straight/repos/general.el/README.org"
 
 ;;; CODE:
 
-;; h/t https://emacs.stackexchange.com/questions/34342/is-there-any-downside-to-setting-gc-cons-threshold-very-high-and-collecting-ga
 ;;;;;; Set garbage collection threshold
-
+;; h/t https://emacs.stackexchange.com/questions/34342/is-there-any-downside-to-setting-gc-cons-threshold-very-high-and-collecting-ga
 ;; From https://www.reddit.com/r/emacs/comments/3kqt6e/2_easy_little_known_steps_to_speed_up_emacs_start/
-
 (setq gc-cons-threshold-original gc-cons-threshold)
 (setq gc-cons-threshold (* 1024 1024 100))
 
 ;;;;;; Set file-name-handler-alist
-
 ;; Also from https://www.reddit.com/r/emacs/comments/3kqt6e/2_easy_little_known_steps_to_speed_up_emacs_start/
-
 (setq file-name-handler-alist-original file-name-handler-alist)
 (setq file-name-handler-alist nil)
 
-;; TODO: Consider the merits of each of these
 ;; from: https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/
 (setq delete-old-versions -1)           ; delete excess backup versions silently
 (setq version-control t)                ; use version control
@@ -58,7 +45,6 @@
 (setq sentence-end-double-space nil)    ; sentence SHOULD end with only a point.
 (setq fill-column 80)           ; toggle wrapping text at the 80th character
 (setq select-enable-clipboard nil)      ; use of killring / clipboard annoys me
-(setq global-linum-mode nil)            ; disable line numbers. (IME, too slow on large files for me)
 (setq-default indent-tabs-mode nil)
 (setq
  org-modules
@@ -111,13 +97,15 @@
 (add-hook 'haskell-mode-hook 'whitespace-mode)
 (add-hook 'js-mode-hook 'whitespace-mode)
 
+
 ;; add some commands to switch to particular themes
 ;; see also: https://www.brautaset.org/articles/2017/hydra-theme-switcher.html
-;; ^^ this seems to be a much cleve
 (defun my-load-theme-dark ()
   "A convenience command to load the solarized-dark theme."
   (interactive)
   (load-theme 'solarized-dark))
+
+
 (defun my-load-theme-light ()
   "A convenience command to load the solarized-light theme."
   (interactive)
@@ -125,14 +113,18 @@
 
 
 (defun rgoulter/set-font-dyslexic-big ()
+  "A convenience command for using the OpenDyslexic font."
     (interactive)
     (set-face-attribute 'default nil :font "OpenDyslexic 24" )
     (set-frame-font "OpenDyslexic 24" nil t))
 
+
 (defun rgoulter/set-font-dyslexic-mono-big ()
+  "A convenience command for using the OpenDyslexicMono font."
     (interactive)
     (set-face-attribute 'default nil :font "OpenDyslexicMono 20" )
     (set-frame-font "OpenDyslexicMono 20" nil t))
+
 
 ;; h/t https://www.reddit.com/r/emacs/comments/1xe7vr/check_if_font_is_available_before_setting/
 ;; Test char and monospace:
@@ -141,14 +133,17 @@
 ;;
 ;; Probably not the best way of doing this.
 (defun rgoulter/set-font-programming ()
-    (interactive)
-    (dolist (font-name '("Inconsolata for Powerline" "Inconsolata Nerd Font"))
-      (when (find-font (font-spec :name font-name))
-        ;; e.g. "Inconsolata for Powerline 20"
-        (let ((font-name-with-size (concat font-name " 18")))
-          (set-face-attribute 'default nil :font font-name-with-size)
-          (set-frame-font font-name-with-size nil t)))))
+  "A convenience command for setting a large, pretty font."
+  (interactive)
+  (dolist (font-name '("Inconsolata for Powerline" "Inconsolata Nerd Font"))
+    (when (find-font (font-spec :name font-name))
+      ;; e.g. "Inconsolata for Powerline 20"
+      (let ((font-name-with-size (concat font-name " 18")))
+        (set-face-attribute 'default nil :font font-name-with-size)
+        (set-frame-font font-name-with-size nil t)))))
 
+
+(defvar cheatsheet-org-file nil "Path to a cheatsheet org file.")
 (defun rgoulter/cheatsheet-rifle ()
   "A convenience command for running helm-org-rifle against a cheatsheet file."
   (interactive)
@@ -156,20 +151,6 @@
     (let ((helm-autoresize-min-height 50)
           (helm-autoresize-max-height 50))
       (helm-org-rifle-files (list cheatsheet-org-file)))))
-
-
-;; Reload Emacs settings
-;; taken from http://www.saltycrane.com/blog/2007/07/how-to-reload-your-emacs-file-while/
-;; (defun reload-dotemacs-file ()
-;;     "reload your .emacs file without restarting Emacs"
-;;     (interactive)
-;;     (load-file "~/.emacs"))
-
-
-
-
-
-
 
 
 ;; bootstrap straight.el
@@ -189,7 +170,6 @@
 ;; straight.el and use-package integration:
 ;; (setq straight-use-package-by-default t)
 
-;; 2018-10-31: I ran into a problem when refiling, which I hadn't earlier.
 ;; kludge from raxod502/straight.el readme for installing org
 ;; h/t: https://github.com/raxod502/straight.el#installing-org-with-straightel
 (require 'subr-x)
@@ -241,6 +221,8 @@ Inserted by installing 'org-mode' or when a release is made."
 
 (straight-use-package 'use-package)
 
+(straight-use-package 'undo-tree)
+
 (straight-use-package 'evil)
 (straight-use-package 'evil-collection)
 (straight-use-package 'evil-leader)
@@ -267,8 +249,6 @@ Inserted by installing 'org-mode' or when a release is made."
 
 (straight-use-package 'helm)
 (straight-use-package 'helm-ag)
-;; Use this fork until it's up to date with helm
-;; https://github.com/cosmicexplorer/helm-rg/issues/26
 (straight-use-package 'helm-rg)
 (straight-use-package 'helm-projectile)
 (straight-use-package 'helm-swoop)
@@ -282,6 +262,8 @@ Inserted by installing 'org-mode' or when a release is made."
 
 (straight-use-package 'hydra)
 
+;; Alternative to helm: Ivy/Counsel/Swiper work together.
+;; h/t: https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/
 (straight-use-package 'ivy)
 (straight-use-package 'counsel)
 (straight-use-package 'swiper)
@@ -362,6 +344,7 @@ Inserted by installing 'org-mode' or when a release is made."
 (straight-use-package 'elixir-mode)
 
 (straight-use-package 'nix-mode)
+(straight-use-package 'nix-sandbox)
 
 (straight-use-package 'tide)
 
@@ -411,6 +394,8 @@ Inserted by installing 'org-mode' or when a release is made."
 (straight-use-package 'kubernetes)
 (straight-use-package 'kubernetes-evil)
 
+(straight-use-package 'vterm)
+
 
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
@@ -433,23 +418,41 @@ Inserted by installing 'org-mode' or when a release is made."
      magit))
   (evil-mode 1))
 
+;; Hook unto-tree-mode onto evil-local-mode.
+;;
+;; For some reason, adding:
+;;   :hook
+;;   (evil-local-mode . undo-tree-mode)
+;; to the use-package above doesn't work.
+;; Nor:
+;;   (use-package undo-tree
+;;     :hook
+;;     evil-local-mode)
+(add-hook 'evil-local-mode-hook 'undo-tree-mode)
+
+
 ;; (use-package evil-leader)
+
 
 (use-package evil-magit
   :hook
   (with-editor-mode . evil-insert-state))
 
+
 (use-package evil-unimpaired
   :config
   (evil-unimpaired-mode 1))
+
 
 (use-package evil-snipe
   :config
   (evil-snipe-mode 1))
 
+
 (use-package evil-surround
   :config
   (global-evil-surround-mode 1))
+
 
 (use-package evil-org
   :after org
@@ -462,11 +465,6 @@ Inserted by installing 'org-mode' or when a release is made."
   (require 'evil-org-agenda)
   (evil-org-agenda-set-keys))
 
-;; (use-package evil-org-agenda
-;;   :after (org evil-org)
-;;   :defer nil
-;;   :config
-;;   (evil-org-agenda-set-keys))
 
 (use-package evil-snipe
   :init
@@ -474,25 +472,15 @@ Inserted by installing 'org-mode' or when a release is made."
   :config
   (evil-snipe-mode 1))
 
+
 (use-package evil-surround
   :config
   (global-evil-surround-mode 1))
 
-;;; Rainbow Delimiters
-;;
-;; Colours are pretty. :-)
-;; GitHub: https://github.com/istib/rainbow-blocks
-;;
-;; Usage:
-;; - command `rainbow-delimiters-mode` to toggle.
+
 (use-package rainbow-delimiters
-  ;; Enable for most programming languages:
   :hook
   (emacs-lisp-mode . rainbow-delimiters-mode))
-
-;; Alternative to helm: Ivy/Counsel/Swiper work together.
-;; h/t: https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/
-
 
 
 (use-package which-key
@@ -520,17 +508,19 @@ Inserted by installing 'org-mode' or when a release is made."
   (which-key-mode 1))
 
 
-
 ;; Taken from: https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/
 ;; GitHub: https://github.com/noctuid/general.el
 (use-package general
-  ;; TODO: use :general (general-def) rather than general-define-key
   :config
-  (general-define-key "C-'" 'avy-goto-word-1)
   (general-define-key
    ;; replace default keybindings
    "C-s" 'swiper)             ; search for string in current buffer
    ;; "M-x" 'counsel-M-x        ; replace default M-x with ivy backend
+  ;; ibuffer mode
+  ;;  this manages buffers in a similar manner to how Dired manages directories.
+  ;;
+  ;; from: http://tuhdo.github.io/emacs-tutor.html
+  (general-def "C-x C-b" 'ibuffer)
   (general-define-key
    :prefix "C-c"
    ;; bind to simple key press
@@ -540,8 +530,6 @@ Inserted by installing 'org-mode' or when a release is made."
     "f"   '(:ignore t :which-key "files")
     "ff"  'counsel-find-file  ; find file using ivy
     "fr"  'counsel-recentf    ; find recently edited files
-    ;; "p"   '(:ignore t :which-key "project")
-    "pf"  '(counsel-git :which-key "find file in git dir")        ; find file in git project
     "t"   '(:ignore t :which-key "load theme")
     "td" '(my-load-theme-dark :which-key "solarized dark")
     "tl" '(my-load-theme-light :which-key "solarized light"))
@@ -577,10 +565,10 @@ Inserted by installing 'org-mode' or when a release is made."
 
     "oc" 'rgoulter/cheatsheet-rifle))
 
+
 (use-package discover-my-major
  :general
  ("C-h C-m" 'discover-my-major))
-
 
 
 (use-package helpful
@@ -595,48 +583,14 @@ Inserted by installing 'org-mode' or when a release is made."
 
   ;; Look up *F*unctions (excludes macros).
   ;;
-  ;; By default, C-h F is bound to `Info-goto-emacs-command-node'. Helpful
-  ;; already links to the manual, if a function is referenced there.
+  ;; By default, C-h F is bound to `Info-goto-emacs-command-node'.
+  ;; Helpful already links to the manual, if a function is referenced there.
   ("C-h F" #'helpful-function)
 
   ;; Look up *C*ommands.
   ;;
   ;; By default, C-h C is bound to describe `describe-coding-system'.
   ("C-h C" #'helpful-command))
-
-
-
-;; For Editing Language: Haskell
-(use-package haskell-mode
- :hook
- (haskell-mode . turn-on-haskell-indent))
-
-
-
-;; Tuarag Mode
-;; For Editing Language: OCaml
-;; (use-package tuareg
-;;   :mode (("\\.ml[ily]?$" . tuareg-mode)
-;;          ("\\.topml$" . tuareg-mode)
-;;          ("\\.topscript$" . tuareg-mode)))
-
-;; Merlin
-;; OCaml completion
-;; For Editing Language: OCaml
-;; (use-package merlin
-;;   :init (setq ; merlin-use-auto-complete-mode t
-;;               merlin-error-after-save nil)
-;;
-;;   :config (add-hook 'tuareg-mode-hook 'merlin-mode)
-;;           ; See http://emacs.stackexchange.com/questions/12084/how-to-get-merlin-mode-to-work-in-emacs
-;;           ;(setq merlin-command 'opam)
-;;
-;;   ;; For some reason, having :bind here throws this out of whack. ???
-;;   ; :bind (("C-c <up>" . merlin-type-enclosing-go-up)
-;;   ;        ("C-c <down>" . merlin-type-enclosing-go-down))
-;;   )
-
-
 
 
 ;; from http://tuhdo.github.io/helm-intro.html
@@ -665,25 +619,13 @@ Inserted by installing 'org-mode' or when a release is made."
   (helm-mode 1))
 
 
-;; TODO: 2019-11-13: these genera-defs out of place compared to use-packages below.
-
-;; magit
 (use-package magit
   :general
   ("C-x g" 'magit-status))
 
 
-
 (use-package forge
   :after magit)
-
-
-;; ibuffer mode
-;;  this manages buffers like Dired manages directories.
-;;
-;; from: http://tuhdo.github.io/emacs-tutor.html
-(general-def "C-x C-b" 'ibuffer)
-
 
 
 (use-package solarized-theme
@@ -694,9 +636,7 @@ Inserted by installing 'org-mode' or when a release is made."
   (setq solarized-height-plus-1 1.0)
   (setq solarized-height-plus-2 1.0)
   (setq solarized-height-plus-3 1.0)
-  (setq solarized-height-plus-4 1.0)
-  :config
-  (load-theme 'solarized-dark))
+  (setq solarized-height-plus-4 1.0))
 
 
 (use-package smooth-scrolling
@@ -704,16 +644,7 @@ Inserted by installing 'org-mode' or when a release is made."
  (smooth-scrolling-mode 1))
 
 
-
-(use-package markdown-mode
-  :commands (markdown-mode gfm-mode)
-  :mode (("README\\.md\\'" . 'gfm-mode)
-         ("\\.md\\'" . 'markdown-mode)
-         ("\\.markdown\\'" . 'markdown-mode))
-  :init (setq markdown-command "multimarkdown"))
-
 (use-package writeroom-mode)
-
 
 
 (use-package projectile
@@ -731,18 +662,21 @@ Inserted by installing 'org-mode' or when a release is made."
   (projectile-mode-map "C-c p" 'projectile-command-map))
 
 
-
-(use-package scala-mode)
-
-
-
+;; Alternative to helm: Ivy/Counsel/Swiper work together.
+;; h/t: https://sam217pa.github.io/2016/09/02/how-to-build-your-own-spacemacs/
 (use-package ivy)
+
+
 (use-package counsel)
+
+
 (use-package swiper)
+
 
 (use-package doom-modeline
   :defer t
   :hook (after-init . doom-modeline-init))
+
 
 (use-package company
   :hook
@@ -753,14 +687,17 @@ Inserted by installing 'org-mode' or when a release is made."
   (setq company-minimum-prefix-length 3)
   (setq company-quickhelp-delay 0.1))
 
+
 (use-package flycheck
   :init (global-flycheck-mode t)
   :config
   (flycheck-package-setup))
 
+
 (use-package deft
   :init
   (setq deft-extensions '("org" "md" "txt")))
+
 
 (use-package zetteldeft
   :after deft
@@ -792,35 +729,54 @@ Inserted by installing 'org-mode' or when a release is made."
    "dN" '(zetteldeft-new-file-and-link :wk "new file & link")
    "dr" '(zetteldeft-file-rename :wk "rename")))
 
-;; 2018-11-08: TODO:
-;; Ohhh. e.g. a "Refiling Hydra" could be for the actions I do when refiling:
-;; - REFINE (+ next header)
-;; - REFILE ??
-;; - tag "backlog", or other popular tags
-;; - refile-to, and my popular places?
 
-;; (use-package lsp)
-;; in case you are using client which is available as part of lsp refer to the
-;; table bellow for the clients that are distributed as part of lsp-mode.el
-;; (require 'lsp-clients)
-;; (add-hook 'programming-mode-hook 'lsp)
+(use-package avy
+  :general
+  ("C-'" 'avy-goto-word-1))
+
+
 (use-package lsp-mode
-  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
   :init (setq lsp-keymap-prefix "C-c l")
-  :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
-         ;; (elm-mode . lsp)
-         (go-mode . lsp-deferred)
-         ;; if you want which-key integration
+  :hook ((go-mode . lsp-deferred)
+         (terraform-mode . lsp-deferred)
          (lsp-mode . lsp-enable-which-key-integration))
   :commands lsp)
+
+
 (use-package lsp-ui :commands lsp-ui-mode)
+
+
 (use-package company-lsp :commands company-lsp)
 ;; (add-hook 'lsp-mode-hook 'lsp-ui-mode)
 ;; (add-hook 'haskell-mode-hook 'flycheck-mode)
-;; (require 'lsp-haskell)
-;; (add-hook 'haskell-mode-hook 'lsp)
 
-;; (add-hook 'haskell-mode-hook 'intero-mode)
+
+(use-package diff-hl
+  :hook (magit-post-refresh . diff-hl-magit-post-refresh))
+
+
+(use-package restclient
+  :mode ("\\.rest\\'" . restclient-mode))
+
+
+(use-package haskell-mode
+ :hook
+ (haskell-mode . turn-on-haskell-indent))
+
+
+(use-package markdown-mode
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . 'gfm-mode)
+         ("\\.md\\'" . 'markdown-mode)
+         ("\\.markdown\\'" . 'markdown-mode))
+  :init (setq markdown-command "multimarkdown"))
+
+
+(use-package nix-mode
+  :mode "\\.nix\\'")
+
+
+(use-package scala-mode)
 
 
 ;; (straight-use-package
@@ -874,14 +830,6 @@ Inserted by installing 'org-mode' or when a release is made."
 ;;  :prefix "SPC"
 ;;  "r" 'hydra-patch-grid/body)
 
-(use-package diff-hl
-  :hook (magit-post-refresh . diff-hl-magit-post-refresh))
-
-
-(use-package restclient
-  :mode ("\\.rest\\'" . restclient-mode))
-
-
 
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (when (file-exists-p custom-file)
@@ -891,9 +839,9 @@ Inserted by installing 'org-mode' or when a release is made."
 (setq workstation-file (concat user-emacs-directory "local.el"))
 (when (file-exists-p workstation-file)
   (load workstation-file))
+
 ;; moving my org-mode code to a separate Emacs Lisp file.
 ;; This contains (use-package org ...) and other settings.
-(defvar cheatsheet-org-file nil "Path to a cheatsheet org file.")
 (let ((personal-settings "~/org/settings.el"))
  (when (file-exists-p personal-settings)
    (load-file personal-settings)))
@@ -901,7 +849,9 @@ Inserted by installing 'org-mode' or when a release is made."
 ;; https://www.emacswiki.org/emacs/Calc#toc14
 (defun calc-eval-region (arg beg end)
   "Calculate the region and display the result in the echo area.
-With prefix ARG non-nil, insert the result at the end of region."
+
+With prefix ARG non-nil, insert the result at the end of region.
+BEG for beginning, END for end."
   (interactive "P\nr")
   (let* ((expr (buffer-substring-no-properties beg end))
          (result (calc-eval expr)))
@@ -914,7 +864,8 @@ With prefix ARG non-nil, insert the result at the end of region."
 
 ;; h/t https://emacs.stackexchange.com/questions/34342/is-there-any-downside-to-setting-gc-cons-threshold-very-high-and-collecting-ga
 (run-with-idle-timer
- 5 nil
+ 5
+ nil
  (lambda ()
    (setq gc-cons-threshold gc-cons-threshold-original)
    (setq file-name-handler-alist file-name-handler-alist-original)
@@ -922,29 +873,21 @@ With prefix ARG non-nil, insert the result at the end of region."
    (makunbound 'file-name-handler-alist-original)
    (message "gc-cons-threshold and file-name-handler-alist restored")))
 
+
 (require 'dired+)
 
-(use-package nix-mode
-  :mode "\\.nix\\'")
 
 (require 'ansi-color)
 (defun colorize-compilation-buffer ()
+  "Function which colorises the compilation buffer."
   (toggle-read-only)
   (ansi-color-apply-on-region compilation-filter-start (point))
   (toggle-read-only))
 (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
 
-;; Add yasnippet support for all company backends
-;; https://github.com/syl20bnr/spacemacs/pull/179
-(defvar company-mode/enable-yas t
-  "Enable yasnippet for all backends.")
 
-(defun company-mode/backend-with-yas (backend)
-  (if (or (not company-mode/enable-yas) (and (listp backend) (member 'company-yasnippet backend)))
-      backend
-    (append (if (consp backend) backend (list backend))
-            '(:with company-yasnippet))))
+;; allow remembering risky variables
+(defun risky-local-variable-p (sym &optional _ignored) nil)
 
-;; (setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
 
 ;;; init.el ends here
