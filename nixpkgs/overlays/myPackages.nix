@@ -94,6 +94,7 @@ in
       lazygit
       less
       neovim
+      nix
       openssh
       procps
       python38Packages.powerline
