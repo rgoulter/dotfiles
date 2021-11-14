@@ -70,7 +70,9 @@ in
       ctags
       direnv
       docker
-      emacs
+      ((emacsPackagesFor emacs).emacsWithPackages (epkgs: [
+        epkgs.vterm
+      ]))
       emacs-all-the-icons-fonts
       exa
       fd
