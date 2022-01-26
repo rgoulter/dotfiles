@@ -46,29 +46,11 @@ Plugin 'romainl/flattened'
 " Plugins which add normal-mode keybindings "
 """""""""""""""""""""""""""""""""""""""""""""
 
-" More motions
-" Like f, but two letters
-Plugin 'goldfeld/vim-seek'
-" seek works only on one line; sneak is more versatile.
-" Plugin 'justinmk/vim-sneak'
-" I don't use easy-motion, but nice to have in Vimrc?
-Plugin 'easymotion/vim-easymotion'
-
-" a la ST, mulitcursor support. Looks cool.
-Plugin 'terryma/vim-multiple-cursors'
-
 " Some good bindings by Tim Pope to help with
 " quickfix and stuff
 Plugin 'tpope/vim-unimpaired'
 
 Plugin 'tpope/vim-surround'
-
-" For easy alignment
-Plugin 'junegunn/vim-easy-align'
-
-" tComment for comments.
-" (Alternative is NERDCommenter).
-Plugin 'tomtom/tcomment_vim'
 
 " Ctrl-P for fuzzy-finding of opening files.
 " (Replacing FuzzyFinder).
@@ -80,22 +62,10 @@ Plugin 'kien/ctrlp.vim'
 " Plugins which interact with external tools "
 """"""""""""""""""""""""""""""""""""""""""""""
 
-" YouCompleteMe replaces AutoComplPop, and other things,
-"  to provide modern completion capabilities in Vim.
-" Requires to be recompiled when it updates.
-" C-family code intelligence is a bit more complicated to install.
-" Plugin 'Valloric/YouCompleteMe'
-
-Plugin 'epeli/slimux'
-
-" Uses Ack as an improvement over grep searching.
-Plugin 'mileszs/ack.vim'
 Plugin 'rking/ag.vim'
 
 " VCS (HG, Git) Plugins for Vim
 Plugin 'tpope/vim-fugitive'
-Plugin 'phleet/vim-mercenary'
-Plugin 'vim-scripts/Lawrencium'
 
 
 
@@ -220,8 +190,6 @@ nmap <F4> :set list!<CR>
 " Show the Tagbar "Code Overview"
 nmap <F8> :TagbarToggle<CR>
 
-nmap <F9> :ProjectTreeToggle<CR>
-
 " From http://vim.wikia.com/wiki/Remove_unwanted_spaces
 " The variable _s is used to save and restore the last search pattern
 " The e flag is used in the substitute command so no error is shown if
@@ -250,17 +218,6 @@ colorscheme flattened_dark
 
 
 
-" Jenkins/Jelly files are XML (in lieu of not having Jelly syntax)
-au BufRead,BufNewFile *.jelly setfiletype xml
-
-
-
-" Have YouCompleteMe and eclim
-"  play nicely with each other.
-let g:EclimCompletionMethod = 'omnifunc'
-
-
-
 " https://vi.stackexchange.com/questions/9693/vim-omnicomplete-with-ruby-2-3-1
 autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
 autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
@@ -274,7 +231,7 @@ autocmd FileType ruby compiler ruby
 " As per (last updated Jan 22 2014)
 " http://stackoverflow.com/questions/14896327/ultisnips-and-youcompleteme
 
-" make YCM compatible with UltiSnips (using supertab)
+" make YouCompleteMe compatible with UltiSnips (using supertab)
 " As per supertab, use c-n, c-p to cycle autocomplete; use tab for Ultisnips
 let g:ycm_key_list_select_completion   = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
@@ -287,7 +244,7 @@ let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 
 
-" Customize YCM
+" Customize YouCompleteMe
 let g:ycm_complete_in_comments                          = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_collect_identifiers_from_tags_files           = 1
@@ -316,26 +273,6 @@ let g:airline_mode_map = {
 " Airline algo: tabs then spaces.
 let g:airline#extensions#whitespace#mixed_indent_algo = 2
 
-" Personally I love this idea,
-" but unsuitable for large codebase you didn't write yourself.
-let g:airline#extensions#whitespace#checks = []
-
-
-" For the Sessions plugin
-" Session autosaving is tedious.
-let g:session_autosave = 'no'
-let g:session_autoload = 'no'
-
-
-
-" For slimux
-" NOTE: Unfortunately, some OCaml plugin has mapping for
-" something else (goto-interface).
-map  <Leader>s :SlimuxREPLSendLine<CR>
-vmap <Leader>s :SlimuxREPLSendSelection<CR>
-map  <Leader>a :SlimuxShellLast<CR>
-map  <Leader>k :SlimuxSendKeysLast<CR>
-
 
 
 " Distraction free writing,
@@ -349,11 +286,3 @@ Limelight!
 endfunction
 
 let g:goyo_callbacks = [function('GoyoBefore'), function('GoyoAfter')]
-
-
-
-" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
-vmap <Enter> <Plug>(EasyAlign)
-
-" Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
-nmap <Leader>a <Plug>(EasyAlign)
