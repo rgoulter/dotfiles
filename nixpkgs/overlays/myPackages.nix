@@ -90,12 +90,15 @@ in
       k9s
       kakoune
       keepassxc
-      kitty
+      # 2022-01-23: macOS: kitty tests failed w/ permission issues
+      (kitty.overrideAttrs(oa: { doInstallCheck = false; }))
       kubectl
       lazydocker
       lazygit
       less
-      neovim
+      # 2021-01-26: macOS: neovim, temporarily broken
+      # https://github.com/NixOS/nixpkgs/pull/155688
+      (wrapNeovim (neovim-unwrapped.overrideAttrs (oa: { NIX_LDFLAGS = []; })) { })
       nix
       openssh
       procps
