@@ -225,7 +225,6 @@ Inserted by installing 'org-mode' or when a release is made."
 
 (straight-use-package 'evil)
 (straight-use-package 'evil-collection)
-(straight-use-package 'evil-leader)
 (straight-use-package 'evil-ledger)
 (straight-use-package 'evil-nerd-commenter)
 (straight-use-package 'evil-snipe)
@@ -234,8 +233,6 @@ Inserted by installing 'org-mode' or when a release is made."
  '(evil-unimpaired :type git :host github :repo "zmaas/evil-unimpaired"))
 (straight-use-package
  '(evil-org-mode :type git :host github :repo "Somelauw/evil-org-mode"))
-(straight-use-package 'evil-snipe)
-(straight-use-package 'evil-surround)
 
 (straight-use-package 'flycheck)
 (straight-use-package 'flycheck-package)
@@ -271,13 +268,9 @@ Inserted by installing 'org-mode' or when a release is made."
 (straight-use-package 'magit)
 (straight-use-package 'forge)
 
-(straight-use-package 'github-review)
-
 (straight-use-package 'projectile)
 
 (straight-use-package 'which-key)
-
-(straight-use-package 'org-jira)
 
 (straight-use-package
  '(discover-my-major :type git :host github :repo "jguenther/discover-my-major"))
@@ -341,12 +334,8 @@ Inserted by installing 'org-mode' or when a release is made."
 
 (straight-use-package 'groovy-mode)
 
-(straight-use-package 'elixir-mode)
-
 (straight-use-package 'nix-mode)
 (straight-use-package 'nix-sandbox)
-
-(straight-use-package 'tide)
 
 (straight-use-package 'writeroom-mode)
 
@@ -356,10 +345,6 @@ Inserted by installing 'org-mode' or when a release is made."
 (straight-use-package 'yasnippet-snippets)
 
 (straight-use-package 'realgud)
-(straight-use-package '(realgud-node-inspect :type git :host github :repo "realgud/realgud-node-inspect"))
-(straight-use-package '(realgud-trepan-ni :type git :host github :repo "realgud/realgud-trepan-ni"))
-
-(straight-use-package 'indium)
 
 (straight-use-package 'haskell-mode)
 
@@ -384,6 +369,7 @@ Inserted by installing 'org-mode' or when a release is made."
 
 (straight-use-package 'feature-mode)
 
+;; Colour names in buffers
 (straight-use-package 'rainbow-mode)
 
 (straight-use-package 'tldr)
