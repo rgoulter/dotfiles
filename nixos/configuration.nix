@@ -31,8 +31,17 @@
     open-dyslexic
   ];
 
-  # https://github.com/NixOS/nix/issues/2208
-  nix.extraOptions = "keep-outputs = true";
+  nix = {
+    # https://github.com/NixOS/nix/issues/2208
+    extraOptions = ''
+      keep-outputs = true
+      experimental-features = nix-command flakes
+    '';
+
+    package = pkgs.nixUnstable;
+
+    trustedUsers = [ "root" "rgoulter" ];
+  };
 
   nixpkgs.config.allowUnfree = true;
 
