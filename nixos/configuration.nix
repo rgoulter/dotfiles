@@ -37,6 +37,7 @@
   nixpkgs.config.allowUnfree = true;
 
   programs.ssh.startAgent = true;
+  programs.steam.enable = true;
 
   # https://nixos.wiki/wiki/PipeWire
   # rtkit is optional but recommended
