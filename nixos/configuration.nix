@@ -21,8 +21,9 @@
         };
       };
     };
+    # opengl.enable = true;
     pulseaudio.enable = false;
-  }
+  };
 
   fonts.fonts = with pkgs; [
     noto-fonts
