@@ -23,7 +23,7 @@ alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %
 #
 # This is used by git-init
 # https://git-scm.com/docs/git-init#_template_directory
-set -x GIT_TEMPLATE_DIR ~/.git_template/
+# set -x GIT_TEMPLATE_DIR ~/.git_template/
 
 
 # HG, one-liner logs.
