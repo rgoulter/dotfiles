@@ -15,7 +15,7 @@ let
   #  e.g. "alacritty/alacritty.yml" for ~/.config/alacritty/alacritty.yml
   # The attribute value is the path to the dotfile in this repo.
   configFilesToLink = {
-    "alacritty/alacritty.yml" = ./alacritty.yml;
+    "alacritty/alacritty.yml" = ./alacritty/alacritty.yml;
     "emacs-rgoulter/init.el"  = ./emacs.el;
     "emacs-rgoulter/straight/versions/default.el"  = ./emacs.d/straight/versions/default.el;
     "fish/coloured-manpages.fish"  = ./fish/coloured-manpages.fish;
