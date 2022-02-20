@@ -1,0 +1,49 @@
+{
+  "nodes": {
+    "home-manager": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1641563473,
+        "narHash": "sha256-JsYhJqw3YUHXCKtc6h/O8+CmfFmt5ow3eMC4nswZ35g=",
+        "owner": "FlorianFranzen",
+        "repo": "home-manager",
+        "rev": "4e97b01b2737bb0f39c18a65d87dd98659391b97",
+        "type": "github"
+      },
+      "original": {
+        "owner": "FlorianFranzen",
+        "repo": "home-manager",
+        "rev": "4e97b01b2737bb0f39c18a65d87dd98659391b97",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1645013224,
+        "narHash": "sha256-b7OEC8vwzJv3rsz9pwnTX2LQDkeOWz2DbKypkVvNHXc=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "b66b39216b1fef2d8c33cc7a5c72d8da80b79970",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "home-manager": "home-manager",
+        "nixpkgs": "nixpkgs"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
