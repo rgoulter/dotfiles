@@ -1,48 +1,66 @@
 { config, pkgs, ... }:
 
+let
+  # Using the submodule in this dotfiles repo would make
+  # require a more awkward flake URI.
+  vundleRepoSrc = pkgs.fetchFromGitHub {
+    owner = "VundleVim";
+    repo = "Vundle.vim";
+    rev = "cfd3b2d388a8c2e9903d7a9d80a65539aabfe933";
+    sha256 = "sha256-OCCXgMVWj/aBWLGaZmMr+cD546+QgynmEN/ECp1r08Q=";
+  };
+
+  # Attribute set for dotfiles in this repo to link into ~/.config.
+  # The attribute name is for ~/.config/$attrSetName,
+  #  e.g. "alacritty/alacritty.yml" for ~/.config/alacritty/alacritty.yml
+  # The attribute value is the path to the dotfile in this repo.
+  configFilesToLink = {
+    "alacritty/alacritty.yml" = ./alacritty.yml;
+    "emacs-rgoulter/init.el"  = ./emacs.el;
+    "emacs-rgoulter/straight/versions/default.el"  = ./emacs.d/straight/versions/default.el;
+    "fish/coloured-manpages.fish"  = ./fish/coloured-manpages.fish;
+    "fish/config.fish"  = ./fish/config.fish;
+    "fish/fishfile"     = ./fish/fishfile;
+    "fish/keybindings.txt"        = ./fish/keybindings.txt;
+    "fish/functions/fisher.fish"  = ./fish/functions/fisher.fish;
+    "fish/functions/fish_greeting.fish"  = ./fish/functions/fish_greeting.fish;
+    "git/common.inc"   = ./git/common.inc;
+    "kitty/kitty.conf" = ./kitty/kitty.conf;
+    "powerline/themes/tmux/default.json" = ./powerline/themes/tmux/default.json;
+    "nvim/init.vim" = ./vimrc;
+    "starship.toml" = ./starship.toml;
+  };
+
+  # Attribute set for dotfiles in this repo to link into home directory.
+  # The attribute name is for ~/$attrSetName,
+  #  e.g. ".hgrc" for ~/.hgrc.
+  # The attribute value is the path to the dotfile in this repo.
+  homeFilesToLink = {
+    ".emacs-profiles.el" = ./emacs-profiles.el;
+    ".gvimrc" = ./gvimrc;
+    ".hgrc.d/fancy.style" = ./hgrc.d/fancy.style;
+    ".hgrc"   = ./hgrc;
+    ".tmux.conf" = ./tmux.conf;
+    ".nvim/after/ftplugin/org.vim" = ./vim/after/ftplugin/org.vim;
+    ".nvim/bundle/Vundle.vim" = vundleRepoSrc;
+
+    ".vimrc" = ./vimrc;
+    ".vim/after/ftplugin/org.vim" = ./vim/after/ftplugin/org.vim;
+    ".vim/bundle/Vundle.vim" = vundleRepoSrc;
+  };
+
+  # Function to help map attrs for symlinking home.file, xdg.configFile
+  # e.g. from { ".hgrc" = ./hgrc; } to { ".hgrc".source = ./hgrc; }
+  toSource = configDirName: dotfilesPath: { source = dotfilesPath; };
+in
 {
+  # Symlink files under ~, e.g. ~/.hgrc
+  home.file = pkgs.lib.attrsets.mapAttrs toSource homeFilesToLink;
+
   home.stateVersion = "22.05";
 
   programs.home-manager.enable = true;
 
-  xdg.configFile."alacritty/alacritty.yml".source = ./alacritty.yml;
-  xdg.configFile."emacs-rgoulter/init.el".source  = ./emacs.el;
-  xdg.configFile."emacs-rgoulter/straight/versions/default.el".source  = ./emacs.d/straight/versions/default.el;
-  xdg.configFile."fish/coloured-manpages.fish".source  = ./fish/coloured-manpages.fish;
-  xdg.configFile."fish/config.fish".source  = ./fish/config.fish;
-  xdg.configFile."fish/fishfile".source     = ./fish/fishfile;
-  xdg.configFile."fish/keybindings.txt".source        = ./fish/keybindings.txt;
-  xdg.configFile."fish/functions/fisher.fish".source  = ./fish/functions/fisher.fish;
-  xdg.configFile."fish/functions/fish_greeting.fish".source  = ./fish/functions/fish_greeting.fish;
-  xdg.configFile."git/common.inc".source   = ./git/common.inc;
-
-  xdg.configFile."kitty/kitty.conf".source = ./kitty/kitty.conf;
-  xdg.configFile."powerline/themes/tmux/default.json".source = ./powerline/themes/tmux/default.json;
-  xdg.configFile."nvim/init.vim".source = ./vimrc;
-  xdg.configFile."starship.toml".source = ./starship.toml;
-
-  home.file.".emacs-profiles.el".source = ./emacs-profiles.el;
-  home.file.".gvimrc".source = ./gvimrc;
-  home.file.".hgrc.d/fancy.style".source = ./hgrc.d/fancy.style;
-  home.file.".hgrc".source   = ./hgrc;
-  home.file.".tmux.conf".source = ./tmux.conf;
-
-  home.file.".nvim/after/ftplugin/org.vim".source = ./vim/after/ftplugin/org.vim;
-  # Using the submodule in this dotfiles repo would make
-  # require a more awkward flake URI.
-  home.file.".nvim/bundle/Vundle.vim".source = pkgs.fetchFromGitHub {
-    owner = "VundleVim";
-    repo = "Vundle.vim";
-    rev = "cfd3b2d388a8c2e9903d7a9d80a65539aabfe933";
-    sha256 = "sha256-OCCXgMVWj/aBWLGaZmMr+cD546+QgynmEN/ECp1r08Q=";
-  };
-
-  home.file.".vimrc".source = ./vimrc;
-  home.file.".vim/after/ftplugin/org.vim".source = ./vim/after/ftplugin/org.vim;
-  home.file.".vim/bundle/Vundle.vim".source = pkgs.fetchFromGitHub {
-    owner = "VundleVim";
-    repo = "Vundle.vim";
-    rev = "cfd3b2d388a8c2e9903d7a9d80a65539aabfe933";
-    sha256 = "sha256-OCCXgMVWj/aBWLGaZmMr+cD546+QgynmEN/ECp1r08Q=";
-  };
+  # Symlink files under ~/.config, e.g. ~/.config/alacritty/alacritty.yml
+  xdg.configFile = pkgs.lib.attrsets.mapAttrs toSource configFilesToLink;
 }
