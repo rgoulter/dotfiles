@@ -13,6 +13,9 @@
     ~/.config/fish:
         create: true
         path: fish
+    ~/.config/git/common.inc:
+        create: true
+        path: git/common.inc
     ~/.config/kitty:
         create: true
         path: kitty
