@@ -73,9 +73,6 @@ Plugin 'tpope/vim-fugitive'
 " Other plugins which add useful functionality "
 """"""""""""""""""""""""""""""""""""""""""""""""
 
-Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-session'
-
 " Distraction free writing
 " Use :Goyo or :Goyo 80,
 " As well as Limelight [0.0, 1.0], Limelight!!
@@ -105,9 +102,6 @@ Plugin 'dag/vim-fish'
 " Plugin 'sukima/xmledit'
 " JSON
 Plugin 'elzr/vim-json'
-
-" nixpkgs nix syntax
-Plugin 'spwhitt/vim-nix'
 
 " Ruby
 Plugin 'vim-ruby/vim-ruby'
