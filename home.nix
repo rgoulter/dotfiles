@@ -1,6 +1,18 @@
 { config, pkgs, ... }:
 
 let
+  # e.g. given "alacritty/alacritty.yml",
+  # return the attrset { "alacritty/alacritty.yml" = ./alacritty/alacritty.yml; }.
+  genAttrsForSimpleLink = fileName: ./. + ("/" + fileName);
+
+  # e.g. given "hgrc"
+  # return the attrset { ".hgrc" = ./hgrc; }.
+  genAttrsForSimpleDotLink = fileName: { ".${fileName}" = ./. + ("/" + fileName); };
+
+  # Function to help map attrs for symlinking home.file, xdg.configFile
+  # e.g. from { ".hgrc" = ./hgrc; } to { ".hgrc".source = ./hgrc; }
+  toSource = configDirName: dotfilesPath: { source = dotfilesPath; };
+
   # Using the submodule in this dotfiles repo would make
   # require a more awkward flake URI.
   vundleRepoSrc = pkgs.fetchFromGitHub {
@@ -10,48 +22,63 @@ let
     sha256 = "sha256-OCCXgMVWj/aBWLGaZmMr+cD546+QgynmEN/ECp1r08Q=";
   };
 
+  # List of dotfiles where the path to link under
+  # ~/.config/ matches the path in the dotfiles repo.
+  # e.g. ~/.config/alacritty/alacritty.yml matches ./alacritty/alacritty.yml.
+  simpleConfigFilesToLinkList = [
+    "alacritty/alacritty.yml"
+    "fish/coloured-manpages.fish"
+    "fish/config.fish"
+    "fish/fishfile"
+    "fish/keybindings.txt"
+    "fish/functions/fisher.fish"
+    "fish/functions/fish_greeting.fish"
+    "git/common.inc"
+    "kitty/kitty.conf"
+    "powerline/themes/tmux/default.json"
+    "starship.toml"
+  ];
+
+  # Files where the symlinks aren't following a nice convention.
+  unconventionalConfigFilesToLink = {
+    "emacs-rgoulter/init.el"  = ./emacs.el;
+    "emacs-rgoulter/straight/versions/default.el"  = ./emacs.d/straight/versions/default.el;
+    "nvim/init.vim" = ./vimrc;
+  };
+
+  # e.g. "gvimrc" to link "~/.gvimrc" to ./gvimrc
+  simpleHomeFilesToLinkList = [
+    "emacs-profiles.el"
+    "gvimrc"
+    "hgrc.d/fancy.style"
+    "hgrc"
+    "tmux.conf"
+
+    "vimrc"
+    "vim/after/ftplugin/org.vim"
+  ];
+
+  unconventionalHomeFilesToLink = {
+    ".nvim/after/ftplugin/org.vim" = ./vim/after/ftplugin/org.vim;
+    ".nvim/bundle/Vundle.vim" = vundleRepoSrc;
+    ".vim/bundle/Vundle.vim" = vundleRepoSrc;
+  };
+
   # Attribute set for dotfiles in this repo to link into ~/.config.
   # The attribute name is for ~/.config/$attrSetName,
   #  e.g. "alacritty/alacritty.yml" for ~/.config/alacritty/alacritty.yml
   # The attribute value is the path to the dotfile in this repo.
-  configFilesToLink = {
-    "alacritty/alacritty.yml" = ./alacritty/alacritty.yml;
-    "emacs-rgoulter/init.el"  = ./emacs.el;
-    "emacs-rgoulter/straight/versions/default.el"  = ./emacs.d/straight/versions/default.el;
-    "fish/coloured-manpages.fish"  = ./fish/coloured-manpages.fish;
-    "fish/config.fish"  = ./fish/config.fish;
-    "fish/fishfile"     = ./fish/fishfile;
-    "fish/keybindings.txt"        = ./fish/keybindings.txt;
-    "fish/functions/fisher.fish"  = ./fish/functions/fisher.fish;
-    "fish/functions/fish_greeting.fish"  = ./fish/functions/fish_greeting.fish;
-    "git/common.inc"   = ./git/common.inc;
-    "kitty/kitty.conf" = ./kitty/kitty.conf;
-    "powerline/themes/tmux/default.json" = ./powerline/themes/tmux/default.json;
-    "nvim/init.vim" = ./vimrc;
-    "starship.toml" = ./starship.toml;
-  };
+  configFilesToLink =
+    (pkgs.lib.attrsets.genAttrs simpleConfigFilesToLinkList genAttrsForSimpleLink) //
+    unconventionalConfigFilesToLink;
 
   # Attribute set for dotfiles in this repo to link into home directory.
   # The attribute name is for ~/$attrSetName,
   #  e.g. ".hgrc" for ~/.hgrc.
   # The attribute value is the path to the dotfile in this repo.
-  homeFilesToLink = {
-    ".emacs-profiles.el" = ./emacs-profiles.el;
-    ".gvimrc" = ./gvimrc;
-    ".hgrc.d/fancy.style" = ./hgrc.d/fancy.style;
-    ".hgrc"   = ./hgrc;
-    ".tmux.conf" = ./tmux.conf;
-    ".nvim/after/ftplugin/org.vim" = ./vim/after/ftplugin/org.vim;
-    ".nvim/bundle/Vundle.vim" = vundleRepoSrc;
-
-    ".vimrc" = ./vimrc;
-    ".vim/after/ftplugin/org.vim" = ./vim/after/ftplugin/org.vim;
-    ".vim/bundle/Vundle.vim" = vundleRepoSrc;
-  };
-
-  # Function to help map attrs for symlinking home.file, xdg.configFile
-  # e.g. from { ".hgrc" = ./hgrc; } to { ".hgrc".source = ./hgrc; }
-  toSource = configDirName: dotfilesPath: { source = dotfilesPath; };
+  homeFilesToLink =
+    (pkgs.lib.lists.foldr (a: b: a // b) {} (map genAttrsForSimpleDotLink simpleHomeFilesToLinkList)) //
+    unconventionalHomeFilesToLink;
 in
 {
   # Symlink files under ~, e.g. ~/.hgrc
