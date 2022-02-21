@@ -48,9 +48,16 @@
   programs.ssh.startAgent = true;
   programs.steam.enable = true;
 
-  # https://nixos.wiki/wiki/PipeWire
-  # rtkit is optional but recommended
-  security.rtkit.enable = true;
+  security = {
+    pam.u2f = {
+      debug = true;
+      enable = true;
+    };
+
+    # https://nixos.wiki/wiki/PipeWire
+    # rtkit is optional but recommended
+    rtkit.enable = true;
+  };
 
   services = {
     # Enable the OpenSSH daemon.
