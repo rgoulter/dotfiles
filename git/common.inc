@@ -16,5 +16,7 @@
 	discard = checkout --
 	uncommit = reset --mixed HEAD~
 	amend = commit --amend
+[init]
+	defaultBranch = "master"
 [merge]
 	conflictStyle = diff3
