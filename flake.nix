@@ -16,22 +16,23 @@
     };
   };
 
-  outputs = { home-manager, ... }:
-    let
-      system = "x86_64-linux";
-      username = "rgoulter";
-    in {
-      homeConfigurations."${username}-${system}" = home-manager.lib.homeManagerConfiguration {
-        inherit system username;
+  outputs = { home-manager, ... }: {
+      homeConfigurations = {
+        "richardgoulter-x86_64-darwin" = home-manager.lib.homeManagerConfiguration {
+          configuration = import ./home.nix;
+          homeDirectory = "/Users/richardgoulter";
+          stateVersion = "22.05";
+          system = "x86_64-darwin";
+          username = "richard";
+        };
 
-        configuration = import ./home.nix;
-
-        homeDirectory = "/home/${username}";
-
-        # Update the state version as needed.
-        # See the changelog here:
-        # https://nix-community.github.io/home-manager/release-notes.html
-        stateVersion = "22.05";
+        "rgoulter-x86_64-linux" = home-manager.lib.homeManagerConfiguration {
+          configuration = import ./home.nix;
+          homeDirectory = "/home/rgoulter";
+          stateVersion = "22.05";
+          system = "x86_64-linux";
+          username = "rgoulter";
+        };
       };
     };
 }
