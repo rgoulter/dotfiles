@@ -23,7 +23,7 @@
           homeDirectory = "/Users/richardgoulter";
           stateVersion = "22.05";
           system = "x86_64-darwin";
-          username = "richard";
+          username = "richardgoulter";
         };
 
         "rgoulter-x86_64-linux" = home-manager.lib.homeManagerConfiguration {
