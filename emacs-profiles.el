@@ -2,4 +2,4 @@
  ("spacemacs" . ((user-emacs-directory . "~/spacemacs")))
  ("prelude" . ((user-emacs-directory . "~/prelude")))
  ("doom" . ((user-emacs-directory . "~/doom-emacs")
-            (env . (("DOOMDIR" . "~/.doom.d"))))))
+            (env . (("DOOMDIR" . "~/.config/doom"))))))

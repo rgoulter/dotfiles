@@ -27,6 +27,9 @@ let
   # e.g. ~/.config/alacritty/alacritty.yml matches ./alacritty/alacritty.yml.
   simpleConfigFilesToLinkList = [
     "alacritty/alacritty.yml"
+    "doom/config.el"
+    "doom/init.el"
+    "doom/packages.el"
     "fish/coloured-manpages.fish"
     "fish/config.fish"
     "fish/fishfile"
