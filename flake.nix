@@ -3,17 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    home-manager = {
-      # https://github.com/nix-community/home-manager/pull/2461
-      inputs.nixpkgs.follows = "nixpkgs";
-      # Fork which allows using `nix profile` instead of `nix-env`
-      # https://github.com/FlorianFranzen/home-manager/commit/4e97b01b2737bb0f39c18a65d87dd98659391b97
-      # url = {
-      type  = "github";
-      owner = "FlorianFranzen";
-      repo  = "home-manager";
-      rev   = "4e97b01b2737bb0f39c18a65d87dd98659391b97";
-    };
+    home-manager.url = "github:nix-community/home-manager";
   };
 
   outputs = { home-manager, ... }: {
