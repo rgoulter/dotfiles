@@ -526,16 +526,16 @@ Inserted by installing 'org-mode' or when a release is made."
 
     ;; simple command
     "/"   'counsel-ag
-    "TAB" '(evil-switch-to-windows-last-buffer :which-key "prev buffer")
+    "`" '(evil-switch-to-windows-last-buffer :which-key "prev buffer")
     "SPC" '(avy-goto-word-or-subword-1  :which-key "go to char")
 
-    ";"   'helm-M-x
+    ":"   'helm-M-x
 
     "cx" 'clipboard-kill-region
     "cc" 'clipboard-kill-ring-save
     "cv" 'clipboard-yank
 
-    "g" 'magit-status
+    "gg" 'magit-status
 
     "p" 'projectile-command-map
 
