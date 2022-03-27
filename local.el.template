@@ -29,6 +29,8 @@
 ;;   (setenv "PGPASSWORD" "postgres")
 ;;   (sql-connect "postgres.local"))  ; <-- should agree with the key in sql-connection-alist
 
+;; (projectile-add-known-project "")
+
 ;; (defun rgoulter/magit.repoX ()
 ;;   "Convenience command which opens magit
 ;; in repoX dir."
