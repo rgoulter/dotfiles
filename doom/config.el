@@ -42,6 +42,16 @@
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
 
+(defvar workstation-file "File location for a local Emacs Lisp configuration file")
+(setq workstation-file (concat user-emacs-directory "local.el"))
+(when (file-exists-p workstation-file)
+  (load workstation-file))
+
+;; moving my org-mode code to a separate Emacs Lisp file.
+;; This contains (use-package org ...) and other settings.
+(let ((personal-settings "~/org/settings.el"))
+ (when (file-exists-p personal-settings)
+   (load-file personal-settings)))
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
