@@ -501,23 +501,7 @@ Inserted by installing 'org-mode' or when a release is made."
    ;; replace default keybindings
    "C-s" 'swiper)             ; search for string in current buffer
    ;; "M-x" 'counsel-M-x        ; replace default M-x with ivy backend
-  ;; ibuffer mode
-  ;;  this manages buffers in a similar manner to how Dired manages directories.
-  ;;
-  ;; from: http://tuhdo.github.io/emacs-tutor.html
-  (general-def "C-x C-b" 'ibuffer)
-  (general-define-key
-   :prefix "C-c"
-   ;; bind to simple key press
-    "b"   'ivy-switch-buffer  ; change buffer, chose using ivy
-    "/"   'counsel-git-grep   ; find string in git project
-    ;; bind to double key press
-    "f"   '(:ignore t :which-key "files")
-    "ff"  'counsel-find-file  ; find file using ivy
-    "fr"  'counsel-recentf    ; find recently edited files
-    "t"   '(:ignore t :which-key "load theme")
-    "td" '(my-load-theme-dark :which-key "solarized dark")
-    "tl" '(my-load-theme-light :which-key "solarized light"))
+
   (general-define-key
    :states '(normal visual insert emacs)
    :prefix "SPC"
@@ -530,6 +514,12 @@ Inserted by installing 'org-mode' or when a release is made."
     "SPC" '(avy-goto-word-or-subword-1  :which-key "go to char")
 
     ":"   'helm-M-x
+
+    ;; ibuffer mode
+    ;;  this manages buffers in a similar manner to how Dired manages directories.
+    ;;
+    ;; from: http://tuhdo.github.io/emacs-tutor.html
+    "bi" 'ibuffer
 
     "cx" 'clipboard-kill-region
     "cc" 'clipboard-kill-ring-save
@@ -546,9 +536,7 @@ Inserted by installing 'org-mode' or when a release is made."
     "ar" 'ranger
     "ad" 'dired
     "at" 'tldr
-    "am" 'woman
-
-    "oc" 'rgoulter/cheatsheet-rifle))
+    "am" 'woman))
 
 
 (use-package discover-my-major
@@ -604,9 +592,7 @@ Inserted by installing 'org-mode' or when a release is made."
   (helm-mode 1))
 
 
-(use-package magit
-  :general
-  ("C-x g" 'magit-status))
+(use-package magit)
 
 
 (use-package forge
