@@ -56,6 +56,12 @@
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'post-forward-angle-brackets)
 
+;; Support USB HID keys
+(general-define-key
+ "<XF86Cut>" 'clipboard-kill-region
+ "<XF86Copy>" 'clipboard-kill-ring-save
+ "<XF86Paste>" 'clipboard-yank)
+
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
 ;;
