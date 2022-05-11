@@ -9,6 +9,8 @@
 (setq user-full-name "Richard Goulter"
       user-mail-address "richard.goulter@gmail.com")
 
+(setq epa-pinentry-mode 'ask)
+
 ;; Doom exposes five (optional) variables for controlling fonts in Doom:
 ;;
 ;; - `doom-font' -- the primary font to use
