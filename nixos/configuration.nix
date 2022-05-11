@@ -21,7 +21,6 @@
         };
       };
     };
-    # opengl.enable = true;
     pulseaudio.enable = false;
   };
 
@@ -49,10 +48,7 @@
   programs.steam.enable = true;
 
   security = {
-    pam.u2f = {
-      debug = true;
-      enable = true;
-    };
+    pam.u2f.enable = true;
 
     # https://nixos.wiki/wiki/PipeWire
     # rtkit is optional but recommended
@@ -153,8 +149,13 @@ SUBSYSTEMS=="usb", ATTRS{idVendor}=="1eaf", ATTRS{idProduct}=="0003", TAG+="uacc
   users.extraGroups.vboxusers.members = ["rgoulter"];
 
   virtualisation = {
-    docker.enable = true;
     libvirtd.enable = true;
+    podman = {
+      enable = true;
+
+      # Create a `docker` alias for podman, to use it as a drop-in replacement
+      dockerCompat = true;
+    };
     virtualbox.host.enable = true;
   };
 }
