@@ -105,9 +105,7 @@
   :config
   (map! :leader :desc "Ranger" :n "om" #'ranger))
 
-(use-package! deft)
 (use-package! zetteldeft
-  :after evil
   :config
   ;; If creating more than one note in a minute
   ;; using zetteldeft, the default id generation
