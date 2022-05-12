@@ -96,3 +96,40 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
+(use-package! discover-my-major
+ :config
+ (map! :leader :n "h C-m" 'discover-my-major))
+
+(use-package! ranger
+  :config
+  (map! :leader :desc "Ranger" :n "om" #'ranger))
+
+(use-package! deft)
+(use-package! zetteldeft
+  :after evil
+  :config
+  ;; If creating more than one note in a minute
+  ;; using zetteldeft, the default id generation
+  ;; gives them the same ID.
+  (setq zetteldeft-id-format "%Y-%m-%d-%H%M%S")
+  :general
+  (:prefix doom-leader-key
+   :keymaps 'normal
+   "d"  '(nil :wk "deft")
+   "dd" '(deft :wk "deft")
+   "dD" '(zetteldeft-deft-new-search :wk "new search")
+   "dR" '(deft-refresh :wk "refresh")
+   "ds" '(zetteldeft-search-at-point :wk "search at point")
+   "dc" '(zetteldeft-search-current-id :wk "search current id")
+   "df" '(zetteldeft-follow-link :wk "follow link")
+   "dF" '(zetteldeft-avy-file-search-ace-window :wk "avy file other window")
+   "dl" '(zetteldeft-avy-link-search :wk "avy link search")
+   "dt" '(zetteldeft-avy-tag-search :wk "avy tag search")
+   "dT" '(zetteldeft-tag-buffer :wk "tag list")
+   "di" '(zetteldeft-find-file-id-insert :wk "insert id")
+   "dI" '(zetteldeft-find-file-full-title-insert :wk "insert full title")
+   "do" '(zetteldeft-find-file :wk "find file")
+   "dn" '(zetteldeft-new-file :wk "new file")
+   "dN" '(zetteldeft-new-file-and-link :wk "new file & link")
+   "dr" '(zetteldeft-file-rename :wk "rename")))
