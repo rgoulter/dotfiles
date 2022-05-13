@@ -100,6 +100,20 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+(use-package! blamer
+  :general ("s-i" #'blamer-show-commit-info)
+  :defer 20
+  :custom
+  (blamer-idle-time 0.3)
+  (blamer-min-offset 70)
+  :custom-face
+  (blamer-face ((t :foreground "#7a88cf"
+                    :background nil
+                    :height 140
+                    :italic t)))
+  :config
+  (global-blamer-mode 1))
+
 (use-package! discover-my-major
  :config
  (map! :leader :n "h C-m" 'discover-my-major))
