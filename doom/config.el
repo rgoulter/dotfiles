@@ -108,6 +108,9 @@
   :config
   (map! :leader :desc "Ranger" :n "om" #'ranger))
 
+(use-package restclient
+  :mode ("\\.rest\\'" . restclient-mode))
+
 (use-package! zetteldeft
   :config
   ;; If creating more than one note in a minute
