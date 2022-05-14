@@ -12,8 +12,6 @@
 ;; M-SPC gets captured by Gnome
 (setq doom-leader-alt-key "C-SPC")
 
-(setq epa-pinentry-mode 'ask)
-
 ;; Doom exposes five (optional) variables for controlling fonts in Doom:
 ;;
 ;; - `doom-font' -- the primary font to use
@@ -117,6 +115,10 @@
 (use-package! discover-my-major
  :config
  (map! :leader :n "h C-m" 'discover-my-major))
+
+(after! epa
+  ;; don't use minibuffer
+  (setq epa-pinentry-mode 'ask))
 
 (use-package! ranger
   :config
