@@ -36,6 +36,8 @@ let
   # e.g. ~/.config/alacritty/alacritty.yml matches ./alacritty/alacritty.yml.
   simpleConfigFilesToLinkList = [
     "alacritty/alacritty.yml"
+    "chemacs/profiles.el"
+    "chemacs/profile"
     "doom/config.el"
     "doom/init.el"
     "doom/packages.el"
@@ -60,7 +62,6 @@ let
 
   # e.g. "gvimrc" to link "~/.gvimrc" to ./gvimrc
   simpleHomeFilesToLinkList = [
-    "emacs-profiles.el"
     "gvimrc"
     "hgrc.d/fancy.style"
     "hgrc"
