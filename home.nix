@@ -1,30 +1,14 @@
 { config, pkgs, ... }:
 
 let
-  chemacs2 =
-    pkgs.fetchFromGitHub {
-      owner = "plexus";
-      repo = "chemacs2";
-      rev = "868388321169eddf6dcb99f9b0d3ce734897b3de";
-      sha256 = "XsJ2hHoQGoDbM7J+VvO1u0+f+jJCQqcUqQjzvTlnnG0=";
-    };
+  chemacs2 = pkgs.fetchFromGitHub (pkgs.lib.importJSON ./plexus-chemacs2.json);
 
   tpm =
-    pkgs.fetchFromGitHub {
-      owner = "tmux-plugins";
-      repo = "tpm";
-      rev = "b699a7e01c253ffb7818b02d62bce24190ec1019";
-      sha256 = "aGRy5ah1Dxb+94QoIkOy0nKlmAOFq2y5xnf2B852JY0=";
-    };
+    pkgs.fetchFromGitHub (pkgs.lib.importJSON ./tmux-plugins-tpm.json);
 
   # Using the submodule in this dotfiles repo would make
   # require a more awkward flake URI.
-  vundleRepoSrc = pkgs.fetchFromGitHub {
-    owner = "VundleVim";
-    repo = "Vundle.vim";
-    rev = "cfd3b2d388a8c2e9903d7a9d80a65539aabfe933";
-    sha256 = "sha256-OCCXgMVWj/aBWLGaZmMr+cD546+QgynmEN/ECp1r08Q=";
-  };
+  vundleRepoSrc = pkgs.fetchFromGitHub (pkgs.lib.importJSON ./vundlevim-vundle.vim.json);
 
   # e.g. given "alacritty/alacritty.yml",
   # return the attrset { "alacritty/alacritty.yml" = ./alacritty/alacritty.yml; }.
