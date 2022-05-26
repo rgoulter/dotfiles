@@ -8,6 +8,7 @@ let
       rev = "868388321169eddf6dcb99f9b0d3ce734897b3de";
       sha256 = "XsJ2hHoQGoDbM7J+VvO1u0+f+jJCQqcUqQjzvTlnnG0=";
     };
+
   tpm =
     pkgs.fetchFromGitHub {
       owner = "tmux-plugins";
@@ -15,8 +16,16 @@ let
       rev = "b699a7e01c253ffb7818b02d62bce24190ec1019";
       sha256 = "aGRy5ah1Dxb+94QoIkOy0nKlmAOFq2y5xnf2B852JY0=";
     };
-in
-let
+
+  # Using the submodule in this dotfiles repo would make
+  # require a more awkward flake URI.
+  vundleRepoSrc = pkgs.fetchFromGitHub {
+    owner = "VundleVim";
+    repo = "Vundle.vim";
+    rev = "cfd3b2d388a8c2e9903d7a9d80a65539aabfe933";
+    sha256 = "sha256-OCCXgMVWj/aBWLGaZmMr+cD546+QgynmEN/ECp1r08Q=";
+  };
+
   # e.g. given "alacritty/alacritty.yml",
   # return the attrset { "alacritty/alacritty.yml" = ./alacritty/alacritty.yml; }.
   genAttrsForSimpleLink = fileName: ./. + ("/" + fileName);
@@ -29,22 +38,13 @@ let
   # e.g. from { ".hgrc" = ./hgrc; } to { ".hgrc".source = ./hgrc; }
   toSource = configDirName: dotfilesPath: { source = dotfilesPath; };
 
-  # Using the submodule in this dotfiles repo would make
-  # require a more awkward flake URI.
-  vundleRepoSrc = pkgs.fetchFromGitHub {
-    owner = "VundleVim";
-    repo = "Vundle.vim";
-    rev = "cfd3b2d388a8c2e9903d7a9d80a65539aabfe933";
-    sha256 = "sha256-OCCXgMVWj/aBWLGaZmMr+cD546+QgynmEN/ECp1r08Q=";
-  };
-
   # List of dotfiles where the path to link under
   # ~/.config/ matches the path in the dotfiles repo.
   # e.g. ~/.config/alacritty/alacritty.yml matches ./alacritty/alacritty.yml.
   simpleConfigFilesToLinkList = [
     "alacritty/alacritty.yml"
-    "chemacs/profiles.el"
     "chemacs/profile"
+    "chemacs/profiles.el"
     "doom/config.el"
     "doom/init.el"
     "doom/packages.el"
@@ -53,26 +53,28 @@ let
     "fish/coloured-manpages.fish"
     "fish/config.fish"
     "fish/fishfile"
-    "fish/keybindings.txt"
-    "fish/functions/fisher.fish"
     "fish/functions/fish_greeting.fish"
+    "fish/functions/fisher.fish"
+    "fish/keybindings.txt"
     "git/common.inc"
     "kitty/kitty.conf"
     "powerline/themes/tmux/default.json"
-    "tmux/tmux.conf"
     "starship.toml"
+    "tmux/tmux.conf"
   ];
 
   # Files where the symlinks aren't following a nice convention.
   unconventionalConfigFilesToLink = {
+    "emacs" = chemacs2;
     "nvim/init.vim" = ./vimrc;
+    "tmux/plugins/tpm" = tpm;
   };
 
   # e.g. "gvimrc" to link "~/.gvimrc" to ./gvimrc
   simpleHomeFilesToLinkList = [
     "gvimrc"
-    "hgrc.d/fancy.style"
     "hgrc"
+    "hgrc.d/fancy.style"
 
     "vimrc"
     "vim/after/ftplugin/org.vim"
@@ -90,11 +92,7 @@ let
   # The attribute value is the path to the dotfile in this repo.
   configFilesToLink =
     (pkgs.lib.attrsets.genAttrs simpleConfigFilesToLinkList genAttrsForSimpleLink) //
-    unconventionalConfigFilesToLink //
-    {
-      "emacs" = chemacs2;
-      "tmux/plugins/tpm" = tpm;
-    };
+    unconventionalConfigFilesToLink;
 
   # Attribute set for dotfiles in this repo to link into home directory.
   # The attribute name is for ~/$attrSetName,
