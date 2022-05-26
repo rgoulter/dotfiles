@@ -8,6 +8,13 @@ let
       rev = "868388321169eddf6dcb99f9b0d3ce734897b3de";
       sha256 = "XsJ2hHoQGoDbM7J+VvO1u0+f+jJCQqcUqQjzvTlnnG0=";
     };
+  tpm =
+    pkgs.fetchFromGitHub {
+      owner = "tmux-plugins";
+      repo = "tpm";
+      rev = "b699a7e01c253ffb7818b02d62bce24190ec1019";
+      sha256 = "aGRy5ah1Dxb+94QoIkOy0nKlmAOFq2y5xnf2B852JY0=";
+    };
 in
 let
   # e.g. given "alacritty/alacritty.yml",
@@ -50,6 +57,7 @@ let
     "git/common.inc"
     "kitty/kitty.conf"
     "powerline/themes/tmux/default.json"
+    "tmux/tmux.conf"
     "starship.toml"
   ];
 
@@ -65,7 +73,6 @@ let
     "gvimrc"
     "hgrc.d/fancy.style"
     "hgrc"
-    "tmux.conf"
 
     "vimrc"
     "vim/after/ftplugin/org.vim"
@@ -85,7 +92,8 @@ let
     (pkgs.lib.attrsets.genAttrs simpleConfigFilesToLinkList genAttrsForSimpleLink) //
     unconventionalConfigFilesToLink //
     {
-      emacs = chemacs2;
+      "emacs" = chemacs2;
+      "tmux/plugins/tpm" = tpm;
     };
 
   # Attribute set for dotfiles in this repo to link into home directory.
