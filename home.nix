@@ -48,6 +48,8 @@ let
     "doom/config.el"
     "doom/init.el"
     "doom/packages.el"
+    "emacs-rgoulter/init.el"
+    "emacs-rgoulter/straight/versions/default.el"
     "fish/coloured-manpages.fish"
     "fish/config.fish"
     "fish/fishfile"
@@ -63,8 +65,6 @@ let
 
   # Files where the symlinks aren't following a nice convention.
   unconventionalConfigFilesToLink = {
-    "emacs-rgoulter/init.el"  = ./emacs.el;
-    "emacs-rgoulter/straight/versions/default.el"  = ./emacs.d/straight/versions/default.el;
     "nvim/init.vim" = ./vimrc;
   };
 
