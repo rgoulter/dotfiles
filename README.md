@@ -2,9 +2,6 @@
 
 My dotfiles repo.
 
-Makes use of [anishathalye/dotbot](https://github.com/anishathalye/dotbot)
-for managing symlinks.
-
 ## Home Manager with Nix Flakes
 
 ### Installing Home Manager, Linux Standalone Installation
@@ -37,12 +34,3 @@ or using this repository's flake URI, i.e. `github:rgoulter/dotfiles`
 home-manager switch --flake 'github:rgoulter/dotfiles#rgoulter-x86_64-linux'
 ```
 
-## Vim Native Dependencies
-
-A couple of plugins require native dependencies. (VimProc, and YouCompleteMe).
-
-For building YCM with C/C++ support, with system libclang (not recommended by YCM):
-
-```
-cmake -G "Unix Makefiles" -DUSE_SYSTEM_LIBCLANG=ON . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp
-```
