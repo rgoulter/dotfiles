@@ -1,6 +1,15 @@
 { config, pkgs, ... }:
 
 let
+  chemacs2 =
+    pkgs.fetchFromGitHub {
+      owner = "plexus";
+      repo = "chemacs2";
+      rev = "868388321169eddf6dcb99f9b0d3ce734897b3de";
+      sha256 = "XsJ2hHoQGoDbM7J+VvO1u0+f+jJCQqcUqQjzvTlnnG0=";
+    };
+in
+let
   # e.g. given "alacritty/alacritty.yml",
   # return the attrset { "alacritty/alacritty.yml" = ./alacritty/alacritty.yml; }.
   genAttrsForSimpleLink = fileName: ./. + ("/" + fileName);
@@ -73,7 +82,10 @@ let
   # The attribute value is the path to the dotfile in this repo.
   configFilesToLink =
     (pkgs.lib.attrsets.genAttrs simpleConfigFilesToLinkList genAttrsForSimpleLink) //
-    unconventionalConfigFilesToLink;
+    unconventionalConfigFilesToLink //
+    {
+      emacs = chemacs2;
+    };
 
   # Attribute set for dotfiles in this repo to link into home directory.
   # The attribute name is for ~/$attrSetName,
