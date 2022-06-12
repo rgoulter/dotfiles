@@ -44,7 +44,6 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  programs.ssh.startAgent = true;
   programs.steam.enable = true;
 
   security = {
@@ -79,6 +78,9 @@
               # SBC-XQ: higher audio
               # SBC-XQ is not expected to work on all headset + adapter combinations.
               "bluez5.sbc-xq-support" = true;
+
+              # https://wiki.archlinux.org/title/PipeWire#Automatic_profile_selection
+              "bluez5.autoswitch-profile" = true;
             };
           };
         }
@@ -91,6 +93,11 @@
           ];
           actions = {
             "node.pause-on-idle" = false;
+
+            "update-props" = {
+              # https://wiki.archlinux.org/title/PipeWire#Automatic_profile_selection
+              "bluez5.autoswitch-profile" = true;
+            };
           };
         }
       ];
@@ -108,7 +115,10 @@ SUBSYSTEMS=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="df11", TAG+="uacc
 # STM32duino 1eaf:0003
 SUBSYSTEMS=="usb", ATTRS{idVendor}=="1eaf", ATTRS{idProduct}=="0003", TAG+="uaccess"
       '';
-      packages = [ pkgs.yubikey-personalization ];
+      packages = [
+        pkgs.stlink
+        pkgs.yubikey-personalization
+      ];
     };
 
     # Enable the X11 windowing system.
@@ -149,12 +159,13 @@ SUBSYSTEMS=="usb", ATTRS{idVendor}=="1eaf", ATTRS{idProduct}=="0003", TAG+="uacc
   users.extraGroups.vboxusers.members = ["rgoulter"];
 
   virtualisation = {
+    docker.enable = true;
     libvirtd.enable = true;
     podman = {
       enable = true;
 
       # Create a `docker` alias for podman, to use it as a drop-in replacement
-      dockerCompat = true;
+      # dockerCompat = true;
     };
     virtualbox.host.enable = true;
   };
