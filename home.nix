@@ -1,6 +1,8 @@
 { config, pkgs, ... }:
 
 let
+  configSymlinksLib = import ./lib/configSymlinks.nix { inherit pkgs; symlinkFromDir = ./.; };
+
   chemacs2 = pkgs.fetchFromGitHub (pkgs.lib.importJSON ./plexus-chemacs2.json);
 
   tpm =
@@ -9,18 +11,6 @@ let
   # Using the submodule in this dotfiles repo would make
   # require a more awkward flake URI.
   vundleRepoSrc = pkgs.fetchFromGitHub (pkgs.lib.importJSON ./vundlevim-vundle.vim.json);
-
-  # e.g. given "alacritty/alacritty.yml",
-  # return the attrset { "alacritty/alacritty.yml" = ./alacritty/alacritty.yml; }.
-  genAttrsForSimpleLink = fileName: ./. + ("/" + fileName);
-
-  # e.g. given "hgrc"
-  # return the attrset { ".hgrc" = ./hgrc; }.
-  genAttrsForSimpleDotLink = fileName: { ".${fileName}" = ./. + ("/" + fileName); };
-
-  # Function to help map attrs for symlinking home.file, xdg.configFile
-  # e.g. from { ".hgrc" = ./hgrc; } to { ".hgrc".source = ./hgrc; }
-  toSource = configDirName: dotfilesPath: { source = dotfilesPath; };
 
   # List of dotfiles where the path to link under
   # ~/.config/ matches the path in the dotfiles repo.
@@ -75,7 +65,7 @@ let
   #  e.g. "alacritty/alacritty.yml" for ~/.config/alacritty/alacritty.yml
   # The attribute value is the path to the dotfile in this repo.
   configFilesToLink =
-    (pkgs.lib.attrsets.genAttrs simpleConfigFilesToLinkList genAttrsForSimpleLink) //
+    (configSymlinksLib.configFilesToLinkF simpleConfigFilesToLinkList) //
     unconventionalConfigFilesToLink;
 
   # Attribute set for dotfiles in this repo to link into home directory.
@@ -83,17 +73,17 @@ let
   #  e.g. ".hgrc" for ~/.hgrc.
   # The attribute value is the path to the dotfile in this repo.
   homeFilesToLink =
-    (pkgs.lib.lists.foldr (a: b: a // b) {} (map genAttrsForSimpleDotLink simpleHomeFilesToLinkList)) //
+    (configSymlinksLib.homeFilesToLinkF simpleHomeFilesToLinkList) //
     unconventionalHomeFilesToLink;
 in
 {
   # Symlink files under ~, e.g. ~/.hgrc
-  home.file = pkgs.lib.attrsets.mapAttrs toSource homeFilesToLink;
+  home.file = pkgs.lib.attrsets.mapAttrs configSymlinksLib.toSource homeFilesToLink;
 
   home.stateVersion = "22.05";
 
   programs.home-manager.enable = true;
 
   # Symlink files under ~/.config, e.g. ~/.config/alacritty/alacritty.yml
-  xdg.configFile = pkgs.lib.attrsets.mapAttrs toSource configFilesToLink;
+  xdg.configFile = pkgs.lib.attrsets.mapAttrs configSymlinksLib.toSource configFilesToLink;
 }
