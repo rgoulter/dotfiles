@@ -153,3 +153,9 @@
    "dn" '(zetteldeft-new-file :wk "new file")
    "dN" '(zetteldeft-new-file-and-link :wk "new file & link")
    "dr" '(zetteldeft-file-rename :wk "rename")))
+
+;; Kludge: use gpg-agent as the ssh agent
+(when (eq system-type 'gnu/linux)
+  (setenv "SSH_AUTH_SOCK" (format "/run/user/%d/gnupg/S.gpg-agent.ssh" (user-uid))))
+(when (eq system-type 'darwin)
+  (setenv "SSH_AUTH_SOCK" (format "%s/.gnupg/S.gpg-agent.ssh" (getenv "HOME"))))
