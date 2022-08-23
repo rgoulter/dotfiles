@@ -31,6 +31,7 @@ let
     "fish/functions/fisher.fish"
     "fish/keybindings.txt"
     "git/common.inc"
+    "git/gpg.inc"
     "kitty/kitty.conf"
     "powerline/themes/tmux/default.json"
     "starship.toml"
