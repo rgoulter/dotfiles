@@ -17,7 +17,7 @@ nix build --no-link github:rgoulter/dotfiles#homeConfigurations.rgoulter-x86_64-
 "$(nix path-info github:rgoulter/dotfiles#homeConfigurations.rgoulter-x86_64-linux.activationPackage)"/activate
 ```
 
-### Using `home.nix` Configuration
+### Using the `dotfiles.nix` Configuration
 
 From this repository's directory:
 
@@ -37,7 +37,7 @@ I found it useful to know that you can use Home Manager modules
 from different repositories.
 
 Here's an example of configuring Home Manager in a `flake.nix` file,
-using the `home.nix` file (exported as `nixosModules.dotfiles`) in
+using the `dotfiles.nix` file (exported as `nixosModules.dotfiles`) in
 your `flake.nix`:
 
 ``` nix
@@ -69,7 +69,7 @@ your `flake.nix`:
 
         modules = [
           rgoulter.nixosModules.dotfiles
-          # ... other modules
+          # ...
         ];
       };
     };

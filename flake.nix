@@ -9,7 +9,7 @@
   outputs = { self, home-manager, nixpkgs, ... }: {
       nixosModules = {
         default = self.nixosModules.dotfiles;
-        dotfiles = import ./home.nix;
+        dotfiles = import ./dotfiles.nix;
       };
       homeConfigurations = {
         "richardgoulter-x86_64-darwin" =
