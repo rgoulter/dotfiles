@@ -6,27 +6,51 @@
     home-manager.url = "github:nix-community/home-manager";
   };
 
-  outputs = { self, home-manager, ... }: {
+  outputs = { self, home-manager, nixpkgs, ... }: {
       nixosModules = {
         default = self.nixosModules.dotfiles;
         dotfiles = import ./home.nix;
       };
       homeConfigurations = {
-        "richardgoulter-x86_64-darwin" = home-manager.lib.homeManagerConfiguration {
-          configuration = import ./home.nix;
-          homeDirectory = "/Users/richardgoulter";
-          stateVersion = "22.05";
-          system = "x86_64-darwin";
-          username = "richardgoulter";
-        };
+        "richardgoulter-x86_64-darwin" =
+          let
+            system = "x86_64-darwin";
+            pkgs = nixpkgs.legacyPackages.${system};
+          in
+          home-manager.lib.homeManagerConfiguration {
+            inherit pkgs;
 
-        "rgoulter-x86_64-linux" = home-manager.lib.homeManagerConfiguration {
-          configuration = import ./home.nix;
-          homeDirectory = "/home/rgoulter";
-          stateVersion = "22.05";
-          system = "x86_64-linux";
-          username = "rgoulter";
-        };
+            modules = [
+              ./home.nix
+              {
+                home = {
+                  username = "richardgoulter";
+                  homeDirectory = "/Users/richardgoulter";
+                  stateVersion = "22.05";
+                };
+              }
+            ];
+          };
+
+        "rgoulter-x86_64-linux" =
+          let
+            system = "x86_64-linux";
+            pkgs = nixpkgs.legacyPackages.${system};
+          in
+          home-manager.lib.homeManagerConfiguration {
+            inherit pkgs;
+
+            modules = [
+              ./home.nix
+              {
+                home = {
+                  username = "rgoulter";
+                  homeDirectory = "/home/rgoulter";
+                  stateVersion = "22.05";
+                };
+              }
+            ];
+          };
       };
     };
 }
