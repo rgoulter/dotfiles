@@ -2,6 +2,9 @@
 
 My dotfiles repo.
 
+I use Nix's [home manager](https://github.com/nix-community/home-manager),
+though currently only to manage symlinks.
+
 ## Home Manager with Nix Flakes
 
 ### Installing Home Manager, Linux Standalone Installation
