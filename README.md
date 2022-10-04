@@ -59,7 +59,7 @@ your `flake.nix`:
         home-manager.follows = "home-manager";
         nixpkgs.follows = "nixpkgs";
       };
-    }
+    };
   };
 
   outputs = { nixpkgs, home-manager, ... }:
