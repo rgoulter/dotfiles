@@ -21,7 +21,7 @@
             inherit pkgs;
 
             modules = [
-              ./home.nix
+              self.nixosModules.dotfiles
               {
                 home = {
                   username = "richardgoulter";
@@ -41,7 +41,7 @@
             inherit pkgs;
 
             modules = [
-              ./home.nix
+              self.nixosModules.dotfiles
               {
                 home = {
                   username = "rgoulter";
