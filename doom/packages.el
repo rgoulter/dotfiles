@@ -11,6 +11,8 @@
 
 (package! blamer)
 
+(package! focus)
+
 (package! plantuml-mode)
 
 (package! ranger)
