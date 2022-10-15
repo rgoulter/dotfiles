@@ -31,3 +31,5 @@ fish/completions/
 
 # nix build, etc.
 result
+result-*
+.direnv
