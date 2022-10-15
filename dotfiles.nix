@@ -1,8 +1,10 @@
-{ config, pkgs, ... }:
-
-let
-  configSymlinksLib = import ./lib/configSymlinks.nix { inherit pkgs; };
-  sources = import ./lib/sources { inherit pkgs; };
+{
+  config,
+  pkgs,
+  ...
+}: let
+  configSymlinksLib = import ./lib/configSymlinks.nix {inherit pkgs;};
+  sources = import ./lib/sources {inherit pkgs;};
 
   # List of dotfiles where the path to link under
   # ~/.config/ matches the path in the dotfiles repo.
@@ -53,11 +55,12 @@ let
     ".vim/bundle/Vundle.vim" = sources.vundle;
   };
 in
-configSymlinksLib.mkSymlinkedDotfilesConfig {
-  inherit
-    simpleConfigFilesToLinkList
-    unconventionalConfigFilesToLink
-    simpleHomeFilesToLinkList
-    unconventionalHomeFilesToLink;
-  symlinkFromDir = ./.;
-}
+  configSymlinksLib.mkSymlinkedDotfilesConfig {
+    inherit
+      simpleConfigFilesToLinkList
+      unconventionalConfigFilesToLink
+      simpleHomeFilesToLinkList
+      unconventionalHomeFilesToLink
+      ;
+    symlinkFromDir = ./.;
+  }

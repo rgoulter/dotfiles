@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   chemacs2 = pkgs.fetchFromGitHub (pkgs.lib.importJSON ./plexus-chemacs2.json);
   tpm =
     pkgs.fetchFromGitHub (pkgs.lib.importJSON ./tmux-plugins-tpm.json);
