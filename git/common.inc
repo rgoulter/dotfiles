@@ -20,3 +20,5 @@
 	defaultBranch = "master"
 [merge]
 	conflictStyle = diff3
+[pull]
+	rebase = true
