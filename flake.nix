@@ -7,10 +7,6 @@
   };
 
   outputs = { self, home-manager, nixpkgs, ... }: {
-      nixosModules = {
-        default = self.nixosModules.dotfiles;
-        dotfiles = import ./dotfiles.nix;
-      };
       homeConfigurations = {
         "richardgoulter-x86_64-darwin" =
           let
@@ -53,6 +49,10 @@
               }
             ];
           };
+      };
+      nixosModules = {
+        default = self.nixosModules.dotfiles;
+        dotfiles = import ./dotfiles.nix;
       };
     };
 }
