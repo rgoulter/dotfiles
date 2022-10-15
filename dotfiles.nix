@@ -2,15 +2,7 @@
 
 let
   configSymlinksLib = import ./lib/configSymlinks.nix { inherit pkgs; symlinkFromDir = ./.; };
-
-  chemacs2 = pkgs.fetchFromGitHub (pkgs.lib.importJSON ./plexus-chemacs2.json);
-
-  tpm =
-    pkgs.fetchFromGitHub (pkgs.lib.importJSON ./tmux-plugins-tpm.json);
-
-  # Using the submodule in this dotfiles repo would make
-  # require a more awkward flake URI.
-  vundleRepoSrc = pkgs.fetchFromGitHub (pkgs.lib.importJSON ./vundlevim-vundle.vim.json);
+  sources = import ./lib/sources { inherit pkgs; };
 
   # List of dotfiles where the path to link under
   # ~/.config/ matches the path in the dotfiles repo.
@@ -40,9 +32,9 @@ let
 
   # Files where the symlinks aren't following a nice convention.
   unconventionalConfigFilesToLink = {
-    "emacs" = chemacs2;
+    "emacs" = sources.chemacs2;
     "nvim/init.vim" = ./vimrc;
-    "tmux/plugins/tpm" = tpm;
+    "tmux/plugins/tpm" = sources.tpm;
   };
 
   # e.g. "gvimrc" to link "~/.gvimrc" to ./gvimrc
@@ -57,8 +49,8 @@ let
 
   unconventionalHomeFilesToLink = {
     ".nvim/after/ftplugin/org.vim" = ./vim/after/ftplugin/org.vim;
-    ".nvim/bundle/Vundle.vim" = vundleRepoSrc;
-    ".vim/bundle/Vundle.vim" = vundleRepoSrc;
+    ".nvim/bundle/Vundle.vim" = sources.vundle;
+    ".vim/bundle/Vundle.vim" = sources.vundle;
   };
 
   # Attribute set for dotfiles in this repo to link into ~/.config.
