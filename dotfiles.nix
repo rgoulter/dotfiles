@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  configSymlinksLib = import ./lib/configSymlinks.nix { inherit pkgs; symlinkFromDir = ./.; };
+  configSymlinksLib = import ./lib/configSymlinks.nix { inherit pkgs; };
   sources = import ./lib/sources { inherit pkgs; };
 
   # List of dotfiles where the path to link under
@@ -59,4 +59,5 @@ configSymlinksLib.mkSymlinkedDotfilesConfig {
     unconventionalConfigFilesToLink
     simpleHomeFilesToLinkList
     unconventionalHomeFilesToLink;
+  symlinkFromDir = ./.;
 }
