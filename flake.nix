@@ -28,6 +28,7 @@
                   homeDirectory = "/Users/richardgoulter";
                   stateVersion = "22.05";
                 };
+                programs.home-manager.enable = true;
               }
             ];
           };
@@ -48,6 +49,7 @@
                   homeDirectory = "/home/rgoulter";
                   stateVersion = "22.05";
                 };
+                programs.home-manager.enable = true;
               }
             ];
           };

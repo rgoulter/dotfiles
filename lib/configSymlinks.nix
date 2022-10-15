@@ -49,4 +49,43 @@ rec {
   #   ];
   homeFilesToLinkF = simpleHomeFilesToLink:
     (pkgs.lib.lists.foldr (a: b: a // b) {} (map genAttrsForSimpleDotLink simpleHomeFilesToLink));
+
+  mkSymlinkedDotfilesConfig = {
+    # List of dotfiles where the path to link under
+    # ~/.config/ matches the path in the dotfiles repo.
+    # e.g. ~/.config/alacritty/alacritty.yml matches ./alacritty/alacritty.yml.
+    simpleConfigFilesToLinkList ? [],
+
+    # Files where the symlinks aren't following a nice convention.
+    unconventionalConfigFilesToLink ? {},
+
+    # e.g. "gvimrc" to link "~/.gvimrc" to ./gvimrc
+    simpleHomeFilesToLinkList ? [],
+
+    unconventionalHomeFilesToLink ? {},
+  }:
+  let
+    # Attribute set for dotfiles in this repo to link into ~/.config.
+    # The attribute name is for ~/.config/$attrSetName,
+    #  e.g. "alacritty/alacritty.yml" for ~/.config/alacritty/alacritty.yml
+    # The attribute value is the path to the dotfile in this repo.
+    configFilesToLink =
+      (configFilesToLinkF simpleConfigFilesToLinkList) //
+      unconventionalConfigFilesToLink;
+
+    # Attribute set for dotfiles in this repo to link into home directory.
+    # The attribute name is for ~/$attrSetName,
+    #  e.g. ".hgrc" for ~/.hgrc.
+    # The attribute value is the path to the dotfile in this repo.
+    homeFilesToLink =
+      (homeFilesToLinkF simpleHomeFilesToLinkList) //
+      unconventionalHomeFilesToLink;
+  in
+  {
+    # Symlink files under ~, e.g. ~/.hgrc
+    home.file = pkgs.lib.attrsets.mapAttrs toSource homeFilesToLink;
+    # Symlink files under ~/.config, e.g. ~/.config/alacritty/alacritty.yml
+    xdg.configFile = pkgs.lib.attrsets.mapAttrs toSource configFilesToLink;
+  };
 }
+

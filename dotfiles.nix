@@ -52,31 +52,11 @@ let
     ".nvim/bundle/Vundle.vim" = sources.vundle;
     ".vim/bundle/Vundle.vim" = sources.vundle;
   };
-
-  # Attribute set for dotfiles in this repo to link into ~/.config.
-  # The attribute name is for ~/.config/$attrSetName,
-  #  e.g. "alacritty/alacritty.yml" for ~/.config/alacritty/alacritty.yml
-  # The attribute value is the path to the dotfile in this repo.
-  configFilesToLink =
-    (configSymlinksLib.configFilesToLinkF simpleConfigFilesToLinkList) //
-    unconventionalConfigFilesToLink;
-
-  # Attribute set for dotfiles in this repo to link into home directory.
-  # The attribute name is for ~/$attrSetName,
-  #  e.g. ".hgrc" for ~/.hgrc.
-  # The attribute value is the path to the dotfile in this repo.
-  homeFilesToLink =
-    (configSymlinksLib.homeFilesToLinkF simpleHomeFilesToLinkList) //
-    unconventionalHomeFilesToLink;
 in
-{
-  # Symlink files under ~, e.g. ~/.hgrc
-  home.file = pkgs.lib.attrsets.mapAttrs configSymlinksLib.toSource homeFilesToLink;
-
-  home.stateVersion = "22.05";
-
-  programs.home-manager.enable = true;
-
-  # Symlink files under ~/.config, e.g. ~/.config/alacritty/alacritty.yml
-  xdg.configFile = pkgs.lib.attrsets.mapAttrs configSymlinksLib.toSource configFilesToLink;
+configSymlinksLib.mkSymlinkedDotfilesConfig {
+  inherit
+    simpleConfigFilesToLinkList
+    unconventionalConfigFilesToLink
+    simpleHomeFilesToLinkList
+    unconventionalHomeFilesToLink;
 }
