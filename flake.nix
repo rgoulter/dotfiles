@@ -11,7 +11,25 @@
     home-manager,
     nixpkgs,
     ...
-  }: {
+  }: let
+    systems = [
+      "x86_64-linux"
+      "x86_64-darwin"
+    ];
+    forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f system);
+  in {
+    devShells = forAllSystems (system: let
+      pkgs = nixpkgs.legacyPackages.${system};
+    in {
+      default = pkgs.mkShell {
+        packages = with pkgs; [
+          alejandra
+          shellcheck
+          shfmt
+          treefmt
+        ];
+      };
+    });
     homeConfigurations = {
       "richardgoulter-x86_64-darwin" = let
         system = "x86_64-darwin";
