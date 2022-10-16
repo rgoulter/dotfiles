@@ -5,10 +5,10 @@ user := env_var("USER")
 # e.g. "." or "github:rgoulter/dotfiles"
 flake_uri := "."
 
+default: home-manager-switch
+
 bootstrap:
   ./scripts/bootstrap-{{system}}.sh
-
-default: home-manager-switch
 
 home-manager-switch:
   home-manager switch --flake {{flake_uri}}#{{user}}-{{system}}
