@@ -75,5 +75,8 @@
       default = self.nixosModules.dotfiles;
       dotfiles = import ./dotfiles.nix;
     };
+    lib = {
+      configSymlinks = import ./lib/configSymlinks.nix;
+    };
   };
 }
