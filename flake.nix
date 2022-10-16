@@ -70,6 +70,8 @@
             }
           ];
         };
+
+      "richardgoulter-x86_64-macos" = self.homeConfigurations.richardgoulter-x86_64-darwin;
     };
     nixosModules = {
       default = self.nixosModules.dotfiles;
