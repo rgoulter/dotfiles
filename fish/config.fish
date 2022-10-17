@@ -1,4 +1,4 @@
-set -x EDITOR nvim
+set -x EDITOR hx
 
 # HOST, for HG stuff.
 set -x HOST (hostname)
