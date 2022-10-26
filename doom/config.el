@@ -127,6 +127,9 @@
 (use-package restclient
   :mode ("\\.rest\\'" . restclient-mode))
 
+;; https://github.com/felipeochoa/rjsx-mode/issues/85
+(add-hook 'rjsx-mode-hook (lambda () (setq-local indent-line-function 'js-jsx-indent-line)))
+
 (use-package! zetteldeft
   :config
   ;; If creating more than one note in a minute
