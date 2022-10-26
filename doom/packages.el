@@ -13,6 +13,8 @@
 
 (package! focus)
 
+(package! justl)
+
 (package! plantuml-mode)
 
 (package! ranger)
