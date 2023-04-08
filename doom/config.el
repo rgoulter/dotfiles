@@ -47,7 +47,7 @@
 (setq org-directory "~/org/")
 
 (defvar workstation-file "File location for a local Emacs Lisp configuration file")
-(setq workstation-file (concat user-emacs-directory "local.el"))
+(setq workstation-file (concat doom-user-dir "local.el"))
 (when (file-exists-p workstation-file)
   (load workstation-file))
 
