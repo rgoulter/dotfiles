@@ -19,8 +19,11 @@
 [init]
 	defaultBranch = "master"
 [merge]
+	autoStash = true
 	conflictStyle = diff3
 [pull]
 	rebase = true
 [push]
 	autoSetupRemote = true
+[rebase]
+	autoStash = true
