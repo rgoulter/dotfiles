@@ -18,6 +18,13 @@
 
 (package! justl)
 
+(package! nickel-mode)
+
+;; mkdir -p ~/.doom.d/lisp/ob-ledger/
+;; wget -O ~/.doom.d/lisp/ob-ledger/ob-ledger.el https://raw.githubusercontent.com/overtone/emacs-live/master/packs/stable/org-pack/lib/org-mode/lisp/ob-ledger.el
+;; c.f. https://github.com/doomemacs/doomemacs/issues/6457
+(package! ob-ledger :recipe (:local-repo "lisp/ob-ledger"))
+
 (package! plantuml-mode)
 
 (package! ranger)
