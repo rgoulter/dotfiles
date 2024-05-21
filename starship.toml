@@ -1,4 +1,5 @@
 format = """
+($custom\n)\
 ($aws\n)\
 ($gcloud\n)\
 ($openstack\n)\
@@ -53,7 +54,6 @@ $conda\
 $memory_usage\
 $env_var\
 $crystal\
-$custom\
 $cmd_duration\
 $line_break\
 $jobs\
@@ -81,3 +81,11 @@ disabled = false
 
 [terraform]
 format = "${symbol}Terraform: ([$version]($style) )in [$workspace]($style) workspace"
+
+[custom.toolbox]
+description = "The activated toolbox container"
+command = " bash -c 'echo $(. /var/run/.containerenv; echo ${name}:${image})' "
+when = """ bash -c "[[ -f /run/.containerenv && -f /run/.toolboxenv ]]" """
+style = "bold red"
+format = "[\\[$output\\]]($style) "
+disabled = false
