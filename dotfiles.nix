@@ -13,6 +13,7 @@
     "alacritty/alacritty.yml"
     "chemacs/profile"
     "chemacs/profiles.el"
+    "direnv/direnvrc"
     "doom/config.el"
     "doom/init.el"
     "doom/packages.el"
