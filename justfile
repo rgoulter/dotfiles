@@ -7,8 +7,7 @@ flake_uri := "."
 
 default: home-manager-switch
 
-bootstrap:
-  ./scripts/bootstrap-{{system}}.sh
+hm_branch := "release-24.05"
 
 home-manager-switch:
-  home-manager switch --flake {{flake_uri}}#{{user}}-{{system}}
+  nix run home-manager/{{hm_branch}} -- switch --flake {{flake_uri}}#{{user}}-{{system}}
