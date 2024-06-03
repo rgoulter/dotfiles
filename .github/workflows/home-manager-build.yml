@@ -1,0 +1,36 @@
+name: Home Manager Standalone Build
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Nix
+        uses: DeterminateSystems/nix-installer-action@main
+
+      - name: Run Nix Build
+        run: nix run home-manager/release-24.05 -- build --flake .#rgoulter-x86_64-linux
+
+  macos:
+    runs-on: macos-13
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Nix
+        uses: DeterminateSystems/nix-installer-action@main
+
+      - name: Run Nix Build
+        run: nix run home-manager/release-24.05 -- build --flake .#richardgoulter-x86_64-darwin
