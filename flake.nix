@@ -5,6 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     home-manager.url = "github:nix-community/home-manager";
     systems.url = "github:nix-systems/default";
+    treefmt-nix.url = "github:numtide/treefmt-nix";
   };
 
   outputs = {
@@ -12,10 +13,15 @@
     home-manager,
     nixpkgs,
     systems,
+    treefmt-nix,
     ...
   }: let
     forAllSystems = f: nixpkgs.lib.genAttrs (import systems) (system: f system);
+    treefmtEval = forAllSystems (system: treefmt-nix.lib.evalModule nixpkgs.legacyPackages.${system} ./treefmt.nix);
   in {
+    checks = forAllSystems (system: {
+      formatting = treefmtEval.${system}.config.build.check self;
+    });
     devShells = forAllSystems (system: let
       pkgs = nixpkgs.legacyPackages.${system};
     in {
@@ -28,6 +34,7 @@
         ];
       };
     });
+    formatter = forAllSystems (system: treefmtEval.${system}.config.build.wrapper);
     homeConfigurations = {
       "richardgoulter-x86_64-darwin" = let
         system = "x86_64-darwin";
