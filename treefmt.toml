@@ -8,7 +8,7 @@ options = [
     "-eucx",
     """
 # First shellcheck
-shellcheck --external-sources --source-path=SCRIPTDIR "$@"
+shellcheck "$@"
 # Then format
 shfmt -i 2 -s -w "$@"
     """,
