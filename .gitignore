@@ -33,3 +33,4 @@ fish/completions/
 result
 result-*
 .direnv
+.devenv

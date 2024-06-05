@@ -2,14 +2,16 @@
   description = "rgoulter's Home Manager configuration";
 
   inputs = {
+    devenv.url = "github:cachix/devenv";
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     home-manager.url = "github:nix-community/home-manager";
     systems.url = "github:nix-systems/default";
     treefmt-nix.url = "github:numtide/treefmt-nix";
   };
 
-  outputs = {
+  outputs = inputs @ {
     self,
+    devenv,
     home-manager,
     nixpkgs,
     systems,
@@ -25,12 +27,24 @@
     devShells = forAllSystems (system: let
       pkgs = nixpkgs.legacyPackages.${system};
     in {
-      default = pkgs.mkShell {
-        packages = with pkgs; [
-          alejandra
-          shellcheck
-          shfmt
-          treefmt
+      default = devenv.lib.mkShell {
+        inherit inputs pkgs;
+
+        modules = [
+          ({
+            pkgs,
+            config,
+            ...
+          }: {
+            packages = with pkgs; [
+              treefmt
+            ];
+
+            languages = {
+              nix.enable = true;
+              shell.enable = true;
+            };
+          })
         ];
       };
     });
