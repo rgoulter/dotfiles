@@ -19,12 +19,13 @@
     systems,
     treefmt-nix,
     ...
-  }: let
-    forAllSystems = f: nixpkgs.lib.genAttrs (import systems) (system: f system);
-    treefmtEval = forAllSystems (system: treefmt-nix.lib.evalModule nixpkgs.legacyPackages.${system} ./treefmt.nix);
-  in
+  }:
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = import systems;
+
+      imports = [
+        treefmt-nix.flakeModule
+      ];
 
       flake = {
         homeConfigurations = {
@@ -81,23 +82,21 @@
         };
       };
 
-      perSystem = {config, pkgs, system, ...}: {
-        checks = {
-          formatting = treefmtEval.${system}.config.build.check self;
-        };
-
+      perSystem = {
+        config,
+        pkgs,
+        system,
+        ...
+      }: {
         devShells = {
           default = devenv.lib.mkShell {
             inherit inputs pkgs;
 
             modules = [
-              ({
-                pkgs,
-                  config,
-                  ...
-              }: {
+              ({pkgs, ...}: {
                 packages = with pkgs; [
-                  treefmt
+                  # add treefmt using flake-parts per-system config
+                  config.treefmt.build.wrapper
                 ];
 
                 languages = {
@@ -109,7 +108,7 @@
           };
         };
 
-        formatter = treefmtEval.${system}.config.build.wrapper;
+        treefmt = import ./treefmt.nix;
       };
     };
 }
