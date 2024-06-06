@@ -12,9 +12,6 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     systems.url = "github:nix-systems/default";
     treefmt-nix.url = "github:numtide/treefmt-nix";
-    # needed for `nix flake show`
-    nix2container.url = "github:nlewo/nix2container";
-    nix2container.inputs = {nixpkgs.follows = "nixpkgs";};
   };
 
   outputs = inputs @ {
@@ -98,11 +95,13 @@
         ...
       }: {
         devenv.shells.default = {pkgs, ...}: {
-          devenv.root =
-            let
-              devenvRootFileContent = builtins.readFile devenv-root.outPath;
-            in
+          devenv.root = let
+            devenvRootFileContent = builtins.readFile devenv-root.outPath;
+          in
             pkgs.lib.mkIf (devenvRootFileContent != "") devenvRootFileContent;
+
+          # https://github.com/cachix/devenv/issues/528
+          containers = pkgs.lib.mkForce {};
 
           packages = [
             # add treefmt using flake-parts per-system config
