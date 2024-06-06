@@ -2,6 +2,10 @@
   description = "rgoulter's Home Manager configuration";
 
   inputs = {
+    devenv-root = {
+      url = "file+file:///dev/null";
+      flake = false;
+    };
     devenv.url = "github:cachix/devenv";
     flake-parts.url = "github:hercules-ci/flake-parts";
     home-manager.url = "github:nix-community/home-manager";
@@ -15,6 +19,7 @@
 
   outputs = inputs @ {
     self,
+    devenv-root,
     devenv,
     flake-parts,
     home-manager,
@@ -93,6 +98,12 @@
         ...
       }: {
         devenv.shells.default = {pkgs, ...}: {
+          devenv.root =
+            let
+              devenvRootFileContent = builtins.readFile devenv-root.outPath;
+            in
+            pkgs.lib.mkIf (devenvRootFileContent != "") devenvRootFileContent;
+
           packages = [
             # add treefmt using flake-parts per-system config
             config.treefmt.build.wrapper
