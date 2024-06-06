@@ -8,6 +8,9 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     systems.url = "github:nix-systems/default";
     treefmt-nix.url = "github:numtide/treefmt-nix";
+    # needed for `nix flake show`
+    nix2container.url = "github:nlewo/nix2container";
+    nix2container.inputs = {nixpkgs.follows = "nixpkgs";};
   };
 
   outputs = inputs @ {
@@ -24,6 +27,7 @@
       systems = import systems;
 
       imports = [
+        devenv.flakeModule
         treefmt-nix.flakeModule
       ];
 
@@ -88,23 +92,15 @@
         system,
         ...
       }: {
-        devShells = {
-          default = devenv.lib.mkShell {
-            inherit inputs pkgs;
+        devenv.shells.default = {pkgs, ...}: {
+          packages = [
+            # add treefmt using flake-parts per-system config
+            config.treefmt.build.wrapper
+          ];
 
-            modules = [
-              ({pkgs, ...}: {
-                packages = with pkgs; [
-                  # add treefmt using flake-parts per-system config
-                  config.treefmt.build.wrapper
-                ];
-
-                languages = {
-                  nix.enable = true;
-                  shell.enable = true;
-                };
-              })
-            ];
+          languages = {
+            nix.enable = true;
+            shell.enable = true;
           };
         };
 
