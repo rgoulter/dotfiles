@@ -22,62 +22,65 @@
   }: let
     forAllSystems = f: nixpkgs.lib.genAttrs (import systems) (system: f system);
     treefmtEval = forAllSystems (system: treefmt-nix.lib.evalModule nixpkgs.legacyPackages.${system} ./treefmt.nix);
-    flake = {
-      homeConfigurations = {
-        "richardgoulter-x86_64-darwin" = let
-          system = "x86_64-darwin";
-          pkgs = nixpkgs.legacyPackages.${system};
-        in
-          home-manager.lib.homeManagerConfiguration {
-            inherit pkgs;
-
-            modules = [
-              self.nixosModules.dotfiles
-              {
-                home = {
-                  username = "richardgoulter";
-                  homeDirectory = "/Users/richardgoulter";
-                  stateVersion = "22.05";
-                };
-                programs.home-manager.enable = true;
-              }
-            ];
-          };
-
-        "rgoulter-x86_64-linux" = let
-          system = "x86_64-linux";
-          pkgs = nixpkgs.legacyPackages.${system};
-        in
-          home-manager.lib.homeManagerConfiguration {
-            inherit pkgs;
-
-            modules = [
-              self.nixosModules.dotfiles
-              {
-                home = {
-                  username = "rgoulter";
-                  homeDirectory = "/home/rgoulter";
-                  stateVersion = "22.05";
-                };
-                programs.home-manager.enable = true;
-              }
-            ];
-          };
-
-        "richardgoulter-x86_64-macos" = self.homeConfigurations.richardgoulter-x86_64-darwin;
-      };
-      nixosModules = {
-        default = self.nixosModules.dotfiles;
-        dotfiles = import ./dotfiles.nix;
-      };
-      lib = {
-        configSymlinks = import ./lib/configSymlinks.nix;
-      };
-    };
   in
     flake-parts.lib.mkFlake {inherit inputs;} {
-      inherit flake;
       systems = import systems;
+
+      flake = {
+        homeConfigurations = {
+          "richardgoulter-x86_64-darwin" = let
+            system = "x86_64-darwin";
+            pkgs = nixpkgs.legacyPackages.${system};
+          in
+            home-manager.lib.homeManagerConfiguration {
+              inherit pkgs;
+
+              modules = [
+                self.nixosModules.dotfiles
+                {
+                  home = {
+                    username = "richardgoulter";
+                    homeDirectory = "/Users/richardgoulter";
+                    stateVersion = "22.05";
+                  };
+                  programs.home-manager.enable = true;
+                }
+              ];
+            };
+
+          "rgoulter-x86_64-linux" = let
+            system = "x86_64-linux";
+            pkgs = nixpkgs.legacyPackages.${system};
+          in
+            home-manager.lib.homeManagerConfiguration {
+              inherit pkgs;
+
+              modules = [
+                self.nixosModules.dotfiles
+                {
+                  home = {
+                    username = "rgoulter";
+                    homeDirectory = "/home/rgoulter";
+                    stateVersion = "22.05";
+                  };
+                  programs.home-manager.enable = true;
+                }
+              ];
+            };
+
+          "richardgoulter-x86_64-macos" = self.homeConfigurations.richardgoulter-x86_64-darwin;
+        };
+
+        lib = {
+          configSymlinks = import ./lib/configSymlinks.nix;
+        };
+
+        nixosModules = {
+          default = self.nixosModules.dotfiles;
+          dotfiles = import ./dotfiles.nix;
+        };
+      };
+
       perSystem = {config, pkgs, system, ...}: {
         checks = {
           formatting = treefmtEval.${system}.config.build.check self;
