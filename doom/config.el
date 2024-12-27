@@ -129,9 +129,7 @@
   ;; don't use minibuffer
   (setq epa-pinentry-mode 'ask))
 
-(use-package! justl
-  :config
-  (map! :n "e" 'justl-exec-recipe))
+(use-package! justl)
 
 (use-package! ranger
   :config
