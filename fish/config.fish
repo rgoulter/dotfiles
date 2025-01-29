@@ -71,3 +71,10 @@ starship init fish | source
 
 abbr -a nscf nix-shell --command "fish"
 abbr -a nb nix-build
+
+abbr -a cb cargo build
+abbr -a ct cargo test
+
+abbr -a mm make
+abbr -a mc make clean
+abbr -a mt make test
