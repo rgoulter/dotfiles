@@ -168,6 +168,39 @@
    "dN" '(zetteldeft-new-file-and-link :wk "new file & link")
    "dr" '(zetteldeft-file-rename :wk "rename")))
 
+
+(defun rgoulter/rustic-cargo-build ()
+  "run cargo build, switch to that buffer, zoom in on it."
+  (interactive)
+  (when
+    rustic-compilation-directory
+    (pop-to-buffer-same-window (get-buffer rustic-compilation-directory)))
+  (rustic-cargo-build)
+  (pop-to-buffer-same-window (get-buffer rustic-compilation-buffer-name))
+  (doom/window-maximize-buffer))
+
+(defun rgoulter/rustic-cargo-test ()
+  "run cargo test, switch to that buffer, zoom in on it."
+  (interactive)
+  (when
+    rustic-compilation-directory
+    (pop-to-buffer-same-window (get-buffer rustic-compilation-directory)))
+  (rustic-cargo-test)
+  (pop-to-buffer-same-window (get-buffer rustic-test-buffer-name))
+  (doom/window-maximize-buffer))
+
+(map!
+      :localleader
+      :map (rustic-mode-map rustic-compilation-mode-map rustic-cargo-test-mode-map)
+      "r b"
+	  #'rgoulter/rustic-cargo-build)
+
+(map!
+      :localleader
+      :map (rustic-mode-map rustic-compilation-mode-map rustic-cargo-test-mode-map)
+      "r t"
+	  #'rgoulter/rustic-cargo-test)
+
 ;; Kludge: use gpg-agent as the ssh agent
 (when (eq system-type 'gnu/linux)
   (setenv "SSH_AUTH_SOCK" (format "/run/user/%d/gnupg/S.gpg-agent.ssh" (user-uid))))
