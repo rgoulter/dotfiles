@@ -16,7 +16,7 @@ $git_commit\
 $git_state\
 $git_metrics\
 $git_status\
-$hg_branch\
+$hg_branch\n\
 $docker_context\
 $package\
 $cmake\
@@ -48,12 +48,12 @@ $scala\
 $swift\
 $vlang\
 $vagrant\
-$zig\
-$nix_shell\
+$zig\n\
 $conda\
 $memory_usage\
 $env_var\
 $crystal\
+$nix_shell\n\
 $cmd_duration\
 $line_break\
 $jobs\
