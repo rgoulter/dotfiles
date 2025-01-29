@@ -22,7 +22,6 @@
     "fish/coloured-manpages.fish"
     "fish/config.fish"
     "fish/fishfile"
-    "fish/functions/fish_greeting.fish"
     "fish/functions/fisher.fish"
     "fish/keybindings.txt"
     "git/common.inc"
