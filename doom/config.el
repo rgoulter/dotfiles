@@ -238,3 +238,6 @@
   (setenv "SSH_AUTH_SOCK" (format "/run/user/%d/gnupg/S.gpg-agent.ssh" (user-uid))))
 (when (eq system-type 'darwin)
   (setenv "SSH_AUTH_SOCK" (format "%s/.gnupg/S.gpg-agent.ssh" (getenv "HOME"))))
+
+(after! avy
+  (setq avy-keys '(?a ?o ?e ?u ?i ?d ?h ?t ?n ?s))))
