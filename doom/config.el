@@ -241,3 +241,6 @@
 
 (after! avy
   (setq avy-keys '(?a ?o ?e ?u ?i ?d ?h ?t ?n ?s))))
+
+(after! lsp-mode
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.devenv\\'"))
