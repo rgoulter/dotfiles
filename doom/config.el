@@ -189,6 +189,26 @@
   (pop-to-buffer-same-window (get-buffer rustic-test-buffer-name))
   (doom/window-maximize-buffer))
 
+(defun rgoulter/rustic-cargo-run-nextest ()
+  "run cargo test, switch to that buffer, zoom in on it."
+  (interactive)
+  (when
+    rustic-compilation-directory
+    (pop-to-buffer-same-window (get-buffer rustic-compilation-directory)))
+  (rustic-cargo-run-nextest)
+  (pop-to-buffer-same-window (get-buffer rustic-test-buffer-name))
+  (doom/window-maximize-buffer))
+
+(defun rgoulter/rustic-cargo-nextest-current-test ()
+  "run cargo test, switch to that buffer, zoom in on it."
+  (interactive)
+  (when
+    rustic-compilation-directory
+    (pop-to-buffer-same-window (get-buffer rustic-compilation-directory)))
+  (rustic-cargo-nextest-current-test)
+  (pop-to-buffer-same-window (get-buffer rustic-test-buffer-name))
+  (doom/window-maximize-buffer))
+
 (map!
       :localleader
       :map (rustic-mode-map rustic-compilation-mode-map rustic-cargo-test-mode-map)
@@ -200,6 +220,18 @@
       :map (rustic-mode-map rustic-compilation-mode-map rustic-cargo-test-mode-map)
       "r t"
 	  #'rgoulter/rustic-cargo-test)
+
+(map!
+      :localleader
+      :map (rustic-mode-map rustic-compilation-mode-map rustic-cargo-test-mode-map)
+      "r T"
+	  #'rgoulter/rustic-cargo-nextest-current-test)
+
+(map!
+      :localleader
+      :map (rustic-mode-map rustic-compilation-mode-map rustic-cargo-test-mode-map)
+      "r n"
+	  #'rgoulter/rustic-cargo-run-nextest)
 
 ;; Kludge: use gpg-agent as the ssh agent
 (when (eq system-type 'gnu/linux)
