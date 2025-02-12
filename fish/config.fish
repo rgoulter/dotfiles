@@ -78,3 +78,7 @@ abbr -a ct cargo test
 abbr -a mm make
 abbr -a mc make clean
 abbr -a mt make test
+
+abbr -a j just
+
+abbr -a we watchexec
