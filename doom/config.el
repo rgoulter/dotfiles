@@ -9,8 +9,7 @@
 (setq user-full-name "Richard Goulter"
       user-mail-address "richard.goulter@gmail.com")
 
-;; M-SPC gets captured by Gnome
-(setq doom-leader-alt-key "C-SPC")
+(setq doom-leader-alt-key "M-SPC")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom:
 ;;
