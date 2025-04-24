@@ -240,7 +240,7 @@
   (setenv "SSH_AUTH_SOCK" (format "%s/.gnupg/S.gpg-agent.ssh" (getenv "HOME"))))
 
 (after! avy
-  (setq avy-keys '(?a ?o ?e ?u ?i ?d ?h ?t ?n ?s))))
+  (setq avy-keys '(?a ?o ?e ?u ?i ?d ?h ?t ?n ?s)))
 
 (after! lsp-mode
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.devenv\\'"))
