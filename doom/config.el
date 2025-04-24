@@ -108,9 +108,7 @@
   (blamer-face ((t :foreground "#7a88cf"
                     :background nil
                     :height 140
-                    :italic t)))
-  :config
-  (global-blamer-mode 1))
+                    :italic t))))
 
 ;; accept completion from copilot and fallback to company
 (use-package! copilot
