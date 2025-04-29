@@ -67,7 +67,9 @@ end
 
 direnv hook fish | source
 
-starship init fish | source
+if command -q starship; and test "$TERM" != "dumb"
+    starship init fish | source
+end
 
 abbr -a nscf nix-shell --command "fish"
 abbr -a nb nix-build
