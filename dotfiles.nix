@@ -14,6 +14,7 @@
     "chemacs/profile"
     "chemacs/profiles.el"
     "direnv/direnvrc"
+    "direnv/direnv.toml"
     "doom/config.el"
     "doom/init.el"
     "doom/packages.el"

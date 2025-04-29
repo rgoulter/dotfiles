@@ -1,0 +1,3 @@
+# h/t https://github.com/direnv/direnv/wiki/Quiet-or-Silence-direnv
+[global]
+hide_env_diff = true
