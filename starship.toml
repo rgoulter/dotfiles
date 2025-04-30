@@ -3,8 +3,10 @@ format = """
 ($aws\n)\
 ($gcloud\n)\
 ($openstack\n)\
+($pulumi\n)\
 ($terraform\n)\
 ($kubernetes\n)\
+$sudo\
 $username\
 $hostname\
 $shlvl\
@@ -21,6 +23,7 @@ $hg_branch\n\
 $package\
 $cmake\
 $cobol\
+$crystal\
 $dart\
 $deno\
 $dotnet\
@@ -28,6 +31,8 @@ $elixir\
 $elm\
 $erlang\
 $golang\
+$gradle\
+$haskell\
 $helm\
 $java\
 $julia\
@@ -50,11 +55,11 @@ $vlang\
 $vagrant\
 $zig\n)\
 ($conda\
-$memory_usage\
+$direnv\
 $env_var\
-$crystal\
 $nix_shell\n)\
-($cmd_duration\n)\
+($memory_usage\
+$cmd_duration\n)\
 $jobs\
 $battery\
 $time\
