@@ -17,7 +17,7 @@ $git_state\
 $git_metrics\
 $git_status\
 $hg_branch\n\
-$docker_context\
+($docker_context\
 $package\
 $cmake\
 $cobol\
@@ -48,14 +48,13 @@ $scala\
 $swift\
 $vlang\
 $vagrant\
-$zig\n\
-$conda\
+$zig\n)\
+($conda\
 $memory_usage\
 $env_var\
 $crystal\
-$nix_shell\n\
-$cmd_duration\
-$line_break\
+$nix_shell\n)\
+($cmd_duration\n)\
 $jobs\
 $battery\
 $time\
