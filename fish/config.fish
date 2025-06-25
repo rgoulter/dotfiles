@@ -1,5 +1,7 @@
 set -x EDITOR hx
 
+set -x SHELL (which fish)
+
 # HOST, for HG stuff.
 set -x HOST (hostname)
 
