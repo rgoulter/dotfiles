@@ -83,8 +83,8 @@
 
        :checkers
        syntax              ; tasing you for every semicolon you forget
-       ;;(spell +flyspell) ; tasing you for misspelling mispelling
-       ;;grammar           ; tasing grammar mistake every you make
+       (spell +flyspell)   ; tasing you for misspelling mispelling
+       grammar             ; tasing grammar mistake every you make
 
        :tools
        ;;ansible
@@ -99,13 +99,13 @@
        lookup              ; navigate your code and its documentation
        lsp                 ; M-x vscode
        magit               ; a git porcelain for Emacs
-       ;;llm               ; when I said you needed friends, I didn't mean...
-       ;;make              ; run make tasks from Emacs
-       ;;pass              ; password manager for nerds
+       llm                 ; when I said you needed friends, I didn't mean...
+       make                ; run make tasks from Emacs
+       pass                ; password manager for nerds
        pdf                 ; pdf enhancements
        terraform           ; infrastructure as code
        ;;tmux              ; an API for interacting with tmux
-       ;;tree-sitter       ; syntax and parsing, sitting in a tree...
+       tree-sitter         ; syntax and parsing, sitting in a tree...
        ;;upload            ; map local to remote projects via ssh/ftp
 
        :os
@@ -115,7 +115,7 @@
        :lang
        ;;agda              ; types of types of types of types...
        ;;beancount         ; mind the GAAP
-       (cc +lsp)           ; C > C++ == 1
+       (cc +lsp +tree-sitter)           ; C > C++ == 1
        ;;clojure           ; java with a lisp
        ;;common-lisp       ; if you've seen one lisp, you've seen them all
        ;;coq               ; proofs-as-programs
@@ -163,7 +163,7 @@
        ;;qt                ; the 'cutest' gui framework ever
        ;;racket            ; a DSL for DSLs
        ;;raku              ; the artist formerly known as perl6
-       ;;rest              ; Emacs as a REST client
+       rest                ; Emacs as a REST client
        ;;rst               ; ReST in peace
        ;;(ruby +rails)     ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
        (rust +lsp +tree-sitter)   ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
