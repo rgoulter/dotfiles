@@ -43,7 +43,7 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
+(setq org-directory "~/org")
 
 (defvar workstation-file "File location for a local Emacs Lisp configuration file")
 (setq workstation-file (concat "~/.config/doom" "local.el"))
