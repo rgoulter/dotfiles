@@ -35,6 +35,26 @@
 
       flake = {
         homeConfigurations = {
+          "richard.goulter-aarch64-macos" = let
+            system = "aarch64-darwin";
+            pkgs = nixpkgs.legacyPackages.${system};
+          in
+            home-manager.lib.homeManagerConfiguration {
+              inherit pkgs;
+
+              modules = [
+                self.homeManagerModules.dotfiles
+                {
+                  home = {
+                    username = "richard.goulter";
+                    homeDirectory = "/Users/richard.goulter";
+                    stateVersion = "22.05";
+                  };
+                  programs.home-manager.enable = true;
+                }
+              ];
+            };
+
           "richardgoulter-x86_64-darwin" = let
             system = "x86_64-darwin";
             pkgs = nixpkgs.legacyPackages.${system};
@@ -43,7 +63,7 @@
               inherit pkgs;
 
               modules = [
-                self.nixosModules.dotfiles
+                self.homeManagerModules.dotfiles
                 {
                   home = {
                     username = "richardgoulter";
@@ -63,7 +83,7 @@
               inherit pkgs;
 
               modules = [
-                self.nixosModules.dotfiles
+                self.homeManagerModules.dotfiles
                 {
                   home = {
                     username = "rgoulter";
@@ -82,8 +102,8 @@
           configSymlinks = import ./lib/configSymlinks.nix;
         };
 
-        nixosModules = {
-          default = self.nixosModules.dotfiles;
+        homeManagerModules = {
+          default = self.homeManagerModules.dotfiles;
           dotfiles = import ./dotfiles.nix;
         };
       };
