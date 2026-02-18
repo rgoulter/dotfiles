@@ -49,8 +49,10 @@ alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %
 alias hl="hg log --style ~/.hgrc.d/fancy.style"
 
 
-set -x GOPATH "$HOME/go"
-set -x PATH $GOPATH/bin/ $PATH
+if not set --query GOPATH
+    set -x GOPATH "$HOME/go"
+    set -x PATH $GOPATH/bin/ $PATH
+end
 
 
 source $HOME/.config/fish/coloured-manpages.fish
