@@ -75,16 +75,19 @@ if command -q starship; and test "$TERM" != "dumb"
     starship init fish | source
 end
 
-abbr -a nscf nix-shell --command "fish"
-abbr -a nb nix-build
-
 abbr -a cb cargo build
 abbr -a ct cargo test
+
+abbr -a gb go build ./...
+abbr -a gt go test ./...
+
+abbr -a j just
 
 abbr -a mm make
 abbr -a mc make clean
 abbr -a mt make test
 
-abbr -a j just
+abbr -a nscf nix-shell --command "fish"
+abbr -a nb nix-build
 
 abbr -a we watchexec
