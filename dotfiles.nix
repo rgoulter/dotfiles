@@ -22,7 +22,7 @@
     "emacs-rgoulter/straight/versions/default.el"
     "fish/coloured-manpages.fish"
     "fish/config.fish"
-    "fish/fishfile"
+    # "fish/fishfile"
     "fish/functions/fisher.fish"
     "fish/keybindings.txt"
     "git/common.inc"
