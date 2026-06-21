@@ -144,26 +144,24 @@
   ;; using zetteldeft, the default id generation
   ;; gives them the same ID.
   (setq zetteldeft-id-format "%Y-%m-%d-%H%M%S")
-  :general
-  (:prefix doom-leader-key
-   :keymaps 'normal
-   "D"  '(nil :wk "deft")
-   "Dd" '(deft :wk "deft")
-   "DD" '(zetteldeft-deft-new-search :wk "new search")
-   "DR" '(deft-refresh :wk "refresh")
-   "Ds" '(zetteldeft-search-at-point :wk "search at point")
-   "Dc" '(zetteldeft-search-current-id :wk "search current id")
-   "Df" '(zetteldeft-follow-link :wk "follow link")
-   "DF" '(zetteldeft-avy-file-search-ace-window :wk "avy file other window")
-   "Dl" '(zetteldeft-avy-link-search :wk "avy link search")
-   "Dt" '(zetteldeft-avy-tag-search :wk "avy tag search")
-   "DT" '(zetteldeft-tag-buffer :wk "tag list")
-   "Di" '(zetteldeft-find-file-id-insert :wk "insert id")
-   "DI" '(zetteldeft-find-file-full-title-insert :wk "insert full title")
-   "Do" '(zetteldeft-find-file :wk "find file")
-   "Dn" '(zetteldeft-new-file :wk "new file")
-   "DN" '(zetteldeft-new-file-and-link :wk "new file & link")
-   "Dr" '(zetteldeft-file-rename :wk "rename")))
+  (map! :leader
+        :prefix ("D" . "deft")
+        :desc "deft"                    "d" #'deft
+        :desc "new search"              "D" #'zetteldeft-deft-new-search
+        :desc "refresh"                 "R" #'deft-refresh
+        :desc "search at point"         "s" #'zetteldeft-search-at-point
+        :desc "search current id"       "c" #'zetteldeft-search-current-id
+        :desc "follow link"             "f" #'zetteldeft-follow-link
+        :desc "avy file other window"   "F" #'zetteldeft-avy-file-search-ace-window
+        :desc "avy link search"         "l" #'zetteldeft-avy-link-search
+        :desc "avy tag search"          "t" #'zetteldeft-avy-tag-search
+        :desc "tag list"                "T" #'zetteldeft-tag-buffer
+        :desc "insert id"               "i" #'zetteldeft-find-file-id-insert
+        :desc "insert full title"       "I" #'zetteldeft-find-file-full-title-insert
+        :desc "find file"               "o" #'zetteldeft-find-file
+        :desc "new file"                "n" #'zetteldeft-new-file
+        :desc "new file & link"         "N" #'zetteldeft-new-file-and-link
+        :desc "rename"                  "r" #'zetteldeft-file-rename))
 
 
 (defun rgoulter/rustic-cargo-build ()
