@@ -26,13 +26,32 @@ async function detectAppearance(): Promise<"dark" | "light"> {
 	if (process.platform === "linux") {
 		try {
 			const { stdout } = await execAsync(
+				"dbus-send --session --print-reply --dest=org.freedesktop.portal.Desktop /org/freedesktop/portal/desktop org.freedesktop.portal.Settings.Read string:org.freedesktop.appearance string:color-scheme",
+			);
+			const match = stdout.match(/uint32\s+(\d+)/);
+			if (match) {
+				const scheme = Number(match[1]);
+				if (scheme === 1) {
+					return "dark";
+				}
+				if (scheme === 2) {
+					return "light";
+				}
+			}
+		} catch {
+			// fall through
+		}
+
+		try {
+			const { stdout } = await execAsync(
 				"gsettings get org.gnome.desktop.interface color-scheme",
 			);
 			const value = stdout.trim();
 			if (value.includes("prefer-dark")) {
 				return "dark";
 			}
-			if (value.includes("prefer-light")) {
+			// GNOME reports 'default' when Dark Style is off; treat as light.
+			if (value.includes("prefer-light") || value.includes("'default'")) {
 				return "light";
 			}
 		} catch {
