@@ -7,7 +7,5 @@ flake_uri := "."
 
 default: home-manager-switch
 
-hm_branch := "release-24.05"
-
 home-manager-switch:
-  nix run home-manager/{{hm_branch}} -- switch --flake {{flake_uri}}#{{user}}-{{system}}
+  nix run {{flake_uri}}#home-manager -- switch --flake {{flake_uri}}#{{user}}-{{system}}
