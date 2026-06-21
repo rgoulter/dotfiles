@@ -49,8 +49,8 @@
  :recipe (:host github :repo "EFLS/zetteldeft"))
 
 ;; code assistants which build on top of gptel
-(package! elysium)
-(package! evedel)
+;; (package! elysium)
+;; (package! evedel)
 (package! gptel-aibo)
 
 (package! pi-coding-agent)
