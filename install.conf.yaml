@@ -1,35 +1,34 @@
 - clean: ['~']
-
 - link:
     ~/.config/alacritty/alacritty.yml:
-        create: true
-        path: alacritty/alacritty.yml
+      create: true
+      path: alacritty/alacritty.yml
     ~/.config/emacs-rgoulter/init.el:
-        create: true
-        path: emacs.el
+      create: true
+      path: emacs.el
     ~/.config/emacs-rgoulter/straight/versions/default.el:
-        create: true
-        path: emacs.d/straight/versions/default.el
+      create: true
+      path: emacs.d/straight/versions/default.el
     ~/.config/fish:
-        create: true
-        path: fish
+      create: true
+      path: fish
     ~/.config/git/common.inc:
-        create: true
-        path: git/common.inc
+      create: true
+      path: git/common.inc
     ~/.config/kitty:
-        create: true
-        path: kitty
+      create: true
+      path: kitty
     ~/.config/powerline:
-        create: true
-        path: powerline
+      create: true
+      path: powerline
     ~/.config/nixpkgs/overlays:
-        create: true
-        path: nixpkgs/overlays
+      create: true
+      path: nixpkgs/overlays
     ~/.config/nvim/init.vim: vimrc
     ~/.config/starship.toml: starship.toml
     ~/.grok/config.toml:
-        create: true
-        path: grok/config.toml
+      create: true
+      path: grok/config.toml
     ~/.emacs-profiles.el: emacs-profiles.el
     ~/.gvimrc: gvimrc
     ~/.hgrc.d: hgrc.d
@@ -38,11 +37,9 @@
     ~/.tmux.conf: tmux.conf
     ~/.vim: vim/
     ~/.vimrc: vimrc
-
-
 - shell:
-  - [mkdir -p ~/.config/zellij && install -m644 zellij/config.kdl ~/.config/zellij/config.kdl, Install zellij config as real file for hot-reload]
-  - [rm -f ~/.config/kitty/theme.conf, Remove stale kitty theme.conf that overrides auto themes]
-  - [git submodule init, Installing/updating submodules]
-  - [git submodule update, Installing/updating submodules]
-  - [vim -e +PluginInstall +visual +qall, Installing vim plugins (at least 15 mins first run).]
+    - [mkdir -p ~/.config/zellij && install -m644 zellij/config.kdl ~/.config/zellij/config.kdl, Install zellij config as real file for hot-reload]
+    - [rm -f ~/.config/kitty/theme.conf, Remove stale kitty theme.conf that overrides auto themes]
+    - [git submodule init, Installing/updating submodules]
+    - [git submodule update, Installing/updating submodules]
+    - [vim -e +PluginInstall +visual +qall, Installing vim plugins (at least 15 mins first run).]
