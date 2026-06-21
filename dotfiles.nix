@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }: let
   configSymlinksLib = import ./lib/configSymlinks.nix {inherit pkgs;};
@@ -26,8 +27,11 @@
     # "fish/functions/fisher.fish"
     "fish/keybindings.txt"
     "git/common.inc"
+    "helix/config.toml"
     "git/gpg.inc"
+    "kitty/dark-theme.auto.conf"
     "kitty/kitty.conf"
+    "kitty/light-theme.auto.conf"
     "powerline/themes/tmux/default.json"
     "starship.toml"
     "tmux/tmux.conf"
@@ -53,10 +57,10 @@
   unconventionalHomeFilesToLink = {
     ".nvim/after/ftplugin/org.vim" = ./vim/after/ftplugin/org.vim;
     ".nvim/bundle/Vundle.vim" = sources.vundle;
+    ".pi/agent/settings.json" = ./pi/agent/settings.json;
     ".vim/bundle/Vundle.vim" = sources.vundle;
   };
-in
-  configSymlinksLib.mkSymlinkedDotfilesConfig {
+  symlinkedConfig = configSymlinksLib.mkSymlinkedDotfilesConfig {
     inherit
       simpleConfigFilesToLinkList
       unconventionalConfigFilesToLink
@@ -64,4 +68,25 @@ in
       unconventionalHomeFilesToLink
       ;
     symlinkFromDir = ./.;
-  }
+  };
+in {
+  imports = [./themes.nix];
+
+  dotfiles.themes.enable = true;
+
+  home.file = lib.mkMerge [
+    symlinkedConfig.home.file
+    {
+      # Overwrite a pre-existing pi settings file on first install.
+      ".pi/agent/settings.json".force = true;
+    }
+  ];
+
+  xdg.configFile = lib.mkMerge [
+    symlinkedConfig.xdg.configFile
+    {
+      # Managed as a real file in themes.nix so Zellij can hot-reload it.
+      "zellij/config.kdl".enable = false;
+    }
+  ];
+}
