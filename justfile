@@ -7,5 +7,8 @@ flake_uri := "."
 
 default: home-manager-switch
 
+fmt:
+  nix run {{flake_uri}} --
+
 home-manager-switch:
   nix run {{flake_uri}}#home-manager -- switch --flake {{flake_uri}}#{{user}}-{{system}}
