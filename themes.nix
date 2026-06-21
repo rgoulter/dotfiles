@@ -27,5 +27,13 @@ in {
       $DRY_RUN_CMD mkdir -p "${config.home.homeDirectory}/.config/zellij"
       $DRY_RUN_CMD install -m644 ${zellijConfig} "${config.home.homeDirectory}/.config/zellij/config.kdl"
     '';
+
+    # Pre-auto-theme symlink; overrides palette and breaks CSI 2031 propagation.
+    home.activation.removeStaleKittyThemeConf = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      if [ -L "${config.home.homeDirectory}/.config/kitty/theme.conf" ] \
+         || [ -f "${config.home.homeDirectory}/.config/kitty/theme.conf" ]; then
+        $DRY_RUN_CMD rm -f "${config.home.homeDirectory}/.config/kitty/theme.conf"
+      fi
+    '';
   };
 }
