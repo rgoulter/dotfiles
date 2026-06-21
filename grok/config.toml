@@ -1,0 +1,20 @@
+[cli]
+installer = "internal"
+
+[ui]
+# Follow OS light/dark; Grok polls every ~5s on macOS/Linux.
+theme = "auto"
+auto_dark_theme = "groknight"
+auto_light_theme = "grokday"
+max_thoughts_width = 120
+fork_secondary_model = "grok-build"
+yolo = false
+compact_mode = false
+permission_mode = "always-approve"
+
+[marketplace]
+official_marketplace_auto_installed = true
+
+[[marketplace.sources]]
+name = "xAI Official"
+git = "https://github.com/xai-org/plugin-marketplace.git"
