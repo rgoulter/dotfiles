@@ -27,6 +27,9 @@
         path: nixpkgs/overlays
     ~/.config/nvim/init.vim: vimrc
     ~/.config/starship.toml: starship.toml
+    ~/.grok/config.toml:
+        create: true
+        path: grok/config.toml
     ~/.emacs-profiles.el: emacs-profiles.el
     ~/.gvimrc: gvimrc
     ~/.hgrc.d: hgrc.d
@@ -38,6 +41,7 @@
 
 
 - shell:
+  - [mkdir -p ~/.config/zellij && install -m644 zellij/config.kdl ~/.config/zellij/config.kdl, Install zellij config as real file for hot-reload]
   - [rm -f ~/.config/kitty/theme.conf, Remove stale kitty theme.conf that overrides auto themes]
   - [git submodule init, Installing/updating submodules]
   - [git submodule update, Installing/updating submodules]
