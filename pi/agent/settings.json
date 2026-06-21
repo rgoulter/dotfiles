@@ -1,0 +1,6 @@
+{
+  "lastChangelogVersion": "0.73.0",
+  "defaultProvider": "xai",
+  "defaultModel": "grok-4-1-fast",
+  "theme": "ansi-light"
+}
