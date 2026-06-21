@@ -32,6 +32,7 @@
     "kitty/dark-theme.auto.conf"
     "kitty/kitty.conf"
     "kitty/light-theme.auto.conf"
+    "kitty/no-preference-theme.auto.conf"
     "powerline/themes/tmux/default.json"
     "starship.toml"
     "tmux/tmux.conf"

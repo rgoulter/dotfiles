@@ -279,7 +279,8 @@ web_client {
 // 
 // simplified_ui true
  
-// Follow kitty's light/dark palette via CSI 2031 (kitty picks palette from OS .auto.conf files).
+// Follow kitty's light/dark palette via CSI 2031 (kitty picks palette from OS *.auto.conf files;
+// GNOME "default" uses no-preference-theme.auto.conf).
 theme_dark "gruvbox-dark"
 theme_light "gruvbox-light"
  
