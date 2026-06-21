@@ -57,7 +57,6 @@
   unconventionalHomeFilesToLink = {
     ".nvim/after/ftplugin/org.vim" = ./vim/after/ftplugin/org.vim;
     ".nvim/bundle/Vundle.vim" = sources.vundle;
-    ".pi/agent/settings.json" = ./pi/agent/settings.json;
     ".vim/bundle/Vundle.vim" = sources.vundle;
   };
   symlinkedConfig = configSymlinksLib.mkSymlinkedDotfilesConfig {
@@ -74,13 +73,7 @@ in {
 
   dotfiles.themes.enable = true;
 
-  home.file = lib.mkMerge [
-    symlinkedConfig.home.file
-    {
-      # Overwrite a pre-existing pi settings file on first install.
-      ".pi/agent/settings.json".force = true;
-    }
-  ];
+  home.file = symlinkedConfig.home.file;
 
   xdg.configFile = lib.mkMerge [
     symlinkedConfig.xdg.configFile
