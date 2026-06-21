@@ -20,7 +20,7 @@ jobs:
         uses: DeterminateSystems/nix-installer-action@main
 
       - name: Run Nix Build
-        run: nix run home-manager/release-24.05 -- build --flake .#rgoulter-x86_64-linux
+        run: nix run .#home-manager -- build --flake .#rgoulter-x86_64-linux
 
   macos:
     runs-on: macos-13
@@ -33,4 +33,4 @@ jobs:
         uses: DeterminateSystems/nix-installer-action@main
 
       - name: Run Nix Build
-        run: nix run home-manager/release-24.05 -- build --flake .#richardgoulter-x86_64-darwin
+        run: nix run .#home-manager -- build --flake .#richardgoulter-x86_64-darwin
