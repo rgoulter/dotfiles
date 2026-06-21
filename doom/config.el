@@ -234,6 +234,10 @@
 (when (eq system-type 'darwin)
   (setenv "SSH_AUTH_SOCK" (format "%s/.gnupg/S.gpg-agent.ssh" (getenv "HOME"))))
 
+(after! ispell
+  ;; British English via aspell (aspellDicts.en in Nix); Oxford style: -ize verbs, -our/-re (colour, organize).
+  (setq ispell-dictionary "en_GB-ize"))
+
 (after! avy
   (setq avy-keys '(?a ?o ?e ?u ?i ?d ?h ?t ?n ?s)))
 
