@@ -8,8 +8,11 @@
     };
     devenv.url = "github:cachix/devenv";
     flake-parts.url = "github:hercules-ci/flake-parts";
-    home-manager.url = "github:nix-community/home-manager";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    home-manager = {
+      url = "github:nix-community/home-manager/release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     systems.url = "github:nix-systems/default";
     treefmt-nix.url = "github:numtide/treefmt-nix";
   };
@@ -114,6 +117,11 @@
         system,
         ...
       }: {
+        packages = {
+          home-manager = home-manager.packages.${system}.default;
+          default = config.treefmt.build.wrapper;
+        };
+
         devenv.shells.default = {pkgs, ...}: {
           devenv.root = let
             devenvRootFileContent = builtins.readFile devenv-root.outPath;
