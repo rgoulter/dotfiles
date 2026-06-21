@@ -1,0 +1,6 @@
+# Helix 25.07.1 only accepts `theme` as a string.
+# `[theme] dark/light` (CSI 2031 via Kitty) lands after 25.07.1 — see helix PR #14356.
+theme = "gruvbox_light_hard"
+
+[editor]
+true-color = true
