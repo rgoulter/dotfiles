@@ -109,6 +109,12 @@
           default = self.homeManagerModules.dotfiles;
           dotfiles = import ./dotfiles.nix;
         };
+
+        # Alias for flakes (e.g. my-nixos-config) that import this as a NixOS module.
+        nixosModules = {
+          default = self.homeManagerModules.dotfiles;
+          dotfiles = import ./dotfiles.nix;
+        };
       };
 
       perSystem = {
