@@ -215,7 +215,7 @@ function _fisher_commit -a cmd
     end
 
     set -l out_pkgs
-    if test "$cmd" = "rm"
+    if test "$cmd" = rm
         set out_pkgs $next_pkgs
     else
         for pkg in $next_pkgs
