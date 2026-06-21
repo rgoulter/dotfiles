@@ -23,7 +23,7 @@
     "fish/coloured-manpages.fish"
     "fish/config.fish"
     # "fish/fishfile"
-    "fish/functions/fisher.fish"
+    # "fish/functions/fisher.fish"
     "fish/keybindings.txt"
     "git/common.inc"
     "git/gpg.inc"
