@@ -31,6 +31,8 @@
     "git/gpg.inc"
     "git/ignore"
     "helix/config.toml"
+    "shell/gpg-agent.envsh"
+    "shell/source-nix-daemon.sh"
     "kitty/dark-theme.auto.conf"
     "kitty/kitty.conf"
     "kitty/light-theme.auto.conf"
