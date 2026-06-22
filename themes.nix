@@ -8,7 +8,7 @@
   zellijConfig = ./zellij/config.kdl;
 in {
   options.dotfiles.themes = {
-    enable = lib.mkEnableOption "OS-driven Gruvbox theme sync for Kitty, Zellij, Helix, Grok, and pi";
+    enable = lib.mkEnableOption "OS-driven Gruvbox theme sync for Kitty, Ghostty, Zellij, Helix, Grok, and pi";
   };
 
   config = lib.mkIf cfg.enable {

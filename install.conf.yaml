@@ -15,6 +15,9 @@
     ~/.config/git/common.inc:
       create: true
       path: git/common.inc
+    ~/.config/ghostty:
+      create: true
+      path: ghostty
     ~/.config/kitty:
       create: true
       path: kitty

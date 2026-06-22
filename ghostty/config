@@ -1,0 +1,12 @@
+# Gruvbox light/dark follows macOS appearance; Zellij picks up CSI 2031 palette updates.
+theme = dark:gruvbox-dark,light:gruvbox-light
+
+font-family = monospace
+font-size = 20
+
+# Left Option only acts as Alt (right Option keeps macOS Unicode input).
+macos-option-as-alt = left
+
+# Defaults send esc:b / esc:f (word back/forward); unbind so shells/editors handle these.
+keybind = alt+arrow_left=unbind
+keybind = alt+arrow_right=unbind

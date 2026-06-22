@@ -1,6 +1,6 @@
 /**
  * Sync pi theme with OS appearance using ansi-dark / ansi-light.
- * Kitty's gruvbox palette supplies the underlying ANSI colors.
+ * The host terminal's gruvbox palette supplies the underlying ANSI colors.
  *
  * Adapted from pi's mac-system-theme example and leblancfg/pi-ansi-themes.
  */

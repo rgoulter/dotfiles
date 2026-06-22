@@ -635,8 +635,8 @@ web_client {
 //   - false (Default)
 //
 // simplified_ui true
-// Follow kitty's light/dark palette via CSI 2031 (kitty picks palette from OS *.auto.conf files;
-// GNOME "default" uses no-preference-theme.auto.conf).
+// Follow the host terminal's light/dark palette via CSI 2031 (Kitty *.auto.conf files or
+// Ghostty theme = dark:...,light:...; GNOME "default" uses no-preference-theme.auto.conf).
 theme_dark "gruvbox-dark"
 theme_light "gruvbox-light"
  // Choose the base input mode of zellij.
