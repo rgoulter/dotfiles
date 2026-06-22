@@ -1,0 +1,2 @@
+# Host-specific fragments live in ~/.ssh/config.d/ (private dotfiles module).
+Include ~/.ssh/config.d/*

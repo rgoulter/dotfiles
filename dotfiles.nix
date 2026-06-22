@@ -54,7 +54,7 @@
     "gvimrc"
     "hgrc"
     "hgrc.d/fancy.style"
-
+    "ssh/config"
     "vimrc"
     "vim/after/ftplugin/org.vim"
   ];
