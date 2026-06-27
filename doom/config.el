@@ -97,6 +97,14 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+(add-load-path! "lisp")
+
+(use-package! agent-shell
+  :config
+  (require 'agent-shell-grok)
+  (agent-shell-grok-setup)
+  (agent-shell-grok-setup-keys))
+
 (use-package! blamer
   :general ("s-i" #'blamer-show-commit-info)
   :defer 20
