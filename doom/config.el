@@ -121,10 +121,6 @@
  :config
  (map! :leader :n "h C-m" 'discover-my-major))
 
-(after! epa
-  ;; don't use minibuffer
-  (setq epa-pinentry-mode 'ask))
-
 (use-package! justl)
 
 (use-package! ranger
@@ -233,12 +229,16 @@
 (when (eq system-type 'darwin)
   (setenv "SSH_AUTH_SOCK" (format "%s/.gnupg/S.gpg-agent.ssh" (getenv "HOME"))))
 
+(after! avy
+  (setq avy-keys '(?a ?o ?e ?u ?i ?d ?h ?t ?n ?s)))
+
+(after! epa
+  ;; don't use minibuffer
+  (setq epa-pinentry-mode 'ask))
+
 (after! ispell
   ;; British English via aspell (aspellDicts.en in Nix); Oxford style: -ize verbs, -our/-re (colour, organize).
   (setq ispell-dictionary "en_GB-ize"))
-
-(after! avy
-  (setq avy-keys '(?a ?o ?e ?u ?i ?d ?h ?t ?n ?s)))
 
 (after! lsp-mode
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.devenv\\'"))
