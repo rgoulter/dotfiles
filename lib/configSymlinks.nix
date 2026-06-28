@@ -4,11 +4,12 @@
     # ~/.config/ matches the path in the dotfiles repo.
     # e.g. ~/.config/alacritty/alacritty.yml matches ./alacritty/alacritty.yml.
     simpleConfigFilesToLinkList ? [],
-    # Files where the symlinks aren't following a nice convention.
-    unconventionalConfigFilesToLink ? {},
+    # Extra ~/.config paths that don't mirror the repo layout 1:1.
+    extraConfigFileLinks ? {},
     # e.g. "gvimrc" to link "~/.gvimrc" to ./gvimrc
     simpleHomeFilesToLinkList ? [],
-    unconventionalHomeFilesToLink ? {},
+    # Extra home paths that don't mirror the repo layout 1:1.
+    extraHomeFileLinks ? {},
     # symlinksFromDir is the path to the 'root' directory
     # of where the files passed to functions in this lib
     # are symlinked from.
@@ -60,7 +61,7 @@
     # The attribute value is the path to the dotfile in this repo.
     configFilesToLink =
       (configFilesToLinkF simpleConfigFilesToLinkList)
-      // unconventionalConfigFilesToLink;
+      // extraConfigFileLinks;
 
     # Attribute set for dotfiles in this repo to link into home directory.
     # The attribute name is for ~/$attrSetName,
@@ -68,7 +69,7 @@
     # The attribute value is the path to the dotfile in this repo.
     homeFilesToLink =
       (homeFilesToLinkF simpleHomeFilesToLinkList)
-      // unconventionalHomeFilesToLink;
+      // extraHomeFileLinks;
   in {
     # Symlink files under ~, e.g. ~/.hgrc
     home.file = pkgs.lib.attrsets.mapAttrs toSource homeFilesToLink;

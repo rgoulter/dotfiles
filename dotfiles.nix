@@ -5,7 +5,28 @@
   ...
 }: let
   configSymlinksLib = import ./lib/configSymlinks.nix {inherit pkgs;};
-  sources = import ./lib/sources {inherit pkgs;};
+  ensureClonedLib = import ./lib/ensureCloned.nix {inherit config lib pkgs;};
+
+  # home-relative dest = git repo src (string, or { src, rev? })
+  ensureCloned = {
+    ".config/emacs" = {
+      src = "https://github.com/plexus/chemacs2.git";
+      rev = "868388321169eddf6dcb99f9b0d3ce734897b3de";
+    };
+    ".config/tmux/plugins/tpm" = {
+      src = "https://github.com/tmux-plugins/tpm.git";
+      rev = "b699a7e01c253ffb7818b02d62bce24190ec1019";
+    };
+    ".vim/bundle/Vundle.vim" = {
+      src = "https://github.com/VundleVim/Vundle.vim.git";
+      rev = "cfd3b2d388a8c2e9903d7a9d80a65539aabfe933";
+    };
+  };
+
+  # home-relative dest = home-relative src
+  homeSymlinks = {
+    ".nvim/bundle/Vundle.vim" = ".vim/bundle/Vundle.vim";
+  };
 
   # List of dotfiles where the path to link under
   # ~/.config/ matches the path in the dotfiles repo.
@@ -41,17 +62,11 @@
     "kitty/kitty.conf"
     "kitty/light-theme.auto.conf"
     "kitty/no-preference-theme.auto.conf"
+    "nvim/init.vim"
     "powerline/themes/tmux/default.json"
     "starship.toml"
     "tmux/tmux.conf"
   ];
-
-  # Files where the symlinks aren't following a nice convention.
-  unconventionalConfigFilesToLink = {
-    "emacs" = sources.chemacs2;
-    "nvim/init.vim" = ./vimrc;
-    "tmux/plugins/tpm" = sources.tpm;
-  };
 
   # e.g. "gvimrc" to link "~/.gvimrc" to ./gvimrc
   simpleHomeFilesToLinkList = [
@@ -63,17 +78,15 @@
     "vim/after/ftplugin/org.vim"
   ];
 
-  unconventionalHomeFilesToLink = {
+  extraHomeFileLinks = {
     ".nvim/after/ftplugin/org.vim" = ./vim/after/ftplugin/org.vim;
-    ".nvim/bundle/Vundle.vim" = sources.vundle;
-    ".vim/bundle/Vundle.vim" = sources.vundle;
   };
+
   symlinkedConfig = configSymlinksLib.mkSymlinkedDotfilesConfig {
     inherit
       simpleConfigFilesToLinkList
-      unconventionalConfigFilesToLink
       simpleHomeFilesToLinkList
-      unconventionalHomeFilesToLink
+      extraHomeFileLinks
       ;
     symlinkFromDir = ./.;
   };
@@ -91,4 +104,8 @@ in {
       "zellij/config.kdl".enable = false;
     }
   ];
+
+  home.activation = ensureClonedLib.mkActivation {
+    inherit ensureCloned homeSymlinks;
+  };
 }
