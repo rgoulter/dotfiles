@@ -27,8 +27,6 @@
 
 (package! plantuml-mode)
 
-(package! ranger)
-
 (package! restclient)
 
 (package! scad-mode)

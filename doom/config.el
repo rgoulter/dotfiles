@@ -151,10 +151,6 @@
         :desc "Just choose recipe" "o j c" #'justl-exec-recipe-in-dir
         :desc "Just default recipe" "o j j" #'justl-exec-default-recipe))
 
-(use-package! ranger
-  :config
-  (map! :leader :desc "Ranger" :n "o m" #'ranger))
-
 (use-package restclient
   :mode ("\\.rest\\'" . restclient-mode))
 
