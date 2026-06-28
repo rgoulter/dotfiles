@@ -14,6 +14,7 @@
   (agent-shell-make-agent-config
    :identifier 'grok
    :mode-line-name "Grok"
+   :icon-name "grok.png"
    :buffer-name "Grok"
    :shell-prompt "Grok> "
    :shell-prompt-regexp "Grok> "
@@ -32,15 +33,35 @@
   (interactive)
   (agent-shell--dwim :config (agent-shell-grok-make-agent-config) :new-shell t))
 
+(defun agent-shell-grok--fix-icon-fetch-advice (orig-fn icon-name)
+  "Rewrite lobe-icons filenames to working raw.githubusercontent.com URLs.
+
+agent-shell builds URLs with refs/heads/master, which GitHub rejects
+with HTTP 400. Full https URLs are passed through unchanged."
+  (when (and icon-name
+             (not (string-prefix-p "https://" (downcase icon-name)))
+             (not (string-prefix-p "http://" (downcase icon-name))))
+    (setq icon-name
+          (concat "https://raw.githubusercontent.com/lobehub/lobe-icons/master/packages/static-png/"
+                  (if (eq (frame-parameter nil 'background-mode) 'dark) "dark" "light")
+                  "/" icon-name)))
+  (funcall orig-fn icon-name))
+
+(defun agent-shell-grok--ensure-icon-fetch-fix ()
+  "Install one-time advice fixing agent-shell lobe-icons URL template."
+  (unless (get 'agent-shell--fetch-agent-icon 'agent-shell-grok-icon-fix)
+    (put 'agent-shell--fetch-agent-icon 'agent-shell-grok-icon-fix t)
+    (advice-add 'agent-shell--fetch-agent-icon :around #'agent-shell-grok--fix-icon-fetch-advice)))
+
 (defun agent-shell-grok-setup ()
   "Register Grok with agent-shell."
+  (agent-shell-grok--ensure-icon-fetch-fix)
   (add-to-list 'agent-shell-agent-configs (agent-shell-grok-make-agent-config))
   (setq agent-shell-preferred-agent-config 'grok))
 
 (defun agent-shell-grok-setup-keys ()
   "Bind Grok agent-shell keys (after `map!' is available)."
   (map! :leader
-        :desc "Grok agent" "a g" #'grok-start-agent
-        :desc "Agent shell" "a a" #'agent-shell))
+        :desc "Grok agent" "o l g" #'grok-start-agent))
 
 (provide 'agent-shell-grok)
