@@ -145,7 +145,11 @@
  :config
  (map! :leader :n "h C-m" 'discover-my-major))
 
-(use-package! justl)
+(use-package! justl
+  :config
+  (map! :leader
+        :desc "Just choose recipe" "o j c" #'justl-exec-recipe-in-dir
+        :desc "Just default recipe" "o j j" #'justl-exec-default-recipe))
 
 (use-package! ranger
   :config
