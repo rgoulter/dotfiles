@@ -11,8 +11,10 @@ if exists('+termguicolors')
   set termguicolors
 endif
 
-set rtp+=~/.vim/bundle/Vundle.vim/
-call vundle#begin()
+let s:bundle_dir = expand('~/.local/share/vim/bundle')
+call mkdir(s:bundle_dir, 'p')
+execute 'set rtp+=' . s:bundle_dir . '/Vundle.vim/'
+call vundle#begin(s:bundle_dir)
 
 " let Vundle manage Vundle
 " Vundle is the way you want to handle Vim plugins.

@@ -11,12 +11,7 @@
   ensureCloned = {
     ".config/emacs" = "https://github.com/plexus/chemacs2.git";
     ".config/tmux/plugins/tpm" = "https://github.com/tmux-plugins/tpm.git";
-    ".vim/bundle/Vundle.vim" = "https://github.com/VundleVim/Vundle.vim.git";
-  };
-
-  # home-relative dest = home-relative src
-  homeSymlinks = {
-    ".nvim/bundle/Vundle.vim" = ".vim/bundle/Vundle.vim";
+    ".local/share/vim/bundle/Vundle.vim" = "https://github.com/VundleVim/Vundle.vim.git";
   };
 
   # List of dotfiles where the path to link under
@@ -54,30 +49,25 @@
     "kitty/light-theme.auto.conf"
     "kitty/no-preference-theme.auto.conf"
     "nvim/init.vim"
+    "vim/after/ftplugin/org.vim"
+    "vim/gvimrc"
+    "vim/vimrc"
     "powerline/themes/tmux/default.json"
     "starship.toml"
     "tmux/tmux.conf"
   ];
 
-  # e.g. "gvimrc" to link "~/.gvimrc" to ./gvimrc
+  # Programs without XDG config support (e.g. hg, ssh).
   simpleHomeFilesToLinkList = [
-    "gvimrc"
     "hgrc"
     "hgrc.d/fancy.style"
     "ssh/config"
-    "vimrc"
-    "vim/after/ftplugin/org.vim"
   ];
-
-  extraHomeFileLinks = {
-    ".nvim/after/ftplugin/org.vim" = ./vim/after/ftplugin/org.vim;
-  };
 
   symlinkedConfig = configSymlinksLib.mkSymlinkedDotfilesConfig {
     inherit
       simpleConfigFilesToLinkList
       simpleHomeFilesToLinkList
-      extraHomeFileLinks
       ;
     symlinkFromDir = ./.;
   };
@@ -97,6 +87,6 @@ in {
   ];
 
   home.activation = ensureClonedLib.mkActivation {
-    inherit ensureCloned homeSymlinks;
+    inherit ensureCloned;
   };
 }
