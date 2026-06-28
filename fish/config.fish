@@ -74,6 +74,7 @@ abbr -a gb go build ./...
 abbr -a gt go test ./...
 
 abbr -a j just
+abbr -a jc just --choose
 
 abbr -a mm make
 abbr -a mc make clean
