@@ -7,20 +7,11 @@
   configSymlinksLib = import ./lib/configSymlinks.nix {inherit pkgs;};
   ensureClonedLib = import ./lib/ensureCloned.nix {inherit config lib pkgs;};
 
-  # home-relative dest = git repo src (string, or { src, rev? })
+  # home-relative dest = git repo url
   ensureCloned = {
-    ".config/emacs" = {
-      src = "https://github.com/plexus/chemacs2.git";
-      rev = "868388321169eddf6dcb99f9b0d3ce734897b3de";
-    };
-    ".config/tmux/plugins/tpm" = {
-      src = "https://github.com/tmux-plugins/tpm.git";
-      rev = "b699a7e01c253ffb7818b02d62bce24190ec1019";
-    };
-    ".vim/bundle/Vundle.vim" = {
-      src = "https://github.com/VundleVim/Vundle.vim.git";
-      rev = "cfd3b2d388a8c2e9903d7a9d80a65539aabfe933";
-    };
+    ".config/emacs" = "https://github.com/plexus/chemacs2.git";
+    ".config/tmux/plugins/tpm" = "https://github.com/tmux-plugins/tpm.git";
+    ".vim/bundle/Vundle.vim" = "https://github.com/VundleVim/Vundle.vim.git";
   };
 
   # home-relative dest = home-relative src

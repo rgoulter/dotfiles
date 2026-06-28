@@ -1,41 +1,19 @@
-{
-  config,
-  lib,
-  pkgs,
-}: let
+{config, lib, pkgs}: let
   home = config.home.homeDirectory;
-
-  # "https://…" or { src = "https://…"; rev = "…"; }
-  parseCloneSpec = spec:
-    if builtins.isString spec
-    then {
-      src = spec;
-      rev = null;
-    }
-    else {
-      src = spec.src;
-      rev = spec.rev or null;
-    };
 
   activationName = prefix: path: "${prefix}-${lib.replaceStrings ["/" "."] ["-" "-"] path}";
 
   mkEnsureCloned = ensureCloned:
-    lib.mapAttrs' (dest: spec: let
-      inherit (parseCloneSpec spec) src rev;
-      repoPath = "${home}/${dest}";
-    in {
+    lib.mapAttrs' (dest: url: {
       name = activationName "ensureCloned" dest;
       value = lib.hm.dag.entryAfter ["writeBoundary"] ''
-        repoPath=${lib.escapeShellArg repoPath}
+        repoPath=${lib.escapeShellArg "${home}/${dest}"}
         $DRY_RUN_CMD mkdir -p "$(dirname "$repoPath")"
         if [ -e "$repoPath" ] && [ ! -d "$repoPath/.git" ]; then
           $DRY_RUN_CMD rm -rf "$repoPath"
         fi
         if [ ! -d "$repoPath/.git" ]; then
-          $DRY_RUN_CMD ${pkgs.git}/bin/git clone ${lib.escapeShellArg src} "$repoPath"
-          ${lib.optionalString (rev != null) ''
-          $DRY_RUN_CMD ${pkgs.git}/bin/git -C "$repoPath" checkout ${lib.escapeShellArg rev}
-        ''}
+          $DRY_RUN_CMD ${pkgs.git}/bin/git clone ${lib.escapeShellArg url} "$repoPath"
         fi
       '';
     })
