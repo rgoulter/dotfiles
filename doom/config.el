@@ -32,10 +32,21 @@
 ;; wasn't installed correctly. Font issues are rarely Doom issues!
 (setq doom-font (font-spec :family "Source Code Pro" :size 21))
 
-;; There are two ways to load a theme. Both assume the theme is installed and
-;; available. You can either set `doom-theme' or manually load a theme with the
-;; `load-theme' function. This is the default:
-(setq doom-theme 'leuven)
+;; Gruvbox light/dark follows OS appearance (Kitty, Ghostty, Zellij, Helix, etc.).
+(use-package! auto-dark
+  :defer t
+  :init
+  (setq! auto-dark-themes '((doom-gruvbox) (doom-gruvbox-light))
+         doom-theme nil
+         custom-safe-themes t)
+  (when (eq system-type 'darwin)
+    (setq auto-dark-allow-osascript t))
+  (defun rgoulter/auto-dark-init-h ()
+    (auto-dark-mode)
+    (remove-hook 'server-after-make-frame-hook #'rgoulter/auto-dark-init-h)
+    (remove-hook 'after-init-hook #'rgoulter/auto-dark-init-h))
+  (add-hook (if (daemonp) 'server-after-make-frame-hook 'after-init-hook)
+            #'rgoulter/auto-dark-init-h -95))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
