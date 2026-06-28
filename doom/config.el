@@ -256,6 +256,12 @@
 (after! avy
   (setq avy-keys '(?a ?o ?e ?u ?i ?d ?h ?t ?n ?s)))
 
+(after! dirvish
+  (map! :leader
+        :desc "Dirvish preview (DWIM)" "o m" #'dirvish-dwim
+        :desc "Dirvish preview"        "o /" #'dirvish
+        :desc "Dirvish sidebar"         "o p" #'dirvish-side))
+
 (after! epa
   ;; don't use minibuffer
   (setq epa-pinentry-mode 'ask))
