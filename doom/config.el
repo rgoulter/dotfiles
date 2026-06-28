@@ -153,7 +153,7 @@
 
 (use-package! ranger
   :config
-  (map! :leader :desc "Ranger" :n "om" #'ranger))
+  (map! :leader :desc "Ranger" :n "o m" #'ranger))
 
 (use-package restclient
   :mode ("\\.rest\\'" . restclient-mode))
