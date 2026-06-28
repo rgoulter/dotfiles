@@ -111,6 +111,11 @@
 (add-load-path! "lisp")
 
 (use-package! agent-shell
+  :custom
+  ;; Graphical header shows the agent icon plus two text rows (~5 lines).
+  ;; Text mode keeps agent, model, and project on a single header line.
+  ;; Icon fetch needs agent-shell-grok's lobe-icons URL fix (see lisp/).
+  (agent-shell-header-style 'text)
   :config
   (require 'agent-shell-grok)
   (agent-shell-grok-setup)
