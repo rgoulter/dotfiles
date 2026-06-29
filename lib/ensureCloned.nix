@@ -1,4 +1,8 @@
-{config, lib, pkgs}: let
+{
+  config,
+  lib,
+  pkgs,
+}: let
   home = config.home.homeDirectory;
 
   activationName = prefix: path: "${prefix}-${lib.replaceStrings ["/" "."] ["-" "-"] path}";

@@ -132,7 +132,9 @@
           devenv.root = let
             devenvRootFileContent = builtins.readFile devenv-root.outPath;
           in
-            pkgs.lib.mkIf (devenvRootFileContent != "") devenvRootFileContent;
+            if devenvRootFileContent != ""
+            then devenvRootFileContent
+            else builtins.toString self;
 
           # https://github.com/cachix/devenv/issues/528
           containers = pkgs.lib.mkForce {};
