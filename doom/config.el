@@ -271,5 +271,15 @@
   ;; British English via aspell (aspellDicts.en in Nix); Oxford style: -ize verbs, -our/-re (colour, organize).
   (setq ispell-dictionary "en_GB-ize"))
 
+(after! magit
+  ;; Free [w/]w and M-1..M-9 workspace keys; use gj/gk and z1..z4 for sections.
+  (map! :map magit-mode-map
+        :nv "[" nil
+        :nv "]" nil)
+  (undefine-key! magit-mode-map
+    "M-1" "M-2" "M-3" "M-4" "M-5" "M-6" "M-7" "M-8" "M-9")
+  (undefine-key! magit-section-mode-map
+    "M-1" "M-2" "M-3" "M-4" "M-5" "M-6" "M-7" "M-8" "M-9"))
+
 (after! lsp-mode
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.devenv\\'"))
