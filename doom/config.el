@@ -111,6 +111,7 @@
 (add-load-path! "lisp")
 
 (use-package! agent-shell
+  :hook (agent-shell-mode . doom-disable-line-numbers-h)
   :custom
   ;; Graphical header shows the agent icon plus two text rows (~5 lines).
   ;; Text mode keeps agent, model, and project on a single header line.
