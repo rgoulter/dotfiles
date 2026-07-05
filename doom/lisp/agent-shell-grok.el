@@ -6,27 +6,62 @@
 (defvar agent-shell-grok-acp-command '("grok" "agent" "stdio")
   "Command and parameters for the Grok ACP client.")
 
+(defvar agent-shell-grok--stripped-env-prefixes
+  '("AWS_ACCESS_KEY_ID="
+    "AWS_DEFAULT_PROFILE="
+    "AWS_PROFILE="
+    "AWS_SECRET_ACCESS_KEY="
+    "AWS_SESSION_TOKEN="
+    "GH_TOKEN="
+    "GITHUB_TOKEN="
+    "GIT_ASKPASS="
+    "GPG_AGENT_INFO="
+    "PASS_PASSWORD_STORE_DIR="
+    "SSH_AGENT_PID="
+    "SSH_AUTH_SOCK=")
+  "Env var prefixes dropped from the Grok ACP client environment.
+
+Agent sessions should not inherit human SSH/GPG agents or cloud tokens.
+Optional read-only deploy-key ssh-agent: set `agent-shell-grok-agent-ssh-socket'.")
+
+(defvar agent-shell-grok-agent-ssh-socket nil
+  "When non-nil, `SSH_AUTH_SOCK' for the Grok ACP client (e.g. deploy-key agent).
+Set in `local.el' when using a dedicated agent ssh-agent.")
+
+(defun agent-shell-grok--drop-env-entry-p (entry)
+  "Return non-nil if ENTRY should not be passed to the Grok ACP client."
+  (or (seq-some (lambda (pfx) (string-prefix-p pfx entry))
+                agent-shell-grok--stripped-env-prefixes)
+      (string-prefix-p "CARGO_TERM_COLOR=" entry)
+      (string-prefix-p "CARGO_TERM_PROGRESS_WHEN=" entry)
+      (string-prefix-p "CLICOLOR_FORCE=" entry)
+      (string-prefix-p "CLICOLOR=" entry)
+      (string-prefix-p "COLORTERM=" entry)
+      (string-prefix-p "FORCE_COLOR=" entry)
+      (string-prefix-p "NO_COLOR=" entry)))
+
 (defun agent-shell-grok--environment ()
   "Environment for the Grok ACP client.
 
-Inherit Emacs's environment, but force monochrome output so Grok and
-tools it runs (e.g. devenv, nix, cargo) do not emit ANSI into
-agent-shell buffers."
-  (append '("NO_COLOR=1"
-            "CLICOLOR=0"
-            "FORCE_COLOR=0"
-            "CARGO_TERM_COLOR=never"
-            "CARGO_TERM_PROGRESS_WHEN=never")
-          (seq-filter
-           (lambda (entry)
-             (not (or (string-prefix-p "NO_COLOR=" entry)
-                      (string-prefix-p "CLICOLOR=" entry)
-                      (string-prefix-p "CLICOLOR_FORCE=" entry)
-                      (string-prefix-p "FORCE_COLOR=" entry)
-                      (string-prefix-p "COLORTERM=" entry)
-                      (string-prefix-p "CARGO_TERM_COLOR=" entry)
-                      (string-prefix-p "CARGO_TERM_PROGRESS_WHEN=" entry))))
-           (agent-shell-make-environment-variables :inherit-env t))))
+Inherit Emacs's environment, but force monochrome output and drop auth
+sockets and credential env vars so Grok/bash tools do not run as you."
+  (let ((env (append '("CARGO_TERM_COLOR=never"
+                        "CARGO_TERM_PROGRESS_WHEN=never"
+                        "CLICOLOR=0"
+                        "FORCE_COLOR=0"
+                        "NO_COLOR=1")
+                      (seq-filter
+                       (lambda (entry)
+                         (not (agent-shell-grok--drop-env-entry-p entry)))
+                       (agent-shell-make-environment-variables :inherit-env t)))))
+    (when agent-shell-grok-agent-ssh-socket
+      (setq env (append (list (format "SSH_AUTH_SOCK=%s"
+                                      agent-shell-grok-agent-ssh-socket))
+                        (seq-filter
+                         (lambda (entry)
+                           (not (string-prefix-p "SSH_AUTH_SOCK=" entry)))
+                         env))))
+    env))
 
 (defun agent-shell-grok--sanitize-tool-output (text)
   "Return TEXT with ANSI color sequences removed."

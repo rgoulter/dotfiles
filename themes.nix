@@ -17,6 +17,19 @@ in {
       force = true;
     };
 
+    home.file.".grok/sandbox.toml" = {
+      text = ''
+        # Managed by Home Manager (dotfiles/themes.nix). Grok applies at session start.
+
+        [profiles.personal]
+        extends = "workspace"
+        read_write = [
+          "${config.home.homeDirectory}/github",
+        ]
+      '';
+      force = true;
+    };
+
     # pi-coding-agent: ANSI themes inherit Kitty palette; extension polls OS appearance.
     home.file.".pi/agent/themes/ansi-dark.json".source = ./pi/agent/themes/ansi-dark.json;
     home.file.".pi/agent/themes/ansi-light.json".source = ./pi/agent/themes/ansi-light.json;

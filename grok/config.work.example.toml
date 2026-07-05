@@ -1,0 +1,56 @@
+# Example user Grok config overlay for a work machine.
+# Copy relevant sections to ~/.grok/config.toml (not deployed from dotfiles).
+#
+# Merge with personal [permission] rules: deny beats allow.
+
+[ui]
+permission_mode = "ask"
+
+[sandbox]
+profile = "workspace"
+
+[permission]
+deny = [
+  # Network exfil
+  "Bash(curl *)",
+  "Bash(wget *)",
+  "Bash(scp *)",
+
+  # git / secrets
+  "Bash(git push *)",
+  "Bash(pass *)",
+
+  # kubectl — block mutating; get/logs/describe use Grok read-only fast path
+  "Bash(kubectl delete *)",
+  "Bash(kubectl apply *)",
+  "Bash(kubectl create *)",
+  "Bash(kubectl patch *)",
+  "Bash(kubectl replace *)",
+  "Bash(kubectl scale *)",
+  "Bash(kubectl rollout *)",
+  "Bash(kubectl exec *)",
+  "Bash(kubectl run *)",
+  "Bash(kubectl port-forward *)",
+
+  # aws — destructive / broad mutating (tighten to your usage)
+  "Bash(aws * delete*)",
+  "Bash(aws * terminate*)",
+  "Bash(aws * remove*)",
+  "Bash(aws * destroy*)",
+  "Bash(aws s3 rm *)",
+  "Bash(aws s3 sync *)",
+]
+
+allow = [
+  "Read",
+  "Grep",
+  "Bash(git *)",
+  "Bash(gh *)",
+  "Bash(rg *)",
+  "Bash(kubectl get *)",
+  "Bash(kubectl describe *)",
+  "Bash(kubectl logs *)",
+  "Bash(aws * describe*)",
+  "Bash(aws * list*)",
+  "Bash(aws * get*)",
+]

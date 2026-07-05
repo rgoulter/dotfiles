@@ -10,7 +10,60 @@ max_thoughts_width = 120
 fork_secondary_model = "grok-build"
 yolo = false
 compact_mode = false
-permission_mode = "always-approve"
+# Prompt before tool calls.
+# Grok auto-approves read-only git/rg/etc. anyway.
+permission_mode = "ask"
+
+[sandbox]
+# Custom profile in ~/.grok/sandbox.toml (extends workspace + ~/github writes).
+profile = "personal"
+
+[permission]
+# Deny has highest priority
+deny = [
+  "Bash(chmod *)",
+  "Bash(chown *)",
+  "Bash(curl *)",
+  "Bash(gh api *)",
+  "Bash(gh pr close *)",
+  "Bash(gh pr create *)",
+  "Bash(gh pr edit *)",
+  "Bash(gh pr merge *)",
+  "Bash(gh pr reopen *)",
+  "Bash(gh pr review *)",
+  "Bash(git push *)",
+  "Bash(pass *)",
+  "Bash(rm -rf *)",
+  "Bash(scp *)",
+  "Bash(ssh *)",
+  "Bash(wget *)",
+]
+
+allow = [
+  # agent-plain:
+  #  my script to filter out ansi, control codes
+  #  because Grok Build forces CLI COLOR.
+  "Bash(agent-plain *)",
+  # gh: read-only subcommands only (deny api + mutating pr above).
+  "Bash(gh auth status)",
+  "Bash(gh pr checks *)",
+  "Bash(gh pr diff *)",
+  "Bash(gh pr list *)",
+  "Bash(gh pr status *)",
+  "Bash(gh pr view *)",
+  "Bash(gh repo view *)",
+  "Bash(git *)",
+  "Bash(just build)",
+  "Bash(just fmt)",
+  "Bash(nix build *)",
+  "Bash(nix develop *)",
+  "Bash(nix flake check *)",
+  "Bash(rg *)",
+  "Grep",
+  "Read",
+]
+
+ask = ["Bash(just switch)", "Bash(just apply)"]
 
 [marketplace]
 official_marketplace_auto_installed = true
