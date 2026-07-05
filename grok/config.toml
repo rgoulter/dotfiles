@@ -62,6 +62,7 @@ allow = [
   "Bash(nix search *)",
   "Bash(rg *)",
   "Bash(tail *)",
+  "Bash(which *)",
   "Grep",
   "Read",
 ]
