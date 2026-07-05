@@ -20,31 +20,25 @@ profile = "personal"
 
 [permission]
 # Deny has highest priority
-deny = [
-  "Bash(chmod *)",
-  "Bash(chown *)",
-  "Bash(curl *)",
-  "Bash(gh api *)",
-  "Bash(gh pr close *)",
-  "Bash(gh pr create *)",
-  "Bash(gh pr edit *)",
-  "Bash(gh pr merge *)",
-  "Bash(gh pr reopen *)",
-  "Bash(gh pr review *)",
-  "Bash(git push *)",
-  "Bash(pass *)",
-  "Bash(rm -rf *)",
-  "Bash(scp *)",
-  "Bash(ssh *)",
-  "Bash(wget *)",
-]
+deny = []
 
 allow = [
-  # agent-plain:
-  #  my script to filter out ansi, control codes
-  #  because Grok Build forces CLI COLOR.
-  "Bash(agent-plain *)",
+  # agent-plain: ANSI wrapper for noisy CLIs (see agents/skills/agent-plain).
+  # Prefix-only — broader rules bypass gh/curl/etc. deny rules.
+  "Bash(agent-plain cargo build)",
+  "Bash(agent-plain cargo check)",
+  "Bash(agent-plain cargo clippy)",
+  "Bash(agent-plain cargo test)",
+  "Bash(agent-plain devenv shell)",
+  "Bash(agent-plain devenv test)",
+  "Bash(agent-plain direnv exec)",
   # gh: read-only subcommands only (deny api + mutating pr above).
+  "Bash(bat *)",
+  "Bash(cd *)",
+  "Bash(direnv exec *)",
+  "Bash(direnv status)",
+  "Bash(echo *)",
+  "Bash(eza *)",
   "Bash(gh auth status)",
   "Bash(gh pr checks *)",
   "Bash(gh pr diff *)",
@@ -53,12 +47,21 @@ allow = [
   "Bash(gh pr view *)",
   "Bash(gh repo view *)",
   "Bash(git *)",
+  "Bash(head *)",
+  "Bash(jq *)",
   "Bash(just build)",
   "Bash(just fmt)",
   "Bash(nix build *)",
   "Bash(nix develop *)",
+  "Bash(nix eval *)",
   "Bash(nix flake check *)",
+  "Bash(nix flake metadata *)",
+  "Bash(nix flake show *)",
+  "Bash(nix path-info *)",
+  "Bash(nix profile list)",
+  "Bash(nix search *)",
   "Bash(rg *)",
+  "Bash(tail *)",
   "Grep",
   "Read",
 ]
