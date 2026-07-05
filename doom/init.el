@@ -101,7 +101,7 @@
        (magit +forge)      ; a git porcelain for Emacs
        llm                 ; when I said you needed friends, I didn't mean...
        make                ; run make tasks from Emacs
-       pass                ; password manager for nerds
+       (pass +auth)        ; password manager for nerds; auth-source for forge
        pdf                 ; pdf enhancements
        terraform           ; infrastructure as code
        ;;tmux              ; an API for interacting with tmux
