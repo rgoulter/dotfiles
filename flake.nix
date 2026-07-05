@@ -7,6 +7,10 @@
       flake = false;
     };
     devenv.url = "github:cachix/devenv";
+    git-hooks = {
+      url = "github:cachix/git-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     flake-parts.url = "github:hercules-ci/flake-parts";
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
@@ -143,6 +147,11 @@
             # add treefmt using flake-parts per-system config
             config.treefmt.build.wrapper
           ];
+
+          git-hooks.hooks.treefmt = {
+            enable = true;
+            package = config.treefmt.build.wrapper;
+          };
 
           languages = {
             nix.enable = true;
