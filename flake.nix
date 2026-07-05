@@ -126,7 +126,13 @@
         pkgs,
         system,
         ...
-      }: {
+      }: let
+        checkElispParens = pkgs.writeShellApplication {
+          name = "check-elisp-parens";
+          runtimeInputs = [pkgs.emacs];
+          text = builtins.readFile ./scripts/check-elisp-parens.sh;
+        };
+      in {
         packages = {
           home-manager = home-manager.packages.${system}.default;
           default = config.treefmt.build.wrapper;
@@ -151,6 +157,13 @@
           git-hooks.hooks.treefmt = {
             enable = true;
             package = config.treefmt.build.wrapper;
+          };
+
+          git-hooks.hooks.emacs-lisp-parens = {
+            enable = true;
+            name = "emacs-lisp-parens";
+            entry = pkgs.lib.getExe checkElispParens;
+            files = "\\.el$";
           };
 
           languages = {
