@@ -45,6 +45,9 @@ alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %
 # custom.author = blue bold
 alias hl="hg log --style ~/.hgrc.d/fancy.style"
 
+# Home Manager user binaries (e.g. agent-plain).
+fish_add_path -m -p $HOME/.local/bin
+
 if not set --query GOPATH
     set -x GOPATH "$HOME/go"
     set -x PATH $GOPATH/bin/ $PATH
