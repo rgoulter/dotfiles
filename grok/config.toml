@@ -31,7 +31,7 @@ allow = [
   "Bash(agent-plain cargo test)",
   "Bash(agent-plain devenv shell)",
   "Bash(agent-plain devenv test)",
-  "Bash(agent-plain direnv exec)",
+  "Bash(agent-plain gh pr view)",
   # gh: read-only subcommands only (deny api + mutating pr above).
   "Bash(bat *)",
   "Bash(cd *)",
