@@ -7,6 +7,14 @@
   configSymlinksLib = import ./lib/configSymlinks.nix {inherit pkgs;};
   ensureClonedLib = import ./lib/ensureCloned.nix {inherit config lib pkgs;};
 
+  # Agent Skills (https://agentskills.io) — deploy ./agents/skills/<name>/ to
+  # ~/.agents/skills/<name>/ (Grok, pi, Claude Code compat, etc.).
+  # Nix flakes only see git-tracked paths: git add new skill dirs before build.
+  agentSkills = import ./lib/agentSkills.nix {
+    inherit lib;
+    skillsDir = ./agents/skills;
+  };
+
   # home-relative dest = git repo url
   ensureCloned = {
     ".config/emacs" = "https://github.com/plexus/chemacs2.git";
@@ -78,6 +86,7 @@ in {
 
   home.file =
     symlinkedConfig.home.file
+    // agentSkills
     // {
       ".local/bin/agent-plain".source = ./bin/agent-plain;
       ".local/bin/agent-plain".executable = true;
