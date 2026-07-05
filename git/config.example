@@ -13,7 +13,7 @@
 	path = ~/.config/git/common.inc
 	path = ~/.config/git/gpg.inc
 	path = ~/.config/git/user-personal.inc
-#	path = ~/.config/git/forge.inc
+	path = ~/.config/git/forge.inc
 
 # Optional private fragments (create locally or deploy from a private repo):
 #	path = ~/.config/git/go-private-access-musiio.inc

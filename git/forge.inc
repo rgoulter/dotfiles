@@ -1,0 +1,2 @@
+[github]
+	user = rgoulter

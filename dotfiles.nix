@@ -47,6 +47,7 @@
     "ghostty/themes/gruvbox-light"
     "git/common.inc"
     "git/config.example"
+    "git/forge.inc"
     "git/gpg.inc"
     "git/ignore"
     "helix/config.toml"
