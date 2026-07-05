@@ -50,6 +50,28 @@ agent-shell buffers."
     (advice-add 'agent-shell--update-fragment :around
                 #'agent-shell-grok--sanitize-fragment--advice)))
 
+(defun agent-shell-grok--auto-revert-stale-buffer--advice (orig &rest args)
+  "Reload unmodified buffers before agent-shell reads them from disk.
+
+When the agent edits via bash tools, open buffers can be stale.  agent-shell
+prompts to reload on `fs/read_text_file'; skip that when the user has no
+unsaved edits."
+  (let ((kw (car args)))
+    (when-let ((buffer (plist-get kw :buffer)))
+      (with-current-buffer buffer
+        (when (and (buffer-file-name)
+                   (not (verify-visited-file-modtime))
+                   (not (buffer-modified-p)))
+          (revert-buffer t nil nil))))
+    (apply orig args)))
+
+(defun agent-shell-grok--ensure-auto-revert-buffer-advice ()
+  "Install one-time advice auto-reloading stale unmodified file buffers."
+  (unless (get 'agent-shell--extract-buffer-text 'agent-shell-grok-auto-revert)
+    (put 'agent-shell--extract-buffer-text 'agent-shell-grok-auto-revert t)
+    (advice-add 'agent-shell--extract-buffer-text :around
+                #'agent-shell-grok--auto-revert-stale-buffer--advice)))
+
 (defun agent-shell-grok-make-agent-config ()
   "Create a Grok agent configuration."
   (agent-shell-make-agent-config
@@ -98,6 +120,7 @@ with HTTP 400. Full https URLs are passed through unchanged."
   "Register Grok with agent-shell."
   (agent-shell-grok--ensure-icon-fetch-fix)
   (agent-shell-grok--ensure-output-sanitize-advice)
+  (agent-shell-grok--ensure-auto-revert-buffer-advice)
   (add-to-list 'agent-shell-agent-configs (agent-shell-grok-make-agent-config))
   (setq agent-shell-preferred-agent-config 'grok))
 

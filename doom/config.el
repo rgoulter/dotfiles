@@ -110,6 +110,15 @@
 
 (add-load-path! "lisp")
 
+;; Poll file buffers so agent/bash edits on disk propagate without prompts.
+;; Supersedes Doom's lazy `doom-auto-revert-mode` (switch-buffer only).
+(use-package! autorevert
+  :defer t
+  :config
+  (setq auto-revert-interval 2
+        auto-revert-verbose nil)
+  (global-auto-revert-mode +1))
+
 (use-package! agent-shell
   :hook (agent-shell-mode . doom-disable-line-numbers-h)
   :custom
