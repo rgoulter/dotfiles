@@ -25,6 +25,8 @@ in {
         extends = "workspace"
         read_write = [
           "${config.home.homeDirectory}/github",
+          # prek logs/hooks when git commit runs outside devenv (default ~/.cache/prek).
+          "${config.home.homeDirectory}/.cache/prek",
         ]
       '';
       force = true;
