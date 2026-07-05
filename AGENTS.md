@@ -4,7 +4,7 @@ Personal dotfiles managed with [Home Manager](https://github.com/nix-community/h
 
 ## Home Manager
 
-Use **`just`** from the repo root (see `justfile`). Managed paths are declared in `dotfiles.nix` (and `themes.nix`).
+Use **`just`** from the repo root (see `justfile`). Managed paths are declared in `dotfiles.nix` (and `grok.nix` / `themes.nix` where noted).
 
 Home Manager **builds** a home configuration and, on switch, **installs symlinks and managed files** under `~/`. Editing files in this repo does not change what apps read until you apply — e.g. `doom/config.el` here is not live at `~/.config/doom/` until switch runs.
 
@@ -76,7 +76,7 @@ Grok is integrated via **agent-shell** (ACP) in `doom/lisp/agent-shell-grok.el`,
 ## Other layout notes
 
 - **Shell**: fish — `fish/`
-- **Grok CLI config**: `grok/config.toml` → `~/.grok/config.toml` (via `themes.nix` when themes are enabled)
+- **Grok CLI config**: `grok/config.toml` and `grok/sandbox.toml` → `~/.grok/` (via `grok.nix`)
 - **Pi agent assets**: `pi/agent/` (themes/extensions; separate from Doom)
 - **Nix module entrypoint**: `dotfiles.nix` exports `homeManagerModules.dotfiles`
 - **Agent skills**: `agents/skills/` → `~/.agents/skills/` via Home Manager (cross-runtime; see [Agent Skills](https://agentskills.io))

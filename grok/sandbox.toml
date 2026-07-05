@@ -1,0 +1,10 @@
+# Managed by Home Manager (grok.nix). @HOME@ is substituted per machine.
+# Grok applies at session start.
+
+[profiles.personal]
+extends = "workspace"
+read_write = [
+  "@HOME@/github",
+  # prek logs/hooks when git commit runs outside devenv (default ~/.cache/prek).
+  "@HOME@/.cache/prek",
+]

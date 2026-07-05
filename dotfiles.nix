@@ -81,8 +81,12 @@
     symlinkFromDir = ./.;
   };
 in {
-  imports = [./themes.nix];
+  imports = [
+    ./grok.nix
+    ./themes.nix
+  ];
 
+  dotfiles.grok.enable = true;
   dotfiles.themes.enable = true;
 
   home.file =

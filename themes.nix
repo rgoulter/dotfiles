@@ -8,30 +8,10 @@
   zellijConfig = ./zellij/config.kdl;
 in {
   options.dotfiles.themes = {
-    enable = lib.mkEnableOption "OS-driven Gruvbox theme sync for Kitty, Ghostty, Zellij, Helix, Grok, and pi";
+    enable = lib.mkEnableOption "OS-driven Gruvbox theme sync for Kitty, Ghostty, Zellij, Helix, and pi";
   };
 
   config = lib.mkIf cfg.enable {
-    home.file.".grok/config.toml" = {
-      source = ./grok/config.toml;
-      force = true;
-    };
-
-    home.file.".grok/sandbox.toml" = {
-      text = ''
-        # Managed by Home Manager (dotfiles/themes.nix). Grok applies at session start.
-
-        [profiles.personal]
-        extends = "workspace"
-        read_write = [
-          "${config.home.homeDirectory}/github",
-          # prek logs/hooks when git commit runs outside devenv (default ~/.cache/prek).
-          "${config.home.homeDirectory}/.cache/prek",
-        ]
-      '';
-      force = true;
-    };
-
     # pi-coding-agent: ANSI themes inherit Kitty palette; extension polls OS appearance.
     home.file.".pi/agent/themes/ansi-dark.json".source = ./pi/agent/themes/ansi-dark.json;
     home.file.".pi/agent/themes/ansi-light.json".source = ./pi/agent/themes/ansi-light.json;
