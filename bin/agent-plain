@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# Plain output for agent-shell and other captured terminals.
+#
+# Grok Build may inject CLICOLOR_FORCE and other color-forcing env vars
+# into tool subprocesses. exec env overrides them for the child command.
+#
+# Usage: agent-plain devenv shell -- make test
+
+set -euo pipefail
+
+exec env \
+  -u CLICOLOR_FORCE \
+  -u COLORTERM \
+  NO_COLOR=1 \
+  CLICOLOR=0 \
+  FORCE_COLOR=0 \
+  TERM=dumb \
+  CARGO_TERM_COLOR=never \
+  CARGO_TERM_PROGRESS_WHEN=never \
+  "$@"

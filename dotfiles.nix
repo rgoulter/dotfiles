@@ -76,7 +76,12 @@ in {
 
   dotfiles.themes.enable = true;
 
-  home.file = symlinkedConfig.home.file;
+  home.file =
+    symlinkedConfig.home.file
+    // {
+      ".local/bin/agent-plain".source = ./bin/agent-plain;
+      ".local/bin/agent-plain".executable = true;
+    };
 
   xdg.configFile = lib.mkMerge [
     symlinkedConfig.xdg.configFile
