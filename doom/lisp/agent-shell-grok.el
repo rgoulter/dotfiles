@@ -22,11 +22,23 @@
   "Env var prefixes dropped from the Grok ACP client environment.
 
 Agent sessions should not inherit human SSH/GPG agents or cloud tokens.
-Optional read-only deploy-key ssh-agent: set `agent-shell-grok-agent-ssh-socket'.")
+Stripped GH/GITHUB_TOKEN are replaced from pass when configured — see
+`agent-shell-grok-gh-pass-entry'.  Optional deploy-key ssh-agent:
+`agent-shell-grok-agent-ssh-socket'.")
 
 (defvar agent-shell-grok-agent-ssh-socket nil
   "When non-nil, `SSH_AUTH_SOCK' for the Grok ACP client (e.g. deploy-key agent).
 Set in `local.el' when using a dedicated agent ssh-agent.")
+
+(defvar agent-shell-grok-gh-pass-entry "token/gh"
+  "Pass entry for a GitHub token injected as GH_TOKEN/GITHUB_TOKEN.
+
+Used when Keychain auth is unavailable in sandboxed Grok/bash tools.  Set to
+nil to disable pass lookup.  Overridden by `agent-shell-grok-gh-token'.")
+
+(defvar agent-shell-grok-gh-token nil
+  "When non-nil, GH/GITHUB_TOKEN for the Grok ACP client (skips pass lookup).
+Set in `local.el' to override `agent-shell-grok-gh-pass-entry'.")
 
 (defun agent-shell-grok--drop-env-entry-p (entry)
   "Return non-nil if ENTRY should not be passed to the Grok ACP client."
@@ -40,11 +52,22 @@ Set in `local.el' when using a dedicated agent ssh-agent.")
       (string-prefix-p "FORCE_COLOR=" entry)
       (string-prefix-p "NO_COLOR=" entry)))
 
+(defun agent-shell-grok--gh-token ()
+  "Return a GitHub token for the Grok ACP client, or nil."
+  (or agent-shell-grok-gh-token
+      (and agent-shell-grok-gh-pass-entry
+           (require 'password-store nil t)
+           (fboundp 'password-store-get)
+           (let ((token (password-store-get agent-shell-grok-gh-pass-entry)))
+             (and token (not (string-empty-p (string-trim token)))
+                  (string-trim token))))))
+
 (defun agent-shell-grok--environment ()
   "Environment for the Grok ACP client.
 
 Inherit Emacs's environment, but force monochrome output and drop auth
-sockets and credential env vars so Grok/bash tools do not run as you."
+sockets and credential env vars so Grok/bash tools do not run as you.
+Inject agent-scoped GH/GITHUB_TOKEN from pass when configured."
   (let ((env (append '("CARGO_TERM_COLOR=never"
                         "CARGO_TERM_PROGRESS_WHEN=never"
                         "CLICOLOR=0"
@@ -61,6 +84,10 @@ sockets and credential env vars so Grok/bash tools do not run as you."
                          (lambda (entry)
                            (not (string-prefix-p "SSH_AUTH_SOCK=" entry)))
                          env))))
+    (when-let ((token (agent-shell-grok--gh-token)))
+      (setq env (append (list (format "GH_TOKEN=%s" token)
+                              (format "GITHUB_TOKEN=%s" token))
+                        env)))
     env))
 
 (defun agent-shell-grok--sanitize-tool-output (text)

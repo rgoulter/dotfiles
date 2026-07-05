@@ -47,3 +47,8 @@
 
 ;; Use system's TLDR cache
 ;; (setq tldr-directory-path "~/.tldr/cache")
+
+;; Grok agent-shell: optional overrides for agent-shell-grok.el
+;; (setq agent-shell-grok-gh-pass-entry "token/gh") ; default; nil to disable
+;; (setq agent-shell-grok-gh-token "github_pat_...") ; bypass pass lookup
+;; (setq agent-shell-grok-agent-ssh-socket "/path/to/agent-ssh.sock")
