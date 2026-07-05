@@ -1,13 +1,54 @@
 ;;; agent-shell-grok.el --- Grok Build agent for agent-shell -*- lexical-binding: t; -*-
 
 (require 'agent-shell)
+(require 'ansi-color)
 
 (defvar agent-shell-grok-acp-command '("grok" "agent" "stdio")
   "Command and parameters for the Grok ACP client.")
 
-(defvar agent-shell-grok-environment
-  (agent-shell-make-environment-variables :inherit-env t)
-  "Environment variables for the Grok client.")
+(defun agent-shell-grok--environment ()
+  "Environment for the Grok ACP client.
+
+Inherit Emacs's environment, but force monochrome output so Grok and
+tools it runs (e.g. devenv, nix, cargo) do not emit ANSI into
+agent-shell buffers."
+  (append '("NO_COLOR=1"
+            "CLICOLOR=0"
+            "FORCE_COLOR=0"
+            "CARGO_TERM_COLOR=never"
+            "CARGO_TERM_PROGRESS_WHEN=never")
+          (seq-filter
+           (lambda (entry)
+             (not (or (string-prefix-p "NO_COLOR=" entry)
+                      (string-prefix-p "CLICOLOR=" entry)
+                      (string-prefix-p "CLICOLOR_FORCE=" entry)
+                      (string-prefix-p "FORCE_COLOR=" entry)
+                      (string-prefix-p "COLORTERM=" entry)
+                      (string-prefix-p "CARGO_TERM_COLOR=" entry)
+                      (string-prefix-p "CARGO_TERM_PROGRESS_WHEN=" entry))))
+           (agent-shell-make-environment-variables :inherit-env t))))
+
+(defun agent-shell-grok--sanitize-tool-output (text)
+  "Return TEXT with ANSI color sequences removed."
+  (if (stringp text)
+      (ansi-color-filter-apply text)
+    text))
+
+(defun agent-shell-grok--sanitize-fragment--advice (orig &rest args)
+  "Strip ANSI escapes from Grok tool output before agent-shell renders it."
+  (let ((kw args))
+    (when-let* ((state (plist-get kw :state))
+                ((eq (map-nested-elt state '(:agent-config :identifier)) 'grok))
+                (body (plist-get kw :body)))
+      (setq kw (plist-put kw :body (agent-shell-grok--sanitize-tool-output body))))
+    (apply orig kw)))
+
+(defun agent-shell-grok--ensure-output-sanitize-advice ()
+  "Install one-time advice stripping ANSI from Grok tool-call fragments."
+  (unless (get 'agent-shell--update-fragment 'agent-shell-grok-output-sanitize)
+    (put 'agent-shell--update-fragment 'agent-shell-grok-output-sanitize t)
+    (advice-add 'agent-shell--update-fragment :around
+                #'agent-shell-grok--sanitize-fragment--advice)))
 
 (defun agent-shell-grok-make-agent-config ()
   "Create a Grok agent configuration."
@@ -23,7 +64,7 @@
      (agent-shell--make-acp-client
       :command (car agent-shell-grok-acp-command)
       :command-params (cdr agent-shell-grok-acp-command)
-      :environment-variables agent-shell-grok-environment
+      :environment-variables (agent-shell-grok--environment)
       :context-buffer buffer))
    :install-instructions "Install Grok Build and run `grok login` in a terminal."))
 
@@ -56,6 +97,7 @@ with HTTP 400. Full https URLs are passed through unchanged."
 (defun agent-shell-grok-setup ()
   "Register Grok with agent-shell."
   (agent-shell-grok--ensure-icon-fetch-fix)
+  (agent-shell-grok--ensure-output-sanitize-advice)
   (add-to-list 'agent-shell-agent-configs (agent-shell-grok-make-agent-config))
   (setq agent-shell-preferred-agent-config 'grok))
 
