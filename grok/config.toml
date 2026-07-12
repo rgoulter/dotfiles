@@ -1,6 +1,12 @@
 [cli]
 installer = "internal"
 
+[model.xai-grok-build]
+model = "grok-build-0.1"
+base_url = "https://api.x.ai/v1"
+name = "xAI Grok Build"
+env_key = "XAI_API_KEY"
+
 [ui]
 # Follow OS light/dark; Grok polls every ~5s on macOS/Linux.
 theme = "auto"
