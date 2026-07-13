@@ -129,7 +129,22 @@
   :config
   (require 'agent-shell-grok)
   (agent-shell-grok-setup)
-  (agent-shell-grok-setup-keys))
+  (agent-shell-grok-setup-keys)
+  ;; evil-collection binds `gs' to cycle-session-mode (shadows Doom easymotion).
+  ;; Hook runs after their setup; cycle mode stays on C-<tab>.
+  ;; Re-run if setup already happened (after-load order / doom/reload).
+  (defun +agent-shell-restore-gs-easymotion-h (mode keymaps &rest _)
+    (when (eq mode 'agent-shell)
+      (require 'evil-easymotion)
+      (dolist (map-sym keymaps)
+        (when-let ((map (and (boundp map-sym) (symbol-value map-sym))))
+          (evil-define-key* 'normal map
+            "gs" (cons "Easymotion" evilem-map))))))
+  (add-hook 'evil-collection-setup-hook #'+agent-shell-restore-gs-easymotion-h)
+  (when (featurep 'evil-collection-agent-shell)
+    (+agent-shell-restore-gs-easymotion-h
+     'agent-shell
+     (bound-and-true-p evil-collection-agent-shell-maps))))
 
 (use-package! blamer
   :general ("s-i" #'blamer-show-commit-info)
