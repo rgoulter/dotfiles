@@ -169,7 +169,7 @@
         whisper-translate nil
         ;; After insert, leave point at end of dictation (natural for drafting).
         whisper-return-cursor 'end)
-  ;; macOS: AVFoundation mic index for ffmpeg (`:N`). Pick with SPC o d.
+  ;; macOS: AVFoundation mic index for ffmpeg (`:N`). Pick with SPC o w d.
   ;; https://github.com/natrys/whisper.el/wiki/MacOS-Configuration
   (when (eq system-type 'darwin)
     (require 'ffmpeg-device))
@@ -197,12 +197,12 @@
         "--no-timestamps"
         "--file" ,input-file)))
   (map! :leader
-        :desc "Whisper record/transcribe" "o w" #'whisper-run
-        :desc "Whisper from file"         "o W" #'whisper-file
-        :desc "Whisper language"          "o l" #'whisper-select-language)
-  (when (eq system-type 'darwin)
-    (map! :leader
-          :desc "Whisper audio device" "o d" #'rk/select-default-audio-device)))
+        (:prefix ("o w" . "whisper")
+         :desc "Whisper record/transcribe" "w" #'whisper-run
+         :desc "Whisper from file"         "f" #'whisper-file
+         :desc "Whisper language"          "l" #'whisper-select-language
+         :when (eq system-type 'darwin)
+         :desc "Whisper audio device"      "d" #'rk/select-default-audio-device)))
 
 (use-package! zetteldeft
   :config
