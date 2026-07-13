@@ -34,6 +34,7 @@
     "doom/config.el"
     "doom/init.el"
     "doom/lisp/agent-shell-grok.el"
+    "doom/lisp/ffmpeg-device.el"
     "doom/packages.el"
     "emacs-rgoulter/init.el"
     "emacs-rgoulter/straight/versions/default.el"
@@ -88,6 +89,13 @@ in {
 
   dotfiles.grok.enable = true;
   dotfiles.themes.enable = true;
+
+  # whisper.el: ffmpeg for mic/file capture; whisper-cpp is prebuilt (no local g++/cmake).
+  # Models: `whisper-cpp-download-ggml-model base` into doom-cache-dir/whisper/models/.
+  home.packages = [
+    pkgs.ffmpeg
+    pkgs.whisper-cpp
+  ];
 
   home.file =
     symlinkedConfig.home.file

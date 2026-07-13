@@ -158,6 +158,52 @@
 ;; https://github.com/felipeochoa/rjsx-mode/issues/85
 (add-hook 'rjsx-mode-hook (lambda () (setq-local indent-line-function 'js-jsx-indent-line)))
 
+(use-package! whisper
+  :commands (whisper-run whisper-file whisper-select-language rk/select-default-audio-device)
+  :config
+  ;; Use Nix home.packages: ffmpeg + whisper-cpp (prebuilt whisper-cli).
+  ;; Skip whisper.el's runtime git/cmake/g++ install of whisper.cpp.
+  (setq whisper-install-whispercpp nil
+        whisper-model "base"
+        whisper-language "en"
+        whisper-translate nil
+        ;; After insert, leave point at end of dictation (natural for drafting).
+        whisper-return-cursor 'end)
+  ;; macOS: AVFoundation mic index for ffmpeg (`:N`). Pick with SPC o d.
+  ;; https://github.com/natrys/whisper.el/wiki/MacOS-Configuration
+  (when (eq system-type 'darwin)
+    (require 'ffmpeg-device))
+  (defun rgoulter/whisper-model-file ()
+    "Path to ggml model under Doom cache (download once with whisper-cpp-download-ggml-model)."
+    (expand-file-name
+     (format "ggml-%s.bin" whisper-model)
+     (expand-file-name "whisper/models/" doom-cache-dir)))
+  (defun whisper-command (input-file)
+    "Run Nix-provided whisper-cli on INPUT-FILE (overrides package default)."
+    (let ((model (rgoulter/whisper-model-file)))
+      (unless (file-readable-p model)
+        (user-error "Whisper model missing: %s\nDownload with: mkdir -p %s && cd %s && whisper-cpp-download-ggml-model %s"
+                    model
+                    (file-name-directory model)
+                    (file-name-directory model)
+                    whisper-model))
+      `("whisper-cli"
+        ,@(when whisper-use-threads
+            (list "--threads" (number-to-string whisper-use-threads)))
+        ,@(when whisper-translate '("--translate"))
+        ,@(when whisper-show-progress-in-mode-line '("--print-progress"))
+        "--language" ,whisper-language
+        "--model" ,model
+        "--no-timestamps"
+        "--file" ,input-file)))
+  (map! :leader
+        :desc "Whisper record/transcribe" "o w" #'whisper-run
+        :desc "Whisper from file"         "o W" #'whisper-file
+        :desc "Whisper language"          "o l" #'whisper-select-language)
+  (when (eq system-type 'darwin)
+    (map! :leader
+          :desc "Whisper audio device" "o d" #'rk/select-default-audio-device)))
+
 (use-package! zetteldeft
   :config
   ;; If creating more than one note in a minute
