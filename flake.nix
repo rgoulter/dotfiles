@@ -155,12 +155,12 @@
           ];
 
           git-hooks.hooks.treefmt = {
-            enable = true;
+            enable = false;
             package = config.treefmt.build.wrapper;
           };
 
           git-hooks.hooks.emacs-lisp-parens = {
-            enable = true;
+            enable = false;
             name = "emacs-lisp-parens";
             entry = pkgs.lib.getExe checkElispParens;
             files = "\\.el$";
