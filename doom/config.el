@@ -129,7 +129,16 @@
   :config
   (require 'agent-shell-grok)
   (agent-shell-grok-setup)
-  (agent-shell-grok-setup-keys)
+  ;; No preferred agent: M-x agent-shell / SPC o l a prompts among configs.
+  ;; Direct starts for the agents we use (others stay available in the picker).
+  (map! :leader
+        (:prefix ("o l" . "LLM / agent-shell")
+         :desc "Agent picker" "a" #'agent-shell
+         :desc "Claude Code"  "c" #'agent-shell-anthropic-start-claude-code
+         :desc "Codex"        "x" #'agent-shell-openai-start-codex
+         :desc "Cursor"       "u" #'agent-shell-cursor-start-agent
+         :desc "Grok"         "g" #'grok-start-agent
+         :desc "Pi"           "p" #'agent-shell-pi-start-agent))
   ;; evil-collection binds `gs' to cycle-session-mode (shadows Doom easymotion).
   ;; Hook runs after their setup; cycle mode stays on C-<tab>.
   ;; Re-run if setup already happened (after-load order / doom/reload).

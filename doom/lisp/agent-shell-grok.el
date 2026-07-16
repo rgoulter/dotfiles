@@ -179,16 +179,13 @@ with HTTP 400. Full https URLs are passed through unchanged."
     (advice-add 'agent-shell--fetch-agent-icon :around #'agent-shell-grok--fix-icon-fetch-advice)))
 
 (defun agent-shell-grok-setup ()
-  "Register Grok with agent-shell."
+  "Register Grok with agent-shell.
+
+Does not set `agent-shell-preferred-agent-config'; leave that nil so
+`agent-shell' prompts, or set it elsewhere if you want a default."
   (agent-shell-grok--ensure-icon-fetch-fix)
   (agent-shell-grok--ensure-output-sanitize-advice)
   (agent-shell-grok--ensure-auto-revert-buffer-advice)
-  (add-to-list 'agent-shell-agent-configs (agent-shell-grok-make-agent-config))
-  (setq agent-shell-preferred-agent-config 'grok))
-
-(defun agent-shell-grok-setup-keys ()
-  "Bind Grok agent-shell keys (after `map!' is available)."
-  (map! :leader
-        :desc "Grok agent" "o l g" #'grok-start-agent))
+  (add-to-list 'agent-shell-agent-configs (agent-shell-grok-make-agent-config)))
 
 (provide 'agent-shell-grok)
