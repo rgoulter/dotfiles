@@ -56,6 +56,9 @@
 ;; (package! elysium)
 ;; (package! evedel)
 (package! gptel-aibo)
+(package! gptel-agent)
+(package! ragmacs
+  :recipe (:host github :repo "positron-solutions/ragmacs"))
 
 (package! pi-coding-agent)
 
