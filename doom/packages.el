@@ -64,6 +64,33 @@
 
 (package! agent-shell)
 
+;; agent-shell companions
+(package! agent-shell-dashboard
+  :recipe (:host github :repo "wandersoncferreira/agent-shell-dashboard"))
+(package! agent-shell-manager
+  :recipe (:host github :repo "jethrokuan/agent-shell-manager"))
+(package! agent-shell-attention
+  :recipe (:host github :repo "ultronozm/agent-shell-attention.el"))
+(package! agent-shell-org-transcript
+  :recipe (:host github :repo "lllShamanlll/agent-shell-org-transcript"))
+(package! agent-shell-macext
+  :recipe (:host github :repo "cxa/agent-shell-macext"))
+(package! agent-shell-pet
+  :recipe (:host github :repo "lgmoneda/agent-shell-pet"
+           :files ("*.el" "pets" "renderers")))
+;; Floating HUD (needs xwidget + a local wasm-pack build of the UI).
+;; After doom sync, in the straight *repos* checkout:
+;;   git submodule update --init --recursive
+;;   (cd ui && wasm-pack build --target web --release)
+;; Config adds repos/.../lisp to load-path so ../ui and ../emacs-egui resolve.
+(package! workspace-hud
+  :recipe (:host github
+           :repo "nohzafk/emacs-workspace-hud"
+           :files ("lisp/*.el" "emacs-egui/lisp/*.el" "ui")
+           :pre-build ("git" "submodule" "update" "--init" "--recursive")))
+(package! agent-shell-hud
+  :recipe (:host github :repo "nohzafk/agent-shell-hud"))
+
 (package! auto-dark)
 
 (package! whisper

@@ -155,6 +155,90 @@
      'agent-shell
      (bound-and-true-p evil-collection-agent-shell-maps))))
 
+(use-package! agent-shell-dashboard
+  :after agent-shell
+  :commands (agent-shell-dashboard)
+  :config
+  (map! :leader
+        :desc "Agent dashboard" "o l d" #'agent-shell-dashboard))
+
+(use-package! agent-shell-manager
+  :after agent-shell
+  :commands (agent-shell-manager-toggle)
+  :custom
+  (agent-shell-manager-side 'bottom)
+  :config
+  (map! :leader
+        :desc "Agent manager" "o l m" #'agent-shell-manager-toggle))
+
+(use-package! agent-shell-attention
+  :after agent-shell
+  :config
+  (agent-shell-attention-mode 1)
+  ;; Echo + desktop notification when an agent needs you / finishes a turn.
+  (setopt agent-shell-attention-notify-function
+          #'agent-shell-attention-notify-default)
+  (map! :leader
+        :desc "Jump to pending agent" "o l j" #'agent-shell-attention-jump
+        :desc "Agent attention dash"  "o l J" #'agent-shell-attention-dashboard))
+
+(use-package! agent-shell-org-transcript
+  :after agent-shell
+  :custom
+  ;; Prefer ~/org/agent-shell over org-roam-directory (roam not enabled).
+  (agent-shell-org-transcript-directory
+   (expand-file-name "agent-shell/" org-directory))
+  :config
+  (unless (file-directory-p agent-shell-org-transcript-directory)
+    (make-directory agent-shell-org-transcript-directory t))
+  (map! :leader
+        :desc "Migrate agent transcripts" "o l T"
+        #'agent-shell-org-transcript-migrate))
+
+(when (eq system-type 'darwin)
+  (use-package! agent-shell-macext
+    :after agent-shell
+    :hook (agent-shell-mode . agent-shell-macext-setup)
+    :custom
+    (agent-shell-macext-file-copy-policy 'auto)
+    (agent-shell-macext-notifications t)
+    ;; Don't spam when you're already looking at the session.
+    (agent-shell-macext-notify-current-buffer nil)))
+
+(use-package! agent-shell-pet
+  :after agent-shell
+  :config
+  ;; Child-frame renderer works everywhere; macOS native needs
+  ;; `make -C renderers/macos` in the package repo after doom sync.
+  (setq agent-shell-pet-size 'medium)
+  (global-agent-shell-pet-mode 1))
+
+;; Workspace HUD + agent-shell status section. Requires Emacs xwidget and a
+;; wasm-pack build of emacs-workspace-hud (straight pre-build only inits the
+;; submodule). After `doom sync`:
+;;   cd ~/doom-emacs/.local/straight/repos/emacs-workspace-hud
+;;   git submodule update --init --recursive
+;;   (cd ui && wasm-pack build --target web --release)
+(use-package! workspace-hud
+  :defer t
+  :commands (workspace-hud-toggle workspace-hud-auto-mode)
+  :init
+  ;; Load from the straight *repos* tree so workspace-hud's relative
+  ;; ../ui and ../emacs-egui/lisp paths stay valid.
+  (when-let ((repo (expand-file-name "straight/repos/emacs-workspace-hud"
+                                     doom-local-dir)))
+    (when (file-directory-p repo)
+      (dolist (sub '("lisp" "emacs-egui/lisp"))
+        (add-to-list 'load-path (expand-file-name sub repo)))))
+  (when (featurep 'xwidget-internal)
+    (map! :leader
+          :desc "Workspace HUD" "o l h" #'workspace-hud-toggle))
+  :config
+  ;; Agent section once the floating HUD framework is actually loaded.
+  (when (and (featurep 'xwidget-internal)
+             (require 'agent-shell-hud nil t))
+    (agent-shell-hud-mode 1)))
+
 (use-package! blamer
   :general ("s-i" #'blamer-show-commit-info)
   :defer 20
