@@ -61,3 +61,21 @@
 ;;       '((:jql "assignee = currentUser() AND resolution = Unresolved ORDER BY updated DESC"
 ;;          :limit 50
 ;;          :filename "my-open-issues")))
+
+;; emacs-slack: register teams after (featurep 'slack) / on demand.
+;; Prefer auth-source (token user + user^cookie for xoxc tokens):
+;;   machine team.slack.com login you@example.com password xoxc-...
+;;   machine team.slack.com login you@example.com^cookie password xoxd-...
+;; Get token/cookie via M-x slack-refresh-token.
+;; (after! slack
+;;   (slack-register-team
+;;    :name "myteam"
+;;    :default t
+;;    :token (auth-source-pick-first-password
+;;            :host "myteam.slack.com"
+;;            :user "you@example.com")
+;;    :cookie (auth-source-pick-first-password
+;;             :host "myteam.slack.com"
+;;             :user "you@example.com^cookie")
+;;    :full-and-display-names t
+;;    :subscribed-channels '(general random)))

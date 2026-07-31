@@ -210,6 +210,48 @@
 (use-package restclient
   :mode ("\\.rest\\'" . restclient-mode))
 
+;; Desktop notifications (emacs-slack, agent-shell-attention, etc.).
+(use-package! alert
+  :defer t
+  :config
+  (setq alert-default-style
+        (cond ((eq system-type 'darwin) 'osx-notifier)
+              ((eq system-type 'gnu/linux) 'libnotify)
+              (t 'message))))
+
+;; Team tokens/cookies live in local.el (prefer auth-source; see local.el.template).
+(use-package! slack
+  :commands (slack-start
+             slack-select-rooms
+             slack-select-unread-rooms
+             slack-im-select
+             slack-channel-select
+             slack-group-select
+             slack-user-select
+             slack-search-from-messages
+             slack-stop)
+  :custom
+  (slack-buffer-emojify t)
+  (slack-prefer-current-team t)
+  (slack-render-image-p t)
+  :config
+  (map! :leader
+        (:prefix ("o s" . "Slack")
+         :desc "Start"           "s" #'slack-start
+         :desc "Stop"            "q" #'slack-stop
+         :desc "Select rooms"    "r" #'slack-select-rooms
+         :desc "Unread rooms"    "u" #'slack-select-unread-rooms
+         :desc "Direct message"  "i" #'slack-im-select
+         :desc "Channel"         "c" #'slack-channel-select
+         :desc "Group"           "g" #'slack-group-select
+         :desc "User"            "U" #'slack-user-select
+         :desc "Search messages" "/" #'slack-search-from-messages))
+  (map! :map slack-mode-map
+        :n "@" #'slack-message-embed-mention
+        :n "#" #'slack-message-embed-channel
+        :i "@" #'slack-message-embed-mention
+        :i "#" #'slack-message-embed-channel))
+
 ;; https://github.com/felipeochoa/rjsx-mode/issues/85
 (add-hook 'rjsx-mode-hook (lambda () (setq-local indent-line-function 'js-jsx-indent-line)))
 

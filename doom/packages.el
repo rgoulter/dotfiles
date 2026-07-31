@@ -22,6 +22,10 @@
 
 (package! org-jira)
 
+;; Desktop notifications (also a slack dependency; explicit for use-package! config).
+(package! alert)
+(package! slack)
+
 ;; mkdir -p ~/.doom.d/lisp/ob-ledger/
 ;; wget -O ~/.doom.d/lisp/ob-ledger/ob-ledger.el https://raw.githubusercontent.com/overtone/emacs-live/master/packs/stable/org-pack/lib/org-mode/lisp/ob-ledger.el
 ;; c.f. https://github.com/doomemacs/doomemacs/issues/6457
