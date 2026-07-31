@@ -176,6 +176,37 @@
         :desc "Just choose recipe" "o j c" #'justl-exec-recipe-in-dir
         :desc "Just default recipe" "o j j" #'justl-exec-default-recipe))
 
+(use-package! org-jira
+  :commands (org-jira-get-issues
+             org-jira-get-issues-from-custom-jql
+             org-jira-get-issues-headonly
+             org-jira-get-projects
+             org-jira-browse-issue
+             org-jira-create-issue
+             org-jira-update-issue
+             org-jira-progress-issue
+             org-jira-assign-issue
+             org-jira-add-comment)
+  :init
+  ;; Issue org files live here (create on first use). Set `jiralib-url' in
+  ;; local.el; credentials via authinfo (machine HOST login EMAIL password TOKEN).
+  (setq org-jira-working-dir (expand-file-name "~/.org-jira/"))
+  :config
+  (unless (file-directory-p org-jira-working-dir)
+    (make-directory org-jira-working-dir t))
+  (map! :leader
+        (:prefix ("o J" . "Jira")
+         :desc "Get issues"              "i" #'org-jira-get-issues
+         :desc "Get issues (JQL)"        "j" #'org-jira-get-issues-from-custom-jql
+         :desc "Get issues (head only)"  "h" #'org-jira-get-issues-headonly
+         :desc "Get projects"            "p" #'org-jira-get-projects
+         :desc "Browse issue"            "b" #'org-jira-browse-issue
+         :desc "Create issue"            "c" #'org-jira-create-issue
+         :desc "Update issue"            "u" #'org-jira-update-issue
+         :desc "Progress issue"          "w" #'org-jira-progress-issue
+         :desc "Assign issue"            "a" #'org-jira-assign-issue
+         :desc "Add comment"             "C" #'org-jira-add-comment)))
+
 (use-package restclient
   :mode ("\\.rest\\'" . restclient-mode))
 

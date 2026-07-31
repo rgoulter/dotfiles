@@ -52,3 +52,12 @@
 ;; (setq agent-shell-grok-gh-pass-entry "token/gh") ; default; nil to disable
 ;; (setq agent-shell-grok-gh-token "github_pat_...") ; bypass pass lookup
 ;; (setq agent-shell-grok-agent-ssh-socket "/path/to/agent-ssh.sock")
+
+;; org-jira: Cloud or Server URL (required). Auth via ~/.authinfo.gpg, e.g.
+;;   machine your-site.atlassian.net login you@example.com password API_TOKEN port 443
+;; (setq jiralib-url "https://your-site.atlassian.net")
+;; Optional custom JQL buffers:
+;; (setq org-jira-custom-jqls
+;;       '((:jql "assignee = currentUser() AND resolution = Unresolved ORDER BY updated DESC"
+;;          :limit 50
+;;          :filename "my-open-issues")))
