@@ -33,7 +33,6 @@
     "direnv/direnv.toml"
     "doom/config.el"
     "doom/init.el"
-    "doom/lisp/agent-shell-grok.el"
     "doom/lisp/ffmpeg-device.el"
     "doom/packages.el"
     "emacs-rgoulter/init.el"

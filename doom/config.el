@@ -124,20 +124,18 @@
   :custom
   ;; Graphical header shows the agent icon plus two text rows (~5 lines).
   ;; Text mode keeps agent, model, and project on a single header line.
-  ;; Icon fetch needs agent-shell-grok's lobe-icons URL fix (see lisp/).
   (agent-shell-header-style 'text)
   :config
-  (require 'agent-shell-grok)
-  (agent-shell-grok-setup)
   ;; No preferred agent: M-x agent-shell / SPC o l a prompts among configs.
   ;; Direct starts for the agents we use (others stay available in the picker).
+  ;; Grok Build is first-class in agent-shell (agent-shell-xai).
   (map! :leader
         (:prefix ("o l" . "LLM / agent-shell")
          :desc "Agent picker" "a" #'agent-shell
          :desc "Claude Code"  "c" #'agent-shell-anthropic-start-claude-code
          :desc "Codex"        "x" #'agent-shell-openai-start-codex
          :desc "Cursor"       "u" #'agent-shell-cursor-start-agent
-         :desc "Grok"         "g" #'grok-start-agent
+         :desc "Grok"         "g" #'agent-shell-xai-start-grok
          :desc "Pi"           "p" #'agent-shell-pi-start-agent))
   ;; evil-collection binds `gs' to cycle-session-mode (shadows Doom easymotion).
   ;; Hook runs after their setup; cycle mode stays on C-<tab>.

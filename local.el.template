@@ -48,11 +48,6 @@
 ;; Use system's TLDR cache
 ;; (setq tldr-directory-path "~/.tldr/cache")
 
-;; Grok agent-shell: optional overrides for agent-shell-grok.el
-;; (setq agent-shell-grok-gh-pass-entry "token/gh") ; default; nil to disable
-;; (setq agent-shell-grok-gh-token "github_pat_...") ; bypass pass lookup
-;; (setq agent-shell-grok-agent-ssh-socket "/path/to/agent-ssh.sock")
-
 ;; org-jira: Cloud or Server URL (required). Auth via ~/.authinfo.gpg, e.g.
 ;;   machine your-site.atlassian.net login you@example.com password API_TOKEN port 443
 ;; (setq jiralib-url "https://your-site.atlassian.net")

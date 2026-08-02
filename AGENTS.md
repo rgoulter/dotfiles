@@ -56,7 +56,7 @@ Tracked Doom files (via `just switch` → `~/.config/doom/`):
 - `doom/init.el` — enabled modules (`doom sync` after changes)
 - `doom/packages.el` — extra packages (`doom sync` after changes)
 - `doom/config.el` — private config (`use-package!`, `after!`, `map!`, etc.)
-- `doom/lisp/*.el` — local libraries (e.g. `agent-shell-grok.el`)
+- `doom/lisp/*.el` — local libraries (e.g. `ffmpeg-device.el`)
 
 A legacy **straight.el** profile still exists as Chemacs `"default"` (`emacs-rgoulter/`), but treat **Doom** as the canonical Emacs setup unless asked otherwise.
 
@@ -71,7 +71,7 @@ A legacy **straight.el** profile still exists as Chemacs `"default"` (`emacs-rgo
 
 ### AI agents in Emacs
 
-Grok is integrated via **agent-shell** (ACP) in `doom/lisp/agent-shell-grok.el`, wired from `doom/config.el` with `use-package! agent-shell` (requires `agent-shell-grok`, registers the agent, binds keys). Only `(package! agent-shell)` is needed in `packages.el`; straight installs `acp` and `shell-maker` as dependencies.
+Grok Build is first-class in **agent-shell** (`agent-shell-xai`; `agent-shell-xai-start-grok`). Wired from `doom/config.el` with `use-package! agent-shell` (no preferred agent). Leader keys under `SPC o l`: picker `a`, Claude `c`, Codex `x`, Cursor `u`, Grok `g`, Pi `p`. Only `(package! agent-shell)` is needed in `packages.el`; straight installs `acp` and `shell-maker` as dependencies. Builtin agents need their ACP CLIs on PATH (`grok` for Grok Build).
 
 ## Other layout notes
 
