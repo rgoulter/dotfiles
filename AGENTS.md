@@ -73,6 +73,8 @@ A legacy **straight.el** profile still exists as Chemacs `"default"` (`emacs-rgo
 
 Grok Build is first-class in **agent-shell** (`agent-shell-xai`; `agent-shell-xai-start-grok`). Wired from `doom/config.el` with `use-package! agent-shell` (no preferred agent). Leader keys under `SPC o l`: picker `a`, Claude `c`, Codex `x`, Cursor `u`, Grok `g`, Pi `p`. Only `(package! agent-shell)` is needed in `packages.el`; straight installs `acp` and `shell-maker` as dependencies. Builtin agents need their ACP CLIs on PATH (`grok` for Grok Build).
 
+**Sandboxed `gh`:** Grok tool shells cannot use the macOS Keychain. `doom/lisp/agent-shell-xai-gh.el` injects `GH_TOKEN` / `GITHUB_TOKEN` from password-store (`token/gh` by default) when the Grok ACP client starts. Override with `+agent-shell-xai-gh-token` or `+agent-shell-xai-gh-pass-entry` in `local.el` (see `local.el.template`). Also grant `~/.config/gh` write in `grok/sandbox.toml` for file-based auth.
+
 ## Other layout notes
 
 - **Shell**: fish — `fish/`

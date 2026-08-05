@@ -126,6 +126,11 @@
   ;; Text mode keeps agent, model, and project on a single header line.
   (agent-shell-header-style 'text)
   :config
+  ;; Sandboxed Grok tools cannot use macOS Keychain for `gh`; inject GH_TOKEN
+  ;; from pass (token/gh) when the ACP client starts.  See agent-shell-xai-gh.el
+  ;; and local.el.template for overrides.
+  (require 'agent-shell-xai-gh)
+  (+agent-shell-xai-gh-setup)
   ;; No preferred agent: M-x agent-shell / SPC o l a prompts among configs.
   ;; Direct starts for the agents we use (others stay available in the picker).
   ;; Grok Build is first-class in agent-shell (agent-shell-xai).
