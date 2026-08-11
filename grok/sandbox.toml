@@ -7,4 +7,19 @@ read_write = [
   "@HOME@/github",
   # prek logs/hooks when git commit runs outside devenv (default ~/.cache/prek).
   "@HOME@/.cache/prek",
+  # GitHub CLI: hosts.yml / token refresh / local cache. Without these writes,
+  # sandboxed `gh` often fails auth (especially after token refresh).
+  # Prefer file-based auth (oauth_token in hosts.yml or GH_TOKEN in the
+  # environment); macOS Keychain access is typically blocked by Seatbelt.
+  "@HOME@/.config/gh",
+  "@HOME@/.cache/gh",
+  # Cargo: registry downloads, git deps, index cache. Without this, sandboxed
+  # `cargo fetch` / first use of a new crate fails with EPERM under ~/.cargo
+  # (compile into workspace target/ still works when deps are already cached).
+  "@HOME@/.cargo",
+  # Nix: fetcher/eval SQLite caches under ~/.cache/nix. Without write access,
+  # sandboxed `devenv shell` / `nix flake …` fails opening fetcher-cache-*.sqlite
+  # ("unable to open database file" on pragma synchronous / journal create).
+  # Project .devenv/ and workspace target dirs remain covered by workspace write.
+  "@HOME@/.cache/nix",
 ]
