@@ -208,14 +208,6 @@
     ;; Don't spam when you're already looking at the session.
     (agent-shell-macext-notify-current-buffer nil)))
 
-(use-package! agent-shell-pet
-  :after agent-shell
-  :config
-  ;; Child-frame renderer works everywhere; macOS native needs
-  ;; `make -C renderers/macos` in the package repo after doom sync.
-  (setq agent-shell-pet-size 'medium)
-  (global-agent-shell-pet-mode 1))
-
 ;; Workspace HUD + agent-shell status section. Requires Emacs xwidget and a
 ;; wasm-pack build of emacs-workspace-hud (straight pre-build only inits the
 ;; submodule). After `doom sync`:
