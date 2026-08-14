@@ -103,7 +103,43 @@ allow = [
   "Read",
 ]
 
-ask = ["Bash(just switch)", "Bash(just apply)"]
+# Prompt even under always-approve for shell segments that match (deny > ask > allow).
+# Read-only gh stays in allow above; everything else gh-related asks.
+ask = [
+  "Bash(just switch)",
+  "Bash(just apply)",
+  # Privileged / mutating GitHub CLI (uses ~/.config/gh when sandboxed).
+  "Bash(gh api *)",
+  "Bash(gh auth login *)",
+  "Bash(gh auth logout *)",
+  "Bash(gh auth refresh *)",
+  "Bash(gh auth switch *)",
+  "Bash(gh auth token *)",
+  "Bash(gh auth setup-git *)",
+  "Bash(gh pr create *)",
+  "Bash(gh pr edit *)",
+  "Bash(gh pr merge *)",
+  "Bash(gh pr close *)",
+  "Bash(gh pr comment *)",
+  "Bash(gh pr review *)",
+  "Bash(gh pr ready *)",
+  "Bash(gh pr checkout *)",
+  "Bash(gh issue create *)",
+  "Bash(gh issue comment *)",
+  "Bash(gh issue close *)",
+  "Bash(gh issue edit *)",
+  "Bash(gh release create *)",
+  "Bash(gh release upload *)",
+  "Bash(gh repo create *)",
+  "Bash(gh workflow run *)",
+  "Bash(gh run rerun *)",
+  "Bash(agent-plain gh api *)",
+  "Bash(agent-plain gh pr create *)",
+  "Bash(agent-plain gh pr edit *)",
+  "Bash(agent-plain gh pr merge *)",
+  "Bash(agent-plain gh pr comment *)",
+  "Bash(agent-plain gh pr review *)",
+]
 
 [marketplace]
 official_marketplace_auto_installed = true
