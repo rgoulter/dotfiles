@@ -454,6 +454,11 @@ code using the `elisp_eval` tool.
         :desc "new file & link"         "N" #'zetteldeft-new-file-and-link
         :desc "rename"                  "r" #'zetteldeft-file-rename))
 
+(defun rgoulter/search-emdashes ()
+  "Search the current buffer for em dashes (U+2014) via `isearch'."
+  (interactive)
+  (isearch-forward nil t)
+  (isearch-yank-string "\u2014"))
 
 (defun rgoulter/rustic-cargo-build ()
   "run cargo build, switch to that buffer, zoom in on it."
