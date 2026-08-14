@@ -2,6 +2,23 @@
 
 Personal dotfiles managed with [Home Manager](https://github.com/nix-community/home-manager) and Nix flakes.
 
+## Scope: stay in this repository
+
+This is a **dotfiles configuration** repo. The files here are the source of
+truth; live paths under `~/` are installed from them (`just switch`). To change
+dotfiles, **edit tracked files in this repo**. Do not search, read, or edit
+live home-directory copies, package installs (e.g. `~/doom-emacs`), or other
+paths outside the tree.
+
+If you think you need to look outside the repo (untracked `local.el`, a live
+symlink target, another clone, the web for a personal snippet, …), **ask
+first** and give a rationale: what is missing from the repo, what path you
+want, and why. Wait for agreement before leaving the tree.
+
+Exceptions that do not need asking: repo git, `just build` / `just fmt` / other
+repo recipes, and skills already listed in the session (deployed copies under
+`~/.agents/` or `~/.grok/`).
+
 ## Home Manager
 
 Use **`just`** from the repo root (see `justfile`). Managed paths are declared in `dotfiles.nix` (and `grok.nix` / `themes.nix` where noted).
