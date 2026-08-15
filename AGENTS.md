@@ -104,4 +104,4 @@ When editing config, match existing style in the target file. Keep changes focus
 
 ## Git and pull requests
 
-For commit and PR conventions across Richard's repositories, follow the user-scope **`git-workflow`** skill (`agents/skills/git-workflow/`, deployed to `~/.agents/skills/git-workflow/`). Summary: atomic commits; smaller focused PRs; amend or squash fixups on unpublished branches instead of chains of "fixed …" commits.
+For commit and PR conventions across Richard's repositories, follow the user-scope **`git-workflow`** skill (`agents/skills/git-workflow/`, deployed to `~/.agents/skills/git-workflow/`). Summary: organised atomic commits; smaller focused PRs; amend or squash fixups instead of chains of "fixed …" commits.
