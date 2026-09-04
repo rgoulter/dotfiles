@@ -10,6 +10,10 @@ Fish:
   Alt-l   :: list files in the directory
   Alt-h   :: Shows man-page for current command
   Alt-v   :: Edit current command in external editor
-FZF Plugin:
-  Ctrl-o  :: Find a file
-  Ctrl-r  :: Search through command history
+FZF Plugin (patrickf1/fzf.fish defaults):
+  Ctrl-Alt-f :: Search directory (find file)
+  Ctrl-Alt-l :: Search git log
+  Ctrl-Alt-s :: Search git status
+  Ctrl-r     :: Search history
+  Ctrl-Alt-p :: Search processes
+  Ctrl-v     :: Search variables
