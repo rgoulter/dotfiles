@@ -17,6 +17,7 @@
 (package! focus)
 
 (package! justl)
+(package! just-mode)
 
 (package! nickel-mode)
 
