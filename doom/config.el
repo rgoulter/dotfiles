@@ -144,6 +144,9 @@
          :desc "Pi"           "p" #'agent-shell-pi-start-agent))
   ;; evil-collection binds `gs' to cycle-session-mode (shadows Doom easymotion).
   ;; Hook runs after their setup; cycle mode stays on C-<tab>.
+  ;; `gq' in evil-collection still points to the removed
+  ;; `agent-shell-queue-request' (renamed to `agent-shell-prompt-queue'
+  ;; in 2026-08, now unbound via `fmakunbound').
   ;; Re-run if setup already happened (after-load order / doom/reload).
   (defun +agent-shell-restore-gs-easymotion-h (mode keymaps &rest _)
     (when (eq mode 'agent-shell)
@@ -151,7 +154,8 @@
       (dolist (map-sym keymaps)
         (when-let ((map (and (boundp map-sym) (symbol-value map-sym))))
           (evil-define-key* 'normal map
-            "gs" (cons "Easymotion" evilem-map))))))
+            "gs" (cons "Easymotion" evilem-map)
+            "gq" #'agent-shell-prompt-queue)))))
   (add-hook 'evil-collection-setup-hook #'+agent-shell-restore-gs-easymotion-h)
   (when (featurep 'evil-collection-agent-shell)
     (+agent-shell-restore-gs-easymotion-h
