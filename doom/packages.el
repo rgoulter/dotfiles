@@ -61,7 +61,7 @@
 (package! ragmacs
   :recipe (:host github :repo "positron-solutions/ragmacs"))
 
-(package! pi-coding-agent)
+(package! pilish)
 
 (package! agent-shell)
 
