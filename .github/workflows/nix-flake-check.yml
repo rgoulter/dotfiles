@@ -6,6 +6,7 @@ on:
   pull_request:
     branches:
       - '*'
+  workflow_dispatch:
 jobs:
   check:
     runs-on: ${{ matrix.os }}
@@ -17,9 +18,10 @@ jobs:
           - macos-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v7
       - name: Setup Nix
-        uses: DeterminateSystems/nix-installer-action@main
+        uses: DeterminateSystems/determinate-nix-action@v3
+      - uses: DeterminateSystems/flake-checker-action@v13
       - name: Run Nix Flake Check
         # devenv needs devenv-root
         run: nix flake check --override-input devenv-root "file+file://"<(printf %s "$PWD")
