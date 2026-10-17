@@ -63,7 +63,8 @@
 (package! ragmacs
   :recipe (:host github :repo "positron-solutions/ragmacs"))
 
-(package! pilish)
+(package! pilish
+  :recipe (:host github :repo "dnouri/pilish"))
 
 (package! agent-shell)
 
