@@ -537,6 +537,11 @@ code using the `elisp_eval` tool.
 (after! avy
   (setq avy-keys '(?a ?o ?e ?u ?i ?d ?h ?t ?n ?s)))
 
+(after! code-review
+  ;; Reuse Forge's PAT (api.github.com/rgoulter^forge in pass)
+  ;; instead of requiring a second api.github.com/code-review entry.
+  (setq code-review-auth-login-marker 'forge))
+
 (after! dirvish
   (map! :leader
         :desc "Dirvish preview (DWIM)" "o m" #'dirvish-dwim
