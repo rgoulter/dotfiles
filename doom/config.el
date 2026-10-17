@@ -540,7 +540,10 @@ code using the `elisp_eval` tool.
 (after! code-review
   ;; Reuse Forge's PAT (api.github.com/rgoulter^forge in pass)
   ;; instead of requiring a second api.github.com/code-review entry.
-  (setq code-review-auth-login-marker 'forge))
+  (setq code-review-auth-login-marker 'forge)
+  ;; ghub 5.3 moved `ghub-graphql' to `ghub-legacy' (obsolete, now `ghub-query').
+  ;; code-review still calls `ghub-graphql'; load the legacy compat.
+  (require 'ghub-legacy nil t))
 
 (after! dirvish
   (map! :leader
