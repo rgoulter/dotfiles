@@ -152,6 +152,8 @@
           packages = [
             # add treefmt using flake-parts per-system config
             config.treefmt.build.wrapper
+            pkgs.actionlint
+            pkgs.shellcheck
           ];
 
           git-hooks.hooks.treefmt = {
