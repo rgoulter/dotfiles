@@ -19,3 +19,7 @@ alias apply := switch
 
 fmt:
   nix run {{flake_uri}} --
+
+# Lint GitHub Actions workflows with actionlint.
+lint-workflows:
+  actionlint
