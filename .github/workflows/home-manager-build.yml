@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v7
       - name: Setup Nix
         uses: DeterminateSystems/nix-installer-action@main
       - name: Run Nix Build
@@ -20,7 +20,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v7
       - name: Setup Nix
         uses: DeterminateSystems/nix-installer-action@main
       - name: Run Nix Build
